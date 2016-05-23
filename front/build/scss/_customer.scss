@@ -1,0 +1,81 @@
+.customer-header{
+    width: 100%;
+    margin-bottom: 4px;
+    .customer-header-top{
+        height: 30px;
+        width: 100%;
+        background-color: $top-bg;
+        color: #fff;
+        .customer-header-top-wrap{
+            width: 960px;
+            margin: 0 auto;
+            height: 30px;
+            line-height: 30px;
+            text-align: right;
+            padding-right: 10px;
+            a{
+                color: #fff;   
+            }
+        }
+    }
+    .customer-header-wrap{
+        height: 48px;
+        line-height: 48px;
+        width: 960px;
+        margin: 0 auto;
+        .customer-logo{
+            width: 186px;
+            display: inline-block;
+            height: 48px;
+            vertical-align: top;
+        }
+        .customer-nav{
+            width: 520px;
+            overflow: hidden;
+            display: inline-block;
+            li{
+                float: left;
+                padding: 0 14px;
+                cursor: pointer;
+                margin: 0 2px;
+            }
+            li.customer-nav-select{
+                background-color: $base-orange;
+                color: #fff;
+            }
+        }
+        .customer-seach{
+            width: 156px;
+            border: 1px solid #666;
+            border-radius: 20px;
+            height: 20px;
+            line-height: 20px;
+            padding-left: 12px;
+            display: inline-block;
+            vertical-align: top;
+            margin: 14px 0;
+        }
+        .customer-bag{
+            width: 22px;
+            height: 22px;
+            display: inline-block;
+            margin: 13px 5px 13px 18px;
+            background-color: red;
+            vertical-align: top;
+            &:after{
+                height: 12px;
+                content: "";
+                display: block;
+                width: 1px;
+                background-color: #666;
+                margin: 5px 0 0 -12px;
+            }
+        }
+        span{
+            display: inline-block;
+            margin: 15px 0;
+            vertical-align: top;
+            line-height: 1.5;
+        }
+    }
+}

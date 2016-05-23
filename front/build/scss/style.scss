@@ -1,1 +1,11 @@
 @import "common";
+$base-orange: #ff5500;
+$top-bg: #262625;
+
+.ylb-navbar{
+    height: 32px;
+    line-height: 32px;
+    background-color: #f9f9f9;
+}
+
+@import "customer";
