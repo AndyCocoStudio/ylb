@@ -1,11 +1,35 @@
 @import "common";
 $base-orange: #ff5500;
-$top-bg: #262625;
+$base-light-orange: #ffeed2;
+$top-bg: #26201e;
 
 .ylb-navbar{
     height: 32px;
     line-height: 32px;
     background-color: #f9f9f9;
 }
+.ylb-footer{
+    height: 88px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: $top-bg; 
+    color: #fff;
+    p{
+        margin: 44px 0 0 10px;
+    }
+}
+.ylb-inlinewrap{
+    display: inline-block;
+    height: 100%;
+}
+.ylb-hidden{
+    overflow: hidden;
+}
+.ylb-relative{
+    position: relative;
+}
+
 
 @import "customer";
+@import "index";
