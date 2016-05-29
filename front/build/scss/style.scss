@@ -3,10 +3,36 @@ $base-orange: #ff5500;
 $base-light-orange: #ffeed2;
 $top-bg: #26201e;
 
+.ylb-header{
+    height: 44px;
+    line-height: 44px;
+    width: 100%;
+    background-color: $top-bg;
+    position: relative;
+    a{
+        display: block;
+        position: absolute;
+        top: 4px;
+        color: #fff;
+        i{
+            font-size: 24px;
+        }
+    }
+    .ylb-menu{
+        left: 5%;
+    }
+    .ylb-search{
+        right: 5%;
+    }
+    .ylb-customer{
+        right: 10%;
+    }
+}
 .ylb-navbar{
-    height: 32px;
-    line-height: 32px;
+    height: 36px;
+    line-height: 36px;
     background-color: #f9f9f9;
+    margin-bottom: 5px;
 }
 .ylb-footer{
     height: 88px;

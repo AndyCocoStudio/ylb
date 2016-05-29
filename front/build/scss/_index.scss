@@ -2,30 +2,6 @@ html,body{
     width: 100%;
     height: 100%;
 }
-.index-header{
-    height: 44px;
-    line-height: 44px;
-    width: 100%;
-    background-color: $top-bg;
-    position: relative;
-    a{
-        display: inline-block;
-        position: absolute;
-        top: 12px;
-        width: 24px;
-        height: 24px;
-        background-color: #fff;
-    }
-    .index-menu{
-        left: 5%;
-    }
-    .index-search{
-        right: 5%;
-    }
-    .index-customer{
-        right: 10%;
-    }
-}
 .index-main{
     margin: 0 auto 88px;
     width: 100%;

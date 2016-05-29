@@ -9,14 +9,16 @@
     <div class="customer-header-wrap">
         <img class="customer-logo" src="" />
         <ul class="customer-nav">
-            <li>首页</li>
+            <li><a href="index.html">首页</a></li>
             <li class="select">个人中心</li>
             <li>商品分类</li>
             <li>公告</li>
         </ul>
-        <input class="customer-seach" type="search" placeholder="搜索">
-        <i class="customer-bag icon-icon-01"></i>
-        <span>购物篮</span>
+        <div class="customer-seach">
+            <input type="search" placeholder="搜索">
+            <i class="customer-bag icon-ylbicon-23"></i>
+            <span>购物车</span>
+        </div>
     </div>
     <p class="ylb-navbar">您现在的位置：<a href="index.html">首页</a> > 会员中心</p>
     <div class="customer-left">
@@ -24,42 +26,219 @@
             会员中心
         </h1>
         <ul>
-            <li class="select"><i></i>我的账号</li>
-            <li><i></i>我的订单</li>
-            <li><i></i>我的收藏</li>
-            <li><i></i>角色申请</li>
+            <li class="select"><a href="#customer-info"><i class="icon-ylbicon-01"></i>我的账号</a></li>
+            <li><a href="#customer-order"><i class="icon-ylbicon-02"></i>我的订单</a></li>
+            <li><a href="#customer-fav"><i class="icon-ylbicon-03"></i>我的收藏</a></li>
+            <li><a href="#customer-apply"><i class="icon-ylbicon-04"></i>商家申请</a></li>
+            <li><a href="achievement.html?id=1"><i class="icon-ylbicon-22"></i>名下业绩</a></li>
+            <li><a href="review.html?id=1"><i class="icon-ylbicon-18"></i>审核管理</a></li>
         </ul>
     </div>
     <div class="customer-right">
-        <div class="customer-info">
+        <div id="customer-info" class="customer-info">
             <div class="customer-base">
-                <img src="" />
+                <img src="images/customer-default.png" />
                 <a>编辑个人资料</a>
                 <h1>优良宝</h1>
-                <h2>真实姓名:优良宝</h2>
-                <h2>会员类型:普通会员</h2>
             </div>
             <div class="customer-asset">
-                <img class="customer-tag" src="" />
+                <div class="customer-tag">资产</div>
+                <h1>真实姓名：优良宝<br />
+                会员等级：普通会员</h1>
                 <p>账户余额: <em>1000</em>元<a>充值</a></p>
                 <p>剩余积分: <em>1000</em>分</p>
-                <p>积分点: <em>2</em>个<a>领取积分</a></p>
+                <p>积分基点: <em>2</em>个<a>领取积分</a></p>
             </div>
             <div class="customer-code customer-exchange">
-                <img class="customer-tag" src="" />
-                <div class="customer-tag-pic">
+                <div class="customer-tag">积分兑换</div>
+                <div class="customer-pic">
                     <span>积分兑换</span>
                     <img src="" alt="二维码" />
                 </div>
             </div>
             <div class="customer-code customer-send">
-                <img class="customer-tag" src="" />
-                <div>
+                <div class="customer-tag">积分做单</div>
+                <div class="customer-pic">
                     <span>积分做单</span>
                     <img src="" alt="二维码" />
                 </div>
             </div>
-            <img class="customer-adv" src="" />
+            <img class="customer-adv" src="images/adv1.png" />
+        </div>
+        <div class="customer-count">
+            本月名下商家累积做单<em>100</em>笔，赠送积分<em>25000</em>分，可获得工资<em>1000</em>元<br>
+            本季度名下商家累积做单<em>180</em>笔，赠送积分<em>30000</em>分。
+            
+        </div>
+        <div id="customer-order" class="customer-order">
+            <div class="customer-title">
+                我的订单
+            </div>
+            <div class="customer-order-ddl">
+                日期
+                <input type="text" id="customer-startdate" placeholder="请选择时间" /> 至
+                <input type="text" id="customer-stopdate" placeholder="请选择时间" />
+                <!--<span>筛选</span>
+                <select class="customer-fliter">
+                    <option>全部</option>
+                </select>-->
+            </div>
+            <ul class="customer-order-type">
+                <li data-type="jfdh" class="select">积分兑换</li>
+                <li data-type="xsxf">线上消费</li>
+                <li data-type="sjzd">商家做单</li>
+            </ul>
+            <table data-type="jfdh" style="display: table;" class="customer-order-list">
+                <tr>
+                    <th>订单号</th>
+                    <th>商品名称</th>
+                    <th>商品类目</th>
+                    <th>商家</th>
+                    <th>价格</th>
+                    <th>支付方式</th>
+                    <th>状态</th>
+                    <th>操作</th>
+                </tr>
+                <tr>
+                    <td>10000011</td>
+                    <td>苏泊尔安全压力锅苏泊尔安全压力锅</td>
+                    <td>厨具</td>
+                    <td>优良宝小二</td>
+                    <td>12545.45</td>
+                    <td>积分</td>
+                    <td>审核中</td>
+                    <td><a>支付</a><br/><a>取消</a></td>
+                </tr>
+                <tr>
+                    <td>10000011</td>
+                    <td>苏泊尔安全压力锅</td>
+                    <td>厨具</td>
+                    <td>优良宝小二</td>
+                    <td>12545.45</td>
+                    <td>积分</td>
+                    <td>审核中</td>
+                    <td><a>支付</a><br/><a>取消</a></td>
+                </tr>
+            </table>
+            <table data-type="xsxf" class="customer-order-list">
+                <tr>
+                    <th>订单号</th>
+                    <th>商品名称</th>
+                    <th>商品类目</th>
+                    <th>商家</th>
+                    <th>价格</th>
+                    <th>支付方式</th>
+                    <th>状态</th>
+                    <th>操作</th>
+                </tr>
+                <tr>
+                    <td>10000011</td>
+                    <td>苏泊尔安全压力锅苏泊尔安全压力锅</td>
+                    <td>厨具</td>
+                    <td>优良宝小二</td>
+                    <td>12545.45</td>
+                    <td>积分</td>
+                    <td>审核中</td>
+                    <td><a>支付</a><br/><a>取消</a></td>
+                </tr>
+                <tr>
+                    <td>10000011</td>
+                    <td>苏泊尔安全压力锅</td>
+                    <td>厨具</td>
+                    <td>优良宝小二</td>
+                    <td>12545.45</td>
+                    <td>积分</td>
+                    <td>审核中</td>
+                    <td><a>支付</a><br/><a>取消</a></td>
+                </tr>
+            </table>
+            <table data-type="sjzd" class="customer-order-list">
+                <tr>
+                    <th>订单号</th>
+                    <th>商品名称</th>
+                    <th>商品类目</th>
+                    <th>商家</th>
+                    <th>价格</th>
+                    <th>支付方式</th>
+                    <th>状态</th>
+                    <th>操作</th>
+                </tr>
+                <tr>
+                    <td>10000011</td>
+                    <td>苏泊尔安全压力锅苏泊尔安全压力锅</td>
+                    <td>厨具</td>
+                    <td>优良宝小二</td>
+                    <td>12545.45</td>
+                    <td>积分</td>
+                    <td>审核中</td>
+                    <td><a>支付</a><br/><a>取消</a></td>
+                </tr>
+                <tr>
+                    <td>10000011</td>
+                    <td>苏泊尔安全压力锅</td>
+                    <td>厨具</td>
+                    <td>优良宝小二</td>
+                    <td>12545.45</td>
+                    <td>积分</td>
+                    <td>审核中</td>
+                    <td><a>支付</a><br/><a>取消</a></td>
+                </tr>
+            </table>
+        </div>
+        <div id="customer-fav" class="customer-fav">
+            <div class="customer-title">我的收藏</div>
+            <ul class="customer-fav-type">
+                <li class="select">宝贝</li>
+                <li>店铺</li>
+            </ul>
+            <ul class="customer-fav-list">
+                <li>
+                    <a>
+                        <img src="">
+                        <p>￥125.20</p>
+                        <h1>苏泊尔安全压力锅</h1>
+                    </a>
+                </li>
+                <li>
+                    <a>
+                        <img src="">
+                        <p>￥125.20</p>
+                        <h1>苏泊尔安全压力锅苏泊尔安全压力锅苏泊尔安全压力锅</h1>
+                    </a>
+                </li>
+                <li>
+                    <a>
+                        <img src="">
+                        <p>￥125.20</p>
+                        <h1>苏泊尔安全压力锅</h1>
+                    </a>
+                </li>
+                <li>
+                    <a>
+                        <img src="">
+                        <p>￥125.20</p>
+                        <h1>苏泊尔安全压力锅</h1>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div id="customer-apply" class="customer-apply">
+            <div class="customer-title">角色申请</div>
+            <p>您将申请成为<em>商家</em>,请认真如实提交以下内容</p>
+            <ul class="cutomer-apply-saler">
+                <li>注：图片资料，请选择500k以下的jpg格式的图片</li>
+                <li><span>营业执照图</span><input type="file" /><input type="button" value="上传"><br><img /></li>
+                <li><span>实际经营地址</span><input type="text" /></li>
+                <li><span>法人</span><input type="text" /></li>
+                <li><span>法人身份证</span><input type="text" /></li>
+                <li><span>法人手持身份证照图</span><input type="file" /><input type="button" value="上传"><br><img /></li>
+                <li><span>店招图</span><input type="file" /><input type="button" value="上传"><br><img /></li>
+                <li><span>店面或内部环境图</span><input type="file" /><input type="button" value="上传"><br><img /></li>
+                <li><span>店面或内部环境图</span><input type="file" /><input type="button" value="上传"><br><img /></li>
+                <li><span>店面或内部环境图</span><input type="file" /><input type="button" value="上传"><br><img /></li>
+                <li><span>店面或内部环境图</span><input type="file" /><input type="button" value="上传"><br><img /></li>
+                <li><button>提交</button></li>
+            </ul>
         </div>
     </div>
 </section>
@@ -68,4 +247,23 @@
 
 <!-- @@block = scripts-->
 <script type="text/javascript" src="js/customer.js?rev=@@hash"></script>
+<script type="text/javascript">
+    var startdate = new Pikaday(
+    {
+        field: document.getElementById('customer-startdate'),
+        firstDay: 1,
+        minDate: new Date('2016-01-01'),
+        maxDate: new Date('2116-12-31'),
+        yearRange: [2016,2116]
+    });
+    var stopdate = new Pikaday(
+    {
+        field: document.getElementById('customer-stopdate'),
+        firstDay: 1,
+        minDate: new Date('2016-01-01'),
+        maxDate: new Date('2116-12-31'),
+        yearRange: [2016,2116]
+    });
+
+</script>
 <!-- @@close-->
