@@ -32,6 +32,7 @@
             width: 96px;
             padding:  0 30px;
             float: left;
+            border-right: 1px solid $base-border-color;
             h1{
                 font-size: 18px;
                 line-height: 58px;
@@ -45,24 +46,32 @@
                     line-height: 35px;
                     border-bottom: 1px solid $base-border-color;
                     text-align: center;
+                    &:hover{
+                        background-color: #efefef;
+                        cursor: pointer;
+                    }
+                    &.select{
+                        background-color: #f20;
+                        color: #fff;
+                        border-bottom: 1px solid #f20;
+                    }
                 }
             }
             
         }
         .list-product{
-            margin: 0 56px 137px 156px;
-            border-left: 1px solid $base-border-color;
+            margin-left: 157px;
             ul{
                 overflow: hidden;
                 li{
                     position: relative;
-                    border-right: 1px solid $base-border-color;
-                    border-bottom: 1px solid $base-border-color;
-                    width: 248px;
+                    border: 1px solid $base-border-color;
+                    width: 253px;
                     float: left;
+                    margin: 12px 0 0 12px;
                     img{
                         padding-bottom: 10px;
-                        width: 248px;
+                        width: 253px;
                     }
                     p{
                         font-size: 18px;
