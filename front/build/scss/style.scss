@@ -2,6 +2,7 @@
 $base-orange: #ff5500;
 $base-light-orange: #ffeed2;
 $top-bg: #26201e;
+$base-border-color: #c7c7c7;
 
 .ylb-header{
     height: 44px;
@@ -100,3 +101,4 @@ $top-bg: #26201e;
 @import "customer";
 @import "index";
 @import "login";
+@import "list";

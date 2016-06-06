@@ -1,0 +1,92 @@
+.list-main{
+    width: 100%;
+    margin: 0 auto;
+    overflow-x: hidden;
+    .list-banner{
+        width: 100%;
+        height: 400px;
+        ul{
+            display: block;
+            overflow: hidden;
+            height: 400px;
+            li{
+                width: 100%;
+                text-align: center;
+                opacity: 0;
+                img{
+                    height: 400px;
+                    margin: 0 auto;
+                }
+                &.select{
+                    opacity: 1;
+                }
+            }
+        }
+    }
+    .list-wrap{
+        width: 960px;
+        margin: 36px auto;
+        border-top: 1px solid $base-border-color;
+        overflow: hidden;
+        .list-type{
+            width: 96px;
+            padding:  0 30px;
+            float: left;
+            h1{
+                font-size: 18px;
+                line-height: 58px;
+                padding-top: 10px;
+                text-align: center;
+            }
+            ul{
+                width: 96px;
+                border-top: 1px solid $base-border-color;
+                li{
+                    line-height: 35px;
+                    border-bottom: 1px solid $base-border-color;
+                    text-align: center;
+                }
+            }
+            
+        }
+        .list-product{
+            margin: 0 56px 137px 156px;
+            border-left: 1px solid $base-border-color;
+            ul{
+                overflow: hidden;
+                li{
+                    position: relative;
+                    border-right: 1px solid $base-border-color;
+                    border-bottom: 1px solid $base-border-color;
+                    width: 248px;
+                    float: left;
+                    img{
+                        padding-bottom: 10px;
+                        width: 248px;
+                    }
+                    p{
+                        font-size: 18px;
+                        color: $base-orange;
+                        line-height: 1.5;
+                        padding: 0 15px;
+                    }
+                    h2{
+                        padding: 0 15px 10px;
+                    }
+                    &:hover{
+                        a{
+                            display: block;
+                            width: 248px;
+                            height: 100%;
+                            background: #000;
+                            opacity: 0.2;
+                            position: absolute;
+                            left: 0;
+                            top: 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
