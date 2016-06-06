@@ -53,12 +53,12 @@
                 font-size: 22px;
                 cursor: pointer;
                 &:after{
-                    height: 12px;
+                    height: 16px;
                     content: "";
                     display: block;
                     width: 1px;
                     background-color: #666;
-                    margin: 5px 0 0 -12px;
+                    margin: -32px 0 0 -8px;
                 }
             }
             span{
