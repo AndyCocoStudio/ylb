@@ -1,11 +1,9 @@
 .detail-main{
-    width: 960px;
-    margin: 0 auto;
-    .detail-nav{
-        line-height: 60px;
-        padding-left: 30px;
-    }
+    width: 100%;
+    margin: 0 auto 44;
+    background-color: #f1f1f1;
     .detail-wrap{
+        background-color: #fff;
         width: 100%;
         overflow: hidden;
         .detail-img{
@@ -13,7 +11,6 @@
             float: left;
             overflow: hidden;
             img{
-                width: 100%;
                 height: 100%;
             }
         }
@@ -24,15 +21,18 @@
             h1{
                 width: 90%;
                 font-size: 20px;
+                height: 20%;
             }
             p{
-                margin-top: 60%;
+                margin-top: 30%;
                 font-size: 24px;
+                height: 10%;
                 color: $base-orange;
             }
             .detail-num{
                 font-size: 18px;
-                margin-top: 10%;
+                margin-top: 5%;
+                height: 10%;
                 span{
                     display: inline-block;
                     margin-right: 20px;
@@ -61,7 +61,8 @@
             }
             .detail-btn{
                 height: 50px;
-                margin-top: 10%;
+                margin-top: 5%;
+                height: 10%;
                 a{
                     width: 40%;
                     margin-right: 5%;
@@ -78,6 +79,64 @@
                         background-color: $base-light-orange;
                     }
                 }
+            }
+        }
+    }
+    .detail-info{
+        width: 960px;
+        margin: 20px auto 0;
+        h1{
+            padding-left: 20px;
+            font-size: 14px;
+            color: #fff;
+            height: 50px;
+            line-height: 50px;
+            background: url(../images/tag-b.png) no-repeat left center #fff;
+            border-bottom: 1px solid #efefef;
+        }
+        .detail-base{
+            width: 100%;
+            margin-bottom: 20px;
+            background-color: #fff;
+            .detail-base-wrap{
+                padding: 20px 20% 20px 40px;
+                display: block;
+                overflow: hidden;
+                li{
+                    width: 30%;
+                    float: left;
+                    line-height: 2;
+                    &:first-child{
+                        width: 100%;
+                    }
+                }
+            }
+        }
+        .detail-des{
+            background-color: #fff;
+            margin-bottom: 20px;
+            .detail-des-wrap{
+                padding: 20px 50px;
+                article{
+                    display: inline-block;
+                    vertical-align: top;
+                    line-height: 1.8;
+                    width: 50%;
+                    padding-right: 5%;
+                }
+                img{
+                    display: inline-block;
+                    vertical-align: top;
+                    width: 42%;
+                }
+            }
+        }
+        .detail-img{
+            background-color: #fff;
+            margin-bottom: 20px;
+            img{
+                padding: 30px 30px 0;
+                max-width: 900px;
             }
         }
     }
