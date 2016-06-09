@@ -20,7 +20,7 @@
 	/**
 	 * 关闭所有弹窗
 	 * **/
-	$(".ylb-cover").on("click",function(){
+	$(".ylb-cover, .ylb-menu-wrap").on("click",function(){
 		$(".ylb-cover").fadeOut();
 		$(".ylb-search-wrap").fadeOut();
 		$(".ylb-menu-wrap").fadeOut();

@@ -1,0 +1,79 @@
+<!-- @@master ../layout.html  -->
+
+<!-- @@block = title-->
+<title>购物车</title>
+<!-- @@close-->
+
+<!-- @@block = content-->
+<section class="shopcart-main">
+    <h1>购物车</h1>
+    <table>
+        <tr>
+            <th><input name="allselect" type="checkbox" /><label for="allselect">全选</label></th>
+            <th>商品信息</th>
+            <th>单价</th>
+            <th>数量</th>
+            <th>金额</th>
+            <th>操作</th>
+        </tr>
+        <tr>
+            <td><input type="checkbox"></td>
+            <td>
+                <img src="images/index-1.jpg" />
+                <article>
+                    <h2>Beats urBeats 入耳式耳机 - 银色手机耳机 三键线控 带麦</h2>
+                    <p>颜色:白色  规格:蓝牙</p>
+                </article>
+            </td>
+            <td>
+                <del>¥ 858.00</del>
+                <p>¥ 558.00</p>
+            </td>
+            <td><a class="count">-</a><input type="text"><a class="count">+</a></td>
+            <td>¥ 858.00</td>
+            <td>删除</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox"></td>
+            <td>
+                <img src="images/index-1.jpg" />
+                <article>
+                    <h2>Beats urBeats 入耳式耳机 - 银色手机耳机 三键线控 带麦</h2>
+                    <p>颜色:白色  规格:蓝牙</p>
+                </article>
+            </td>
+            <td>
+                <del>¥ 858.00</del>
+                <p>¥ 558.00</p>
+            </td>
+            <td><a class="count">-</a><input type="text"><a class="count">+</a></td>
+            <td>¥ 858.00</td>
+            <td>删除</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox"></td>
+            <td>
+                <img src="images/index-1.jpg" />
+                <article>
+                    <h2>Beats urBeats 入耳式耳机 - 银色手机耳机 三键线控 带麦</h2>
+                    <p>颜色:白色  规格:蓝牙</p>
+                </article>
+            </td>
+            <td>
+                <del>¥ 858.00</del>
+                <p>¥ 558.00</p>
+            </td>
+            <td><a class="count">-</a><input type="text"><a class="count">+</a></td>
+            <td>¥ 858.00</td>
+            <td>删除</td>
+        </tr>
+    </table>
+    <div class="shopcart-settle">
+        <span>已选<em>2</em>件商品</span>合计(不含运费) <em>￥588.00</em>元<input type="button" value="结算" />
+    </div>
+</section>
+<!-- @@close-->
+
+<!-- @@block = scripts-->
+<script type="text/javascript" src="js/shopcart.js?rev=@@hash"></script>
+<!-- @@close-->
