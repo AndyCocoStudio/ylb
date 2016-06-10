@@ -1,0 +1,97 @@
+<!-- @@master ../layout.html  -->
+
+<!-- @@block = title-->
+<title>编辑个人信息</title>
+<!-- @@close-->
+
+<!-- @@block = content-->
+<section class="customer-main">
+    <div class="customer-header-wrap">
+        <img class="customer-logo" src="" />
+        <ul class="customer-nav">
+            <li><a href="index.html">首页</a></li>
+            <li class="select">个人中心</li>
+            <li>商品分类</li>
+            <li>公告</li>
+        </ul>
+        <div class="customer-seach">
+            <input type="search" placeholder="搜索">
+            <i class="customer-bag icon-ylbicon-23"></i>
+            <span>购物车</span>
+        </div>
+    </div>
+    <p class="ylb-navbar">您现在的位置：<a href="index.html">首页</a> > 会员中心</p>
+    <div class="customer-left">
+        <h1 class="customer-left-title">
+            会员中心
+        </h1>
+        <ul>
+            <li class="select"><a href="#customer-info"><i class="icon-ylbicon-01"></i>我的账号</a></li>
+            <li><a href="#customer-order"><i class="icon-ylbicon-02"></i>我的订单</a></li>
+            <li><a href="#customer-fav"><i class="icon-ylbicon-03"></i>我的收藏</a></li>
+            <li><a href="#customer-apply"><i class="icon-ylbicon-04"></i>商家申请</a></li>
+            <li><a href="achievement.html?id=1"><i class="icon-ylbicon-22"></i>名下业绩</a></li>
+            <li><a href="review.html?id=1"><i class="icon-ylbicon-18"></i>审核管理</a></li>
+        </ul>
+    </div>
+    <div class="customer-right">
+        <div id="customer-info" class="customer-info">
+            <div class="customer-base">
+                <img src="images/customer-default.png" />
+                <a>编辑个人资料</a>
+                <h1>优良宝</h1>
+            </div>
+            <div class="customer-asset">
+                <div class="customer-tag">资产</div>
+                <h1>真实姓名：优良宝<br /> 会员等级：普通会员
+                </h1>
+                <p>账户余额: <em>1000</em>元<a>充值</a></p>
+                <p>剩余积分: <em>1000</em>分</p>
+                <p>积分基点: <em>2</em>个<a>领取积分</a></p>
+            </div>
+            <div class="customer-code customer-exchange">
+                <div class="customer-tag">二维码</div>
+                <div class="customer-pic">
+                    <span>我的私码</span>
+                    <img src="" alt="二维码" />
+                </div>
+            </div>
+            <div class="customer-code customer-send">
+                <div class="customer-tag">积分做单</div>
+                <div class="customer-pic">
+                    <span>积分做单</span>
+                    <img src="" alt="二维码" />
+                </div>
+            </div>
+            <img class="customer-adv" src="images/adv1.png" />
+        </div>
+        <div class="customer-edit">
+            <ul class="customer-edit-list">
+                <li class="select">头像修改</li>
+                <li>地址管理</li>
+                <li>密码管理</li>
+                <li>个人资料</li>
+            </ul>
+            <div class="edit-avatar">
+                <h3>请选择jpg,png格式的图片，图片大小小于500k</h3>
+                <img src="" />
+                <input type="file" />
+                <input type="button" value="上传" />
+            </div>
+            <div class="edit-address">
+                <h3>新增收货地址<span>电话号码、手机号选填一项，其余均为必填项</span></h3>
+                <ul>
+                    <li><span>所在地区<em>*</em></span><input type="text"></li>
+                    <li></li>
+                </ul>
+            </div>
+            <div class="edit-password"></div>
+            <div class="edit-info"></div>
+        </div>
+    </div>
+</section>
+<!-- @@close-->
+
+<!-- @@block = scripts-->
+<script type="text/javascript" src="js/customer.js?rev=@@hash"></script>
+<!-- @@close-->
