@@ -13,9 +13,9 @@
 
 
 
-	<link rel="stylesheet" type="text/css" href="css/style.css?rev=d1fd46a86940e352ff0c3966fecfcfa2" />
+	<link rel="stylesheet" type="text/css" href="css/style.css?rev=316034e4dfcedd52e6e0bcfcd521b27a" />
 	<link rel="stylesheet" type="text/css" href="css/pickday.css" />
-	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=d1fd46a86940e352ff0c3966fecfcfa2" />
+	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=316034e4dfcedd52e6e0bcfcd521b27a" />
 </head>
 
 <body>
@@ -103,11 +103,57 @@
                 <h3>新增收货地址<span>电话号码、手机号选填一项，其余均为必填项</span></h3>
                 <ul>
                     <li><span>所在地区<em>*</em></span><input type="text"></li>
-                    <li></li>
+                    <li><span>详细地址<em>*</em></span><input type="text"></li>
+                    <li><span>邮政编码</span><input type="text"></li>
+                    <li><span>收货人姓名<em>*</em></span><input type="text"></li>
+                    <li><span>手机号码</span><input type="text"></li>
+                    <li><span>固定电话</span><input class="areacode" type="text"> - <input class="phone" type="text"></li>
+                    <li><input type="checkbox" id="default"/><label for="default">设置为默认收货地址</label></li>
+                    <li><button class="edit-save">保存</button></li>
+                </ul>
+                <table>
+                    <tr>
+                        <th>收货人</th>
+                        <th>详细地址</th>
+                        <th>邮编</th>
+                        <th>手机</th>
+                        <th>操作</th>
+                    </tr>
+                    <tr>
+                        <td>王一</td>
+                        <td>湖南省长沙市浏阳河大桥东金鹰影视文化城金鹰大厦</td>
+                        <td>212000</td>
+                        <td>13612345678</td>
+                        <td><a>修改</a><a>删除</a></td>
+                    </tr>
+                    <tr>
+                        <td>王一</td>
+                        <td>湖南省长沙市浏阳河大桥东金鹰影视文化城金鹰大厦</td>
+                        <td>212000</td>
+                        <td>13612345678</td>
+                        <td><a>修改</a><a>删除</a></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="edit-password">
+                <ul>
+                    <li><span>原密码</span><input type="text"></li>
+                    <li><span>新密码</span><input type="text"></li>
+                    <li><span>确认密码</span><input type="text"></li>
+                    <li><button class="edit-pwd">确认</button></li>
                 </ul>
             </div>
-            <div class="edit-password"></div>
-            <div class="edit-info"></div>
+            <div class="edit-info">
+                <ul>
+                    <li><span>真实姓名</span><input type="text"></li>
+                    <li><span>身份证号</span><input type="text"></li>
+                    <li><span>开户银行</span><input type="text"></li>
+                    <li><span>银行卡号</span><input type="text"></li>
+                    <li><span>所在省市</span><input type="text"></li>
+                    <li><span>推荐人</span><input type="text"></li>
+                    <li><button>保存修改</button></li>
+                </ul>
+            </div>
         </div>
     </div>
 </section>
@@ -142,9 +188,9 @@
 <script src="js/libs/jquery-2.1.4.min.js" type="text/javascript"></script>
 <script src="js/libs/vue.min.js" type="text/javascript"></script>
 <script src="js/libs/pickday.min.js" type="text/javascript"></script>
-<script src="js/base.js?rev=d1fd46a86940e352ff0c3966fecfcfa2" type="text/javascript"></script>
+<script src="js/base.js?rev=316034e4dfcedd52e6e0bcfcd521b27a" type="text/javascript"></script>
 
-<script type="text/javascript" src="js/customer.js?rev=d1fd46a86940e352ff0c3966fecfcfa2"></script>
+<script type="text/javascript" src="js/edit.js?rev=316034e4dfcedd52e6e0bcfcd521b27a"></script>
 
 
 </html>
