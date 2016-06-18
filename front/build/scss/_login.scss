@@ -43,7 +43,7 @@
                     cursor: pointer;
                 }
                 button{
-                    width: 218px;
+                    width: 260px;
                     background-color: $base-orange;
                     color: #fff;
                     text-align: center;
@@ -53,6 +53,14 @@
                     letter-spacing: 2px;
                     cursor: pointer;
                 }
+            }
+        }
+        p{
+            text-align: right;
+            margin-top: 10px;
+            color: #999;
+            i{
+                margin-right: 5px;
             }
         }
     }

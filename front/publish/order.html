@@ -13,9 +13,9 @@
 
 
 
-	<link rel="stylesheet" type="text/css" href="css/style.css?rev=b0bb7ee486cf468e4e7a567a30f23a18" />
+	<link rel="stylesheet" type="text/css" href="css/style.css?rev=32c7a2e002808ffa6f53f75bc8f35a94" />
 	<link rel="stylesheet" type="text/css" href="css/pickday.css" />
-	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=b0bb7ee486cf468e4e7a567a30f23a18" />
+	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=32c7a2e002808ffa6f53f75bc8f35a94" />
 </head>
 
 <body>
@@ -26,7 +26,7 @@
 		<a class="ylb-customer" href="customer.html"><i class="icon-ylbicon-01"></i></a>
 	</header>
 
-<section class="order-main">
+<section id="order-main" class="order-main" v-cloak>
     <ul class="order-cource">
         <li class="select"><span>1</span><br>确认订单信息</li>
         <li><span>2</span><br>付款方式</li>
@@ -35,7 +35,15 @@
     <div class="order-wrap">
         <h1 class="order-title">填写并确认订单信息</h1>
         <div class="order-address">
-            <h2>收货人信息<a class="order-address-manager">管理收货地址</a></h2>
+            <h2>收货人信息<a @click="newaddress" class="order-address-manager">添加收货地址</a></h2>
+            <div class="newaddress" v-show="hideaddress" v-transition="fade">
+                <span>收件人</span><input type="text">
+                <span>手机号</span><input type="text">
+                <span>邮编</span><input type="text"><br />
+                <span>省市区</span><input type="text">
+                <span>详细地址</span><input class="detail" type="text">
+                <button>添加</button>
+            </div>
             <ul class="order-address-list">
                 <li>
                     <input type="radio">
@@ -49,7 +57,7 @@
                 <li>
                     <input type="radio">
                     <article>
-                        <span>王一(收)</span>
+                        <span>王er(收)</span>
                         <span>浙江省杭州市良睦路1399号梦想小镇互联网村4号楼1层</span>
                         <span>1389765850</span>
                         <a>更多地址</a>
@@ -169,9 +177,9 @@
 <script src="js/libs/jquery-2.1.4.min.js" type="text/javascript"></script>
 <script src="js/libs/vue.min.js" type="text/javascript"></script>
 <script src="js/libs/pickday.min.js" type="text/javascript"></script>
-<script src="js/base.js?rev=b0bb7ee486cf468e4e7a567a30f23a18" type="text/javascript"></script>
+<script src="js/base.js?rev=32c7a2e002808ffa6f53f75bc8f35a94" type="text/javascript"></script>
 
-<script type="text/javascript" src="js/order.js?rev=b0bb7ee486cf468e4e7a567a30f23a18"></script>
+<script type="text/javascript" src="js/order.js?rev=32c7a2e002808ffa6f53f75bc8f35a94"></script>
 
 
 </html>

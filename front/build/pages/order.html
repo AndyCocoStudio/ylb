@@ -5,7 +5,7 @@
 <!-- @@close-->
 
 <!-- @@block = content-->
-<section class="order-main">
+<section id="order-main" class="order-main" v-cloak>
     <ul class="order-cource">
         <li class="select"><span>1</span><br>确认订单信息</li>
         <li><span>2</span><br>付款方式</li>
@@ -14,7 +14,15 @@
     <div class="order-wrap">
         <h1 class="order-title">填写并确认订单信息</h1>
         <div class="order-address">
-            <h2>收货人信息<a class="order-address-manager">管理收货地址</a></h2>
+            <h2>收货人信息<a @click="newaddress" class="order-address-manager">添加收货地址</a></h2>
+            <div class="newaddress" v-show="hideaddress" v-transition="fade">
+                <span>收件人</span><input type="text">
+                <span>手机号</span><input type="text">
+                <span>邮编</span><input type="text"><br />
+                <span>省市区</span><input type="text">
+                <span>详细地址</span><input class="detail" type="text">
+                <button>添加</button>
+            </div>
             <ul class="order-address-list">
                 <li>
                     <input type="radio">
@@ -28,7 +36,7 @@
                 <li>
                     <input type="radio">
                     <article>
-                        <span>王一(收)</span>
+                        <span>王er(收)</span>
                         <span>浙江省杭州市良睦路1399号梦想小镇互联网村4号楼1层</span>
                         <span>1389765850</span>
                         <a>更多地址</a>

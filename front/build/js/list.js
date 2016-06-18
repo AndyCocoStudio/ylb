@@ -1,7 +1,18 @@
 (function () {
+    var datas = {
+        id: 222
+    };
     var m = {
         init: function () {
             setInterval(m.bannerAnimate, 4000);
+            m.buildVue();
+        },
+        buildVue: function () {
+            datas = new Vue({
+                el: "#list-main",
+                data: datas,
+                methods: {}
+            });
         },
         bannerAnimate: function () {
             var tar = $(".list-banner").find(".select");

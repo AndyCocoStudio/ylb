@@ -92,6 +92,31 @@
                 font-size: 12px;
             }
         }
+        .newaddress{
+            background-color: #fff;
+            padding: 20px 40px 10px;
+            span{
+                display: inline-block;
+                line-height: 24px
+            }
+            input{
+                display: inline-block;
+                line-height: 22px;
+                border: 1px solid $base-border-color;
+                padding-left: 5px;
+                margin: 0 5px 10px;
+                &.detail{
+                    width: 235px;
+                }
+            }
+            button{
+                width: 60px;
+                height: 24px;
+                background-color: $base-orange;
+                color: #fff;
+                margin-left: 20px;
+            }
+        }
         ul.order-address-list{
             display: block;
             padding: 10px 0 30px;

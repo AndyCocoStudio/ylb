@@ -1,9 +1,22 @@
 (function () {
+    var datas = {
+        
+    }
     var m = {
         init: function () {
             m.setImages();
             m.resizeWindow();
             m.domControl();
+            m.buildVue();
+        },
+        buildVue:function(){
+            datas = new Vue({
+                el:"#index-main",
+                data: datas,
+                methods:{
+                    
+                }
+            });
         },
         setImages: function () {
             $(".index-main img").each(function () {

@@ -94,7 +94,8 @@
             font-size: 16px;
             color: $base-orange;
         }
-        input[type='button']{
+        input[type='button'], a{
+            display: inline-block;
             width: 120px;
             background-color: $base-orange;
             height: 50px;
