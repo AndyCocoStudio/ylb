@@ -1,20 +1,29 @@
 (function () {
-    var datas = {
-        
-    }
+    var datas = {};
     var m = {
         init: function () {
-            m.setImages();
             m.resizeWindow();
             m.domControl();
-            m.buildVue();
+            m.getBanner();
         },
-        buildVue:function(){
+        getBanner: function () {
+            $.when($.ajax({
+                url: $.apiUrl + '/banner',
+                type: 'GET'
+            })).done(function (d) {
+                $.ylbAjaxHandler(d, function () {
+                    datas.data = d.data;
+                    m.buildVue();
+                    m.setImages();
+                });
+            });
+        },
+        buildVue: function () {
             datas = new Vue({
-                el:"#index-main",
+                el: "#index-main",
                 data: datas,
-                methods:{
-                    
+                methods: {
+
                 }
             });
         },

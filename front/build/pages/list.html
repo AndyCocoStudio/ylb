@@ -27,53 +27,11 @@
         </div>
         <div class="list-product">
             <ul>
-                <li>
-                    <a href="detail.html"></a>
-                    <img src="images/index-1.jpg" />
-                    <p>￥ 566.00</p>
-                    <h2>Beats urBeats 入耳式耳机 - 银色 手机耳机 三键线控 带麦</h2>
-                </li>
-                <li>
-                    <a href="detail.html"></a>
-                    <img src="images/index-1.jpg" />
-                    <p>￥ 566.00</p>
-                    <h2>Beats urBeats 入耳式耳机 - 银色 手机耳机 三键线控 带麦</h2>
-                </li>
-                <li>
-                    <a href="detail.html"></a>
-                    <img src="images/index-1.jpg" />
-                    <p>￥ 566.00</p>
-                    <h2>Beats urBeats 入耳式耳机 - 银色 手机耳机 三键线控 带麦</h2>
-                </li>
-                <li>
-                    <a href="detail.html"></a>
-                    <img src="images/index-1.jpg" />
-                    <p>￥ 566.00</p>
-                    <h2>Beats urBeats 入耳式耳机 - 银色 手机耳机 三键线控 带麦</h2>
-                </li>
-                <li>
-                    <a href="detail.html"></a>
-                    <img src="images/index-1.jpg" />
-                    <p>￥ 566.00</p>
-                    <h2>Beats urBeats 入耳式耳机 - 银色 手机耳机 三键线控 带麦</h2>
-                </li>
-                <li>
-                    <a href="detail.html"></a>
-                    <img src="images/index-1.jpg" />
-                    <p>￥ 566.00</p>
-                    <h2>Beats urBeats 入耳式耳机 - 银色 手机耳机 三键线控 带麦</h2>
-                </li>
-                <li>
-                    <a href="detail.html"></a>
-                    <img src="images/index-1.jpg" />
-                    <p>￥ 566.00</p>
-                    <h2>Beats urBeats 入耳式耳机 - 银色 手机耳机 三键线控 带麦</h2>
-                </li>
-                <li>
-                    <a href="detail.html"></a>
-                    <img src="images/index-1.jpg" />
-                    <p>￥ 566.00</p>
-                    <h2>Beats urBeats 入耳式耳机 - 银色 手机耳机 三键线控 带麦</h2>
+                <li v-for="good in data.goodses">
+                    <a href="detail.html?id={{good.goodsID}}"></a>
+                    <img :src="good.thumbnail" />
+                    <p>￥ {{good.price}}</p>
+                    <h2>{{good.name}}</h2>
                 </li>
             </ul>
         </div>

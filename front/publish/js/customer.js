@@ -1,1 +1,1 @@
-!function(){var i={},n={init:function(){n.buildVue()},buildVue:function(){i=new Vue({el:"#customer-main",data:i,methods:{}})}};n.init()}();
+!function(){var s={covershow:!1,sendshow:!1,spendshow:!1},n={init:function(){n.buildVue()},buildVue:function(){s=new Vue({el:"#customer-main",data:s,methods:{sendpoints:function(){this.covershow=!0,this.sendshow=!0},spendpoints:function(){this.covershow=!0,this.spendshow=!0},hideall:function(){this.covershow=!1,this.sendshow=!1,this.spendshow=!1}}})}};n.init()}();

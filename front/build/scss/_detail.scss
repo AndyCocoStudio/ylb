@@ -2,7 +2,7 @@
     width: 100%;
     margin: 0 auto;
     background-color: #f1f1f1;
-    padding-bottom: 128px;
+    padding-bottom: 88px;
     .detail-wrap{
         background-color: #fff;
         width: 100%;
@@ -133,10 +133,12 @@
         }
         .detail-imgs{
             background-color: #fff;
-            margin-bottom: 20px;
+            padding-bottom: 40px;
             img{
                 padding: 30px 30px 0;
                 max-width: 900px;
+                display: block;
+                margin: 0 auto;
                 &:last-child{
                     padding-bottom: 20px;
                 }

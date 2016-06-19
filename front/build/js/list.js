@@ -1,11 +1,27 @@
 (function () {
     var datas = {
-        id: 222
+        k: $.urlParam("k") || "",
+        n: $.urlParam("n") || ""
     };
     var m = {
         init: function () {
             setInterval(m.bannerAnimate, 4000);
-            m.buildVue();
+            m.loadList();
+        },
+        loadList: function () {
+            $.when($.ajax({
+                url: $.apiUrl + "/goods/query",
+                type: "GET",
+                data: {
+                    k: datas.k,
+                    n: datas.n
+                }
+            })).done(function (d) {
+                $.ylbAjaxHandler(d, function () {
+                    datas.data = d.data;
+                    m.buildVue();
+                });
+            });
         },
         buildVue: function () {
             datas = new Vue({

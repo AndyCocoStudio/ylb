@@ -17,33 +17,35 @@
 <body>
 	<header class="ylb-header">
 		<a class="ylb-home" href="index.html"><i class="icon-ylbicon-28"></i></a>
-		<a class="ylb-menu"><i class="icon-ylbicon-06"></i></a>
+		<a class="ylb-menu" @click="aa"><i class="icon-ylbicon-06"></i></a>
 		<a class="ylb-search"><i class="icon-ylbicon-05"></i></a>
 		<a class="ylb-customer" href="customer.html"><i class="icon-ylbicon-01"></i></a>
 	</header>
 	<!-- @@placeholder= content -->
-	<div class="ylb-cover"></div>
-	<div class="ylb-search-wrap">
-		<input class="ylb-search-txt" type="search" placeholder="请输入关键词" />
-		<a class="ylb-search-btn"><i class="icon-ylbicon-05"></i></a>
-	</div>
-	<div class="ylb-menu-wrap">
-		<ul>
-			<li>全部商品分类</li>
-			<li class="select">家具、家装、家居、厨具</li>
-			<li>男装、男鞋、男裤</li>
-			<li>女装、女鞋、女裤</li>
-			<li>家电、数码</li>
-			<li>童装、母婴用品</li>
-			<li>进口食品、鲜蔬水果</li>
-			<li><a href="">某某1></a>
-				<a href="">某某2></a>
-				<a href="">某某3></a>
-				<a href="">某某4></a>
-				<a href="">某某5></a>
-			</li>
-		</ul>
+	<div id="ylb-layout">
+		<div class="ylb-cover"></div>
+		<div class="ylb-search-wrap">
+			<input class="ylb-search-txt" type="search" v-model="sc" placeholder="请输入关键词" />
+			<a @click="search" class="ylb-search-btn"><i class="icon-ylbicon-05"></i></a>
+		</div>
+		<div class="ylb-menu-wrap">
+			<ul>
+				<li>全部商品分类</li>
+				<li class="select">家具、家装、家居、厨具</li>
+				<li>男装、男鞋、男裤</li>
+				<li>女装、女鞋、女裤</li>
+				<li>家电、数码</li>
+				<li>童装、母婴用品</li>
+				<li>进口食品、鲜蔬水果</li>
+				<li><a href="">某某1></a>
+					<a href="">某某2></a>
+					<a href="">某某3></a>
+					<a href="">某某4></a>
+					<a href="">某某5></a>
+				</li>
+			</ul>
 
+		</div>
 	</div>
 	<footer class="ylb-footer">
 		<p>Copyright 2016-2017 <br>湘 ICP备 1002349号－1</p>

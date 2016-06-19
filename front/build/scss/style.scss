@@ -2,6 +2,7 @@
 $base-orange: #ff5500;
 $base-light-orange: #ffeed2;
 $top-bg: #26201e;
+$link-blue: #3063cf;
 $base-border-color: #c7c7c7;
 
 .ylb-header{
@@ -51,6 +52,16 @@ $base-border-color: #c7c7c7;
 }
 .ylb-cover{
     display: none;
+    background-color: $top-bg;
+    opacity: 0.86;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9;
+}
+.ylb-show-cover{
     background-color: $top-bg;
     opacity: 0.86;
     width: 100%;
@@ -168,7 +179,73 @@ $base-border-color: #c7c7c7;
 .ylb-center{
     text-align: center;
 }
-
+.ylb-graybox{
+    width: 420px;
+    min-height: 160px;
+    padding: 20px;
+    position: fixed;
+    z-index: 10;
+    top: 40%;
+    left: 50%;
+    margin: -150px 0 0 -230px;
+    background-color: #fff;
+    border-radius: 5px;
+    h1{
+        font-size: 14px;
+        padding-left: 10px;
+        line-height: 2;
+        border-bottom: 1px solid $base-border-color;
+    }
+    ul{
+        display: block;
+        padding: 20px 20px 10px;
+        li{
+            height: 24px;
+            line-height: 24px;
+            margin-bottom: 5px;
+            span{
+                display: inline-block;
+                width: 120px;
+            }
+            input[type="text"]{
+                width: 180px;
+                border: 1px solid $base-border-color;
+                height: 22px;
+                line-height: 22px;
+            }
+            button{
+                display: inline-block;
+                width: 160px;
+                text-align: center;
+                height: 36px;
+                line-height: 36px;
+                color: #fff;
+                background-color: $base-orange;
+            }
+            a{
+                margin-left: 20px;
+                text-decoration: underline;
+                color: $link-blue;
+            }
+            &:last-child{
+                text-align: center;
+                padding-top: 10px;
+            }
+        }
+    }
+}
+.ylb-alert{
+    position: fixed;
+    top: 10%;
+    left: 50%;
+    width: 240px;
+    padding: 10px 20px;
+    background-color: rgba(0,0,0,0.6);
+    color: #fff;
+    margin-left: -140px;
+    border-radius: 5px;
+    text-align: center;
+}
 
 @import "customer";
 @import "index";

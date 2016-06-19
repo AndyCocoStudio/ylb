@@ -8,11 +8,11 @@
 <section class="detail-main" id="detail-main" v-cloak>
     <div class="detail-wrap">
         <div class="detail-img">
-            <img src="images/list-banner.jpg" />
+            <img :src="data.thumbnail" />
         </div>
         <div class="detail-buy">
-            <h1> Nike 耐克官方 NIKE VAPOR COURT 男子网球鞋 631703</h1>
-            <p>￥1195.00</p>
+            <h1>{{data.name}}</h1>
+            <p>￥{{data.price}}</p>
             <div class="detail-num">
                 <span>数量</span><a>-</a><input type="text" value="1"><a>+</a>
             </div>
@@ -26,30 +26,21 @@
         <article class="detail-base">
             <h1>基础信息</h1>
             <ul class="detail-base-wrap">
-                <li>品牌： Beats</li>
-                <li>商品名称： 耳机</li>
-                <li>商品编号： 11232434534534</li>
-                <li>商品重量： 200g</li>
-                <li>材质： 铁</li>
-                <li>颜色： 红色</li>
+                <li v-for="det in data.info">{{det.name}}： {{det.value}}</li>
             </ul>
         </article>
         <article class="detail-des">
             <h1>产品概述</h1>
             <div class="detail-des-wrap">
                 <article>
-                    Nike Roshe One 运动鞋的设计简约质朴，灵感汲取于禅宗与悟道的理念。该鞋款不添加其他装饰，凭借简约的设计，通过细节为鞋款注入生命。鞋身几乎每个部位都透射出禅院的宁静意味：设计革新的华夫格外底让你如履步石之上，内底模刻有如拾级而上的庭院石阶，加上中底侧边长度的细微变化，令整个设计兼具严谨与玩味。
+                    {{data.abstract.content}}
                 </article>
-                <img src="images/list-banner.jpg">
+                <img :src="data.abstract.img">
             </div>
         </article>
         <article class="detail-imgs">
             <h1>产品详情</h1>
-            <img src="images/list-banner.jpg">
-            <img src="images/list-banner.jpg">
-            <img src="images/list-banner.jpg">
-            <img src="images/list-banner.jpg">
-            <img src="images/list-banner.jpg">
+            <img v-for="imgurl in data.introduceImages" :src="imgurl">
         </article>
     </div>
 </section>

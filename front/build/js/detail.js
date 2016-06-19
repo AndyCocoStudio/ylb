@@ -1,10 +1,27 @@
 (function () {
-    var datas = {};
+    var datas = {
+        id: $.urlParam("id")
+    };
     var m = {
         init: function () {
             m.setScreenHeight();
             m.resizeWindow();
-            m.buildVue();
+            //m.buildVue();
+            m.getDetail();
+        },
+        getDetail: function () {
+            $.when($.ajax({
+                url: $.apiUrl + "/goods/detail",
+                type: "GET",
+                data: {
+                    id: datas.id
+                }
+            })).done(function (d) {
+                $.ylbAjaxHandler(d, function () {
+                    datas.data = d.data;
+                    m.buildVue();
+                });
+            });
         },
         buildVue: function () {
             datas = new Vue({
