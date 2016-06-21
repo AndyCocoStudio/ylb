@@ -55,9 +55,9 @@
         var alertDom = ['<div class="ylb-alert">', msg, '</div>'];
         var alertHtml = $(alertDom.join('')).css('left', left).appendTo('body');
         alertHtml.show();
-        // setTimeout(function () {
-        //     alertHtml.remove();
-        // }, delay);
+        setTimeout(function () {
+            alertHtml.remove();
+        }, delay);
 	};
 	/**
 	 * 获取url参数
@@ -76,6 +76,76 @@
             return "";
         }
     };
+	/**
+	 * LocalStorage处理
+	 * **/
+	$.localStorageHandler = function (method, key, val) {
+		switch (method) {
+			case "set":
+				localStorage.setItem(key, val);
+				break;
+			case "get":
+				return localStorage.getItem(key);
+			//break;
+			case "clear":
+				localStorage.removeItem(key);
+				break;
+			case "clearall":
+				localStorage.clear();
+				break;
+		}
+	};
+	/**
+	 * json和string互换
+	 * **/
+	$.parseHandler = function (method, val) {
+		switch (method) {
+			case "js":
+				return JSON.stringify(val);
+			case "sj":
+				return $.parseJSON(val);
+		}
+	};
+	/**
+	 * localStorage购物车
+	 * **/
+	$.ylbAddCart = function (name, val) {
+		var sv = $.localStorageHandler("get", name);
+		if (!sv) {
+			$.localStorageHandler("set", name, "[" + $.parseHandler("js", val) + "]");
+			$.ylbAlert("添加成功");
+		} else {
+			var jv = $.parseHandler("sj", sv);
+			var isContain = false;
+			for (var i = 0, j = jv.length; i < j; i++) {
+				if (jv[i].goodsID == val.goodsID) {
+					isContain = true;
+					break;
+				}
+			}
+			if (isContain) {
+				$.ylbAlert("商品已添加购物车");
+			} else {
+				val = "[" + sv.substring(1, sv.length - 1) + "," + $.parseHandler("js", val) + "]";
+				$.localStorageHandler("set", name, val);
+				$.ylbAlert("添加成功");
+			}
+		}
+	};
+	$.ylbRemoveCart = function (name, id) {
+		var sv = $.localStorageHandler("get", name);
+		var jv = $.parseHandler("sj", sv);
+		var sn = "";
+		for (var i = 0, j = jv.length; i < j; i++) {
+			if (jv[i].goodsID == id) {
+				continue;
+			} else {
+				sn += $.parseHandler("js", jv[i]) + ",";
+			}
+		}
+		sn = "[" + sn.substring(0, sn.length - 1) + "]";
+		$.localStorageHandler("set", name, sn);
+	}
 })(jQuery);
 (function () {
     /** 

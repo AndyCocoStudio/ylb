@@ -14,11 +14,11 @@
             <h1>{{data.name}}</h1>
             <p>￥{{data.price}}</p>
             <div class="detail-num">
-                <span>数量</span><a>-</a><input type="text" value="1"><a>+</a>
+                <span>数量</span><a>-</a><input type="text" v-model="data.count"><a>+</a>
             </div>
             <div class="detail-btn">
-                <a href="shopcart.html">立即购买</a>
-                <a>收藏商品</a>
+                <a href="order.html?id={{id}}">立即购买</a>
+                <a @click="addcart">加入购物车</a>
             </div>
         </div>
     </div>

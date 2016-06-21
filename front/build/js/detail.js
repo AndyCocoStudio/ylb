@@ -1,6 +1,6 @@
 (function () {
     var datas = {
-        id: $.urlParam("id")
+        id: $.urlParam("id"),
     };
     var m = {
         init: function () {
@@ -19,6 +19,8 @@
             })).done(function (d) {
                 $.ylbAjaxHandler(d, function () {
                     datas.data = d.data;
+                    datas.data.count = 1;
+                    datas.data.selected = 0;
                     m.buildVue();
                 });
             });
@@ -28,7 +30,9 @@
                 el: "#detail-main",
                 data: datas,
                 methods: {
-
+                    addcart: function () {
+                        $.ylbAddCart("product", datas.data);
+                    }
                 }
             });
         },

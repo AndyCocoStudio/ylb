@@ -13,9 +13,9 @@
 
 
 
-	<link rel="stylesheet" type="text/css" href="css/style.css?rev=654011faa01e3442eea86b8ceb3a6730" />
+	<link rel="stylesheet" type="text/css" href="css/style.css?rev=22ca536a1094ca8bf1de162ab5c81218" />
 	<link rel="stylesheet" type="text/css" href="css/pickday.css" />
-	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=654011faa01e3442eea86b8ceb3a6730" />
+	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=22ca536a1094ca8bf1de162ab5c81218" />
 </head>
 
 <body>
@@ -28,7 +28,7 @@
 
 <section class="shopcart-main" id="shopcart-main" v-cloak>
     <h1>购物车</h1>
-    <table>
+    <table v-if="!nogoods">
         <tr>
             <th><input name="allselect" type="checkbox" /><label for="allselect">全选</label></th>
             <th>商品信息</th>
@@ -37,60 +37,29 @@
             <th>金额</th>
             <th>操作</th>
         </tr>
-        <tr>
-            <td><input type="checkbox"></td>
+        <tr v-for="pro in product">
+            <td><input @click="selectpro" data-index="{{$index}}" type="checkbox"></td>
             <td>
-                <img src="images/index-1.jpg" />
+                <img :src="pro.thumbnail" />
                 <article>
-                    <h2>Beats urBeats 入耳式耳机 - 银色手机耳机 三键线控 带麦</h2>
-                    <p>颜色:白色  规格:蓝牙</p>
+                    <h2>{{pro.name}}</h2>
+                    <p><span v-for="p in pro.info">{{p.name}}：{{p.value}}</span></p>
                 </article>
             </td>
             <td>
                 <del>¥ 858.00</del>
-                <p>¥ 558.00</p>
-            </td>
-            <td><a class="count">-</a><input type="text"><a class="count">+</a></td>
-            <td>¥ 858.00</td>
-            <td>删除</td>
-        </tr>
-        <tr>
-            <td><input type="checkbox"></td>
-            <td>
-                <img src="images/index-1.jpg" />
-                <article>
-                    <h2>Beats urBeats 入耳式耳机 - 银色手机耳机 三键线控 带麦</h2>
-                    <p>颜色:白色  规格:蓝牙</p>
-                </article>
+                <p>¥ {{pro.price}}</p>
             </td>
             <td>
-                <del>¥ 858.00</del>
-                <p>¥ 558.00</p>
+                <a @click="reduce" data-index="{{$index}}" class="count">-</a><input class="shopcart-count" v-model="pro.count" data-select="{{pro.selected}}" type="text"><a @click="add" data-index="{{$index}}" class="count">+</a>
             </td>
-            <td><a class="count">-</a><input type="text"><a class="count">+</a></td>
-            <td>¥ 858.00</td>
-            <td>删除</td>
-        </tr>
-        <tr>
-            <td><input type="checkbox"></td>
-            <td>
-                <img src="images/index-1.jpg" />
-                <article>
-                    <h2>Beats urBeats 入耳式耳机 - 银色手机耳机 三键线控 带麦</h2>
-                    <p>颜色:白色  规格:蓝牙</p>
-                </article>
-            </td>
-            <td>
-                <del>¥ 858.00</del>
-                <p>¥ 558.00</p>
-            </td>
-            <td><a class="count">-</a><input type="text"><a class="count">+</a></td>
-            <td>¥ 858.00</td>
-            <td>删除</td>
+            <td>¥ {{(pro.price*pro.count).toFixed(2)}}</td>
+            <td><a data-id="{{pro.goodsID}}" @click="delpro">删除</a></td>
         </tr>
     </table>
+    <div class="shopcart-nogoods" v-if="nogoods"><a href="list.html">您的购物车空空如也，赶紧去挑选喜欢的商品吧</a></div>
     <div class="shopcart-settle">
-        <span>已选<em>2</em>件商品</span>合计(不含运费) <em>￥588.00</em>元<a href="order.html">结算</a>
+        <span>已选<em>{{checkbox}}</em>件商品</span>合计(不含运费) <em>￥<em class="shopcart-price">0</em></em>元<a href="{{canorder?'order.html':''}}">结算</a>
     </div>
 </section>
 
@@ -126,9 +95,9 @@
 <script src="js/libs/jquery-2.1.4.min.js" type="text/javascript"></script>
 <script src="js/libs/vue.min.js" type="text/javascript"></script>
 <script src="js/libs/pickday.min.js" type="text/javascript"></script>
-<script src="js/base.js?rev=654011faa01e3442eea86b8ceb3a6730" type="text/javascript"></script>
+<script src="js/base.js?rev=22ca536a1094ca8bf1de162ab5c81218" type="text/javascript"></script>
 
-<script type="text/javascript" src="js/shopcart.js?rev=654011faa01e3442eea86b8ceb3a6730"></script>
+<script type="text/javascript" src="js/shopcart.js?rev=22ca536a1094ca8bf1de162ab5c81218"></script>
 
 
 </html>
