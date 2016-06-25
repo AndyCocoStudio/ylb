@@ -1,17 +1,30 @@
 (function () {
-    var datas = {
+    var customer = {
         covershow: false,
         sendshow: false,
-        spendshow: false
+        spendshow: false,
+        sid: $.getID()
     };
     var m = {
         init: function () {
-            m.buildVue();
+            $.checkSession();
+            m.getUserInfo();
+        },
+        getUserInfo: function () {
+            $.when($.ajax({
+                url: $.apiUrl + "/user/detail",
+                type: "GET"
+            })).done(function (d) {
+                $.ylbAjaxHandler(d, function () {
+                    alert(1);
+                    m.buildVue();
+                });
+            });
         },
         buildVue: function () {
-            datas = new Vue({
+            customer = new Vue({
                 el: "#customer-main",
-                data: datas,
+                data: customer,
                 methods: {
                     sendpoints: function () {
                         this.covershow = true;

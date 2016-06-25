@@ -8,16 +8,16 @@
 <section class="detail-main" id="detail-main" v-cloak>
     <div class="detail-wrap">
         <div class="detail-img">
-            <img :src="data.thumbnail" />
+            <img :src="data.goodses[0].thumbnail" />
         </div>
         <div class="detail-buy">
-            <h1>{{data.name}}</h1>
-            <p>￥{{data.price}}</p>
+            <h1>{{data.goodses[0].name}}</h1>
+            <p>￥{{data.goodses[0].price}}</p>
             <div class="detail-num">
-                <span>数量</span><a>-</a><input type="text" v-model="data.count"><a>+</a>
+                <span>数量</span><a @click="reducecount">-</a><input disabled="false" type="text" v-model="data.count"><a @click="addcount">+</a>
             </div>
             <div class="detail-btn">
-                <a href="order.html?id={{id}}">立即购买</a>
+                <a href="order.html?id={{id}}&count={{data.count}}">立即购买</a>
                 <a @click="addcart">加入购物车</a>
             </div>
         </div>
@@ -26,21 +26,21 @@
         <article class="detail-base">
             <h1>基础信息</h1>
             <ul class="detail-base-wrap">
-                <li v-for="det in data.info">{{det.name}}： {{det.value}}</li>
+                <li v-for="det in data.goodses[0].info">{{det.name}}： {{det.value}}</li>
             </ul>
         </article>
         <article class="detail-des">
             <h1>产品概述</h1>
             <div class="detail-des-wrap">
                 <article>
-                    {{data.abstract.content}}
+                    {{data.goodses[0].abstract.content}}
                 </article>
-                <img :src="data.abstract.img">
+                <img :src="data.goodses[0].abstract.img">
             </div>
         </article>
         <article class="detail-imgs">
             <h1>产品详情</h1>
-            <img v-for="imgurl in data.introduceImages" :src="imgurl">
+            <img v-for="imgurl in data.goodses[0].introduceImages" :src="imgurl">
         </article>
     </div>
 </section>

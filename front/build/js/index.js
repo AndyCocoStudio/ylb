@@ -2,8 +2,6 @@
     var datas = {};
     var m = {
         init: function () {
-            m.resizeWindow();
-            m.domControl();
             m.getBanner();
         },
         getBanner: function () {
@@ -15,6 +13,8 @@
                     datas.data = d.data;
                     m.buildVue();
                     m.setImages();
+                    m.resizeWindow();
+                    m.domControl();
                 });
             });
         },

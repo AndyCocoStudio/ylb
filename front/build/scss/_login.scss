@@ -1,10 +1,10 @@
-.login-main{
+.login-main, .logon-main{
     width: 100%;
     height: calc(100% - 132px);
     background: url(../images/login-bg.jpg) no-repeat center;
     background-size: cover;
     position: relative;
-    .login-wrap{
+    .login-wrap, .logon-wrap{
         padding: 24px 50px 50px;
         position: absolute;
         top: 20%;
@@ -56,11 +56,17 @@
             }
         }
         p{
-            text-align: right;
             margin-top: 10px;
+            overflow: hidden;
             color: #999;
-            i{
-                margin-right: 5px;
+            span{
+                float: right;
+                i{
+                    margin-right: 5px;
+                }
+            }
+            a{
+                text-decoration: underline;
             }
         }
     }

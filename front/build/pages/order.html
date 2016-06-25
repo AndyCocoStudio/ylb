@@ -56,53 +56,20 @@
                     <th>优惠方式(元)</th>
                     <th>小计金额</th>
                 </tr>
-                <tr>
+                <tr v-for="det in data.goodses">
                     <td>
-                        <img src="images/index-1.jpg" />
+                        <img :src="det.thumbnail" />
                         <article>
-                            <h3>Beats urBeats 入耳式耳机 - 银色手机耳机 三键线控 带麦</h3>
-                            <p>颜色:白色 规格:蓝牙</p>
+                            <h3>{{det.name}}</h3>
                         </article>
                     </td>
                     <td>
-                        <del>¥ 858.00</del>
-                        <p>¥ 558.00</p>
+                        <!--<del>¥ 858.00</del>-->
+                        <p>¥ {{det.price}}</p>
                     </td>
-                    <td><a class="count">-</a><input type="text"><a class="count">+</a></td>
-                    <td>¥ 258.00</td>
-                    <td>¥ 358.00</td>
-                </tr>
-                <tr>
-                    <td>
-                        <img src="images/index-1.jpg" />
-                        <article>
-                            <h3>Beats urBeats 入耳式耳机 - 银色手机耳机 三键线控 带麦</h3>
-                            <p>颜色:白色 规格:蓝牙</p>
-                        </article>
-                    </td>
-                    <td>
-                        <del>¥ 858.00</del>
-                        <p>¥ 558.00</p>
-                    </td>
-                    <td><a class="count">-</a><input type="text"><a class="count">+</a></td>
-                    <td>¥ 258.00</td>
-                    <td>¥ 358.00</td>
-                </tr>
-                <tr>
-                    <td>
-                        <img src="images/index-1.jpg" />
-                        <article>
-                            <h3>Beats urBeats 入耳式耳机 - 银色手机耳机 三键线控 带麦</h3>
-                            <p>颜色:白色 规格:蓝牙</p>
-                        </article>
-                    </td>
-                    <td>
-                        <del>¥ 858.00</del>
-                        <p>¥ 558.00</p>
-                    </td>
-                    <td><a class="count">-</a><input type="text"><a class="count">+</a></td>
-                    <td>¥ 258.00</td>
-                    <td>¥ 358.00</td>
+                    <td><a @click="reducecount" class="count">-</a><input disabled="false" v-model="data.count" type="text"><a @click="addcount" class="count">+</a></td>
+                    <td>无优惠</td>
+                    <td>¥ {{(det.price*data.count).toFixed(2)}}</td>
                 </tr>
             </table>
         </div>

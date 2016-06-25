@@ -1,15 +1,42 @@
 (function () {
-    var datas = {};
+    var vlogin = {
+        mobile: "",
+        password: "",
+        url: $.urlParam("url") || "",
+        sid: $.getID() || ""
+    };
     var m = {
         init: function () {
+            m.pageJump();
+        },
+        pageJump: function () {
+            if (vlogin.sid) {
+                if (vlogin.url) window.location.href = vlogin.url;
+                else window.location.href = "index.html";
+            }
             m.buildVue();
         },
         buildVue: function () {
-            datas = new Vue({
+            vlogin = new Vue({
                 el: "#login-main",
-                data: datas,
+                data: vlogin,
                 methods: {
-
+                    login: function () {
+                        $.ajax({
+                            url: $.apiUrl + '/user/login',
+                            type: 'POST',
+                            data: JSON.stringify({
+                                "mobile": vlogin.mobile,
+                                "captcha": vlogin.password
+                            })
+                        }).done(function (d) {
+                            $.ylbAjaxHandler(d, function () {
+                                $.setID(d.data.sessionID);
+                                if (vlogin.url) window.location.href = vlogin.url;
+                                else window.location.href = "index.html";
+                            })
+                        });
+                    }
                 }
             })
         }

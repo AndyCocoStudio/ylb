@@ -32,6 +32,12 @@
                 methods: {
                     addcart: function () {
                         $.ylbAddCart("product", datas.data);
+                    },
+                    addcount: function () {
+                        this.data.count += 1;
+                    },
+                    reducecount: function () {
+                        if (this.data.count - 1 > 0) this.data.count -= 1;
                     }
                 }
             });

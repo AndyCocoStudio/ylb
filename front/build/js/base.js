@@ -1,6 +1,17 @@
 (function ($) {
 	"use strict";
 	$.apiUrl = "/api";
+	$.ajaxSetup({
+        contentType: "application/json; charset=utf-8",
+    });
+	/**
+	 * 检查session
+	 * **/
+	$.checkSession = function () {
+		var sid = $.getID();
+		var url = window.location.href;
+		if (!sid) window.location.href = "login.html?url=" + url;
+	}
 	/**
 	 * errCode处理
 	 * **/
@@ -28,6 +39,9 @@
 					break;
 				case "4006":
 					$.ylbAlert("查询不到商品");
+					break;
+				case "4007":
+					$.ylbAlert("已支付的订单不能取消");
 					break;
 				default:
 					$.ylbAlert("服务器又开小差");
@@ -95,6 +109,15 @@
 				break;
 		}
 	};
+	/**
+	 * 存储sessionID
+	 * **/
+	$.setID = function (val) {
+		localStorage.setItem("sid", val);
+	}
+	$.getID = function () {
+		return localStorage.getItem("sid");
+	}
 	/**
 	 * json和string互换
 	 * **/
