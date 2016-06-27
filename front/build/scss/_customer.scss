@@ -61,7 +61,7 @@
                 //     margin: -32px 0 0 -8px;
                 // }
             }
-            span{
+            a{
                 display: inline-block;
                 margin: 15px 0;
                 vertical-align: top;
@@ -172,6 +172,28 @@
                     }
                 }
             }
+            .salerasset{
+                font-size: 12px;
+                p{
+                    padding-left: 18px;
+                    line-height: 1.5;
+                    color: #444;
+                    overflow: hidden;
+                    em{
+                        color: $base-orange;
+                    }
+                    a{
+                        display: block;
+                        padding: 0 6px;
+                        height: 18px;
+                        line-height: 18px;
+                        background-color: #fff;
+                        float: right;
+                        font-size: 12px;
+                        margin: 0 16px 0 0;
+                    }
+                }
+            }
             .customer-eqcode{
                 margin-right: 8px;
             }
@@ -198,17 +220,16 @@
                         margin: 15px 7px 10px;
                         background-color: rgba(255, 255, 255, 0.6);
                     }
-                    img{
-                        width: 104px;
-                        height: 104px;
-                        margin-top: 6px;
+                    .customer-private-qrcode{
+                        width: 130px;
+                        height: 130px;
+                        margin: 2px auto 0;
                     }
                 }
             }
             .customer-adv{
                 width: 194px;
                 height: 170px;
-                display: none;
                 float: left;
             }
         }
@@ -407,7 +428,7 @@
         }
         .customer-edit{
             width: 812px;
-            margin: 11px auto 0;
+            margin: 11px auto 40px;
             h3{
                 font-size: 12px;
                 color: $base-orange;
@@ -427,6 +448,7 @@
                     font-size: 14px;
                     border-bottom: 4px solid #f2f2f2;
                     float: left;
+                    cursor: pointer;
                     &.select{
                         border-bottom: 4px solid $base-orange;
                     }
@@ -459,7 +481,6 @@
                 padding: 20px;
                 border: 1px solid $base-border-color;
                 border-top: none;
-                display: none;
                 ul{
                     display: block;
                     margin: 20px 0 50px;
@@ -535,7 +556,6 @@
                 border: 1px solid $base-border-color;
                 border-top: none;
                 padding: 20px;
-                display: none;
                 ul{
                     display: block;
                     padding: 20px;
@@ -568,7 +588,6 @@
                 border: 1px solid $base-border-color;
                 border-top: none;
                 padding: 20px;
-                display: none;
                 ul{
                     display: block;
                     padding: 20px;

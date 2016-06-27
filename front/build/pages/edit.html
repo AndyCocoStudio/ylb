@@ -5,7 +5,7 @@
 <!-- @@close-->
 
 <!-- @@block = content-->
-<section class="customer-main">
+<section class="customer-main" id="customer-main" v-cloak>
     <div class="customer-header-wrap">
         <img class="customer-logo" src="" />
         <ul class="customer-nav">
@@ -37,48 +37,46 @@
     <div class="customer-right">
         <div id="customer-info" class="customer-info">
             <div class="customer-base">
-                <img src="images/customer-default.png" />
-                <a>编辑个人资料</a>
-                <h1>优良宝</h1>
+                <img :src="info.avatar||'images/customer-default.png'" />
+                <a href="edit.html">编辑个人资料</a>
+                <h1>{{info.mobile}}</h1>
             </div>
-            <div class="customer-asset">
+            <div class="customer-asset" :class="{salerasset:info.role=='Merchants'}">
                 <div class="customer-tag">资产</div>
-                <h1>真实姓名：优良宝<br /> 会员等级：普通会员
+                <h1>真实姓名： {{info.name||info.mobile}}<br /> 会员类型：
+                    <em v-if="info.role=='Ordinary'">普通会员</em>
+                    <em v-if="info.role=='Merchants'">加盟商家</em>
+                    <em v-if="info.role=='CustomerManager'">客户经理</em>
+                    <em v-if="info.role=='AreaManager'">区域经理</em>
                 </h1>
-                <p>账户余额: <em>1000</em>元<a>充值</a></p>
-                <p>剩余积分: <em>1000</em>分</p>
-                <p>积分基点: <em>2</em>个<a>领取积分</a></p>
+                <p>账户余额： <em>{{info.asset.balance}}</em>元<a>充值</a></p>
+                <p v-if="info.role=='Merchants'">账户货款： <em>{{info.asset.paymentForGoods}}</em>元</p>
+                <p v-if="info.role=='Merchants'">账户佣金： <em>{{info.asset.commission}}</em>元</p>
+                <p>剩余积分： <em>{{info.asset.score}}</em>分</p>
+                <p>积分基点： <em>{{info.asset.point}}</em>个<a>领取积分</a></p>
             </div>
-            <div class="customer-code customer-exchange">
-                <div class="customer-tag">二维码</div>
-                <div class="customer-pic">
-                    <span>我的私码</span>
-                    <img src="" alt="二维码" />
-                </div>
-            </div>
-            <div class="customer-code customer-send">
-                <div class="customer-tag">积分做单</div>
-                <div class="customer-pic">
-                    <span>积分做单</span>
-                    <img src="" alt="二维码" />
+            <div class="customer-code customer-eqcode">
+                <div class="customer-tag">做单二维码</div>
+                <div class="customer-pic ylb-center">
+                    <div id="customer-private-qrcode" class="customer-private-qrcode"></div>
                 </div>
             </div>
             <img class="customer-adv" src="images/adv1.png" />
         </div>
         <div class="customer-edit">
             <ul class="customer-edit-list">
-                <li class="select">头像修改</li>
-                <li>地址管理</li>
-                <li>密码管理</li>
-                <li>个人资料</li>
+                <li data-role="password" @click="changetap" :class="{select:password}">二级密码管理</li>
+                <li data-role="avatar" @click="changetap" :class="{select:avatar}">头像修改</li>
+                <li data-role="address" @click="changetap" :class="{select:address}">地址管理</li>
+                <li data-role="detail" @click="changetap" :class="{select:detail}">详细资料</li>
             </ul>
-            <div class="edit-avatar">
+            <div v-show="avatar" class="edit-avatar">
                 <h3>请选择jpg,png格式的图片，图片大小小于500k</h3>
                 <img src="" />
                 <input type="file" />
                 <input type="button" value="上传" />
             </div>
-            <div class="edit-address">
+            <div v-show="address" class="edit-address">
                 <h3>新增收货地址<span>电话号码、手机号选填一项，其余均为必填项</span></h3>
                 <ul>
                     <li><span>所在地区<em>*</em></span><input type="text"></li>
@@ -87,7 +85,7 @@
                     <li><span>收货人姓名<em>*</em></span><input type="text"></li>
                     <li><span>手机号码</span><input type="text"></li>
                     <li><span>固定电话</span><input class="areacode" type="text"> - <input class="phone" type="text"></li>
-                    <li><input type="checkbox" id="default"/><label for="default">设置为默认收货地址</label></li>
+                    <li><input type="checkbox" id="default" /><label for="default">设置为默认收货地址</label></li>
                     <li><button class="edit-save">保存</button></li>
                 </ul>
                 <table>
@@ -114,7 +112,7 @@
                     </tr>
                 </table>
             </div>
-            <div class="edit-password">
+            <div v-show="password" class="edit-password">
                 <ul>
                     <li><span>原密码</span><input type="text"></li>
                     <li><span>新密码</span><input type="text"></li>
@@ -122,7 +120,7 @@
                     <li><button class="edit-pwd">确认</button></li>
                 </ul>
             </div>
-            <div class="edit-info">
+            <div v-show="detail" class="edit-info">
                 <ul>
                     <li><span>真实姓名</span><input type="text"></li>
                     <li><span>身份证号</span><input type="text"></li>

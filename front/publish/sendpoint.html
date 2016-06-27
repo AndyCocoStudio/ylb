@@ -3,7 +3,7 @@
 
 <head>
 
-<title>商品列表</title>
+<title>积分做单</title>
 
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1" />
@@ -13,9 +13,9 @@
 
 
 
-	<link rel="stylesheet" type="text/css" href="css/style.css?rev=65a36451ff94f390e43d23bba28086dc" />
+	<link rel="stylesheet" type="text/css" href="css/style.css?rev=8fbdfa6fe14771da9cf194b4acd633a9" />
 	<link rel="stylesheet" type="text/css" href="css/pickday.css" />
-	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=65a36451ff94f390e43d23bba28086dc" />
+	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=8fbdfa6fe14771da9cf194b4acd633a9" />
 </head>
 
 <body>
@@ -32,37 +32,25 @@
 		</div>
 	</header>
 
-<section class="list-main" id="list-main" v-cloak>
-    <div class="list-banner">
-        <ul>
-            <li class="select"><img src="images/list-banner.jpg" /></li>
-            <li><img src="images/list-banner1.jpg" /></li>
-            <li><img src="images/list-banner2.jpg" /></li>
-        </ul>
+<section class="sendpoint-main" id="sendpoint-main" v-cloak>
+    <h1>积分做单</h1>
+    <div class="sendpoint-asset">
+        <span>货款：{{asset.paymentForGoods}}</span>
+        <span>佣金：{{asset.commission}}</span>
+        <span>余额：{{asset.balance}}</span>
     </div>
-    <div class="list-wrap">
-        <div class="list-type">
-            <h1>影音娱乐</h1>
-            <ul>
-                <li class="select">耳机/耳麦</li>
-                <li>音箱/音响</li>
-                <li>头戴式</li>
-                <li>入耳式</li>
-                <li>耳挂式</li>
-                <li>其它</li>
-            </ul>
-        </div>
-        <div class="list-product">
-            <ul>
-                <li v-for="good in data.goodses">
-                    <a href="detail.html?id={{good.goodsID}}"></a>
-                    <img :src="good.thumbnail" />
-                    <p>￥ {{good.price}}</p>
-                    <h2>{{good.name}}</h2>
-                </li>
-            </ul>
-        </div>
-    </div>
+    <ul>
+        <li><span>赠送对象</span>{{uid}}</li>
+        <li><span>商品名</span><input type="text" v-model="name"></li>
+        <li><span>商品分类</span><input type="text" v-model="type"></li>
+        <li><span>积分数</span><input type="text" v-model="points"></li>
+        <li><span>所需服务费</span>{{points*0.16}}
+            <!--这里需要获取配置服务费比例自动算出对应费用-->
+        </li>
+        <li><span>使用货款/佣金</span><input type="text" v-model="poundage"><em>*最高可用{{points*0.128}}</em></li>
+        <li><span>仍需支付金额</span>{{points*0.16-poundage}}</li>
+        <li><button @click="createOrder">支付</button><a>充值</a></li>
+    </ul>
 </section>
 
 	<div id="ylb-layout">
@@ -99,9 +87,9 @@
 <script src="js/libs/pickday.min.js" type="text/javascript"></script>
 <script src="js/libs/qrcode.min.js" type="text/javascript"></script>
 <script src="js/libs/dropzone.js" type="text/javascript"></script>
-<script src="js/base.js?rev=65a36451ff94f390e43d23bba28086dc" type="text/javascript"></script>
+<script src="js/base.js?rev=8fbdfa6fe14771da9cf194b4acd633a9" type="text/javascript"></script>
 
-<script type="text/javascript" src="js/list.js?rev=65a36451ff94f390e43d23bba28086dc"></script>
+<script type="text/javascript" src="js/sendpoint.js?rev=8fbdfa6fe14771da9cf194b4acd633a9"></script>
 
 
 </html>

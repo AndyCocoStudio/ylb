@@ -13,17 +13,23 @@
 
 
 
-	<link rel="stylesheet" type="text/css" href="css/style.css?rev=2583d4118316a05dbad6d3c449e8eb69" />
+	<link rel="stylesheet" type="text/css" href="css/style.css?rev=154a31b2ad213eb0f42d85154273c88a" />
 	<link rel="stylesheet" type="text/css" href="css/pickday.css" />
-	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=2583d4118316a05dbad6d3c449e8eb69" />
+	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=154a31b2ad213eb0f42d85154273c88a" />
 </head>
 
 <body>
 	<header class="ylb-header">
 		<a class="ylb-home" href="index.html"><i class="icon-ylbicon-28"></i></a>
-		<a class="ylb-menu" @click="aa"><i class="icon-ylbicon-06"></i></a>
+		<a class="ylb-menu"><i class="icon-ylbicon-06"></i></a>
 		<a class="ylb-search"><i class="icon-ylbicon-05"></i></a>
-		<a class="ylb-customer" href="customer.html"><i class="icon-ylbicon-01"></i></a>
+		<div class="ylb-customer"><i class="icon-ylbicon-01"></i>
+			<ul>
+				<li><a href="customer.html"><i class="icon-ylbicon-27"></i>个人中心</a></li>
+				<li><a href="shopcart.html"><i class="icon-ylbicon-23"></i>购物车</a></li>
+				<li><a class="logout"><i class="icon-ylbicon-29"></i>注销登录</a></li>
+			</ul>
+		</div>
 	</header>
 
 <section class="login-main" id="login-main" v-cloak>
@@ -76,9 +82,11 @@
 <script src="js/libs/jquery-2.1.4.min.js" type="text/javascript"></script>
 <script src="js/libs/vue.min.js" type="text/javascript"></script>
 <script src="js/libs/pickday.min.js" type="text/javascript"></script>
-<script src="js/base.js?rev=2583d4118316a05dbad6d3c449e8eb69" type="text/javascript"></script>
+<script src="js/libs/qrcode.min.js" type="text/javascript"></script>
+<script src="js/libs/dropzone.js" type="text/javascript"></script>
+<script src="js/base.js?rev=154a31b2ad213eb0f42d85154273c88a" type="text/javascript"></script>
 
-<script type="text/javascript" src="js/login.js?rev=2583d4118316a05dbad6d3c449e8eb69"></script>
+<script type="text/javascript" src="js/login.js?rev=154a31b2ad213eb0f42d85154273c88a"></script>
 
 
 </html>

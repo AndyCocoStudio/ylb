@@ -3,6 +3,9 @@
 	$.apiUrl = "/api";
 	$.ajaxSetup({
         contentType: "application/json; charset=utf-8",
+		beforeSend: function (request) {
+			request.setRequestHeader("sid", $.getID());
+		}
     });
 	/**
 	 * 检查session
@@ -16,8 +19,11 @@
 	 * errCode处理
 	 * **/
 	$.ylbError = function (code) {
-		if (code === 1001) {
+		if (code === "1001") {
 			//登陆
+			$.clearID();
+			var url = window.location.href;
+			window.location.href = "login.html?url=" + url;
 		} else if (code === 2001) {
 			$.ylbAlert("服务器开小差了,请稍后重试...");
 		} else {
@@ -118,6 +124,9 @@
 	$.getID = function () {
 		return localStorage.getItem("sid");
 	}
+	$.clearID = function () {
+		localStorage.removeItem("sid");
+	}
 	/**
 	 * json和string互换
 	 * **/
@@ -171,6 +180,13 @@
 	}
 })(jQuery);
 (function () {
+	/**
+	 * 注销登录
+	 * **/
+	$(".logout").on("click", function () {
+		$.clearID();
+		window.location.href = "login.html";
+	});
     /** 
 	 * 搜索效果
 	 * **/
@@ -200,8 +216,8 @@
 		},
 		methods: {
 			search: function () {
-				if (this.sc) location.href = "/list.html?n=" + this.sc;
-				else location.href = "/list.html";
+				if (this.sc) location.href = "list.html?n=" + this.sc;
+				else location.href = "list.html";
 			}
 		}
 	})

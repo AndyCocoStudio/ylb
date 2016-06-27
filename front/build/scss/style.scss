@@ -9,6 +9,7 @@ $base-border-color: #c7c7c7;
     height: 44px;
     line-height: 44px;
     width: 100%;
+    min-width: 960px;
     background-color: $top-bg;
     position: relative;
     a{
@@ -31,6 +32,40 @@ $base-border-color: #c7c7c7;
     }
     .ylb-customer{
         right: 10%;
+        position: absolute;
+        top: 4px;
+        color: #fff;
+        i{
+            font-size: 24px;
+        }
+        ul{
+            display: none;
+            background-color: $top-bg;
+            color: #fff;
+            position: absolute;
+            top: 40px;
+            width: 90px;
+            padding: 5px 0 0 10px;
+            line-height: 32px;
+            left: 0;
+            z-index: 2;
+            li{
+                a{
+                    position: relative;
+                    top: 0;
+                    left: 0;
+                }
+                i{
+                    margin-right: 5px;
+                    font-size: 14px;
+                }
+            }
+        }
+        &:hover{
+            ul{
+                display: block;
+            }
+        }
     }
 }
 .ylb-navbar{
@@ -44,6 +79,7 @@ $base-border-color: #c7c7c7;
     position: fixed;
     bottom: 0;
     width: 100%;
+    min-width: 960px;
     background-color: $top-bg; 
     color: #fff;
     p{
@@ -200,15 +236,20 @@ $base-border-color: #c7c7c7;
         display: block;
         padding: 20px 20px 10px;
         li{
-            height: 24px;
             line-height: 24px;
             margin-bottom: 5px;
             span{
                 display: inline-block;
-                width: 120px;
+                width: 110px;
+            }
+            em{
+                display: block;
+                margin-left: 110px;
+                color: red;
             }
             input[type="text"]{
                 width: 180px;
+                padding-left: 5px;
                 border: 1px solid $base-border-color;
                 height: 22px;
                 line-height: 22px;
@@ -244,6 +285,7 @@ $base-border-color: #c7c7c7;
     color: #fff;
     border-radius: 5px;
     text-align: center;
+    z-index: 999;
 }
 
 @import "customer";
@@ -253,3 +295,4 @@ $base-border-color: #c7c7c7;
 @import "detail";
 @import "shopcart";
 @import "order";
+@import "point";

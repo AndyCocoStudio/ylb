@@ -13,17 +13,23 @@
 
 
 
-	<link rel="stylesheet" type="text/css" href="css/style.css?rev=12d224fd4c4e1bb61651f2b2da2d7c92" />
+	<link rel="stylesheet" type="text/css" href="css/style.css?rev=038e9a0db6375f73cc9cfa73fe4d0133" />
 	<link rel="stylesheet" type="text/css" href="css/pickday.css" />
-	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=12d224fd4c4e1bb61651f2b2da2d7c92" />
+	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=038e9a0db6375f73cc9cfa73fe4d0133" />
 </head>
 
 <body>
 	<header class="ylb-header">
 		<a class="ylb-home" href="index.html"><i class="icon-ylbicon-28"></i></a>
-		<a class="ylb-menu" @click="aa"><i class="icon-ylbicon-06"></i></a>
+		<a class="ylb-menu"><i class="icon-ylbicon-06"></i></a>
 		<a class="ylb-search"><i class="icon-ylbicon-05"></i></a>
-		<a class="ylb-customer" href="customer.html"><i class="icon-ylbicon-01"></i></a>
+		<div class="ylb-customer"><i class="icon-ylbicon-01"></i>
+			<ul>
+				<li><a href="customer.html"><i class="icon-ylbicon-27"></i>个人中心</a></li>
+				<li><a href="shopcart.html"><i class="icon-ylbicon-23"></i>购物车</a></li>
+				<li><a class="logout"><i class="icon-ylbicon-29"></i>注销登录</a></li>
+			</ul>
+		</div>
 	</header>
 
 <section class="customer-main" id="customer-main" v-cloak>
@@ -38,7 +44,7 @@
         <div class="customer-seach">
             <!--<input type="search" placeholder="搜索">-->
             <i class="customer-bag icon-ylbicon-23"></i>
-            <span>购物车</span>
+            <a href="shopcart.html">购物车</a>
         </div>
     </div>
     <p class="ylb-navbar">您现在的位置：<a href="index.html">首页</a> > 会员中心</p>
@@ -49,41 +55,46 @@
         <ul>
             <li class="select"><a href="#customer-info"><i class="icon-ylbicon-01"></i>我的账号</a></li>
             <li><a href="#customer-order"><i class="icon-ylbicon-02"></i>我的订单</a></li>
-            <li><a href="#customer-fav"><i class="icon-ylbicon-03"></i>我的收藏</a></li>
+            <!--<li><a href="#customer-fav"><i class="icon-ylbicon-03"></i>我的收藏</a></li>-->
             <li><a href="#customer-apply"><i class="icon-ylbicon-04"></i>商家申请</a></li>
-            <li><a href="achievement.html?id=1"><i class="icon-ylbicon-22"></i>名下业绩</a></li>
-            <li><a href="review.html?id=1"><i class="icon-ylbicon-18"></i>审核管理</a></li>
+            <li v-if="info.role=='Merchants'"><a href="achievement.html?id=1"><i class="icon-ylbicon-22"></i>名下业绩</a></li>
+            <li v-if="info.role=='AreaManager'"><a href="review.html?id=1"><i class="icon-ylbicon-18"></i>审核管理</a></li>
         </ul>
     </div>
     <div class="customer-right">
         <div id="customer-info" class="customer-info">
             <div class="customer-base">
-                <img src="images/customer-default.png" />
-                <a>编辑个人资料</a>
-                <h1>优良宝</h1>
+                <img :src="info.avatar||'images/customer-default.png'" />
+                <a href="edit.html">编辑个人资料</a>
+                <h1>{{info.mobile}}</h1>
             </div>
-            <div class="customer-asset">
+            <div class="customer-asset" :class="{salerasset:info.role=='Merchants'}">
                 <div class="customer-tag">资产</div>
-                <h1>真实姓名：优良宝<br /> 会员等级：普通会员
+                <h1>真实姓名： {{info.name||info.mobile}}<br /> 会员类型：
+                    <em v-if="info.role=='Ordinary'">普通会员</em>
+                    <em v-if="info.role=='Merchants'">加盟商家</em>
+                    <em v-if="info.role=='CustomerManager'">客户经理</em>
+                    <em v-if="info.role=='AreaManager'">区域经理</em>
                 </h1>
-                <p>账户余额: <em>1000</em>元<a>充值</a></p>
-                <p>剩余积分: <em>1000</em>分</p>
-                <p>积分基点: <em>2</em>个<a>领取积分</a></p>
+                <p>账户余额： <em>{{info.asset.balance}}</em>元<a>充值</a></p>
+                <p v-if="info.role=='Merchants'">账户货款： <em>{{info.asset.paymentForGoods}}</em>元</p>
+                <p v-if="info.role=='Merchants'">账户佣金： <em>{{info.asset.commission}}</em>元</p>
+                <p>剩余积分： <em>{{info.asset.score}}</em>分</p>
+                <p>积分基点： <em>{{info.asset.point}}</em>个<a @click="getpoint">领取积分</a></p>
             </div>
             <div class="customer-code customer-eqcode">
-                <div class="customer-tag">二维码</div>
+                <div class="customer-tag">做单二维码</div>
                 <div class="customer-pic ylb-center">
-                    <img src="" alt="二维码" />
+                    <div id="customer-private-qrcode" class="customer-private-qrcode"></div>
                 </div>
             </div>
-            <div class="customer-code customer-control">
+            <div v-if="info.role=='Merchants'" class="customer-code customer-control">
                 <div class="customer-tag">商家操作</div>
                 <div class="customer-pic">
-                    <a @click="sendpoints">积分做单</a>
                     <a @click="spendpoints">积分兑换</a>
                 </div>
             </div>
-            <img class="customer-adv" src="images/adv1.png" />
+            <img v-if="info.role=='Ordinary'" class="customer-adv" src="images/adv1.png" />
         </div>
         <div class="customer-count">
             本月名下商家累积做单<em>100</em>笔，赠送积分<em>25000</em>分，可获得工资<em>1000</em>元<br> 本季度名下商家累积做单
@@ -205,7 +216,7 @@
                 </tr>
             </table>
         </div>
-        <div id="customer-fav" class="customer-fav">
+        <!--<div id="customer-fav" class="customer-fav">
             <div class="customer-title">我的收藏</div>
             <ul class="customer-fav-type">
                 <li class="select">宝贝</li>
@@ -241,10 +252,13 @@
                     </a>
                 </li>
             </ul>
-        </div>
+        </div>-->
         <div id="customer-apply" class="customer-apply">
             <div class="customer-title">角色申请</div>
-            <p>您将申请成为<em>商家</em>,请认真如实提交以下内容</p>
+            <p>您将申请成为<select name="roles" id="apply-role">
+                <option value="1">商家</option>
+                <option value="2">客户经理</option>
+                </select>,请认真如实提交以下内容</p>
             <ul class="cutomer-apply-saler">
                 <li>注：图片资料，请选择500k以下的jpg格式的图片</li>
                 <li><span>营业执照图</span><input type="file" /><input type="button" value="上传"><br><img /></li>
@@ -262,27 +276,32 @@
         </div>
     </div>
     <div class="ylb-show-cover" v-show="covershow" @click="hideall"></div>
-    <div class="ylb-graybox sendpoint" v-show="sendshow">
+    <!--<div class="ylb-graybox sendpoint" v-show="sendshow">
         <h1>积分做单</h1>
         <ul>
             <li><span>商品名</span><input type="text"></li>
             <li><span>商品分类</span><input type="text"></li>
             <li><span>积分数</span><input type="text"></li>
-            <li><span>所需服务费</span><!--这里需要获取配置服务费比例自动算出对应费用--></li>
-            <li><span>可使用积分</span><input type="text"></li>
-            <li><span>可使用余额</span><input type="text"></li>
+            <li><span>所需服务费</span></li>
+            <li><span>可使用货额/佣金</span><input type="text"></li>
             <li><span>仍需支付金额</span></li>
             <li><button>支付并生成二维码</button><a>充值</a></li>
         </ul>
-    </div>
+    </div>-->
     <div class="ylb-graybox spendpoint" v-show="spendshow">
         <h1>积分兑换</h1>
         <ul>
-            <li><span>商品名</span><input type="text"></li>
-            <li><span>商品分类</span><input type="text"></li>
-            <li><span>价格</span><input type="text"></li>
-            <li><button>生成二维码</button></li>
+            <li><span>用户手机号</span><input v-model="spendpoint.mobile" type="text"></li>
+            <li><span>商品名</span><input v-model="spendpoint.name" type="text"></li>
+            <li><span>商品分类</span><input v-model="spendpoint.type" type="text"></li>
+            <li><span>数量</span><input v-model="spendpoint.count" type="text"></li>
+            <li><span>总价</span><input v-model="spendpoint.total" type="text"></li>
+            <li><span>兑换积分数</span><input @change="pchange" v-model="spendpoint.point" type="text">
+                <em>*最大可填入积分{{(spendpoint.total*0.8).toFixed(2)}}</em></li>
+            <li><span>支付金额</span>{{(spendpoint.total-spendpoint.point).toFixed(2)}}</li>
+            <li><button @click="getqrcode">生成二维码</button></li>
         </ul>
+        <div id="spendpoint-qrcode" class="spendpoint-qrcode"></div>
     </div>
 </section>
 <footer></footer>
@@ -319,9 +338,11 @@
 <script src="js/libs/jquery-2.1.4.min.js" type="text/javascript"></script>
 <script src="js/libs/vue.min.js" type="text/javascript"></script>
 <script src="js/libs/pickday.min.js" type="text/javascript"></script>
-<script src="js/base.js?rev=12d224fd4c4e1bb61651f2b2da2d7c92" type="text/javascript"></script>
+<script src="js/libs/qrcode.min.js" type="text/javascript"></script>
+<script src="js/libs/dropzone.js" type="text/javascript"></script>
+<script src="js/base.js?rev=038e9a0db6375f73cc9cfa73fe4d0133" type="text/javascript"></script>
 
-<script type="text/javascript" src="js/customer.js?rev=12d224fd4c4e1bb61651f2b2da2d7c92"></script>
+<script type="text/javascript" src="js/customer.js?rev=038e9a0db6375f73cc9cfa73fe4d0133"></script>
 <script type="text/javascript">
     var startdate = new Pikaday(
     {
