@@ -1,0 +1,27 @@
+<!-- @@master ../layout.html  -->
+
+<!-- @@block = title-->
+<title>积分兑换</title>
+<!-- @@close-->
+
+<!-- @@block = content-->
+<section class="sendpoint-main" id="sendpoint-main" v-cloak>
+    <h1>积分兑换</h1>
+    <div class="sendpoint-asset">
+        <span>货款：{{asset.paymentForGoods}}</span>
+        <span>佣金：{{asset.commission}}</span>
+        <span>余额：{{asset.balance}}</span>
+    </div>
+    <ul>
+        <li><span>商品名</span><input type="text" v-model="name"></li>
+        <li><span>商品分类</span><input type="text" v-model="type"></li>
+        <li><span>积分数</span><input type="text" v-model="points"></li>
+        <li><span>仍需支付金额</span>{{points*0.16-poundage}}</li>
+        <li><a @click="createOrder">支付</a><a>充值</a></li>
+    </ul>
+</section>
+<!-- @@close-->
+
+<!-- @@block = scripts-->
+<script type="text/javascript" src="js/sendpoint.js?rev=@@hash"></script>
+<!-- @@close-->

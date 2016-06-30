@@ -25,7 +25,7 @@
     }
     .list-wrap{
         width: 960px;
-        margin: 36px auto;
+        margin: 36px auto 128px;
         border-top: 1px solid $base-border-color;
         overflow: hidden;
         .list-type{
@@ -41,7 +41,13 @@
             }
             ul{
                 width: 96px;
-                border-top: 1px solid $base-border-color;
+                //border-top: 1px solid $base-border-color;
+                li:first-child{
+                    font-size: 18px;
+                    line-height: 58px;
+                    padding-top: 10px;
+                    text-align: center;
+                }
                 li{
                     line-height: 35px;
                     border-bottom: 1px solid $base-border-color;

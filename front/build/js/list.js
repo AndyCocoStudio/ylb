@@ -1,6 +1,7 @@
 (function () {
     var datas = {
-        k: $.urlParam("k") || "",
+        k1: $.urlParam("k1") || "",
+        k2: $.urlParam("k2") || "",
         n: $.urlParam("n") || ""
     };
     var m = {
@@ -13,7 +14,8 @@
                 url: $.apiUrl + "/goods/query",
                 type: "GET",
                 data: {
-                    k: datas.k,
+                    k1: datas.k1,
+                    k2: datas.k2,
                     n: datas.n
                 }
             })).done(function (d) {

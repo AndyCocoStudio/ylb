@@ -2,6 +2,19 @@
     width: 960px;
     margin: 0 auto 88px;
     overflow-x: hidden;
+    .spendpoint{
+        width: 620px;
+        overflow: hidden;
+        margin-left: -330px;
+        ul{
+            float: left;
+        }
+        div{
+            width: 240px;
+            margin: 20px 0 0 20px;
+            float: left;
+        }
+    }
     .customer-header-wrap{
         height: 48px;
         line-height: 48px;
@@ -10,10 +23,9 @@
         margin: 0 auto;
         overflow: hidden;
         .customer-logo{
-            width: 156px;
-            display: inline-block;
-            height: 23px;
-            vertical-align: top;
+            width: 136px;
+            height: 40px;
+            margin-top: 4px;
         }
         .customer-nav{
             margin-left: 30px;

@@ -14,32 +14,25 @@
     <div class="order-wrap">
         <h1 class="order-title">填写并确认订单信息</h1>
         <div class="order-address">
-            <h2>收货人信息<a @click="newaddress" class="order-address-manager">添加收货地址</a></h2>
-            <div class="newaddress" v-show="hideaddress" v-transition="fade">
+            <h2>收货人信息<a class="alladdress" @click="alladdress">显示全部</a><a @click="showaddress" class="order-address-manager">添加收货地址</a></h2>
+            <div class="newaddress" v-show="hideaddress||address.length<1" v-transition="fade">
                 <span>收件人</span><input type="text">
                 <span>手机号</span><input type="text">
                 <span>邮编</span><input type="text"><br />
-                <span>省市区</span><input type="text">
+                <span>省市区</span>
+                <select name="prov" id="prov"><option value="-1">-请选择省-</option><option v-for="p in plist" value="{{p.code}}">{{p.name}}</option></select>
+                <select name="city" id="city"><option value="-1">-请选择市-</option><option v-for="c in clist" value="{{c.code}}">{{c.name}}</option></select>
+                <select name="area" id="area"><option value="-1">-请选择区-</option><option v-for="a in alist" value="{{a.code}}">{{a.name}}</option></select>
                 <span>详细地址</span><input class="detail" type="text">
-                <button>添加</button>
+                <button @click="newaddress">添加</button>
             </div>
-            <ul class="order-address-list">
-                <li>
-                    <input type="radio">
+            <ul v-show="address.length>0" class="order-address-list">
+                <li v-for="adr in address">
+                    <input data-id="{{adr.addressID}}" @click="choseaddress" type="radio">
                     <article>
-                        <span>王一(收)</span>
-                        <span>浙江省杭州市良睦路1399号梦想小镇互联网村4号楼1层</span>
-                        <span>1389765850</span>
-                        <a>更多地址</a>
-                    </article>
-                </li>
-                <li>
-                    <input type="radio">
-                    <article>
-                        <span>王er(收)</span>
-                        <span>浙江省杭州市良睦路1399号梦想小镇互联网村4号楼1层</span>
-                        <span>1389765850</span>
-                        <a>更多地址</a>
+                        <span>{{adr.name}}</span>
+                        <span>{{adr.province+adr.city+adr.area+adr.street}}</span>
+                        <span>{{adr.mobile}}</span>
                     </article>
                 </li>
             </ul>
@@ -56,7 +49,7 @@
                     <th>优惠方式(元)</th>
                     <th>小计金额</th>
                 </tr>
-                <tr v-for="det in data.goodses">
+                <tr v-for="det in product.goodses">
                     <td>
                         <img :src="det.thumbnail" />
                         <article>
@@ -67,9 +60,10 @@
                         <!--<del>¥ 858.00</del>-->
                         <p>¥ {{det.price}}</p>
                     </td>
-                    <td><a @click="reducecount" class="count">-</a><input disabled="false" v-model="data.count" type="text"><a @click="addcount" class="count">+</a></td>
+                    <td><a data-index="{{$index}}" @click="reducecount" class="count">-</a><input disabled="false" v-model="det.count"
+                            type="text"><a data-index="{{$index}}" @click="addcount" class="count">+</a></td>
                     <td>无优惠</td>
-                    <td>¥ {{(det.price*data.count).toFixed(2)}}</td>
+                    <td>¥ {{(det.price*det.count).toFixed(2)}}</td>
                 </tr>
             </table>
         </div>
@@ -77,19 +71,21 @@
             给卖家留言<input type="text" placeholder="选填，填写您与卖家达成一致的要求">
         </div>
         <article class="order-total">
-            <p>总计： <em>￥2523.00</em>元</p>
-            <p>运费： 6.00元</p>
-            <p><input type="checkbox">是否使用积分<input type="text">(最高可抵用20元)</p>
+            <p>总计： <em>￥ {{total}}</em>元</p>
+            <p>运费： {{postage}}元</p>
+            <p><input @click="canuse" type="checkbox">是否使用积分<input @change="usepoint" disabled="{{ispoint}}" v-model="point"
+                    type="text">(最高可抵用{{maxpoint}}元)</p>
         </article>
         <div class="order-result">
-            <p>实付： <em>￥2300.00</em>元</p>
+            <p v-show="!ispoint">实付： <em>￥ {{parseFloat(total+postage-point).toFixed(2)}}</em>元</p>
+            <p v-show="ispoint">实付： <em>￥ {{parseFloat(total+postage).toFixed(2)}}</em>元</p>
             <p>
-                <span>王一(收)</span>
-                <span>浙江省杭州市良睦路1399号梦想小镇互联网村4号楼1层</span>
-                <span>1389765850</span>
+                <span>{{selectaddress.name}}</span>
+                <span>{{selectaddress.province+selectaddress.city+selectaddress.area+selectaddress.street}}</span>
+                <span>{{selectaddress.mobile}}</span>
             </p>
         </div>
-        <div class="order-neworder"><button>提交订单</button></div>
+        <div class="order-neworder"><button @click="neworder">提交订单</button></div>
     </div>
 </section>
 <!-- @@close-->
