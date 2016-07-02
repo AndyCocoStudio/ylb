@@ -88,11 +88,11 @@
                 </select>-->
             </div>
             <ul class="customer-order-type">
-                <li data-type="jfdh" class="select">积分兑换</li>
-                <li data-type="xsxf">线上消费</li>
-                <li data-type="sjzd">商家做单</li>
+                <li @click="selectorder(1)" :class="{'select':jfdh}">积分兑换</li>
+                <li @click="selectorder(2)" :class="{'select':xsxf}">线上消费</li>
+                <li @click="selectorder(3)" :class="{'select':sjzd}">商家做单</li>
             </ul>
-            <table data-type="jfdh" style="display: table;" class="customer-order-list">
+            <table v-show="jfdh" class="customer-order-list">
                 <tr>
                     <th>订单号</th>
                     <th>商品名称</th>
@@ -124,7 +124,7 @@
                     <td><a>支付</a><br/><a>取消</a></td>
                 </tr>
             </table>
-            <table data-type="xsxf" class="customer-order-list">
+            <table v-show="xsxf" class="customer-order-list">
                 <tr>
                     <th>订单号</th>
                     <th>商品名称</th>
@@ -156,7 +156,7 @@
                     <td><a>支付</a><br/><a>取消</a></td>
                 </tr>
             </table>
-            <table data-type="sjzd" class="customer-order-list">
+            <table v-show="sjzd" class="customer-order-list">
                 <tr>
                     <th>订单号</th>
                     <th>商品名称</th>

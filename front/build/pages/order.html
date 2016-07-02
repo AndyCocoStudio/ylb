@@ -16,23 +16,41 @@
         <div class="order-address">
             <h2>收货人信息<a class="alladdress" @click="alladdress">显示全部</a><a @click="showaddress" class="order-address-manager">添加收货地址</a></h2>
             <div class="newaddress" v-show="hideaddress||address.length<1" v-transition="fade">
-                <span>收件人</span><input type="text">
-                <span>手机号</span><input type="text">
-                <span>邮编</span><input type="text"><br />
+                <span>收件人</span><input placeholder="请输入收件人姓名" v-model="newaddress.name" type="text">
+                <span>手机号</span><input placeholder="请输入收件人手机" v-model="newaddress.mobile" maxlength="11" type="text">
+                <span>邮编</span><input placeholder="请输入邮编" v-model="newaddress.postCode" type="text" maxlength="6"><br />
                 <span>省市区</span>
-                <select name="prov" id="prov"><option value="-1">-请选择省-</option><option v-for="p in plist" value="{{p.code}}">{{p.name}}</option></select>
-                <select name="city" id="city"><option value="-1">-请选择市-</option><option v-for="c in clist" value="{{c.code}}">{{c.name}}</option></select>
-                <select name="area" id="area"><option value="-1">-请选择区-</option><option v-for="a in alist" value="{{a.code}}">{{a.name}}</option></select>
-                <span>详细地址</span><input class="detail" type="text">
-                <button @click="newaddress">添加</button>
+                <select name="prov" @change="changeprov" id="prov">
+                    <option value="-1">-请选择省-</option>
+                    <option v-for="p in plist" value="{{p.code}}">{{p.name}}</option>
+                </select>
+                <select name="city" @change="changecity" id="city">
+                    <option value="-1">-请选择市-</option>
+                    <option v-for="c in clist" value="{{c.code}}">{{c.name}}</option>
+                </select>
+                <select name="area" @change="changearea" id="area">
+                    <option value="-1">-请选择区-</option>
+                    <option v-for="a in alist" value="{{a.code}}">{{a.name}}</option>
+                </select>
+                <span>详细地址</span><input placeholder="请输入详细地址" v-model="newaddress.street" class="detail" type="text">
+                <a @click="addaddress">添加</a>
             </div>
-            <ul v-show="address.length>0" class="order-address-list">
+            <div class="default">
+                <input name="useraddress" data-id="{{defaultaddress.addressID}}" @click="choseaddress" type="radio">
+                <article>
+                    <span>{{defaultaddress.name}}</span>
+                    <span>{{defaultaddress.province+defaultaddress.city+defaultaddress.area+defaultaddress.street}}</span>
+                    <span>{{defaultaddress.mobile}}</span>
+                </article>
+            </div>
+            <ul v-show="showlist" class="order-address-list">
                 <li v-for="adr in address">
-                    <input data-id="{{adr.addressID}}" @click="choseaddress" type="radio">
+                    <input name="useraddress" data-id="{{adr.addressID}}" @click="choseaddress" type="radio">
                     <article>
                         <span>{{adr.name}}</span>
                         <span>{{adr.province+adr.city+adr.area+adr.street}}</span>
                         <span>{{adr.mobile}}</span>
+                        <span v-if="!adr.isDefault"><a data-id="{{adr.addressID}}" @click="deleteadr" class="deleteadr">删除</a></span>
                     </article>
                 </li>
             </ul>
