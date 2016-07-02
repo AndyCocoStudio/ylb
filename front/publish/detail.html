@@ -13,9 +13,9 @@
 
 
 
-	<link rel="stylesheet" type="text/css" href="css/style.css?rev=78e1eea23691bb723ffaa509d673169f" />
+	<link rel="stylesheet" type="text/css" href="css/style.css?rev=68d60a0f1d17cbd8df4cdac3ff4c40d5" />
 	<link rel="stylesheet" type="text/css" href="css/pickday.css" />
-	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=78e1eea23691bb723ffaa509d673169f" />
+	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=68d60a0f1d17cbd8df4cdac3ff4c40d5" />
 </head>
 
 <body>
@@ -81,18 +81,8 @@
 		<div class="ylb-menu-wrap">
 			<ul>
 				<li>全部商品分类</li>
-				<li class="select">家具、家装、家居、厨具</li>
-				<li>男装、男鞋、男裤</li>
-				<li>女装、女鞋、女裤</li>
-				<li>家电、数码</li>
-				<li>童装、母婴用品</li>
-				<li>进口食品、鲜蔬水果</li>
-				<li><a href="">某某1></a>
-					<a href="">某某2></a>
-					<a href="">某某3></a>
-					<a href="">某某4></a>
-					<a href="">某某5></a>
-				</li>
+				<li @mouseover="changeslist" data-id="{{f.code}}" v-for="f in flist"><a href="list.html?n={{f.name}}&k1={{f.code}}">{{f.name}}</a></li>
+				<li><a v-for="s in slist" href="list.html?n={{s.name}}&k2={{s.code}}">{{s.name}}></a></li>
 			</ul>
 
 		</div>
@@ -106,9 +96,9 @@
 <script src="js/libs/pickday.min.js" type="text/javascript"></script>
 <script src="js/libs/qrcode.min.js" type="text/javascript"></script>
 <script src="js/libs/dropzone.js" type="text/javascript"></script>
-<script src="js/base.js?rev=78e1eea23691bb723ffaa509d673169f" type="text/javascript"></script>
+<script src="js/base.js?rev=68d60a0f1d17cbd8df4cdac3ff4c40d5" type="text/javascript"></script>
 
-<script type="text/javascript" src="js/detail.js?rev=78e1eea23691bb723ffaa509d673169f"></script>
+<script type="text/javascript" src="js/detail.js?rev=68d60a0f1d17cbd8df4cdac3ff4c40d5"></script>
 
 
 </html>

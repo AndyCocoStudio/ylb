@@ -293,6 +293,7 @@
                     text-align: center;
                     font-size: 14px;
                     letter-spacing: 1px;
+                    cursor: pointer;
                 }
                 .select{
                     height: 40px;
@@ -303,7 +304,6 @@
                 }
             }
             .customer-order-list{
-                display: none;
                 width: 812px;
                 border: 1px solid #ccc;
                 border-top: none;
@@ -320,6 +320,9 @@
                     }
                     &:nth-child(odd){
                         background-color: #f9f9f9;
+                    }
+                    &.noneorder{
+                        height: 80px;
                     }
                 }
             }

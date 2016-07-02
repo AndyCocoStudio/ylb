@@ -37,18 +37,8 @@
 		<div class="ylb-menu-wrap">
 			<ul>
 				<li>全部商品分类</li>
-				<li class="select">家具、家装、家居、厨具</li>
-				<li>男装、男鞋、男裤</li>
-				<li>女装、女鞋、女裤</li>
-				<li>家电、数码</li>
-				<li>童装、母婴用品</li>
-				<li>进口食品、鲜蔬水果</li>
-				<li><a href="">某某1></a>
-					<a href="">某某2></a>
-					<a href="">某某3></a>
-					<a href="">某某4></a>
-					<a href="">某某5></a>
-				</li>
+				<li @mouseover="changeslist" data-id="{{f.code}}" v-for="f in flist"><a href="list.html?n={{f.name}}&k1={{f.code}}">{{f.name}}</a></li>
+				<li><a v-for="s in slist" href="list.html?n={{s.name}}&k2={{s.code}}">{{s.name}}></a></li>
 			</ul>
 
 		</div>

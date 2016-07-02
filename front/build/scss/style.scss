@@ -159,6 +159,9 @@ $base-border-color: #c7c7c7;
                     border: none;
                 }
             }
+            a:link, a:visited, a:hover, a:active{
+                color: #fff;
+            }
             &.select{
                 &:after{
                     display: block;

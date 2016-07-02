@@ -209,16 +209,51 @@
 		$(".ylb-search-wrap").fadeOut();
 		$(".ylb-menu-wrap").fadeOut();
 	});
-	var lists = new Vue({
-		el: "#ylb-layout",
-		data: {
-			sc: ""
+	var layout = {
+		sc: ""
+	};
+	var m = {
+		init: function () {
+			m.getFList();
 		},
-		methods: {
-			search: function () {
-				if (this.sc) location.href = "list.html?n=" + this.sc;
-				else location.href = "list.html";
-			}
+		getFList: function () {
+			$.when($.ajax({
+				url: $.apiUrl + "/goods/kinds",
+				type: "GET"
+			})).done(function (d) {
+				$.ylbAjaxHandler(d, function () {
+					layout.flist = d.data;
+					m.getSList(layout.flist[0].code);
+				});
+			});
+		},
+		getSList: function (code) {
+			$.when($.ajax({
+				url: $.apiUrl + "/goods/kinds?code=" + code,
+				type: "GET"
+			})).done(function (d) {
+				$.ylbAjaxHandler(d, function () {
+					layout.slist = d.data;
+					m.buildVue();
+				});
+			});
+		},
+		buildVue: function () {
+			layout = new Vue({
+				el: "#ylb-layout",
+				data: layout,
+				methods: {
+					search: function () {
+						if (this.sc) location.href = "list.html?n=" + this.sc;
+						else location.href = "list.html";
+					},
+					changeslist: function (el) {
+						var id = el.target.attributes["data-id"].value;
+						m.getSList(id);
+					}
+				}
+			})
 		}
-	})
+	};
+	m.init();
 })();

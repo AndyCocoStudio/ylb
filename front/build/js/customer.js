@@ -5,6 +5,9 @@
         spendshow: false,
         applyrole: -1,
         sid: $.getID(),
+        jfdh: true,
+        xsxf: false,
+        sjzd: false,
         spendpoint: {
             name: "",
             type: "",
@@ -35,6 +38,44 @@
             })).done(function (d) {
                 $.ylbAjaxHandler(d, function () {
                     vcustomer.info = d.data;
+                    m.getJFDHOrder();
+                    //m.buildVue();
+                });
+            });
+        },
+        getJFDHOrder: function () {
+            $.when($.ajax({
+                url: $.apiUrl + "/user/orders?k=0",
+                type: "GET",
+                //data: JSON.stringify({ k: 0 })
+            })).done(function (d) {
+                $.ylbAjaxHandler(d, function () {
+                    vcustomer.jfdhlist = d.data.orders;
+                    m.getXSXFOrder();
+                });
+            });
+        },
+        getXSXFOrder: function () {
+            $.when($.ajax({
+                url: $.apiUrl + "/user/orders?k=2",
+                type: "GET",
+               // data: JSON.stringify({ k: 2 })
+            })).done(function (d) {
+                $.ylbAjaxHandler(d, function () {
+                    vcustomer.xsxflist = d.data.orders;
+                    if (vcustomer.info.role == "Merchants") m.getSJZDOrder();
+                    else m.buildVue();
+                });
+            });
+        },
+        getSJZDOrder: function () {
+            $.when($.ajax({
+                url: $.apiUrl + "/user/orders?k=1",
+                type: "GET",
+                //data: JSON.stringify({ k: 1 })
+            })).done(function (d) {
+                $.ylbAjaxHandler(d, function () {
+                    vcustomer.sjzdlist = d.data.orders;
                     m.buildVue();
                 });
             });
@@ -44,6 +85,30 @@
                 el: "#customer-main",
                 data: vcustomer,
                 methods: {
+                    selectorder: function (t) {
+                        switch (t) {
+                            case 1:
+                                vcustomer.jfdh = true;
+                                vcustomer.sjzd = false;
+                                vcustomer.xsxf = false;
+                                break;
+                            case 2:
+                                vcustomer.jfdh = false;
+                                vcustomer.sjzd = false;
+                                vcustomer.xsxf = true;
+                                break;
+                            case 3:
+                                vcustomer.jfdh = false;
+                                vcustomer.sjzd = true;
+                                vcustomer.xsxf = false;
+                                break;
+                            default:
+                                vcustomer.jfdh = true;
+                                vcustomer.sjzd = false;
+                                vcustomer.xsxf = false;
+                                break;
+                        }
+                    },
                     sendpoints: function () {
                         this.covershow = true;
                         this.sendshow = true;
@@ -71,7 +136,7 @@
                     //*****ajaxMethod******//
                     getPointPerDay: function () {
                         $.ajax({
-                            url: $.apiUrl + "/score/grant",
+                            url: $.apiUrl + "/score",
                             type: "GET"
                         }).done(function (d) {
                             $.ylbAjaxHandler(d, function () {
