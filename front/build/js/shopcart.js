@@ -26,9 +26,27 @@
             }
             $(".shopcart-price").html(total);
         },
+        checkboxselect: function () {
+            var i = 0;
+            $("td input[type='checkbox']").each(function () {
+                if ($(this).is(":checked")) i += 1;
+            });
+            if (i > 0) {
+                datas.canorder = true;
+                if (i == $("td input[type='checkbox']").length) {
+                    $("th input[type='checkbox']").attr("checked", true);
+                } else {
+                    $("th input[type='checkbox']").attr("checked", false);
+                }
+            }
+            else {
+                datas.canorder = false;
+                $("th input[type='checkbox']").attr("checked", false);
+            }
+        },
         getProduct: function () {
             var productlist = $.localStorageHandler("get", "product");
-            if (productlist && productlist!="[]") {
+            if (productlist && productlist != "[]") {
                 datas.product = $.parseHandler("sj", productlist);
             } else {
                 datas.nogoods = true;
@@ -51,6 +69,7 @@
                             datas.checkbox -= 1;
                             datas.product[index].selected = 0;
                         }
+                        m.checkboxselect();
                         m.countPrice();
                     },
                     add: function (el) {
@@ -69,9 +88,35 @@
                         }
                     },
                     delpro: function (el) {
-                        var _this = $(el.target);
-                        var id = _this.attr("data-id");
-                        $.ylbRemoveCart("product", id);
+                        var del = confirm("确认要删除该商品？");
+                        if (del) {
+                            var id = el.target.attributes["data-id"].value;
+                            $.ylbRemoveCart("product", id);
+                            m.getProduct();
+                            m.checkboxselect();
+                            m.countPrice();
+                        }
+                    },
+                    // selectall: function () {
+                    //     if (datas.canorder) {
+                    //         $("td input[type='checkbox']").attr("checked", false);
+                    //     }
+                    //     else {
+                    //         $("td input[type='checkbox']").attr("checked", true);
+                    //     }
+                    //     datas.canorder = !datas.canorder;
+                    // },
+                    settle: function () {
+                        var buylist = [];
+                        for (var i = 0; i < datas.product.length; i++) {
+                            var t = datas.product[i];
+                            if (t.selected) {
+                                buylist.push(t);
+                                $.ylbRemoveCart("product", t.goodsID);
+                            }
+                        }
+                        $.localStorageHandler("set", "shopcart", $.parseHandler("js", buylist));
+                        window.location.href = "order.html";
                     }
                 }
             });

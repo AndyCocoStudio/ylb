@@ -19,8 +19,8 @@
             })).done(function (d) {
                 $.ylbAjaxHandler(d, function () {
                     datas.data = d.data;
-                    datas.data.count = 1;
-                    datas.data.selected = 0;
+                    datas.data.goodses[0].count = 1;
+                    datas.data.goodses[0].selected = 0;
                     m.buildVue();
                 });
             });
@@ -31,13 +31,13 @@
                 data: datas,
                 methods: {
                     addcart: function () {
-                        $.ylbAddCart("product", datas.data);
+                        $.ylbAddCart("product", datas.data.goodses[0]);
                     },
                     addcount: function () {
-                        this.data.count += 1;
+                        this.data.goodses[0].count += 1;
                     },
                     reducecount: function () {
-                        if (this.data.count - 1 > 0) this.data.count -= 1;
+                        if (this.data.goodses[0].count - 1 > 0) this.data.goodses[0].count -= 1;
                     }
                 }
             });

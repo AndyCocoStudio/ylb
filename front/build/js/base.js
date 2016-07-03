@@ -49,6 +49,15 @@
 				case "4007":
 					$.ylbAlert("已支付的订单不能取消");
 					break;
+				case "4008":
+					$.ylbAlert("暂无可领取积分");
+					break;
+				case "4009":
+					$.ylbAlert("领取积分失败");
+					break;
+				case "4010":
+					$.ylbAlert("积分点为0");
+					break;
 				default:
 					$.ylbAlert("服务器又开小差");
 					break;
@@ -94,6 +103,21 @@
             return results[1] || "";
         } catch (e) {
             return "";
+        }
+    };
+	/**
+	 * 获取url中跳转url
+	 * **/
+	$.regexUrl = function (url) {
+        //正则出url
+		if (!url) url = window.location.href;
+        var strs = new Array(); //定义一数组
+        strs = url.split("?url="); //字符分割
+        if (strs[1]) {
+            return strs[1];
+        } else {
+            strs = url.split("&url=");
+            return strs[1];
         }
     };
 	/**

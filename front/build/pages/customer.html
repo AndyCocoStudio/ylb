@@ -98,30 +98,37 @@
                     <th>商品名称</th>
                     <th>商品类目</th>
                     <th>商家</th>
-                    <th>价格</th>
-                    <th>支付方式</th>
+                    <th>买家</th>
+                    <th>总价</th>
+                    <th>积分支付</th>
                     <th>状态</th>
                     <th>操作</th>
                 </tr>
-                <tr>
-                    <td>10000011</td>
-                    <td>苏泊尔安全压力锅苏泊尔安全压力锅</td>
-                    <td>厨具</td>
-                    <td>优良宝小二</td>
-                    <td>12545.45</td>
-                    <td>积分</td>
-                    <td>审核中</td>
-                    <td><a>支付</a><br/><a>取消</a></td>
+                <tr v-show="jfdhlist.length<1">
+                    <td colspan="9">您暂无线下订单</td>
                 </tr>
-                <tr>
-                    <td>10000011</td>
-                    <td>苏泊尔安全压力锅</td>
-                    <td>厨具</td>
-                    <td>优良宝小二</td>
-                    <td>12545.45</td>
-                    <td>积分</td>
-                    <td>审核中</td>
-                    <td><a>支付</a><br/><a>取消</a></td>
+                <tr v-for="h in jfdhlist">
+                    <td>{{h.orderID}}</td>
+                    <td>{{h.items[0].name}}</td>
+                    <td>{{h.items[0].goodsKind}}</td>
+                    <td>{{h.storeName}}</td>
+                    <td>{{h.buyer}}</td>
+                    <td>{{h.totalPrice}}</td>
+                    <td>{{h.score}}</td>
+                    <td v-if="h.payStatus=='Unpaid'">待支付</td>
+                    <td v-else>
+                        <em v-if="h.items[0].stutas=='New'">已支付</em>
+                        <em v-if="h.items[0].stutas=='Refund'">退款中</em>
+                        <em v-if="h.items[0].stutas=='Refunded'">已退款</em>
+                        <em v-if="h.items[0].stutas=='Sending'">待发货</em>
+                        <em v-if="h.items[0].stutas=='Sent'">已发货</em>
+                        <em v-if="h.items[0].stutas=='Received'">已收货</em>
+                    </td>
+                    <td>
+                        <a data-id="{{h.orderID}}">支付</a><br/>
+                        <a v-if="h.payStatus=='Unpaid'" data-id="{{h.orderID}}">取消</a><br>
+                        <a v-if="h.payStatus=='Paid'" data-id="{{h.orderID}}">退款</a>
+                    </td>
                 </tr>
             </table>
             <table v-show="xsxf" class="customer-order-list">
@@ -130,30 +137,39 @@
                     <th>商品名称</th>
                     <th>商品类目</th>
                     <th>商家</th>
-                    <th>价格</th>
-                    <th>支付方式</th>
+                    <th>买家</th>
+                    <th>总价</th>
+                    <th>积分支付</th>
                     <th>状态</th>
                     <th>操作</th>
                 </tr>
-                <tr>
-                    <td>10000011</td>
-                    <td>苏泊尔安全压力锅苏泊尔安全压力锅</td>
-                    <td>厨具</td>
-                    <td>优良宝小二</td>
-                    <td>12545.45</td>
-                    <td>积分</td>
-                    <td>审核中</td>
-                    <td><a>支付</a><br/><a>取消</a></td>
+                <tr v-show="xsxflist.length<1">
+                    <td colspan="9">
+                        您暂无线上订单
+                    </td>
                 </tr>
-                <tr>
-                    <td>10000011</td>
-                    <td>苏泊尔安全压力锅</td>
-                    <td>厨具</td>
-                    <td>优良宝小二</td>
-                    <td>12545.45</td>
-                    <td>积分</td>
-                    <td>审核中</td>
-                    <td><a>支付</a><br/><a>取消</a></td>
+                <tr v-for="x in xsxflist">
+                    <td>{{x.orderID}}</td>
+                    <td>{{x.items[0].name}}</td>
+                    <td>{{x.items[0].goodsKind}}</td>
+                    <td>{{x.storeName}}</td>
+                    <td>{{x.buyer}}</td>
+                    <td>{{x.totalPrice}}</td>
+                    <td>{{x.score}}</td>
+                    <td v-if="x.payStatus=='Unpaid'">待支付</td>
+                    <td v-else>
+                        <em v-if="x.items[0].stutas=='New'">已支付</em>
+                        <em v-if="x.items[0].stutas=='Refund'">退款中</em>
+                        <em v-if="x.items[0].stutas=='Refunded'">已退款</em>
+                        <em v-if="x.items[0].stutas=='Sending'">待发货</em>
+                        <em v-if="x.items[0].stutas=='Sent'">已发货</em>
+                        <em v-if="x.items[0].stutas=='Received'">已收货</em>
+                    </td>
+                    <td>
+                        <a data-id="{{x.orderID}}">支付</a><br/>
+                        <a v-if="x.payStatus=='Unpaid'" data-id="{{x.orderID}}">取消</a><br>
+                        <a v-if="x.payStatus=='Paid'" data-id="{{x.orderID}}">退款</a>
+                    </td>
                 </tr>
             </table>
             <table v-show="sjzd" class="customer-order-list">
@@ -162,30 +178,39 @@
                     <th>商品名称</th>
                     <th>商品类目</th>
                     <th>商家</th>
-                    <th>价格</th>
-                    <th>支付方式</th>
+                    <th>买家</th>
+                    <th>手续费</th>
+                    <th>赠送积分</th>
                     <th>状态</th>
                     <th>操作</th>
                 </tr>
-                <tr>
-                    <td>10000011</td>
-                    <td>苏泊尔安全压力锅苏泊尔安全压力锅</td>
-                    <td>厨具</td>
-                    <td>优良宝小二</td>
-                    <td>12545.45</td>
-                    <td>积分</td>
-                    <td>审核中</td>
-                    <td><a>支付</a><br/><a>取消</a></td>
+                <tr v-show="sjzdlist.length<1">
+                    <td colspan="9">
+                        您暂无做单订单
+                    </td>
                 </tr>
-                <tr>
-                    <td>10000011</td>
-                    <td>苏泊尔安全压力锅</td>
-                    <td>厨具</td>
-                    <td>优良宝小二</td>
-                    <td>12545.45</td>
-                    <td>积分</td>
-                    <td>审核中</td>
-                    <td><a>支付</a><br/><a>取消</a></td>
+                <tr v-for="s in sjzdlist">
+                    <td>{{s.orderID}}</td>
+                    <td>{{s.goodsName}}</td>
+                    <td>{{s.goodsKind}}</td>
+                    <td>{{s.storeName}}</td>
+                    <td>{{s.buyer}}</td>
+                    <td>{{s.totalPrice}}</td>
+                    <td>{{s.givingScore}}</td>
+                    <td v-if="s.payStatus=='Unpaid'">待支付</td>
+                    <td v-else>
+                        <em v-if="s.items[0].stutas=='New'">已支付</em>
+                        <em v-if="s.items[0].stutas=='Refund'">退款中</em>
+                        <em v-if="s.items[0].stutas=='Refunded'">已退款</em>
+                        <em v-if="s.items[0].stutas=='Sending'">待发货</em>
+                        <em v-if="s.items[0].stutas=='Sent'">已发货</em>
+                        <em v-if="s.items[0].stutas=='Received'">已收货</em>
+                    </td>
+                    <td>
+                        <a data-id="{{s.orderID}}">支付</a><br/>
+                        <a v-if="s.payStatus=='Unpaid'" data-id="{{s.orderID}}">取消</a><br>
+                        <a v-if="s.payStatus=='Paid'" data-id="{{s.orderID}}">退款</a>
+                    </td>
                 </tr>
             </table>
         </div>

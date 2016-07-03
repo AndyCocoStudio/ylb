@@ -44,7 +44,7 @@
                 </article>
             </div>
             <ul v-show="showlist" class="order-address-list">
-                <li v-for="adr in address">
+                <li v-if="$index!=0" v-for="adr in address">
                     <input name="useraddress" data-id="{{adr.addressID}}" @click="choseaddress" type="radio">
                     <article>
                         <span>{{adr.name}}</span>
@@ -72,6 +72,7 @@
                         <img :src="det.thumbnail" />
                         <article>
                             <h3>{{det.name}}</h3>
+                            <mark>备注<input type="text" v-model="det.remark" placeholder="选填，填写您与卖家达成一致的要求"></mark>
                         </article>
                     </td>
                     <td>
@@ -85,9 +86,9 @@
                 </tr>
             </table>
         </div>
-        <div class="order-remark">
+        <!--<div class="order-remark">
             给卖家留言<input type="text" placeholder="选填，填写您与卖家达成一致的要求">
-        </div>
+        </div>-->
         <article class="order-total">
             <p>总计： <em>￥ {{total}}</em>元</p>
             <p>运费： {{postage}}元</p>

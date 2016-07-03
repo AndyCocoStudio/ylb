@@ -133,6 +133,27 @@
                 margin-left: 20px;
             }
         }
+        .default{
+            font-size: 14px;
+            line-height: 3.2;
+            margin-left: 20px;
+            input[type="radio"]{
+                display: inline-block;
+                vertical-align: text-top;
+                margin: 16px 5px 0 5px;
+            }
+            article{
+                display: inline-block;
+                vertical-align: text-top;
+                span{
+                    margin-right: 15px;
+                }
+                a{
+                    font-size: 12px;
+                    color: #888;
+                }
+            }
+        }
         ul.order-address-list{
             display: block;
             padding: 10px 0 30px;
@@ -143,7 +164,7 @@
                 input[type="radio"]{
                     display: inline-block;
                     vertical-align: text-top;
-                    margin: 5px 20px 0 5px;
+                    margin: 8px 10px 0 5px;
                 }
                 article{
                     display: inline-block;
@@ -194,6 +215,15 @@
                         text-align: left;
                         p{
                             color: #999;
+                        }
+                        mark{
+                            background-color: transparent;
+                            margin-top: 20px;
+                            input[type="text"]{
+                                width: 190px;
+                                border: 1px solid $base-border-color;
+                                margin-left: 5px;
+                            }
                         }
                     }
                     input[type='text']{

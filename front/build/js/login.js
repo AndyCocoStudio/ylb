@@ -2,7 +2,7 @@
     var vlogin = {
         mobile: "",
         password: "",
-        url: $.urlParam("url") || "",
+        url: $.regexUrl() || "",
         sid: $.getID() || ""
     };
     var m = {

@@ -45,7 +45,7 @@
         },
         getJFDHOrder: function () {
             $.when($.ajax({
-                url: $.apiUrl + "/user/orders?k=0",
+                url: $.apiUrl + "/user/orders?k=1",
                 type: "GET",
                 //data: JSON.stringify({ k: 0 })
             })).done(function (d) {
@@ -70,7 +70,7 @@
         },
         getSJZDOrder: function () {
             $.when($.ajax({
-                url: $.apiUrl + "/user/orders?k=1",
+                url: $.apiUrl + "/user/orders?k=0",
                 type: "GET",
                 //data: JSON.stringify({ k: 1 })
             })).done(function (d) {

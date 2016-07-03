@@ -13,9 +13,9 @@
 
 
 
-	<link rel="stylesheet" type="text/css" href="css/style.css?rev=4a09e6f1b3e6d20eb4b58a94d54ca4d8" />
+	<link rel="stylesheet" type="text/css" href="css/style.css?rev=43d66e7d25332ebc637fb2acb82bbe35" />
 	<link rel="stylesheet" type="text/css" href="css/pickday.css" />
-	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=4a09e6f1b3e6d20eb4b58a94d54ca4d8" />
+	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=43d66e7d25332ebc637fb2acb82bbe35" />
 </head>
 
 <body>
@@ -71,7 +71,7 @@
                 </article>
             </div>
             <ul v-show="showlist" class="order-address-list">
-                <li v-for="adr in address">
+                <li v-if="$index!=0" v-for="adr in address">
                     <input name="useraddress" data-id="{{adr.addressID}}" @click="choseaddress" type="radio">
                     <article>
                         <span>{{adr.name}}</span>
@@ -99,6 +99,7 @@
                         <img :src="det.thumbnail" />
                         <article>
                             <h3>{{det.name}}</h3>
+                            <mark>备注<input type="text" v-model="det.remark" placeholder="选填，填写您与卖家达成一致的要求"></mark>
                         </article>
                     </td>
                     <td>
@@ -112,9 +113,9 @@
                 </tr>
             </table>
         </div>
-        <div class="order-remark">
+        <!--<div class="order-remark">
             给卖家留言<input type="text" placeholder="选填，填写您与卖家达成一致的要求">
-        </div>
+        </div>-->
         <article class="order-total">
             <p>总计： <em>￥ {{total}}</em>元</p>
             <p>运费： {{postage}}元</p>
@@ -158,9 +159,9 @@
 <script src="js/libs/pickday.min.js" type="text/javascript"></script>
 <script src="js/libs/qrcode.min.js" type="text/javascript"></script>
 <script src="js/libs/dropzone.js" type="text/javascript"></script>
-<script src="js/base.js?rev=4a09e6f1b3e6d20eb4b58a94d54ca4d8" type="text/javascript"></script>
+<script src="js/base.js?rev=43d66e7d25332ebc637fb2acb82bbe35" type="text/javascript"></script>
 
-<script type="text/javascript" src="js/order.js?rev=4a09e6f1b3e6d20eb4b58a94d54ca4d8"></script>
+<script type="text/javascript" src="js/order.js?rev=43d66e7d25332ebc637fb2acb82bbe35"></script>
 
 
 </html>

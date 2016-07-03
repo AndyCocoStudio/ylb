@@ -97,7 +97,7 @@
         input[type='button'], a{
             display: inline-block;
             width: 120px;
-            background-color: $base-orange;
+            background-color: #666;
             height: 50px;
             line-height: 50px;
             text-align: center;
@@ -105,6 +105,9 @@
             letter-spacing: 1px;
             color: #fff;
             margin-left: 25px;
+        }
+        a.canorder{
+            background-color: $base-orange;
         }
     }
     .shopcart-nogoods{

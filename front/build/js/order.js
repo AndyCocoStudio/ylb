@@ -2,7 +2,7 @@
     var order = {
         hideaddress: false,
         id: $.urlParam("id") || "",
-        count: $.urlParam("count") || "",
+        count: $.urlParam("count") || 1,
         total: 0,
         postage: 0,
         ispoint: "disabled",
@@ -11,7 +11,6 @@
         product: {},
         address: {},
         select: {},
-        note: "无",
         showlist: false,
         plist: [],
         clist: [],
@@ -89,6 +88,8 @@
             }).done(function (d) {
                 $.ylbAjaxHandler(d, function () {
                     order.address = d.data;
+                    order.defaultaddress = d.data[0]
+                    order.hideaddress = false;
                 });
             });
         },
@@ -112,7 +113,10 @@
                 });
             } else {
                 //购物车购买
-
+                var pl = $.parseHandler("sj", $.localStorageHandler("get", "shopcart"));
+                order.product.goodses = pl;
+                m.countPrice();
+                m.buildVue();
             }
 
         },
@@ -208,43 +212,54 @@
                         });
                     },
                     //删除地址
-                    deleteadr:function(el){
-                        var id = el.target.attributes["data-id"].value;
-                        alert(id);
-                        $.ajax({
-                            url:$.apiUrl+"/user/address",
-                            type:"DELETE",
-                            data:JSON.stringify({
-                                id: id
-                            })
-                        }).done(function(d){
-                            $.ylbAjaxHandler(d,function(){
-                                $.ylbAlert("删除成功！");
-                                m.updateAddress();
+                    deleteadr: function (el) {
+                        var del = confirm("确认要删除该地址?");
+                        if (del) {
+                            var id = el.target.attributes["data-id"].value;
+                            $.ajax({
+                                url: $.apiUrl + "/user/address?id=" + id,
+                                type: "DELETE"
+                            }).done(function (d) {
+                                $.ylbAjaxHandler(d, function () {
+                                    $.ylbAlert("删除成功！");
+                                    m.updateAddress();
+                                });
                             });
-                        });
+                        }
                     },
                     //创建新订单
                     neworder: function () {
-                        var datas = {}, oid = "", p = "";
-                        for (var i = 0; i < order.product.goodses.length; i++) {
-                            var g = order.product.goodses[i];
-                            p += "{goodsID:" + g.goodsID + ",quantity:" + g.count + ",note:" + order.note + "},";
+                        if (!order.select.addressID) {
+                            $.ylbAlert("请选择收货地址");
+                            return;
+                        } else {
+                            var datas = {}, oid = "", p = [];
+                            for (var i = 0; i < order.product.goodses.length; i++) {
+                                var g = order.product.goodses[i];
+                                var o = {
+                                    goodsID: g.goodsID,
+                                    quantity: g.count,
+                                    note: g.remark
+                                };
+                                p.push(o);
+                            }
+                            datas.items = p;
+                            datas.score = order.point;
+                            datas.addressID = order.select.addressID;
+                            $.ajax({
+                                url: $.apiUrl + "/order/shoppingonline",
+                                type: "PUT",
+                                data: JSON.stringify(datas)
+                            }).done(function (d) {
+                                $.ylbAjaxHandler(d, function () {
+                                    oid = d.data;
+                                    if (!order.id) {
+                                        $.localStorageHandler("clear", "shopcart");
+                                    }
+                                    //window.location.href = "pay.html?oid=" + oid;
+                                })
+                            });
                         }
-                        p = "[" + p.substring(0, p.length - 1) + "]";
-                        datas.items = p;
-                        datas.score = order.point;
-                        datas.addressID = order.select.addressID;
-                        $.ajax({
-                            url: $.apiUrl + "/order/shoppingonline",
-                            type: "PUT",
-                            data: JSON.stringify(datas)
-                        }).done(function (d) {
-                            $.ylbAjaxHandler(d, function () {
-                                oid = d.data;
-                                //window.location.href = "pay.html?oid=" + oid;
-                            })
-                        });
                     }
                 }
             });
