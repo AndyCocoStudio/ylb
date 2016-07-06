@@ -114,7 +114,7 @@
         }
     }
     .customer-right{
-        width: 834px;
+        width: 832px;
         float: left;
         .customer-info{
             padding: 12px;
@@ -122,9 +122,9 @@
             overflow: hidden;
             .customer-base{
                 float: left;
-                margin-right: 8px;  
+                margin-right: 7px;  
                 width: 156px;
-                height: 168px;
+                height: 178px;
                 border: 1px solid #fff;
                 text-align: center;
                 box-shadow: 0 0 5px #cecece;
@@ -154,9 +154,9 @@
             }
             .customer-asset{
                 float: left;
-                margin-right: 8px;
+                margin-right: 7px;
                 width: 228px;
-                height: 168px;
+                height: 178px;
                 border: 1px solid #fff;
                 font-size: 14px;
                 box-shadow: 0 0 5px #cecece;
@@ -215,7 +215,7 @@
             .customer-code{
                 float: left;
                 width: 196px;
-                height: 168px;
+                height: 178px;
                 border: 1px solid #fff;
                 box-shadow: 0 0 5px #cecece;
                 .customer-pic{
@@ -233,15 +233,15 @@
                         background-color: rgba(255, 255, 255, 0.6);
                     }
                     .customer-private-qrcode{
-                        width: 130px;
-                        height: 130px;
+                        width: 140px;
+                        height: 120px;
                         margin: 2px auto 0;
                     }
                 }
             }
             .customer-adv{
                 width: 194px;
-                height: 170px;
+                height: 180px;
                 float: left;
             }
         }
@@ -296,9 +296,9 @@
                     cursor: pointer;
                 }
                 .select{
-                    height: 40px;
+                    height: 41px;
                     border-top: 2px solid $base-orange;
-                    line-height: 40px;
+                    line-height: 41px;
                     background-color: #f2f2f2;
                     color: $base-orange;
                 }
@@ -311,9 +311,9 @@
                 tr{
                     height: 44px;
                     td, th{
-                        width:  10%;
                         overflow: hidden;
                         text-align: center;
+                        padding: 0 5px;
                     }
                     th{
                        background-color: #f2f2f2; 
@@ -394,7 +394,7 @@
                 display: block;
                 border: 1px solid #ccc;
                 padding: 12px;
-                width: 524px;
+                width: 640px;
                 margin: 10px 0 0 72px;
                 li{
                     &:first-child{
@@ -408,10 +408,30 @@
                         text-align: right;
                         margin-right: 25px;
                     }
+                    #yyzz, #zmt, #dzt, #dnt, #frsfz{
+                        background-color: #ececec;
+                        height: 30px;
+                        vertical-align: middle;
+                        text-align: center;
+                        cursor: pointer;
+                        width: 320px;
+                        line-height: 30px;
+                        overflow-x: hidden;
+                        text-overflow: ellipsis;
+                        .dz-preview{
+                            display: none;
+                        }
+                        .preimg{
+                            width: 160px;
+                            height: 120px;
+                        }
+                    }
                     input[type='text']{
-                        height: 22px;
-                        line-height: 22px;
+                        height: 26px;
+                        line-height: 26px;
+                        padding: 2px 0 2px 5px;
                         border: 1px solid #d4d4d4;
+                        width: 313px;
                     }
                     input[type='button']{
                         height: 24px;
@@ -425,14 +445,22 @@
                         height: 24px;
                         line-height: 24px;
                     }
+                    .streetinput{
+                        margin-left: 201px;
+                    }
+                    select{
+                        width: 104px;
+                        height: 24px;
+                    }
                     img{
                         width: 200px;
                         display: none;
                     }
-                    button{
+                    a{
+                        text-align: center;
                         display: block;
-                        line-height: 24px;
-                        height: 24px;
+                        line-height: 36px;
+                        height: 36px;
                         width: 160px;
                         color: #fff;
                         margin: 10px auto;
@@ -632,6 +660,52 @@
                 }
             }
         }
-        
+        .customer-logon{
+            margin: 0 12px 25px;
+            padding-top: 1px;
+            ul{
+                padding: 20px;
+                width: 260px;
+                background-color: #efefef;
+                margin: 0 auto;
+                border-radius: 4px;
+                li{
+                    height: 28px;
+                    line-height: 28px;
+                    padding: 15px 0 10px;
+                    border-bottom: 1px solid #d8d8d8;
+                    &:last-child{
+                        border-bottom: none;
+                        padding-top: 40px;
+                    }
+                    input[type="text"]{
+                        width: 140px;
+                        padding: 0 10px;
+                        background-color: transparent;
+                        height: 28px;
+                        line-height: 28px;
+                        margin-right: 10px;
+                    }
+                    input[type="button"]{
+                        width: 90px;
+                        background-color: #d8d8d8;
+                        height: 28px;
+                        line-height: 28px;
+                        cursor: pointer;
+                    }
+                    button{
+                        width: 260px;
+                        background-color: $base-orange;
+                        color: #fff;
+                        text-align: center;
+                        font-size: 14px;
+                        height: 40px;
+                        line-height: 40px;
+                        letter-spacing: 2px;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
     }
 }
