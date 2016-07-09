@@ -33,6 +33,7 @@
         init: function () {
             m.getAddress();
             m.getPlist();
+            $.checkFlag();
         },
         //获取省地址
         getPlist: function () {
@@ -256,7 +257,7 @@
                                     if (!order.id) {
                                         $.localStorageHandler("clear", "shopcart");
                                     }
-                                    //window.location.href = "pay.html?oid=" + oid;
+                                    window.location.href = "pay.html?oid=" + oid;
                                 })
                             });
                         }

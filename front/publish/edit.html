@@ -13,9 +13,9 @@
 
 
 
-	<link rel="stylesheet" type="text/css" href="css/style.css?rev=6c0930a3687946a61baff866eda92c1e" />
+	<link rel="stylesheet" type="text/css" href="css/style.css?rev=50a5734d933f8d93e985d831e13b2c86" />
 	<link rel="stylesheet" type="text/css" href="css/pickday.css" />
-	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=6c0930a3687946a61baff866eda92c1e" />
+	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=50a5734d933f8d93e985d831e13b2c86" />
 </head>
 
 <body>
@@ -65,7 +65,6 @@
         <div id="customer-info" class="customer-info">
             <div class="customer-base">
                 <img :src="info.avatar||'images/customer-default.png'" />
-                <a href="edit.html">编辑个人资料</a>
                 <h1>{{info.mobile}}</h1>
             </div>
             <div class="customer-asset" :class="{salerasset:info.role=='Merchants'}">
@@ -80,15 +79,21 @@
                 <p v-if="info.role=='Merchants'">账户货款： <em>{{info.asset.paymentForGoods}}</em>元</p>
                 <p v-if="info.role=='Merchants'">账户佣金： <em>{{info.asset.commission}}</em>元</p>
                 <p>剩余积分： <em>{{info.asset.score}}</em>分</p>
-                <p>积分基点： <em>{{info.asset.point}}</em>个<a>领取积分</a></p>
+                <p>积分基点： <em>{{info.asset.point}}</em>个<a @click="getpoint">领取积分</a></p>
             </div>
             <div class="customer-code customer-eqcode">
-                <div class="customer-tag">做单二维码</div>
+                <div class="customer-tag">积分做单</div>
                 <div class="customer-pic ylb-center">
                     <div id="customer-private-qrcode" class="customer-private-qrcode"></div>
                 </div>
             </div>
-            <img class="customer-adv" src="images/adv1.png" />
+            <div v-if="info.role=='Merchants'" class="customer-code customer-control">
+                <div class="customer-tag">商家操作</div>
+                <div class="customer-pic">
+                    <a @click="spendpoints">积分兑换</a>
+                </div>
+            </div>
+            <img v-if="info.role=='Ordinary'" class="customer-adv" src="images/adv1.png" />
         </div>
         <div class="customer-edit">
             <ul class="customer-edit-list">
@@ -144,7 +149,7 @@
                     <li><span>原密码</span><input type="text"></li>
                     <li><span>新密码</span><input type="text"></li>
                     <li><span>确认密码</span><input type="text"></li>
-                    <li><button class="edit-pwd">确认</button></li>
+                    <li><a class="edit-pwd">确认</a></li>
                 </ul>
             </div>
             <div v-show="detail" class="edit-info">
@@ -186,9 +191,9 @@
 <script src="js/libs/pickday.min.js" type="text/javascript"></script>
 <script src="js/libs/qrcode.min.js" type="text/javascript"></script>
 <script src="js/libs/dropzone.js" type="text/javascript"></script>
-<script src="js/base.js?rev=6c0930a3687946a61baff866eda92c1e" type="text/javascript"></script>
+<script src="js/base.js?rev=50a5734d933f8d93e985d831e13b2c86" type="text/javascript"></script>
 
-<script type="text/javascript" src="js/edit.js?rev=6c0930a3687946a61baff866eda92c1e"></script>
+<script type="text/javascript" src="js/edit.js?rev=50a5734d933f8d93e985d831e13b2c86"></script>
 
 
 </html>

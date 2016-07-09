@@ -69,7 +69,7 @@
             </div>
             <img v-if="info.role=='Ordinary'" class="customer-adv" src="images/adv1.png" />
         </div>
-        <div v-if="info.role=='Merchants'" class="customer-count">
+        <div v-if="info.role=='CustomerManager'" class="customer-count">
             本月名下商家累积做单<em>{{total.totalNumber||"0"}}</em>笔，赠送积分<em>{{total.totalScore||"0"}}</em>分，可获得工资<em>{{total.wage||"0"}}</em>元。
         </div>
         <div v-if="info.role=='AreaManager'" class="customer-count">
@@ -259,10 +259,10 @@
             <p>您将申请成为<select @change="rolechange" name="roles" id="apply-role">
                 <option value="-1">-请选择角色-</option>
                 <option v-show="info.role!='Merchants'" value="1">加盟商</option>
-                <option v-show="info.role!='AreaManage'" value="2">客户经理</option>
+                <option v-show="info.role!='AreaManager'" value="2">客户经理</option>
                 </select>,请认真如实提交以下内容</p>
             <ul class="cutomer-apply-saler" v-show="role=='1'&&info.role!='Merchants'">
-                <li>注：图片资料，请选择500k以下的jpg格式的图片</li>
+                <li>注：图片资料，请选择1024K以下的jpg格式的图片</li>
                 <li><span>营业执照图</span><span id="yyzz">{{tobesaler.license||'点击上传图片'}}</span></li>
                 <li><span>店铺名称</span><input v-model="tobesaler.storeName" type="text" /></li>
                 <li><span>实际经营地址</span><select @change="changeprov" v-model="tobesaler.provinceCode">
@@ -287,8 +287,14 @@
                 <li><span>推荐人</span><input v-model="tobesaler.referrerMobile" placeholder="请输入推荐人手机" type="text"></li>
                 <li><a @click="apysaler">提交</a></li>
             </ul>
-            <ul v-show="role=='2'&&info.role!='AreaManage'">
-                <li><span>身份证</span></li>
+            <ul class="cutomer-apply-saler" v-show="role=='2'&&info.role!='AreaManage'">
+                <li>注：图片资料，请选择1024K以下的jpg格式的图片</li>
+                <li><span>申请人</span><input type="text"></li>
+                <li><span>身份证号</span><input type="text"></li>
+                <li><span>身份证正面图</span><input type="text"></li>
+                <li><span>身份证反面图</span><input type="text"></li>
+                <li><span>申请人手持身份证图</span><input type="text"></li>
+                <li><a @click="apymanager">提交</a></li>
             </ul>
         </div>
         <div v-if="info.role=='Merchants'" id="customer-logon" class="customer-logon">
@@ -297,7 +303,8 @@
             </div>
             <ul>
                 <li>
-                    <input type="text" maxlength="11" v-model="tj.mobile" placeholder="请输入手机号码" /><input value="获取验证码" type="button" />
+                    <input type="text" maxlength="11" v-model="tj.mobile" placeholder="请输入手机号码" /><input value="获取验证码" type="button"
+                    />
                 </li>
                 <li>
                     <input type="text" maxlength="4" v-model="tj.captcha" placeholder="请输入验证码" />
@@ -306,6 +313,47 @@
                     <button @click="logon">注册</button>
                 </li>
             </ul>
+        </div>
+        <div id="customer-approve" class="customer-approve">
+            <div class="customer-title">
+                审批管理
+            </div>
+            <ul class="customer-approve-type">
+                <li class="select">做单审批</li>
+                <li>申请审批</li>
+            </ul>
+            <table class="customer-approve-list approve-order">
+                <tr>
+                    <th>id</th>
+                    <th>申请人</th>
+                    <th>做单对象</th>
+                    <th>赠送积分</th>
+                    <th>申请时间</th>
+                    <th>操作</th>
+                </tr>
+            </table>
+            <table class="customer-approve-list approve-role">
+                <tr>
+                    <th>id</th>
+                    <th>申请人</th>
+                    <th>推荐人</th>
+                    <th>申请角色</th>
+                    <th>当前角色</th>
+                    <th>成功推荐商家数</th>
+                    <th>申请时间</th>
+                    <th>操作</th>
+                </tr>
+                <tr v-for="a in apply">
+                    <td>{{a.id}}</td>
+                    <td>{{a.applicantName}}</td>
+                    <td>{{a.referrerName}}</td>
+                    <td>{{a.applyRole}}</td>
+                    <td>{{a.rurrentRole}}</td>
+                    <td>{{a.recommended}}</td>
+                    <td>{{a.}}</td>
+                    <td><a>同意</a><a>拒绝</a><input placeholder="请填入拒绝理由" v-model="" type="text"></td>
+                </tr>
+            </table>
         </div>
     </div>
     <div class="ylb-show-cover" v-show="covershow" @click="hideall"></div>

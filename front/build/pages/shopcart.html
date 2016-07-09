@@ -24,7 +24,7 @@
             <td>
                 <img :src="pro.thumbnail" />
                 <article>
-                    <h2>{{pro.name}}</h2>
+                    <h2><a href="detail.html?id={{pro.goodsID}}">{{pro.name}}</a></h2>
                     <p><span v-for="p in pro.info">{{p.name}}：{{p.value}}</span></p>
                 </article>
             </td>

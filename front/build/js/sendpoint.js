@@ -10,6 +10,7 @@
     var m = {
         init: function () {
             m.getAsset();
+            $.checkFlag();
         },
         getAsset: function () {
             $.when($.ajax({

@@ -8,6 +8,7 @@
         init: function () {
             setInterval(m.bannerAnimate, 4000);
             m.loadList();
+            $.checkFlag();
         },
         loadList: function () {
             $.when($.ajax({
@@ -20,7 +21,19 @@
                 }
             })).done(function (d) {
                 $.ylbAjaxHandler(d, function () {
-                    datas.data = d.data;
+                    datas.product = d.data;
+                    m.getNav();
+                    //m.buildVue();
+                });
+            });
+        },
+        getNav: function () {
+            $.when($.ajax({
+                url: $.apiUrl + "/goods/kinds",
+                type: "GET"
+            })).done(function (d) {
+                $.ylbAjaxHandler(d, function () {
+                    datas.nav = d.data;
                     m.buildVue();
                 });
             });

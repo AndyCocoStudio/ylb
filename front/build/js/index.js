@@ -3,6 +3,7 @@
     var m = {
         init: function () {
             m.getBanner();
+            $.checkFlag();
         },
         getBanner: function () {
             $.when($.ajax({

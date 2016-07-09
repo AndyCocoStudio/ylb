@@ -1,0 +1,85 @@
+.pay-main{
+    width: 960px;
+    margin: 30px auto 88px;
+    ul.pay-cource{
+        display: block;
+        width: 100%;
+        margin-top: 20px;
+        overflow: hidden;
+        li{
+            width: 32%;
+            float: left;
+            text-align: center;
+            margin-right: 2%;
+            line-height: 25px;
+            font-size: 14px;
+            color: #888;
+            &:last-child{
+                margin-right: 0;
+            }
+            span{
+                display: inline-block;
+                width: 32px;
+                height: 32px;
+                line-height: 32px;
+                font-size: 16px;
+                margin-bottom: 5px;
+                border-radius: 32px;
+                background-color: #d8d8d8;
+                position: relative;
+                &:before{
+                    width: 130px;
+                    background-color: #d8d8d8;
+                    content: "";
+                    display: block;
+                    height: 4px;
+                    position: absolute;
+                    top: 14px;
+                    left: -130px;
+                }
+                &:after{
+                    width: 130px;
+                    background-color: #d8d8d8;
+                    content: "";
+                    display: block;
+                    height: 4px;
+                    position: absolute;
+                    top: 14px;
+                    left: 32px;
+                }
+            }
+            &.select{
+                color: $base-orange;
+                span{
+                    background-color: $base-orange;
+                    color: #fff;
+                    &:before{
+                        background-color: $base-orange;
+                    }
+                    &:after{
+                        background-color: $base-orange;
+                    }
+                }
+            }
+        }
+    }
+    .pay-detail{
+        padding: 20px;
+        background-color: #f6f6f6;
+        margin-top: 10px;
+        h1{
+            font-size: 16px;
+        }
+        h2{
+            font-size: 14px;
+        }
+        p{
+            font-size: 16px;
+            margin-top: 15px;
+            em{
+                color: $base-orange;
+                margin-right: 10px;
+            }
+        }
+    }
+}

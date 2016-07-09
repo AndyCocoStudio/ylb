@@ -4,7 +4,10 @@
         avatar: false,
         address: false,
         password: true,
-        detail: false
+        detail: false,
+        pwd:{
+            
+        }
     };
     var m = {
         init: function () {
@@ -71,6 +74,9 @@
                                 this.detail = false;
                                 break;
                         }
+                    },
+                    confirmpwd:function(){
+
                     }
                 }
             });

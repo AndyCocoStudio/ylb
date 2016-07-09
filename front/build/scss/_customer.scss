@@ -116,6 +116,7 @@
     .customer-right{
         width: 832px;
         float: left;
+        padding-bottom: 44px;
         .customer-info{
             padding: 12px;
             background-color: $base-light-orange;
@@ -280,50 +281,50 @@
                     width: 90px;
                 }
             }
-            .customer-order-type{
-                width: 810px;
-                border: 1px solid #ccc;
-                border-bottom: none;
-                height: 42px;
-                line-height: 42px;
-                overflow: hidden;
-                li{
-                    width: 150px;
-                    float: left;
-                    text-align: center;
-                    font-size: 14px;
-                    letter-spacing: 1px;
-                    cursor: pointer;
-                }
-                .select{
-                    height: 41px;
-                    border-top: 2px solid $base-orange;
-                    line-height: 41px;
-                    background-color: #f2f2f2;
-                    color: $base-orange;
-                }
+        }
+        .customer-order-type, .customer-approve-type{
+            width: 806px;
+            border: 1px solid #ccc;
+            border-bottom: none;
+            height: 42px;
+            line-height: 42px;
+            overflow: hidden;
+            li{
+                width: 150px;
+                float: left;
+                text-align: center;
+                font-size: 14px;
+                letter-spacing: 1px;
+                cursor: pointer;
             }
-            .customer-order-list{
-                width: 812px;
-                border: 1px solid #ccc;
-                border-top: none;
-                margin-bottom: 25px;
-                tr{
-                    height: 44px;
-                    td, th{
-                        overflow: hidden;
-                        text-align: center;
-                        padding: 0 5px;
-                    }
-                    th{
-                       background-color: #f2f2f2; 
-                    }
-                    &:nth-child(odd){
-                        background-color: #f9f9f9;
-                    }
-                    &.noneorder{
-                        height: 80px;
-                    }
+            .select{
+                height: 41px;
+                border-top: 2px solid $base-orange;
+                line-height: 41px;
+                background-color: #f2f2f2;
+                color: $base-orange;
+            }
+        }
+        .customer-order-list, .customer-approve-list{
+            width: 808px;
+            border: 1px solid #ccc;
+            border-top: none;
+            margin-bottom: 25px;
+            tr{
+                height: 44px;
+                td, th{
+                    overflow: hidden;
+                    text-align: center;
+                    padding: 0 5px;
+                }
+                th{
+                    background-color: #f2f2f2; 
+                }
+                &:nth-child(odd){
+                    background-color: #f9f9f9;
+                }
+                &.noneorder{
+                    height: 80px;
                 }
             }
         }
@@ -615,7 +616,9 @@
                             display: inline-block;
                             width: 90px;
                         }
-                        button{
+                        a{
+                            display: inline-block;
+                            text-align: center;
                             width: 68px;
                             height: 28px;
                             line-height: 28px;
@@ -706,6 +709,9 @@
                     }
                 }
             }
+        }
+        .customer-approve{
+            margin: 0 12px 25px;
         }
     }
 }

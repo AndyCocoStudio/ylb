@@ -202,6 +202,19 @@
 		sn = "[" + sn.substring(0, sn.length - 1) + "]";
 		$.localStorageHandler("set", name, sn);
 	}
+	/**
+	 * 检查登录账号是否设置2级密码
+	 * **/
+	$.checkFlag = function () {
+		if ($.getID()) {
+			if ($.localStorageHandler("get", "flag") == "false") {
+				$.ylbAlert("为了您的账号安全，请设置支付密码");
+				setTimeout(function () {
+					window.location.href = "edit.html";
+				}, 1500);
+			};
+		}
+	}
 })(jQuery);
 (function () {
 	/**
@@ -209,6 +222,7 @@
 	 * **/
 	$(".logout").on("click", function () {
 		$.clearID();
+		$.localStorageHandler("clear", "flag");
 		window.location.href = "login.html";
 	});
     /** 

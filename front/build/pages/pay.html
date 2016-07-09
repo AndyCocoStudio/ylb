@@ -1,0 +1,28 @@
+<!-- @@master ../layout.html  -->
+
+<!-- @@block = title-->
+<title>支付方式</title>
+<!-- @@close-->
+
+<!-- @@block = content-->
+<section id="pay-main" class="pay-main" v-cloak>
+    <ul class="pay-cource">
+        <li><span>1</span><br>确认订单信息</li>
+        <li class="select"><span>2</span><br>付款方式</li>
+        <li><span>3</span><br>确认收货</li>
+    </ul>
+    <div class="pay-detail">
+        <h1>{{order.name||'新商品入手'}}</h1>
+        <h2>订单提交成功，请您尽快付款！订单号：{{id}}</h2>
+        <p>积分支付:<em>{{order.payInScore}}</em> 余额支付:
+            <em>{{order.payInBalance}}</em> 货款支付:
+            <em>{{order.payInPaymentForGoods}}</em> 佣金支付:
+            <em>{{order.payInCommission}}</em> 现金支付:
+            <em>{{order.payInCash}}</em></p>
+    </div>
+</section>
+<!-- @@close-->
+
+<!-- @@block = scripts-->
+<script type="text/javascript" src="js/pay.js?rev=@@hash"></script>
+<!-- @@close-->

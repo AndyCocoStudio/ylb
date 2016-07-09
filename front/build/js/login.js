@@ -32,6 +32,7 @@
                         }).done(function (d) {
                             $.ylbAjaxHandler(d, function () {
                                 $.setID(d.data.sessionID);
+                                $.localStorageHandler("set", "flag", d.data.flag);
                                 if (vlogin.url) window.location.href = vlogin.url;
                                 else window.location.href = "index.html";
                             })

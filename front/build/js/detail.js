@@ -8,6 +8,7 @@
             m.resizeWindow();
             //m.buildVue();
             m.getDetail();
+            $.checkFlag();
         },
         getDetail: function () {
             $.when($.ajax({

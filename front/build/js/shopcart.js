@@ -13,6 +13,7 @@
                     m.countPrice();
                 }
             });
+            $.checkFlag();
         },
         countPrice: function () {
             var total = 0;
@@ -24,7 +25,7 @@
                     total += p * c;
                 }
             }
-            $(".shopcart-price").html(total);
+            $(".shopcart-price").html(total.toFixed(2));
         },
         checkboxselect: function () {
             var i = 0;

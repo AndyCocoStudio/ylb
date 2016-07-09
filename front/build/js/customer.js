@@ -46,6 +46,7 @@
     var m = {
         init: function () {
             $.checkSession();
+            $.checkFlag();
             m.getUserInfo();
             m.imgUpload();
             m.getProvince();
@@ -158,17 +159,30 @@
             })).done(function (d) {
                 $.ylbAjaxHandler(d, function () {
                     vcustomer.info = d.data;
-                    vcustomer.tj.referrerMobile = d.data.mobile
+                    vcustomer.tj.referrerMobile = d.data.mobile;
+                    if (vcustomer.role == "AreaManager") {
+                        m.getApply();
+                    } else {
+                        m.getJFDHOrder();
+                    }
+                });
+            });
+        },
+        getApply:function(){
+            $.when($.ajax({
+                url: $.apiUrl + "/applies",
+                type: "GET"
+            })).done(function (d) {
+                $.ylbAjaxHandler(d, function () {
+                    vcustomer.apply = d.data.applies;
                     m.getJFDHOrder();
-                    //m.buildVue();
                 });
             });
         },
         getJFDHOrder: function () {
             $.when($.ajax({
                 url: $.apiUrl + "/user/orders?k=1",
-                type: "GET",
-                //data: JSON.stringify({ k: 0 })
+                type: "GET"
             })).done(function (d) {
                 $.ylbAjaxHandler(d, function () {
                     vcustomer.jfdhlist = d.data.orders;
@@ -179,8 +193,7 @@
         getXSXFOrder: function () {
             $.when($.ajax({
                 url: $.apiUrl + "/user/orders?k=2",
-                type: "GET",
-                // data: JSON.stringify({ k: 2 })
+                type: "GET"
             })).done(function (d) {
                 $.ylbAjaxHandler(d, function () {
                     vcustomer.xsxflist = d.data.orders;
@@ -192,13 +205,16 @@
         getSJZDOrder: function () {
             $.when($.ajax({
                 url: $.apiUrl + "/user/orders?k=0",
-                type: "GET",
-                //data: JSON.stringify({ k: 1 })
+                type: "GET"
             })).done(function (d) {
                 $.ylbAjaxHandler(d, function () {
                     vcustomer.sjzdlist = d.data.orders;
-                    m.getTotal();
-                    //m.buildVue();
+                    if (vcustomer.info.role == 'CustomerManager' || vcustomer.info.role == 'AreaManager') {
+                        m.getTotal();
+                    }
+                    else {
+                        m.buildVue();
+                    }
                 });
             });
         },
