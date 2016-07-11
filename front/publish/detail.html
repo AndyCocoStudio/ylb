@@ -13,9 +13,9 @@
 
 
 
-	<link rel="stylesheet" type="text/css" href="css/style.css?rev=21e774711daa414bca3019dccff90ebc" />
+	<link rel="stylesheet" type="text/css" href="css/style.css?rev=6ffc2547cb13edd922dc4245ea6926ee" />
 	<link rel="stylesheet" type="text/css" href="css/pickday.css" />
-	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=21e774711daa414bca3019dccff90ebc" />
+	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=6ffc2547cb13edd922dc4245ea6926ee" />
 </head>
 
 <body>
@@ -38,7 +38,7 @@
             <img :src="data.goodses[0].thumbnail" />
         </div>
         <div class="detail-buy">
-            <h1>{{data.goodses[0].name}}</h1>
+            <h1>{{data.goodses[0].name}}<em>积分最高可抵{{data.goodses[0].deduction}}</em></h1>
             <p>￥{{data.goodses[0].price}}</p>
             <div class="detail-num">
                 <span>数量</span><a @click="reducecount">-</a><input disabled="false" type="text" v-model="data.goodses[0].count"><a @click="addcount">+</a>
@@ -96,9 +96,9 @@
 <script src="js/libs/pickday.min.js" type="text/javascript"></script>
 <script src="js/libs/qrcode.min.js" type="text/javascript"></script>
 <script src="js/libs/dropzone.js" type="text/javascript"></script>
-<script src="js/base.js?rev=21e774711daa414bca3019dccff90ebc" type="text/javascript"></script>
+<script src="js/base.js?rev=6ffc2547cb13edd922dc4245ea6926ee" type="text/javascript"></script>
 
-<script type="text/javascript" src="js/detail.js?rev=21e774711daa414bca3019dccff90ebc"></script>
+<script type="text/javascript" src="js/detail.js?rev=6ffc2547cb13edd922dc4245ea6926ee"></script>
 
 
 </html>

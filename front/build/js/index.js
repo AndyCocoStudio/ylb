@@ -11,22 +11,19 @@
                 type: 'GET'
             })).done(function (d) {
                 $.ylbAjaxHandler(d, function () {
-                    datas.data = d.data;
+                    datas.banner = d.data;
                     m.buildVue();
-                    m.setImages();
-                    m.resizeWindow();
-                    m.domControl();
                 });
             });
         },
         buildVue: function () {
             datas = new Vue({
                 el: "#index-main",
-                data: datas,
-                methods: {
-
-                }
+                data: datas
             });
+            m.setImages();
+            m.resizeWindow();
+            m.domControl();
         },
         setImages: function () {
             $(".index-main img").each(function () {
@@ -58,10 +55,10 @@
              **/
             $(".index-img").on({
                 "mouseover": function () {
-                    $(this).find("article").fadeIn();
+                    $(this).find("div").fadeOut();
                 },
                 "mouseleave": function () {
-                    $(this).find("article").fadeOut();
+                    $(this).find("div").fadeIn();
                 }
             });
         }

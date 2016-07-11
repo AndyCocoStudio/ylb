@@ -41,7 +41,7 @@
 					$.ylbAlert("没有足够的积分用来抵扣");
 					break;
 				case "4005":
-					$.ylbAlert("找不到用户");
+					$.ylbAlert("该用户尚未注册");
 					break;
 				case "4006":
 					$.ylbAlert("查询不到商品");
@@ -57,6 +57,18 @@
 					break;
 				case "4010":
 					$.ylbAlert("积分点为0");
+					break;
+				case "4011":
+					$.ylbAlert("余额转出申请已处理");
+					break;
+				case "4012":
+					$.ylbAlert("账户金额不足");
+					break;
+				case "4013":
+					$.ylbAlert("不能重复申请");
+					break;
+				case "4014":
+					$.ylbAlert("该手机已经注册");
 					break;
 				default:
 					$.ylbAlert("服务器又开小差");

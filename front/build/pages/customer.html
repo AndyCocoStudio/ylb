@@ -67,7 +67,7 @@
                     <a @click="spendpoints">积分兑换</a>
                 </div>
             </div>
-            <img v-if="info.role=='Ordinary'" class="customer-adv" src="images/adv1.png" />
+            <img v-if="info.role!='Merchants'" class="customer-adv" src="images/adv1.png" />
         </div>
         <div v-if="info.role=='CustomerManager'" class="customer-count">
             本月名下商家累积做单<em>{{total.totalNumber||"0"}}</em>笔，赠送积分<em>{{total.totalScore||"0"}}</em>分，可获得工资<em>{{total.wage||"0"}}</em>元。
@@ -114,7 +114,10 @@
                     <td>{{h.totalPrice}}</td>
                     <td>{{h.score}}</td>
                     <td>{{h.createTime.substring(0,h.createTime.length-6)}}</td>
-                    <td v-if="h.payStatus=='Unpaid'">待支付</td>
+                    <td v-if="h.payStatus=='Unpaid'">
+                        <em v-if="h.orderStatus!='Cancel'">待支付</em>
+                        <em v-else>已取消</em>
+                    </td>
                     <td v-else>
                         <em v-if="h.items[0].stutas=='New'">已支付</em>
                         <em v-if="h.items[0].stutas=='Refund'">退款中</em>
@@ -124,9 +127,9 @@
                         <em v-if="h.items[0].stutas=='Received'">已收货</em>
                     </td>
                     <td>
-                        <a data-id="{{h.orderID}}">支付</a><br/>
-                        <a v-if="h.payStatus=='Unpaid'" data-id="{{h.orderID}}">取消</a><br>
-                        <a v-if="h.payStatus=='Paid'" data-id="{{h.orderID}}">退款</a>
+                        <a v-if="h.payStatus=='Unpaid'&&h.orderStatus!='Cancel'" href="pay.html?oid={{h.orderID}}">支付</a><br/>
+                        <a v-if="h.payStatus=='Unpaid'&&h.orderStatus!='Cancel'" @click="cancel(h.orderID)" data-id="{{h.orderID}}">取消</a><br>
+                        <a v-if="h.payStatus=='Paid'&&h.orderStatus!='Cancel'" data-id="{{h.orderID}}">退款</a>
                     </td>
                 </tr>
             </table>
@@ -157,7 +160,10 @@
                     <td>{{x.totalPrice}}</td>
                     <td>{{x.score}}</td>
                     <td>{{x.createTime.substring(0,x.createTime.length-6)}}</td>
-                    <td v-if="x.payStatus=='Unpaid'">待支付</td>
+                    <td v-if="x.payStatus=='Unpaid'">
+                        <em v-if="x.orderStatus!='Cancel'">待支付</em>
+                        <em v-else>已取消</em>
+                    </td>
                     <td v-else>
                         <em v-if="x.items[0].stutas=='New'">已支付</em>
                         <em v-if="x.items[0].stutas=='Refund'">退款中</em>
@@ -167,9 +173,9 @@
                         <em v-if="x.items[0].stutas=='Received'">已收货</em>
                     </td>
                     <td>
-                        <a data-id="{{x.orderID}}">支付</a><br/>
-                        <a v-if="x.payStatus=='Unpaid'" data-id="{{x.orderID}}">取消</a><br>
-                        <a v-if="x.payStatus=='Paid'" data-id="{{x.orderID}}">退款</a>
+                        <a v-if="x.payStatus=='Unpaid'&&x.orderStatus!='Cancel'" href="pay.html?oid={{x.orderID}}">支付</a><br/>
+                        <a v-if="x.payStatus=='Unpaid'&&x.orderStatus!='Cancel'" @click="cancel(x.orderID)" data-id="{{x.orderID}}">取消</a><br>
+                        <a v-if="x.payStatus=='Paid'&&x.orderStatus!='Cancel'" data-id="{{x.orderID}}">退款</a>
                     </td>
                 </tr>
             </table>
@@ -200,7 +206,10 @@
                     <td>{{s.totalPrice}}</td>
                     <td>{{s.givingScore}}</td>
                     <td>{{s.createTime.substring(0,s.createTime.length-6)}}</td>
-                    <td v-if="s.payStatus=='Unpaid'">待支付</td>
+                    <td v-if="s.payStatus=='Unpaid'">
+                        <em v-if="s.orderStatus!='Cancel'">待支付</em>
+                        <em v-else>已取消</em>
+                    </td>
                     <td v-else>
                         <em v-if="s.items[0].stutas=='New'">已支付</em>
                         <em v-if="s.items[0].stutas=='Refund'">退款中</em>
@@ -210,9 +219,9 @@
                         <em v-if="s.items[0].stutas=='Received'">已收货</em>
                     </td>
                     <td>
-                        <a data-id="{{s.orderID}}">支付</a><br/>
-                        <a v-if="s.payStatus=='Unpaid'" data-id="{{s.orderID}}">取消</a><br>
-                        <a v-if="s.payStatus=='Paid'" data-id="{{s.orderID}}">退款</a>
+                        <a v-if="s.payStatus=='Unpaid'&&s.orderStatus!='Cancel'" href="pay.html?oid={{s.orderID}}">支付</a><br/>
+                        <a v-if="s.payStatus=='Unpaid'&&s.orderStatus!='Cancel'" @click="cancel(s.orderID)" data-id="{{s.orderID}}">取消</a><br>
+                        <a v-if="s.payStatus=='Paid'&&s.orderStatus!='Cancel'" data-id="{{s.orderID}}">退款</a>
                     </td>
                 </tr>
             </table>
@@ -279,11 +288,13 @@
                     </select>
                     <input class="streetinput" placeholder="请填入详细街道地址" v-model="tobesaler.street" type="text" />
                 </li>
-                <li><span>法人</span><input v-model="tobesaler.saler" type="text" /></li>
-                <li><span>法人身份证</span><span id="frsfz">{{tobesaler.legalPersonIDCardImage||'点击上传图片'}}</span></li>
+                <li><span>法人</span><input v-model="tobesaler.legalPerson" type="text" /></li>
+                <li><span>法人身份证号</span><input maxlength="18" v-model="tobesaler.idCard" type="text" /></li>
+                <li><span>联系号码</span><input maxlength="12" v-model="tobesaler.tel" type="text" /></li>
+                <li><span>法人身份证正、反面</span><span id="frsfz">{{tobesaler.legalPersonIDCardImage.length==0?'点击上传图片':tobesaler.legalPersonIDCardImage}}</span></li>
                 <li><span>法人手持正面身份证照图</span><span id="zmt">{{tobesaler.legalPersonWithIDCardInHandImage||'点击上传图片'}}</span></li>
                 <li><span>店招图</span><span id="dzt">{{tobesaler.storeAppearance||'点击上传图片'}}</span></li>
-                <li><span>店面或内部环境图(最多4张)</span><span id="dnt">{{tobesaler.storeInsideImages||'点击上传图片'}}</span></li>
+                <li><span>店面或内部环境图(最多4张)</span><span id="dnt">{{tobesaler.storeInsideImages.length==0?'点击上传图片':tobesaler.storeInsideImages}}</span></li>
                 <li><span>推荐人</span><input v-model="tobesaler.referrerMobile" placeholder="请输入推荐人手机" type="text"></li>
                 <li><a @click="apysaler">提交</a></li>
             </ul>
@@ -314,15 +325,17 @@
                 </li>
             </ul>
         </div>
-        <div id="customer-approve" class="customer-approve">
+        <div v-if="info.role=='AreaManager'" id="customer-approve" class="customer-approve">
             <div class="customer-title">
                 审批管理
             </div>
             <ul class="customer-approve-type">
-                <li class="select">做单审批</li>
-                <li>申请审批</li>
+                <li :class="{'select':zdsh}" @click="selapprove(1)">做单审批</li>
+                <li :class="{'select':jssh}" @click="selapprove(2)">申请审批</li>
+                <li :class="{'select':fzdsh}" @click="selapprove(3)">已处理做单审批</li>
+                <li :class="{'select':fjssh}" @click="selapprove(4)">已处理申请审批</li>
             </ul>
-            <table class="customer-approve-list approve-order">
+            <table class="customer-approve-list approve-order" v-show="zdsh">
                 <tr>
                     <th>id</th>
                     <th>申请人</th>
@@ -331,8 +344,13 @@
                     <th>申请时间</th>
                     <th>操作</th>
                 </tr>
+                <tr v-if="apply.length>0">
+                    <td colspan="8">
+                        暂无需要处理的审核
+                    </td>
+                </tr>
             </table>
-            <table class="customer-approve-list approve-role">
+            <table class="customer-approve-list approve-role" v-show="jssh">
                 <tr>
                     <th>id</th>
                     <th>申请人</th>
@@ -343,15 +361,66 @@
                     <th>申请时间</th>
                     <th>操作</th>
                 </tr>
-                <tr v-for="a in apply">
+                <tr v-if="apply.length<1">
+                    <td colspan="8">
+                        暂无需要处理的审核
+                    </td>
+                </tr>
+                <tr v-if="a.status=='Pending'" v-for="a in apply">
                     <td>{{a.id}}</td>
-                    <td>{{a.applicantName}}</td>
-                    <td>{{a.referrerName}}</td>
-                    <td>{{a.applyRole}}</td>
-                    <td>{{a.rurrentRole}}</td>
+                    <td>{{a.applicantName||a.applicantMobile}}</td>
+                    <td>{{a.referrerName||a.referrerMobile}}</td>
+                    <td><em v-if="a.applyRole=='Merchants'">商家</em><em v-if="a.applyRole=='CustomerManager'">客户经理</em></td>
+                    <td>
+                        <em v-if="a.currentRole=='Merchants'">商家</em><em v-if="a.currentRole=='Ordinary'">普通会员</em>
+                    </td>
                     <td>{{a.recommended}}</td>
-                    <td>{{a.}}</td>
-                    <td><a>同意</a><a>拒绝</a><input placeholder="请填入拒绝理由" v-model="" type="text"></td>
+                    <td>{{a.date}}</td>
+                    <td><a href="apply.html?aid={{a.id}}">详情</a><br><a @click="accepts(a.id)">同意</a><br><a @click="showreason(a.id)">拒绝</a></td>
+                </tr>
+            </table>
+            <table class="customer-approve-list approve-order" v-show="fzdsh">
+                <tr>
+                    <th>id</th>
+                    <th>申请人</th>
+                    <th>做单对象</th>
+                    <th>赠送积分</th>
+                    <th>申请时间</th>
+                    <th>操作</th>
+                </tr>
+                <tr v-if="apply.length>0">
+                    <td colspan="8">
+                        暂无需要处理的审核
+                    </td>
+                </tr>
+            </table>
+            <table class="customer-approve-list approve-role" v-show="fjssh">
+                <tr>
+                    <th>id</th>
+                    <th>申请人</th>
+                    <th>推荐人</th>
+                    <th>申请角色</th>
+                    <th>当前角色</th>
+                    <th>成功推荐商家数</th>
+                    <th>申请时间</th>
+                    <th>操作</th>
+                </tr>
+                <tr v-if="apply.length<1">
+                    <td colspan="8">
+                        暂无需要处理的审核
+                    </td>
+                </tr>
+                <tr v-if="a.status!='Pending'" v-for="a in apply">
+                    <td>{{a.id}}</td>
+                    <td>{{a.applicantName||a.applicantMobile}}</td>
+                    <td>{{a.referrerName||a.referrerMobile}}</td>
+                    <td><em v-if="a.applyRole=='Merchants'">商家</em><em v-if="a.applyRole=='CustomerManager'">客户经理</em></td>
+                    <td>
+                        <em v-if="a.currentRole=='Merchants'">商家</em><em v-if="a.currentRole=='Ordinary'">普通会员</em>
+                    </td>
+                    <td>{{a.recommended}}</td>
+                    <td>{{a.date}}</td>
+                    <td><a href="apply.html?aid={{a.id}}">详情</a></td>
                 </tr>
             </table>
         </div>
@@ -371,6 +440,11 @@
             <li><button @click="getqrcode">生成二维码</button></li>
         </ul>
         <div id="spendpoint-qrcode" class="spendpoint-qrcode"></div>
+    </div>
+    <div class="ylb-graybox nagtive" v-show="nagtive">
+        <h1>请输入拒绝理由</h1>
+        <input v-model="reason" maxlength="128" placeholder="最多可填入128字" type="text" />
+        <a @click="reject">提交</a>
     </div>
 </section>
 <footer></footer>

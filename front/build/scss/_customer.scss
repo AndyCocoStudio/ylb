@@ -535,7 +535,7 @@
                             display: inline-block;
                             width: 90px;
                         }
-                        input[type="text"], select, textarea{
+                        input[type="text"], textarea{
                             width: 280px;
                             padding-left: 5px;
                             border: 1px solid $base-border-color;
@@ -547,6 +547,9 @@
                             &.phone{
                                 width: 203px;
                             }
+                        }
+                        select{
+                            width: 93px;
                         }
                         input[type="checkbox"]{
                             margin: 0 5px;
@@ -569,6 +572,9 @@
                     border-top: 1px solid $base-border-color;
                     tr{
                         line-height: 14px;
+                        &.default{
+                            color: $base-orange;
+                        }
                     }
                     tr:nth-child(odd){
                         background-color: #efefef;
@@ -579,7 +585,7 @@
                     th{
                         font-weight: 400;
                         background-color: #cecece;
-                        color: #fff;
+                        color: #333;
                     }
                     td{
                         border-right: 1px solid $base-border-color;
@@ -712,6 +718,27 @@
         }
         .customer-approve{
             margin: 0 12px 25px;
+        }
+    }
+    .nagtive{
+        input{
+            width: 200px;
+            border: 1px solid $base-border-color;
+            margin: 20px;
+            display: block;
+            height:32px;
+            line-height: 32px;
+            padding-left: 5px;
+        }
+        a{
+            display: inline-block;
+            width: 120px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            color: #fff;
+            background-color: $base-orange;
+            margin: 20px 0 0 20px;
         }
     }
 }

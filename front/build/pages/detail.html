@@ -11,7 +11,7 @@
             <img :src="data.goodses[0].thumbnail" />
         </div>
         <div class="detail-buy">
-            <h1>{{data.goodses[0].name}}</h1>
+            <h1>{{data.goodses[0].name}}<em>积分最高可抵{{data.goodses[0].deduction}}</em></h1>
             <p>￥{{data.goodses[0].price}}</p>
             <div class="detail-num">
                 <span>数量</span><a @click="reducecount">-</a><input disabled="false" type="text" v-model="data.goodses[0].count"><a @click="addcount">+</a>

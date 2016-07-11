@@ -4,14 +4,22 @@
         sendshow: false,
         spendshow: false,
         applyrole: -1,
+        nagtive: false,
         sid: $.getID(),
+        appID: "",
+        order: [],
         jfdh: true,
         xsxf: false,
         sjzd: false,
+        reason: "",
         role: "-1",
         plist: [],
         clist: [],
         alist: [],
+        zdsh: true,
+        jssh: false,
+        fzdsh: false,
+        fjssh: false,
         spendpoint: {
             name: "",
             type: "",
@@ -28,6 +36,7 @@
         },
         tobesaler: {
             "referrerMobile": "",
+            "idCard": "",
             "storeName": "",
             "province": "",
             "provinceCode": "",
@@ -36,7 +45,8 @@
             "area": "",
             "areaCode": "",
             "street": "",
-            "legalPersonIDCardImage": "",//法人身份证
+            "legalPerson": "",
+            "legalPersonIDCardImage": [],//法人身份证
             "legalPersonWithIDCardInHandImage": "",//法人手持身份证照片
             "storeAppearance": "",//店招
             "storeInsideImages": [],//店铺内部图片
@@ -97,13 +107,13 @@
             $("#frsfz").dropzone({
                 url: $.apiUrl + "/upload",
                 paramName: "file",
-                maxFiles: 1,
+                maxFiles: 2,
                 maxFilesize: 1.0, // MB
                 acceptedFiles: "image/*",
                 addRemoveLinks: true,
                 dictResponseError: '上传文件出错！',
                 success: function (file, response) {
-                    vcustomer.tobesaler.legalPersonIDCardImage = response.data;
+                    vcustomer.tobesaler.legalPersonIDCardImage.push(response.data);
                 }
             });
             $("#zmt").dropzone({
@@ -160,7 +170,7 @@
                 $.ylbAjaxHandler(d, function () {
                     vcustomer.info = d.data;
                     vcustomer.tj.referrerMobile = d.data.mobile;
-                    if (vcustomer.role == "AreaManager") {
+                    if (vcustomer.info.role == "AreaManager") {
                         m.getApply();
                     } else {
                         m.getJFDHOrder();
@@ -168,16 +178,27 @@
                 });
             });
         },
-        getApply:function(){
+        getApply: function () {
             $.when($.ajax({
-                url: $.apiUrl + "/applies",
+                url: $.apiUrl + "/applies?k=0",
                 type: "GET"
             })).done(function (d) {
                 $.ylbAjaxHandler(d, function () {
                     vcustomer.apply = d.data.applies;
-                    m.getJFDHOrder();
+                    m.getOrder();
                 });
             });
+        },
+        getOrder: function () {
+            $.when($.ajax({
+                url: $.apiUrl + "/givingscore",
+                type: "GET"
+            })).done(function (d) {
+                $.ylbAjaxHandler(d, function () {
+                    vcustomer.order = d.data.orders;
+                    m.getXSXFOrder();
+                });
+            })
         },
         getJFDHOrder: function () {
             $.when($.ajax({
@@ -270,6 +291,7 @@
                         this.covershow = false;
                         this.sendshow = false;
                         this.spendshow = false;
+                        this.nagtive = false;
                     },
                     pchange: function () {
                         if (this.spendpoint.point > this.spendpoint.total * 0.8) {
@@ -281,6 +303,68 @@
                     },
                     getpoint: function () {
                         this.getPointPerDay();
+                    },
+                    accepts: function (id) {
+                        var c = confirm("确认同意该申请？");
+                        if (c) {
+                            $.ajax({
+                                url: $.apiUrl + "/apply/allow",
+                                type: "POST",
+                                data: JSON.stringify({
+                                    applicationID: id
+                                })
+                            }).done(function (d) {
+                                $.ylbAjaxHandler(d, function () {
+                                    $.ylbAlert("操作成功");
+                                    m.getApply();
+                                });
+                            });
+                        }
+                    },
+                    selapprove: function (id) {
+                        if (id == 1) {
+                            vcustomer.zdsh = true;
+                            vcustomer.jssh = false;
+                            vcustomer.fzdsh = false;
+                            vcustomer.fjssh = false;
+                        } else if (id == 2) {
+                            vcustomer.zdsh = false;
+                            vcustomer.jssh = true;
+                            vcustomer.fzdsh = false;
+                            vcustomer.fjssh = false;
+                        } else if (id == 3) {
+                            vcustomer.zdsh = false;
+                            vcustomer.jssh = false;
+                            vcustomer.fzdsh = true;
+                            vcustomer.fjssh = false;
+                        } else if (id == 4) {
+                            vcustomer.zdsh = false;
+                            vcustomer.jssh = false;
+                            vcustomer.fzdsh = false;
+                            vcustomer.fjssh = true;
+                        }
+                    },
+                    showreason: function (id) {
+                        vcustomer.nagtive = true;
+                        vcustomer.covershow = true;
+                        vcustomer.appID = id;
+                    },
+                    reject: function () {
+                        $.ajax({
+                            url: $.apiUrl + "/apply/reject",
+                            type: "POST",
+                            data: JSON.stringify({
+                                applicationID: vcustomer.appID,
+                                reason: vcustomer.reason
+                            })
+                        }).done(function (d) {
+                            $.ylbAjaxHandler(d, function () {
+                                $.ylbAlert("操作成功");
+                                vcustomer.nagtive = false;
+                                vcustomer.covershow = false;
+                                m.getApply();
+                            });
+                        });
                     },
                     rolechange: function (el) {
                         vcustomer.role = $(el.target).val();
@@ -317,8 +401,40 @@
                         }).done(function (d) {
                             $.ylbAjaxHandler(d, function () {
                                 $.ylbAlert("申请成功！");
+                                vcustomer.tobesaler = {
+                                    "referrerMobile": "",
+                                    "idCard": "",
+                                    "storeName": "",
+                                    "province": "",
+                                    "provinceCode": "",
+                                    "city": "",
+                                    "cityCode": "",
+                                    "area": "",
+                                    "areaCode": "",
+                                    "street": "",
+                                    "legalPerson": "",
+                                    "legalPersonIDCardImage": [],//法人身份证
+                                    "legalPersonWithIDCardInHandImage": "",//法人手持身份证照片
+                                    "storeAppearance": "",//店招
+                                    "storeInsideImages": [],//店铺内部图片
+                                    "license": ""
+                                }
                             });
                         });
+                    },
+                    cancel: function (id) {
+                        var c = confirm("确认取消该订单？")
+                        if (c) {
+                            $.ajax({
+                                url: $.apiUrl + "/order/cancel?orderID=" + id,
+                                type: "DELETE"
+                            }).done(function (d) {
+                                $.ylbAjaxHandler(d, function () {
+                                    $.ylbAlert("删除成功");
+                                    m.getJFDHOrder();
+                                });
+                            })
+                        }
                     },
                     logon: function () {
                         $.ajax({

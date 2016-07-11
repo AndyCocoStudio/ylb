@@ -36,7 +36,7 @@
                 <a @click="addaddress">添加</a>
             </div>
             <div class="default">
-                <input name="useraddress" data-id="{{defaultaddress.addressID}}" @click="choseaddress" type="radio">
+                <input name="useraddress" v-if="defaultaddress.addressID" data-id="{{defaultaddress.addressID}}" @click="choseaddress" type="radio">
                 <article>
                     <span>{{defaultaddress.name}}</span>
                     <span>{{defaultaddress.province+defaultaddress.city+defaultaddress.area+defaultaddress.street}}</span>
@@ -72,6 +72,7 @@
                         <img :src="det.thumbnail" />
                         <article>
                             <h3>{{det.name}}</h3>
+                            <p><em v-for="i in det.info">{{i.name}}:{{i.value}}</em></p>
                             <mark>备注<input type="text" v-model="det.remark" placeholder="选填，填写您与卖家达成一致的要求"></mark>
                         </article>
                     </td>
@@ -93,7 +94,7 @@
             <p>总计： <em>￥ {{total}}</em>元</p>
             <p>运费： {{postage}}元</p>
             <p><input @click="canuse" type="checkbox">是否使用积分<input @change="usepoint" disabled="{{ispoint}}" v-model="point"
-                    type="text">(最高可抵用{{maxpoint}}元)</p>
+                    type="text">(您有{{userpoint}}积分，本单最高可抵用{{maxpoint}}元)</p>
         </article>
         <div class="order-result">
             <p v-show="!ispoint">实付： <em>￥ {{parseFloat(total+postage-point).toFixed(2)}}</em>元</p>

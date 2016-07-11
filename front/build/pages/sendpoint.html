@@ -17,11 +17,11 @@
         <li><span>商品名</span><input type="text" v-model="name"></li>
         <li><span>商品分类</span><input type="text" v-model="type"></li>
         <li><span>积分数</span><input type="text" v-model="points"></li>
-        <li><span>所需服务费</span>{{points*0.16}}
+        <li><span>所需服务费</span>{{(points*0.16).toFixed(2)}}
             <!--这里需要获取配置服务费比例自动算出对应费用-->
         </li>
-        <li><span>使用货款/佣金</span><input type="text" v-model="poundage"><em>*最高可用{{points*0.128}}</em></li>
-        <li><span>仍需支付金额</span>{{points*0.16-poundage}}</li>
+        <li><span>使用货款/佣金</span><input type="text" v-model="poundage"><em>*最高可用{{(points*0.128).toFixed(2)}}</em></li>
+        <li><span>仍需支付金额</span>{{(points*0.16-poundage).toFixed(2)}}</li>
         <li><button @click="createOrder">支付</button><a>充值</a></li>
     </ul>
 </section>

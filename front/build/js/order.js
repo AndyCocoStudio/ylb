@@ -15,6 +15,7 @@
         plist: [],
         clist: [],
         alist: [],
+        userpoint: 0,
         newaddress: {
             name: "",
             mobile: "",
@@ -33,7 +34,18 @@
         init: function () {
             m.getAddress();
             m.getPlist();
+            m.getUserPoint();
             $.checkFlag();
+        },
+        getUserPoint: function () {
+            $.when($.ajax({
+                url: $.apiUrl + "/user/asset",
+                type: "GET"
+            })).done(function (d) {
+                $.ylbAjaxHandler(d, function () {
+                    order.userpoint = d.data.score;
+                })
+            });
         },
         //获取省地址
         getPlist: function () {
@@ -197,7 +209,9 @@
                     },
                     //积分使用数量检测
                     usepoint: function () {
-                        if (order.point > order.maxpoint) order.point = order.maxpoint;
+                        var p;
+                        order.userpoint > order.maxpoint ? p = order.maxpoint : p = order.userpoint;
+                        if (order.point > p) order.point = p;
                     },
                     //添加新地址
                     addaddress: function () {

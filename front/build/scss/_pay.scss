@@ -82,4 +82,36 @@
             }
         }
     }
+    .pay-way{
+        padding: 20px;
+        h1{
+            font-size: 18px;
+            line-height: 2;
+            border-bottom: 1px solid $base-border-color;
+            margin-bottom: 10px;
+        }
+        input[type='radio']{
+            display: inline-block;
+            vertical-align: middle;
+            margin: 0 4px;
+        }
+        label{
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 12px;
+        }
+    }
+    .payorder{
+        height: 30px;
+        text-align: right;
+        line-height: 30px;
+        padding: 0 20px;
+        button{
+            width: 120px;
+            height: 30px;
+            background-color: $base-orange;
+            color: #fff;
+            font-size: 14px;
+        }
+    }
 }

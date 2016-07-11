@@ -12,7 +12,7 @@
         <li><span>3</span><br>确认收货</li>
     </ul>
     <div class="pay-detail">
-        <h1>{{order.name||'新商品入手'}}</h1>
+        <h1 v-for="p in order.product">{{p.name}}</h1>
         <h2>订单提交成功，请您尽快付款！订单号：{{id}}</h2>
         <p>积分支付:<em>{{order.payInScore}}</em> 余额支付:
             <em>{{order.payInBalance}}</em> 货款支付:
@@ -20,6 +20,13 @@
             <em>{{order.payInCommission}}</em> 现金支付:
             <em>{{order.payInCash}}</em></p>
     </div>
+    <div class="pay-way">
+        <h1>请选择支付方式</h1>
+        <input name="payway" type="radio" checked id="ye"><label for="ye">余额支付</label>
+        <input name="payway" type="radio" id="zfb"><label for="zfb">支付宝支付</label>
+        <input name="payway" type="radio" id="wy"><label for="wy">网银支付</label>
+    </div>
+    <div class="payorder"><button>确认支付</button></div>
 </section>
 <!-- @@close-->
 

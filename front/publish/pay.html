@@ -13,9 +13,9 @@
 
 
 
-	<link rel="stylesheet" type="text/css" href="css/style.css?rev=10b0e3d6d68e6dde52327a434e96099e" />
+	<link rel="stylesheet" type="text/css" href="css/style.css?rev=9821f4efafe0cb3442daea6bf57b8859" />
 	<link rel="stylesheet" type="text/css" href="css/pickday.css" />
-	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=10b0e3d6d68e6dde52327a434e96099e" />
+	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=9821f4efafe0cb3442daea6bf57b8859" />
 </head>
 
 <body>
@@ -39,7 +39,7 @@
         <li><span>3</span><br>确认收货</li>
     </ul>
     <div class="pay-detail">
-        <h1>{{order.name||'新商品入手'}}</h1>
+        <h1 v-for="p in order.product">{{p.name}}</h1>
         <h2>订单提交成功，请您尽快付款！订单号：{{id}}</h2>
         <p>积分支付:<em>{{order.payInScore}}</em> 余额支付:
             <em>{{order.payInBalance}}</em> 货款支付:
@@ -47,6 +47,13 @@
             <em>{{order.payInCommission}}</em> 现金支付:
             <em>{{order.payInCash}}</em></p>
     </div>
+    <div class="pay-way">
+        <h1>请选择支付方式</h1>
+        <input name="payway" type="radio" checked id="ye"><label for="ye">余额支付</label>
+        <input name="payway" type="radio" id="zfb"><label for="zfb">支付宝支付</label>
+        <input name="payway" type="radio" id="wy"><label for="wy">网银支付</label>
+    </div>
+    <div class="payorder"><button>确认支付</button></div>
 </section>
 
 	<div id="ylb-layout">
@@ -73,9 +80,9 @@
 <script src="js/libs/pickday.min.js" type="text/javascript"></script>
 <script src="js/libs/qrcode.min.js" type="text/javascript"></script>
 <script src="js/libs/dropzone.js" type="text/javascript"></script>
-<script src="js/base.js?rev=10b0e3d6d68e6dde52327a434e96099e" type="text/javascript"></script>
+<script src="js/base.js?rev=9821f4efafe0cb3442daea6bf57b8859" type="text/javascript"></script>
 
-<script type="text/javascript" src="js/pay.js?rev=10b0e3d6d68e6dde52327a434e96099e"></script>
+<script type="text/javascript" src="js/pay.js?rev=9821f4efafe0cb3442daea6bf57b8859"></script>
 
 
 </html>
