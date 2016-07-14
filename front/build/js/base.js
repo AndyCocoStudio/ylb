@@ -70,6 +70,12 @@
 				case "4014":
 					$.ylbAlert("该手机已经注册");
 					break;
+				case "4015":
+					$.ylbAlert("原密码输入错误");
+					break;
+				case "4016":
+					$.ylbAlert("推荐会员人数不足");
+					break;
 				default:
 					$.ylbAlert("服务器又开小差");
 					break;
@@ -222,7 +228,7 @@
 			if ($.localStorageHandler("get", "flag") == "false") {
 				$.ylbAlert("为了您的账号安全，请设置支付密码");
 				setTimeout(function () {
-					window.location.href = "edit.html";
+					window.location.href = "edit.html?url=" + window.location.href;
 				}, 1500);
 			};
 		}
@@ -273,7 +279,11 @@
 			})).done(function (d) {
 				$.ylbAjaxHandler(d, function () {
 					layout.flist = d.data;
-					m.getSList(layout.flist[0].code);
+					if (d.data.length > 0) {
+						m.getSList(layout.flist[0].code);
+					} else {
+						m.buildVue();
+					}
 				});
 			});
 		},

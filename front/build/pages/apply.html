@@ -16,27 +16,34 @@
         <li><span>申请角色</span>{{detail.applyRole=='Merchants'?'加盟商':'客户经理'}}</li>
         <li><span>当前角色</span>{{detail.crurrentRole=='Ordinary'?'普通会员':'加盟商'}}</li>
         <li><span>申请时间</span>{{detail.date}}</li>
-        <li><span>店铺名称</span>{{detail.storeName}}</li>
-        <li><span>店铺地址</span>{{detail.province+detail.city+detail.area+detail.street}}</li>
-        <li><span>法人</span>{{detail.legalPerson}}</li>
-        <li><span>联系方式</span>{{detail.tel}}</li>
-        <li><span>法人身份证号</span>{{detail.idCard}}</li>
-        <li><span>法人身份证正反照</span>
+        <li v-if="detail.applyRole=='Merchants'"><span>店铺名称</span>{{detail.storeName}}</li>
+        <li v-if="detail.applyRole=='Merchants'"><span>店铺地址</span>{{detail.province+detail.city+detail.area+detail.street}}</li>
+        <li v-if="detail.applyRole=='Merchants'"><span>法人</span>{{detail.legalPerson}}</li>
+        <li v-if="detail.applyRole=='Merchants'"><span>联系方式</span>{{detail.tel}}</li>
+        <li v-if="detail.applyRole=='Merchants'"><span>法人身份证号</span>{{detail.idCard}}</li>
+        <li v-if="detail.applyRole=='CustomerManager'"><span>身份证号</span>{{detail.idCard}}</li>
+        <li v-if="detail.applyRole=='Merchants'"><span>法人身份证正反照</span>
             <a v-for="i in detail.legalPersonIdCardImage" href="{{i}}" target="_blank"><img :src="i"></a>
         </li>
-        <li><span>法人手持身份证照</span>
+        <li v-if="detail.applyRole=='CustomerManager'"><span>身份证正反照</span>
+            <a v-for="i in detail.legalPersonIdCardImage" href="{{i}}" target="_blank"><img :src="i"></a>
+        </li>
+        <li v-if="detail.applyRole=='CustomerManager'"><span>持身份证照</span>
             <a href="detail.legalPersonWithIdCardInHandImage" target="_blank"><img :src="detail.legalPersonWithIdCardInHandImage"></a>
         </li>
-        <li><span>营业执照</span>
+        <li v-if="detail.applyRole=='Merchants'"><span>法人手持身份证照</span>
+            <a href="detail.legalPersonWithIdCardInHandImage" target="_blank"><img :src="detail.legalPersonWithIdCardInHandImage"></a>
+        </li>
+        <li v-if="detail.applyRole=='Merchants'"><span>营业执照</span>
             <a href="detail.license" target="_blank"><img :src="detail.license"></a>
         </li>
-        <li><span>店招图</span>
+        <li v-if="detail.applyRole=='Merchants'"><span>店招图</span>
             <a href="detail.storeAppearance" target="_blank"><img :src="detail.storeAppearance"></a>
         </li>
-        <li><span>店内图</span>
+        <li v-if="detail.applyRole=='Merchants'"><span>店内图</span>
             <a v-for="i in detail.storeInsideImages" href="{{i}}" target="_blank"><img :src="i"></a>
         </li>
-        <li><span>推荐人</span>{{detail.referrerName||detail.referrer}}</li>
+        <li v-if="detail.applyRole=='Merchants'"><span>推荐人</span>{{detail.referrerName||detail.referrer}}</li>
         <li><span>推荐商家数</span>{{detail.recommended}}</li>
     </ul>
     <div class="apply-btns">

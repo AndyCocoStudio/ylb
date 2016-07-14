@@ -1,6 +1,7 @@
 (function () {
     var apply = {
         id: $.urlParam("aid"),
+        r: $.urlParam("r"),
         reason: false,
         reasons: ""
     };
@@ -10,7 +11,7 @@
         },
         getInfo: function () {
             $.when($.ajax({
-                url: $.apiUrl + "/apply?id=" + apply.id + "&r=Merchants",
+                url: $.apiUrl + "/apply?id=" + apply.id + "&r=" + apply.r,
                 type: "GET"
             })).done(function (d) {
                 $.ylbAjaxHandler(d, function () {
@@ -36,6 +37,7 @@
                             }).done(function (d) {
                                 $.ylbAjaxHandler(d, function () {
                                     $.ylbAlert("操作成功");
+                                    apply.reason = false;
                                     m.getInfo();
                                 });
                             });
@@ -51,7 +53,7 @@
                             })
                         }).done(function (d) {
                             $.ylbAjaxHandler(d, function () {
-                                m.reason = false;
+                                apply.reason = false;
                                 m.getInfo();
                             });
                         });
