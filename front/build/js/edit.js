@@ -207,8 +207,9 @@
                                     vcustomer.confirmpwd = "";
                                     $.localStorageHandler("set", "flag", true);
                                     setTimeout(function () {
-                                        var url = $.urlParam("url");
-                                        if (url) window.location.href = url;
+                                        // var url = $.urlParam("url");
+                                        // if (url) window.location.href = url;
+                                        window.location = "/customer.html";
                                     }, 1500);
                                 });
                             });

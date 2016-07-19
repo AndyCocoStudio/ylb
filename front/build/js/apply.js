@@ -39,6 +39,9 @@
                                     $.ylbAlert("操作成功");
                                     apply.reason = false;
                                     m.getInfo();
+                                    setTimeout(function () {
+                                        window.location.href = "customer.html";
+                                    }, 1500);
                                 });
                             });
                         }
@@ -55,6 +58,9 @@
                             $.ylbAjaxHandler(d, function () {
                                 apply.reason = false;
                                 m.getInfo();
+                                setTimeout(function () {
+                                    window.location.href = "customer.html";
+                                }, 1500);
                             });
                         });
                     },

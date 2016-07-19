@@ -148,13 +148,24 @@
                 }
             }
             .customer-tag{
-                width: 62px;
                 height: 20px;
                 margin: 1px 0 10px 1px;
                 line-height: 20px;
                 padding-left: 6px;
                 color: #fff;
-                background: url(../images/tag-s.png) no-repeat center;
+                background: url(../images/tag-s.png) no-repeat center left;
+                overflow: hidden;
+                a{
+                    display: block;
+                    padding: 0 6px;
+                    height: 18px;
+                    line-height: 18px;
+                    background-color: #fff;
+                    float: right;
+                    font-size: 12px;
+                    margin: 4px 16px 0 0;
+                    color: #333;
+                }
             }
             .customer-asset{
                 float: left;
@@ -315,7 +326,7 @@
                 height: 41px;
                 border-top: 2px solid $base-orange;
                 line-height: 41px;
-                background-color: #f2f2f2;
+                background-color: #efefef;
                 color: $base-orange;
             }
         }
@@ -332,7 +343,7 @@
                     padding: 0 5px;
                 }
                 th{
-                    background-color: #f2f2f2; 
+                    background-color: #efefef; 
                 }
                 &:nth-child(odd){
                     background-color: #f9f9f9;
@@ -341,6 +352,9 @@
                     height: 80px;
                 }
             }
+        }
+        .customer-reward-list{
+            border-top: 1px solid #ccc;
         }
         .customer-fav{
             margin: 0 12px 25px;
@@ -498,7 +512,7 @@
             .customer-edit-list{
                 width: 812px;
                 height: 44px;
-                background-color: #f2f2f2;
+                background-color: #efefef;
                 line-height: 44px;
                 display: block;
                 overflow: hidden;
@@ -710,7 +724,7 @@
             ul{
                 padding: 20px;
                 width: 260px;
-                background-color: #efefef;
+                background-color: #f4f4f4;
                 margin: 0 auto;
                 border-radius: 4px;
                 li{
