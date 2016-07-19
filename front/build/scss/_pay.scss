@@ -77,8 +77,12 @@
             font-size: 16px;
             margin-top: 15px;
             em{
-                color: $base-orange;
                 margin-right: 10px;
+                display: block;
+                span{
+                    color: $base-orange;
+                    padding: 0 5px;
+                }
             }
         }
     }

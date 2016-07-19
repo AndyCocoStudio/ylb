@@ -54,14 +54,12 @@
                                 "deduction": vsendpoint.poundage
                             })
                         }).done(function (d) {
-                            console.log(d);
                             $.ylbAjaxHandler(d, function () {
                                 window.location.href = "pay.html?oid=" + d.data;
                             });
                         });
                     },
                     inuse: function () {
-                        alert(this.config.gsd);
                         if (this.poundage > this.points * this.config.pr * this.config.gsd / 10000) {
                             this.poundage = (this.points * this.config.pr * this.config.gsd / 10000).toFixed(2);
                         }

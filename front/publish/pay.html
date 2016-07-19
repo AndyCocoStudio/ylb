@@ -13,9 +13,9 @@
 
 
 
-	<link rel="stylesheet" type="text/css" href="css/style.css?rev=2f5fcf4b4d5f81eaf2fc03717b7bfc63" />
+	<link rel="stylesheet" type="text/css" href="css/style.css?rev=8255bca72fb1cf0fb2319843d7a0cbbc" />
 	<link rel="stylesheet" type="text/css" href="css/pickday.css" />
-	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=2f5fcf4b4d5f81eaf2fc03717b7bfc63" />
+	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=8255bca72fb1cf0fb2319843d7a0cbbc" />
 </head>
 
 <body>
@@ -40,16 +40,17 @@
     </ul>-->
     <div class="pay-detail">
         <h1 v-for="p in order.product">{{p.name}}</h1>
-        <h2>订单提交成功，请您尽快付款！订单号：{{id}}</h2>
-        <p>积分支付:<em>{{order.payInScore}}</em> 余额支付:
-            <em>{{order.payInBalance}}</em> 货款支付:
-            <em>{{order.payInPaymentForGoods}}</em> 佣金支付:
-            <em>{{order.payInCommission}}</em> 现金支付:
-            <em>{{order.payInCash}}</em></p>
+        <h2>订单提交成功，请您尽快付款！<br>订单号：{{id}}</h2>
+        <p>
+            <em>积分支付:<span>{{order.payInScore}}</span>元</em> 
+            <em>余额支付:<span>{{order.payInBalance}}</span>元</em>
+            <em>货款支付:<span>{{order.payInPaymentForGoods}}</span>元</em> 
+            <em>佣金支付:<span>{{order.payInCommission}}</span>元</em> 
+            <em>现金支付:<span>{{order.payInCash}}</span>元</em></p>
     </div>
     <div class="pay-way">
         <h1>现金部分请选择支付方式</h1>
-        <input name="payway" @change="selectpayway(1)" type="radio" checked="{{payway==1}}" id="zfb"><label for="zfb">支付宝支付</label>
+        <!--<input name="payway" @change="selectpayway(1)" type="radio" checked="{{payway==1}}" id="zfb"><label for="zfb">支付宝支付</label>-->
         <input name="payway" @change="selectpayway(2)" type="radio" checked="{{payway==2}}" id="wy"><label for="wy">网银支付</label>
     </div>
     <div class="payorder"><button @click="payorder">确认支付</button></div>
@@ -79,9 +80,9 @@
 <script src="js/libs/pickday.min.js" type="text/javascript"></script>
 <script src="js/libs/qrcode.min.js" type="text/javascript"></script>
 <script src="js/libs/dropzone.js" type="text/javascript"></script>
-<script src="js/base.js?rev=2f5fcf4b4d5f81eaf2fc03717b7bfc63" type="text/javascript"></script>
+<script src="js/base.js?rev=8255bca72fb1cf0fb2319843d7a0cbbc" type="text/javascript"></script>
 
-<script type="text/javascript" src="js/pay.js?rev=2f5fcf4b4d5f81eaf2fc03717b7bfc63"></script>
+<script type="text/javascript" src="js/pay.js?rev=8255bca72fb1cf0fb2319843d7a0cbbc"></script>
 
 
 </html>
