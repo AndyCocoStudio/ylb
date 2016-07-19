@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>商品管理</title>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1" />
+	<meta name="description" content="优良宝" />
+	<meta name="keywords" content="优良宝" />
+	<link rel="shortcut icon" type="image/png" href="images/favicon.png" />
+
+
+
+	<link rel="stylesheet" type="text/css" href="css/libs/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/libs/morris.css" />
+	<link rel="stylesheet" type="text/css" href="css/font-awesome.css" />
+	<link rel="stylesheet" type="text/css" href="css/style.css?rev=85a19c5d0dd559597d0e3bc5913f2c19" />
+</head>
+
+<body>
+
+<section class="product-main" id="product-main" v-cloak>
+    <div class="op-header"><img src="images/logo.png" /></div>
+    <div class="op-left">
+        <ul>
+            <li><a href="product.html"><i class="fa fa-comments"></i>商品管理</a></li>
+            <li><a><i class="fa fa-dashboard"></i>用户管理 </a>
+                <ul>
+                    <li><a href="areamanager.html"><i class="fa fa-table"></i>区域经理管理</a></li>
+                    <li><a href="admin.html"><i class="fa fa-group"></i>后台用户管理</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div class="op-right">
+        <h1>商品管理</h1>
+        <ul>
+            <li><span>商品名</span><input v-model="detail.name" type="text"></li>
+            <li><span>价格</span><input v-model="detail.price" type="text"></li>
+            <li><span>库存</span><input v-model="detail.sku" type="text"></li>
+            <li><span>重量</span><input v-model="detail.weight" type="text"></li>
+            <li><span>运费</span><input v-model="detail.freight" type="text"></li>
+            <li><span>列表图</span><span>{{detail.thumbnail[0]}}</span><img :src="detail.thumbnail[0]"></li>
+            <li><span>产品概述</span><input v-model="detail.brief.content" type="text"></li>
+            <li><span>概述图</span><span>{{detail.brief.img}}</span><img :src="detail.brief.img"></li>
+            <li><span>可抵用积分数</span><input v-model="detail.deduction" type="text"></li>
+            <li><span>供应商</span><input v-model="detail.vendorID" type="text"></li>
+            <li><span>所属类目</span>
+                <select>
+                    <option value="-1">-请选择一级类目-</option>
+                    <option v-for="f in flist" value="f.code">{{f.name}}</option>
+                </select>
+                <select>
+                    <option value="-1">-请选择二级类目-</option>
+                    <option v-for="s in slist" value="s.code">{{s.name}}</option>
+                </select>
+            </li>
+            <li><span>商品属性</span><a>+</a>
+                <div><input type="text" placeholder="属性"><input type="text" placeholder="值"><a>x</a></div>
+            </li>
+            <li><span>商品详情图</span><span id="xq1">+</span><span id="xq2">+</span><span class="xq3">+</span></li>
+            <li><span>状态</span><select><option value="OnSell">在售</option><option value="SoldOut">下架</option></select></li>
+        </ul>
+    </div>
+</section>
+
+</body>
+<script src="js/libs/jquery-2.1.4.min.js" type="text/javascript"></script>
+<script src="js/libs/bootstrap.min.js" type="text/javascript"></script>
+<script src="js/libs/vue.min.js" type="text/javascript"></script>
+<script src="js/base.js?rev=85a19c5d0dd559597d0e3bc5913f2c19" type="text/javascript"></script>
+
+<script type="text/javascript" src="js/product.js?rev=85a19c5d0dd559597d0e3bc5913f2c19"></script>
+
+
+</html>
