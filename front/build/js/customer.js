@@ -297,7 +297,7 @@
             })).done(function (d) {
                 $.ylbAjaxHandler(d, function () {
                     vcustomer.rlist = d.data.transfers;
-                    if (vcustomer.info.role == 'CustomerManager' || vcustomer.info.role == 'AreaManager') {
+                    if (vcustomer.info.role == 'CustomerManager' || vcustomer.info.role == 'AreaManager' || vcustomer.info.role == 'AM' || vcustomer.info.role == 'CM') {
                         m.getTotal();
                     }
                     else {
@@ -314,9 +314,9 @@
             })).done(function (d) {
                 $.ylbAjaxHandler(d, function () {
                     vcustomer.total = d.data;
-                    if (vcustomer.info.role == 'CustomerManager') {
+                    if (vcustomer.info.role == 'CustomerManager' || vcustomer.info.role == 'CM') {
                         m.getOrders();
-                    } else if (vcustomer.info.role == 'AreaManager') {
+                    } else if (vcustomer.info.role == 'AreaManager' || vcustomer.info.role == 'AM') {
                         m.getApply();
                     }
                     else m.buildVue();

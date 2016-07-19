@@ -28,10 +28,10 @@
             <li class="select"><a href="#customer-info"><i class="icon-ylbicon-01"></i>我的账号</a></li>
             <li><a href="#customer-order"><i class="icon-ylbicon-02"></i>我的订单</a></li>
             <li><a href="#customer-apply"><i class="icon-ylbicon-04"></i>角色申请</a></li>
-            <li v-if="info.role=='Merchants'"><a href="#customer-logon"><i class="icon-ylbicon-37"></i>推荐会员</a></li>
+            <li v-if="info.role=='Merchants'||info.role=='AM'||info.role=='CM'"><a href="#customer-logon"><i class="icon-ylbicon-37"></i>推荐会员</a></li>
             <li v-if="info.role!='Ordinary'"><a href="#customer-reward"><i class="icon-ylbicon-41"></i>转出记录</a></li>
-            <li v-if="info.role=='Merchants'"><a href="#customer-managerorder"><i class="icon-ylbicon-22"></i>名下业绩</a></li>
-            <li v-if="info.role=='AreaManager'"><a href="#customer-approve"><i class="icon-ylbicon-18"></i>审核管理</a></li>
+            <li v-if="info.role=='Merchants'||info.role=='AM'||info.role=='CM'"><a href="#customer-managerorder"><i class="icon-ylbicon-22"></i>名下业绩</a></li>
+            <li v-if="info.role=='AreaManager'||info.role=='AM'"><a href="#customer-approve"><i class="icon-ylbicon-18"></i>审核管理</a></li>
         </ul>
     </div>
     <div class="customer-right">
@@ -42,13 +42,13 @@
                 <a href="edit.html">编辑个人资料</a>
                 <h1>{{info.mobile}}</h1>
             </div>
-            <div class="customer-asset" :class="{salerasset:info.role=='Merchants'}">
+            <div class="customer-asset" :class="{salerasset:info.role=='Merchants'||info.role=='AM'||info.role=='CM'}">
                 <div class="customer-tag">资产</div>
                 <h1>真实姓名： {{info.name||info.mobile}}<br /> 会员类型：
                     <em v-if="info.role=='Ordinary'">普通会员</em>
                     <em v-if="info.role=='Merchants'">加盟商家</em>
-                    <em v-if="info.role=='CustomerManager'">客户经理</em>
-                    <em v-if="info.role=='AreaManager'">区域经理</em>
+                    <em v-if="info.role=='CustomerManager'||info.role=='CM'">客户经理</em>
+                    <em v-if="info.role=='AreaManager'||info.role=='AM'">区域经理</em>
                     <a v-if="info.role!='Ordinary'" @click="rewards">转出资产</a>
                 </h1>
                 <p>账户余额： <em>{{info.asset.balance}}</em>元<a @click="recharge">充值</a></p>
@@ -63,21 +63,21 @@
                     <div id="customer-private-qrcode" class="customer-private-qrcode"></div>
                 </div>
             </div>
-            <div v-if="info.role=='Merchants'" class="customer-code customer-control">
+            <div v-if="info.role=='Merchants'||info.role=='AM'||info.role=='CM'" class="customer-code customer-control">
                 <div class="customer-tag">商家操作</div>
                 <div class="customer-pic">
                     <a @click="spendpoints">积分兑换</a>
                     <a href="sendpoint.html">商家做单</a>
                 </div>
             </div>
-            <img v-if="info.role!='Merchants'" class="customer-adv" src="images/adv1.png" />
+            <img v-if="info.role!='Merchants'&&info.role!='AM'&&info.role!='CM'" class="customer-adv" src="images/adv1.png" />
         </div>
         <!--客户经理统计-->
-        <div v-if="info.role=='CustomerManager'" class="customer-count">
+        <div v-if="info.role=='CustomerManager'||info.role=='CM'" class="customer-count">
             本月名下商家累积做单<em>{{total.totalNumber||"0"}}</em>笔，赠送积分<em>{{total.totalScore||"0"}}</em>分，可获得工资<em>{{total.wage||"0"}}</em>元。
         </div>
         <!--区域经理统计-->
-        <div v-if="info.role=='AreaManager'" class="customer-count">
+        <div v-if="info.role=='AreaManager'||info.role=='AM'" class="customer-count">
             本月本区域商家累积做单<em>{{total.totalNumber||"0"}}</em>笔，赠送积分<em>{{total.totalScore||"0"}}</em>分，可获得工资<em>{{total.wage||"0"}}</em>元。
         </div>
         <!--所有订单列表-->
@@ -289,10 +289,10 @@
             <div class="customer-title" id="roleapply">角色申请</div>
             <p>您将申请成为<select @change="rolechange" name="roles" id="apply-role">
                 <option value="-1">-请选择角色-</option>
-                <option v-show="info.role!='Merchants'" value="1">加盟商</option>
-                <option v-show="info.role!='AreaManager'&&info.role!='CustomerManager'" value="2">客户经理</option>
+                <option v-show="info.role!='Merchants'&&info.role!='AM'&&info.role!='CM'" value="1">加盟商</option>
+                <option v-show="info.role!='AreaManager'&&info.role!='CustomerManager'&&info.role!='AM'&&info.role=!='CM'" value="2">客户经理</option>
                 </select>,请认真如实提交以下内容</p>
-            <ul class="cutomer-apply-saler" v-show="role=='1'&&info.role!='Merchants'">
+            <ul class="cutomer-apply-saler" v-show="role=='1'&&info.role!='Merchants'&&info.role!='AM'&&info.role!='CM'">
                 <li>注：图片资料，请选择1024K以下的jpg格式的图片</li>
                 <li><span>营业执照图</span><span id="yyzz">{{tobesaler.license?'图片已上传':'点击上传图片'}}</span><img :src="tobesaler.license"></li>
                 <li><span>店铺名称</span><input v-model="tobesaler.storeName" type="text" /></li>
@@ -323,7 +323,7 @@
                 <li><span>推荐人</span><input v-model="tobesaler.referrerMobile" maxlength="11" placeholder="请输入推荐人手机" type="text"></li>
                 <li><a @click="apysaler">提交</a></li>
             </ul>
-            <ul class="cutomer-apply-saler" v-show="role=='2'&&info.role!='CustomerManager'&&info.role!='AreaManager'">
+            <ul class="cutomer-apply-saler" v-show="role=='2'&&info.role!='CustomerManager'&&info.role!='AreaManager'&&info.role!='AM'&&info.role!='CM'">
                 <li>注：图片资料，请选择1024K以下的jpg格式的图片</li>
                 <li><span>申请人</span><input v-model="tobearea.applicantName" type="text"></li>
                 <li><span>所在地区</span><select @change="changeprov" v-model="tobearea.provinceCode">
@@ -349,7 +349,7 @@
             </ul>
         </div>
         <!--商家注册会员-->
-        <div v-if="info.role=='Merchants'" id="customer-logon" class="customer-logon">
+        <div v-if="info.role=='Merchants'||info.role=='AM'||info.role=='CM'" id="customer-logon" class="customer-logon">
             <div class="customer-title">
                 推荐会员
             </div>
@@ -396,7 +396,7 @@
             </table>
         </div>
         <!--客户经理名下商家做单查看-->
-        <div v-if="info.role=='CustomerManager'" id="customer-managerorder" class="customer-managerorder">
+        <div v-if="info.role=='CustomerManager'||info.role=='CM'" id="customer-managerorder" class="customer-managerorder">
             <div class="customer-title">名下商家做单</div>
             <table class="customer-order-list">
                 <tr>
@@ -440,7 +440,7 @@
             </table>
         </div>
         <!--区域经理审批管理-->
-        <div v-if="info.role=='AreaManager'" id="customer-approve" class="customer-approve">
+        <div v-if="info.role=='AreaManager'||info.role=='AM'" id="customer-approve" class="customer-approve">
             <div class="customer-title">
                 审批管理
             </div>
@@ -587,7 +587,7 @@
             </table>
         </div>
         <!--区域经理工资管理-->
-        <div v-if="info.role=='AreaManager'" class="customer-cash"></div>
+        <div v-if="info.role=='AreaManager'||info.role=='AM'" class="customer-cash"></div>
     </div>
     <div class="ylb-show-cover" v-show="covershow" @click="hideall"></div>
     <!--积分兑换-->
