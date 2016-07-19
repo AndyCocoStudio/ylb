@@ -13,9 +13,9 @@
 
 
 
-	<link rel="stylesheet" type="text/css" href="css/style.css?rev=7cba08949f45b2e516f0636de1ebbaa5" />
+	<link rel="stylesheet" type="text/css" href="css/style.css?rev=2f5fcf4b4d5f81eaf2fc03717b7bfc63" />
 	<link rel="stylesheet" type="text/css" href="css/pickday.css" />
-	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=7cba08949f45b2e516f0636de1ebbaa5" />
+	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=2f5fcf4b4d5f81eaf2fc03717b7bfc63" />
 </head>
 
 <body>
@@ -33,11 +33,11 @@
 	</header>
 
 <section id="pay-main" class="pay-main" v-cloak>
-    <ul class="pay-cource">
+    <!--<ul class="pay-cource">
         <li><span>1</span><br>确认订单信息</li>
         <li class="select"><span>2</span><br>付款方式</li>
         <li><span>3</span><br>确认收货</li>
-    </ul>
+    </ul>-->
     <div class="pay-detail">
         <h1 v-for="p in order.product">{{p.name}}</h1>
         <h2>订单提交成功，请您尽快付款！订单号：{{id}}</h2>
@@ -48,8 +48,7 @@
             <em>{{order.payInCash}}</em></p>
     </div>
     <div class="pay-way">
-        <h1>请选择支付方式</h1>
-        <input name="payway" @change="selectpayway(0)" type="radio" checked="{{payway==0}}" id="ye"><label for="ye">余额支付</label>
+        <h1>现金部分请选择支付方式</h1>
         <input name="payway" @change="selectpayway(1)" type="radio" checked="{{payway==1}}" id="zfb"><label for="zfb">支付宝支付</label>
         <input name="payway" @change="selectpayway(2)" type="radio" checked="{{payway==2}}" id="wy"><label for="wy">网银支付</label>
     </div>
@@ -80,9 +79,9 @@
 <script src="js/libs/pickday.min.js" type="text/javascript"></script>
 <script src="js/libs/qrcode.min.js" type="text/javascript"></script>
 <script src="js/libs/dropzone.js" type="text/javascript"></script>
-<script src="js/base.js?rev=7cba08949f45b2e516f0636de1ebbaa5" type="text/javascript"></script>
+<script src="js/base.js?rev=2f5fcf4b4d5f81eaf2fc03717b7bfc63" type="text/javascript"></script>
 
-<script type="text/javascript" src="js/pay.js?rev=7cba08949f45b2e516f0636de1ebbaa5"></script>
+<script type="text/javascript" src="js/pay.js?rev=2f5fcf4b4d5f81eaf2fc03717b7bfc63"></script>
 
 
 </html>

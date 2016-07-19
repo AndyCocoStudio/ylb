@@ -1,5 +1,5 @@
 .pay-main{
-    width: 960px;
+    width: 320px;
     margin: 30px auto 88px;
     ul.pay-cource{
         display: block;
@@ -103,10 +103,11 @@
     }
     .payorder{
         height: 30px;
-        text-align: right;
+        text-align: center;
         line-height: 30px;
         padding: 0 20px;
         button{
+            margin: 20px auto 0;
             width: 120px;
             height: 30px;
             background-color: $base-orange;

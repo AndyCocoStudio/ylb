@@ -767,7 +767,9 @@
                             $.ylbAjaxHandler(d, function () {
                                 $.ylbAlert("转出申请成功");
                                 vcustomer.hideall();
-                                window.location.href = window.location.href;
+                                setTimeout(function () {
+                                    window.location.href = window.location.href;
+                                }, 1500);
                             });
                         });
                     }
