@@ -22,11 +22,11 @@
     </div>
     <div class="pay-way">
         <h1>请选择支付方式</h1>
-        <input name="payway" type="radio" checked id="ye"><label for="ye">余额支付</label>
-        <input name="payway" type="radio" id="zfb"><label for="zfb">支付宝支付</label>
-        <input name="payway" type="radio" id="wy"><label for="wy">网银支付</label>
+        <input name="payway" @change="selectpayway(0)" type="radio" checked="{{payway==0}}" id="ye"><label for="ye">余额支付</label>
+        <input name="payway" @change="selectpayway(1)" type="radio" checked="{{payway==1}}" id="zfb"><label for="zfb">支付宝支付</label>
+        <input name="payway" @change="selectpayway(2)" type="radio" checked="{{payway==2}}" id="wy"><label for="wy">网银支付</label>
     </div>
-    <div class="payorder"><button>确认支付</button></div>
+    <div class="payorder"><button @click="payorder">确认支付</button></div>
 </section>
 <!-- @@close-->
 

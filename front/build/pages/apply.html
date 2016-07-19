@@ -43,7 +43,7 @@
         <li v-if="detail.applyRole=='Merchants'"><span>店内图</span>
             <a v-for="i in detail.storeInsideImages" href="{{i}}" target="_blank"><img :src="i"></a>
         </li>
-        <li v-if="detail.applyRole=='Merchants'"><span>推荐人</span>{{detail.referrerName||detail.referrer}}</li>
+        <li v-if="detail.applyRole=='Merchants'"><span>推荐人</span>{{detail.referrerName||detail.referrerMobile}}</li>
         <li><span>推荐商家数</span>{{detail.recommended}}</li>
     </ul>
     <div class="apply-btns">

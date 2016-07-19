@@ -76,6 +76,12 @@
 				case "4016":
 					$.ylbAlert("推荐会员人数不足");
 					break;
+				case "4017":
+					$.ylbAlert("本时间段不可领取积分");
+					break;
+				case "4018":
+					$.ylbAlert("违规操作");
+					break;
 				default:
 					$.ylbAlert("服务器又开小差");
 					break;
@@ -233,15 +239,67 @@
 			};
 		}
 	}
+	/**
+	 * 检测是否是手机号码
+	 * **/
+	$.checkIsMobileNumber = function (number) {
+        var reg = /^1\d{10}$/;
+        return reg.test(number);
+    }
+	$.ylbConfirm = function (config) {
+        var defs = {
+            type: 'confirm',
+            msg: '',
+            callback: function () { },
+            navCallback: function () { }
+        };
+        $.extend(defs, config);
+        var html = '<div class="ylb-confirm-cover"></div>',
+            btns = '';
+        if (defs.type === 'confirm') {
+            btns += '<input type="button" class="btn-cancel" value="取消">'
+                + '<input type="button" class="btn-yes" value="确认">';
+        } else {
+            btns += '<input type="button" class="btn-yes" value="确认">';
+        }
+        html += '<div class="ylb-confirm">'
+            + '<h4 class="confirm-tit">提示</h4>'
+            + '<p class="confirm-msg">' + defs.msg + '</p>'
+            + '<div class="confirm-group">' + btns
+            + '</div></div>';
+        $('body').append(html);
+        $('.ylb-confirm-cover').show();
+        var scrollTop = window.pageYOffset //用于FF
+            || document.documentElement.scrollTop
+            || document.body.scrollTop
+            || 0;
+        $('.ylb-confirm').css('margin-top', (+scrollTop - 40) + 'px');
+        $('body').delegate('.btn-cancel', 'click', function () {
+            $('.ylb-confirm-cover').remove();
+            $('.ylb-confirm').remove();
+            $('body').undelegate();
+            defs.navCallback();
+        });
+        $('body').delegate('.btn-yes', 'click', function () {
+			defs.callback();
+            $('.ylb-confirm-cover').remove();
+            $('.ylb-confirm').remove();
+            $('body').undelegate();
+        });
+    };
 })(jQuery);
 (function () {
 	/**
 	 * 注销登录
 	 * **/
 	$(".logout").on("click", function () {
-		$.clearID();
-		$.localStorageHandler("clear", "flag");
-		window.location.href = "login.html";
+		if (layout.islogin) {
+			$.clearID();
+			$.localStorageHandler("clear", "flag");
+			window.location.href = "login.html";
+		} else {
+			window.location.href = "login.html";
+		}
 	});
     /** 
 	 * 搜索效果
@@ -266,11 +324,21 @@
 		$(".ylb-menu-wrap").fadeOut();
 	});
 	var layout = {
-		sc: ""
+		sc: "",
+		islogin: false
 	};
 	var m = {
 		init: function () {
 			m.getFList();
+			if ($.getID()) {
+				layout.islogin = true;
+				$(".btn-login").hide();
+				$(".btn-logout").show();
+			} else {
+				layout.islogin = false;
+				$(".btn-login").show();
+				$(".btn-logout").hide();
+			}
 		},
 		getFList: function () {
 			$.when($.ajax({

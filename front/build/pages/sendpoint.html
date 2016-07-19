@@ -1,32 +1,44 @@
-<!-- @@master ../layout.html  -->
+<!DOCTYPE html>
+<html>
 
-<!-- @@block = title-->
-<title>积分做单</title>
-<!-- @@close-->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="优良宝" />
+    <meta name="keywords" content="优良宝" />
+    <link rel="shortcut icon" type="image/png" href="public/img/favicon.png" />
+    <title>商家做单</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css?rev=@@hash" />
+    <link rel="stylesheet" type="text/css" href="css/pickday.css" />
+    <link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=@@hash" />
+</head>
 
-<!-- @@block = content-->
-<section class="sendpoint-main" id="sendpoint-main" v-cloak>
-    <h1>积分做单</h1>
-    <div class="sendpoint-asset">
-        <span>货款：{{asset.paymentForGoods}}</span>
-        <span>佣金：{{asset.commission}}</span>
-        <span>余额：{{asset.balance}}</span>
-    </div>
-    <ul>
-        <li><span>赠送对象</span>{{uid}}</li>
-        <li><span>商品名</span><input type="text" v-model="name"></li>
-        <li><span>商品分类</span><input type="text" v-model="type"></li>
-        <li><span>积分数</span><input type="text" v-model="points"></li>
-        <li><span>所需服务费</span>{{(points*0.16).toFixed(2)}}
-            <!--这里需要获取配置服务费比例自动算出对应费用-->
-        </li>
-        <li><span>使用货款/佣金</span><input type="text" v-model="poundage"><em>*最高可用{{(points*0.128).toFixed(2)}}</em></li>
-        <li><span>仍需支付金额</span>{{(points*0.16-poundage).toFixed(2)}}</li>
-        <li><button @click="createOrder">支付</button><a>充值</a></li>
-    </ul>
-</section>
-<!-- @@close-->
+<body>
+    <section class="sendpoint-main" id="sendpoint-main" v-cloak>
+        <h1>商家做单</h1>
+        <div class="sendpoint-asset">
+            <span>货款：{{asset.paymentForGoods}}</span>
+            <span>佣金：{{asset.commission}}</span>
+            <span>余额：{{asset.balance}}</span>
+        </div>
+        <ul>
+            <li><span>赠送对象</span><label v-if="!free">{{uid}}</label><input v-if="free" maxlength="11" v-model="uid" type="text"></li>
+            <li><span>商品名</span><input type="text" v-model="name"></li>
+            <li><span>商品分类</span><input type="text" v-model="type"></li>
+            <li><span>积分数</span><input type="text" v-model="points"></li>
+            <li><span>所需服务费</span>{{(points*config.pr/100).toFixed(2)}}</li>
+            <li><span>使用货款/佣金</span><input type="text" @change="inuse" v-model="poundage"><em><!--*货款/佣金最高可用{{(points*config.pr*config.gsd/10000).toFixed(2)}}</em>--></li>
+            <li><span>仍需支付金额</span>{{(points*config.pr/100-poundage).toFixed(2)}}</li>
+            <li><button @click="createOrder">支付</button><a>充值</a></li>
+        </ul>
+    </section>
+</body>
+<script src="js/libs/jquery-2.1.4.min.js" type="text/javascript"></script>
+<script src="js/libs/vue.min.js" type="text/javascript"></script>
+<script src="js/libs/pickday.min.js" type="text/javascript"></script>
+<script src="js/libs/qrcode.min.js" type="text/javascript"></script>
+<script src="js/libs/dropzone.js" type="text/javascript"></script>
+<script src="js/base.js?rev=@@hash" type="text/javascript"></script>
+<script src="js/sendpoint.js?rev=@@hash" type="text/javascript"></script>
 
-<!-- @@block = scripts-->
-<script type="text/javascript" src="js/sendpoint.js?rev=@@hash"></script>
-<!-- @@close-->
+</html>

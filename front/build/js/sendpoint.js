@@ -5,11 +5,13 @@
         type: "",
         points: 0,
         poundage: 0,
-        asset: {}
+        asset: {},
+        free: false
     };
     var m = {
         init: function () {
             m.getAsset();
+            if (!vsendpoint.uid) vsendpoint.free = true;
             $.checkFlag();
         },
         getAsset: function () {
@@ -19,8 +21,20 @@
             })).done(function (d) {
                 $.ylbAjaxHandler(d, function () {
                     vsendpoint.asset = d.data;
-                    m.buildVue();
+                    m.getconfig();
+                    //m.buildVue();
                 });
+            });
+        },
+        getconfig: function () {
+            $.when($.ajax({
+                url: $.apiUrl + "/config",
+                type: "GET"
+            })).done(function (d) {
+                $.ylbAjaxHandler(d, function () {
+                    vsendpoint.config = d.data;
+                    m.buildVue();
+                })
             });
         },
         buildVue: function () {
@@ -45,6 +59,12 @@
                                 window.location.href = "pay.html?oid=" + d.data;
                             });
                         });
+                    },
+                    inuse: function () {
+                        alert(this.config.gsd);
+                        if (this.poundage > this.points * this.config.pr * this.config.gsd / 10000) {
+                            this.poundage = (this.points * this.config.pr * this.config.gsd / 10000).toFixed(2);
+                        }
                     }
                 }
             });

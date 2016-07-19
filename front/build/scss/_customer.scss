@@ -167,6 +167,17 @@
                 h1{
                     margin-bottom: 5px;
                     padding-left: 18px;
+                    overflow: hidden;
+                    a{
+                        display: block;
+                        padding: 0 6px;
+                        height: 18px;
+                        line-height: 18px;
+                        background-color: #fff;
+                        float: right;
+                        font-size: 12px;
+                        margin: 0 16px 0 0;
+                    }
                 }
                 p{
                     padding-left: 18px;
@@ -250,13 +261,13 @@
             }
         }
         .customer-title{
-            width: 62px;
+            width: 82px;
             height: 24px;
             line-height: 24px;
-            padding-left: 6px;
+            border-left: 6px solid rgba(254, 112, 35, 1);
             color: #fff;
             margin: 10px 0 12px;
-            background: url(../images/tag-s.png) no-repeat center;
+            background: url(../images/tag-s.png) no-repeat center left;
         }
         .customer-count{
             margin: 15px 12px 0;
@@ -308,7 +319,7 @@
                 color: $base-orange;
             }
         }
-        .customer-order-list, .customer-approve-list{
+        .customer-order-list, .customer-approve-list, .customer-reward-list{
             width: 808px;
             border: 1px solid #ccc;
             border-top: none;
@@ -473,6 +484,9 @@
                     }
                 }
             }
+        }
+        .customer-managerorder{
+            margin: 0 12px 25px;
         }
         .customer-edit{
             width: 812px;
@@ -740,6 +754,9 @@
         .customer-approve{
             margin: 0 12px 25px;
         }
+        .customer-reward{
+            margin: 0 12px 25px;
+        }
     }
     .nagtive{
         input{
@@ -760,6 +777,39 @@
             color: #fff;
             background-color: $base-orange;
             margin: 20px 0 0 20px;
+        }
+    }
+    .forward{
+        h1{
+            padding-bottom: 5px;
+            margin-bottom: 40px;
+            select{
+                width: 90px;
+            }
+        }
+        p{
+            padding: 0 40px;
+            margin: 0 auto;
+            span{
+                display: inline-block;
+                width:  60px;
+            }
+            input{
+                border: 1px solid $base-border-color;
+                height: 24px;
+                line-height: 24px;
+                width: 220px;
+                padding-left: 5px;
+                margin-bottom: 10px;
+            }
+        }
+        button{
+            width: 90px;
+            margin: 20px auto 0;
+            display: block;
+            background-color: $base-orange;
+            color: #fff;
+            height: 28px;
         }
     }
 }

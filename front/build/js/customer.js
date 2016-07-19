@@ -7,6 +7,9 @@
         nagtive: false,
         ordernagtive: false,
         sid: $.getID(),
+        counting: false,
+        countdown: 0,
+        num: 60,
         appID: "",
         order: [],
         jfdh: true,
@@ -22,6 +25,7 @@
         jssh: false,
         fzdsh: false,
         fjssh: false,
+        zczc: false,
         spendpoint: {
             name: "",
             type: "",
@@ -29,6 +33,11 @@
             total: "",
             point: "",
             mobile: ""
+        },
+        reward: {
+            way: 1,//1货款2佣金3余额
+            amount: 0,
+            account: ""
         },
         total: {},
         tj: {
@@ -87,6 +96,7 @@
                 });
             });
         },
+
         //获取市
         getCity: function (code) {
             $.when($.ajax({
@@ -215,11 +225,7 @@
                 $.ylbAjaxHandler(d, function () {
                     vcustomer.info = d.data;
                     vcustomer.tj.referrerMobile = d.data.mobile;
-                    if (vcustomer.info.role == "AreaManager") {
-                        m.getApply();
-                    } else {
-                        m.getJFDHOrder();
-                    }
+                    m.getJFDHOrder();
                 });
             });
         },
@@ -243,7 +249,7 @@
             })).done(function (d) {
                 $.ylbAjaxHandler(d, function () {
                     vcustomer.order = d.data.orders;
-                    m.getXSXFOrder();
+                    m.buildVue();
                 });
             })
         },
@@ -267,8 +273,7 @@
             })).done(function (d) {
                 $.ylbAjaxHandler(d, function () {
                     vcustomer.xsxflist = d.data.orders;
-                    if (vcustomer.info.role == "Merchants") m.getSJZDOrder();
-                    else m.buildVue();
+                    m.getSJZDOrder();
                 });
             });
         },
@@ -280,13 +285,25 @@
             })).done(function (d) {
                 $.ylbAjaxHandler(d, function () {
                     vcustomer.sjzdlist = d.data.orders;
+                    m.getReward();
+                });
+            });
+        },
+        //获取资金转出记录
+        getReward: function () {
+            $.when($.ajax({
+                url: $.apiUrl + "/user/transfers",
+                type: "GET"
+            })).done(function (d) {
+                $.ylbAjaxHandler(d, function () {
+                    vcustomer.rlist = d.data.transfers;
                     if (vcustomer.info.role == 'CustomerManager' || vcustomer.info.role == 'AreaManager') {
                         m.getTotal();
                     }
                     else {
                         m.buildVue();
                     }
-                });
+                })
             });
         },
         //计算工资小计
@@ -299,6 +316,8 @@
                     vcustomer.total = d.data;
                     if (vcustomer.info.role == 'CustomerManager') {
                         m.getOrders();
+                    } else if (vcustomer.info.role == 'AreaManager') {
+                        m.getApply();
                     }
                     else m.buildVue();
                 });
@@ -356,6 +375,38 @@
                         this.covershow = true;
                         this.spendshow = true;
                     },
+                    //获取验证码
+                    getcode: function () {
+                        if (vcustomer.counting) {
+                            return;
+                        } else {
+                            if (vcustomer.tj.mobile) {
+                                if (vcustomer.tj.mobile.length < 11) {
+                                    $.ylbAlert("手机号码位数不正确");
+                                } else {
+                                    if (!$.checkIsMobileNumber(vcustomer.tj.mobile)) {
+                                        $.ylbAlert("请输入正确手机号");
+                                    } else {
+                                        vcustomer.counting = true;
+                                        $.ajax({
+                                            url: $.apiUrl + "/captcha",
+                                            type: "PUT",
+                                            data: JSON.stringify({
+                                                mobile: vcustomer.tj.mobile,
+                                            })
+                                        }).done(function (d) {
+                                            $.ylbAjaxHandler(d, function () {
+                                                $.ylbAlert("发送成功");
+                                                vcustomer.countdown = setInterval(m.countDown, 1000);
+                                            });
+                                        });
+                                    }
+                                }
+                            } else {
+                                $.ylbAlert("请输入手机号码");
+                            }
+                        }
+                    },
                     //隐藏所有弹层
                     hideall: function () {
                         this.covershow = false;
@@ -363,11 +414,12 @@
                         this.spendshow = false;
                         this.nagtive = false;
                         this.ordernative = false;
+                        this.zczc = false;
                     },
                     //积分兑换可用积分数限制
                     pchange: function () {
-                        if (this.spendpoint.point > this.spendpoint.total * 0.8) {
-                            this.spendpoint.point = (this.spendpoint.total * 0.8).toFixed(2);
+                        if (this.spendpoint.point > this.spendpoint.total) {
+                            this.spendpoint.point = this.spendpoint.total.toFixed(2);
                         }
                     },
                     //创建积分兑换二维码
@@ -385,15 +437,25 @@
                             })
                         }).done(function (d) {
                             $.ylbAjaxHandler(d, function () {
-                                var url = "http://www.hnylbsc.com/spendpoint.html?oid=" + d.data;
+                                var url = "http://www.hnylbsc.com/pay.html?oid=" + d.data;
                                 $('#spendpoint-qrcode').qrcode({
-                                    render: "table",
+                                    render: "canvas",
                                     width: 240,
                                     height: 240,
                                     text: url
                                 });
                             })
                         });
+                    },
+                    showreject: function (t) {
+                        alert(t);
+                    },
+                    //检测积分对象是否是自己
+                    setobj: function (el) {
+                        if (el.target.value == vcustomer.info.mobile) {
+                            $.ylbAlert("该手机号码不可用");
+                            $(el.target).focus();
+                        }
                     },
                     //领取积分
                     getpoint: function () {
@@ -458,6 +520,11 @@
                     //查看做单拒绝理由
                     showrejectreason: function (msg) {
                         alert(msg);
+                    },
+                    //选择转出资产类型
+                    changerewardway: function (el) {
+                        var v = $(el.target).find("option:selected").val();
+                        vcustomer.reward.way = v;
                     },
                     //拒绝角色申请
                     reject: function () {
@@ -640,10 +707,84 @@
                                 m.getOrder();
                             });
                         });
+                    },
+                    //充值
+                    recharge: function () {
+                        $.ylbConfirm({
+                            msg: "请输入充值金额<input type='text' class='recharge'>",
+                            callback: function () {
+                                var money = $(".recharge").val();
+                                $.ajax({
+                                    url: $.apiUrl + '/order/recharge',
+                                    type: "PUT",
+                                    data: JSON.stringify({ amount: money })
+                                }).done(function (d) {
+                                    $.ylbAjaxHandler(d, function () {
+                                        window.location.href = "http://api.hnylbsc.com/unionpay?id=" + d.data;
+                                    })
+                                })
+                            }
+                        })
+                    },
+                    //显示转出资产弹层
+                    rewards: function () {
+                        vcustomer.zczc = true;
+                        vcustomer.covershow = true;
+                    },
+                    //转出资产
+                    dorewards: function () {
+                        var url = "";
+                        switch (vcustomer.reward.way) {
+                            case "1":
+                                url = "/transfer/paymentforgoods";
+                                break;
+                            case "2":
+                                url = "/transfer/commission";
+                                break;
+                            case "3":
+                                url = "/transfer/balance";
+                                break;
+                            default:
+                                url = "/transfer/paymentforgoods";
+                                break;
+                        }
+                        if (!vcustomer.reward.amount) {
+                            $.ylbAlert("请输入转出金额");
+                            return;
+                        }
+                        if (!vcustomer.reward.account) {
+                            $.ylbAlert("请输入账号");
+                            return;
+                        }
+                        $.ajax({
+                            url: $.apiUrl + url,
+                            type: "PUT",
+                            data: JSON.stringify({
+                                amount: vcustomer.reward.amount,
+                                account: vcustomer.reward.account
+                            })
+                        }).done(function (d) {
+                            $.ylbAjaxHandler(d, function () {
+                                $.ylbAlert("转出申请成功");
+                                vcustomer.hideall();
+                            });
+                        });
                     }
                 }
             });
             m.createQRcode();
+        },
+        countDown: function () {
+            //## 再次获取验证码倒计时
+            if (vcustomer.num > 1) {
+                vcustomer.num -= 1;
+                $(".btn-code").val(vcustomer.num + "秒后重新获取");
+            } else {
+                vcustomer.counting = false;
+                $(".btn-code").val("重新获取");
+                vcustomer.num = 60;
+                clearInterval(vcustomer.countdown);
+            }
         }
     };
     m.init();

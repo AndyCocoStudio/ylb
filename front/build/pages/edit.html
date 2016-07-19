@@ -11,8 +11,7 @@
         <ul class="customer-nav">
             <li><a href="index.html">首页</a></li>
             <li class="select"><a href="customer.html">个人中心</a></li>
-            <li>商品分类</li>
-            <li>公告</li>
+            <li>加盟商</li>
         </ul>
         <div class="customer-seach">
             <input type="search" placeholder="搜索">
@@ -27,11 +26,6 @@
         </h1>
         <ul>
             <li class="select"><a href="#customer-info"><i class="icon-ylbicon-01"></i>我的账号</a></li>
-            <li><a href="#customer-order"><i class="icon-ylbicon-02"></i>我的订单</a></li>
-            <li><a href="#customer-fav"><i class="icon-ylbicon-03"></i>我的收藏</a></li>
-            <li><a href="#customer-apply"><i class="icon-ylbicon-04"></i>商家申请</a></li>
-            <li><a href="achievement.html?id=1"><i class="icon-ylbicon-22"></i>名下业绩</a></li>
-            <li><a href="review.html?id=1"><i class="icon-ylbicon-18"></i>审核管理</a></li>
         </ul>
     </div>
     <div class="customer-right">
@@ -50,8 +44,8 @@
                 </h1>
                 <p>账户余额： <em>{{info.asset.balance}}</em>元<a>充值</a></p>
                 <p v-if="info.role=='Merchants'">账户货款： <em>{{info.asset.paymentForGoods}}</em>元</p>
-                <p v-if="info.role=='Merchants'">账户佣金： <em>{{info.asset.commission}}</em>元</p>
-                <p>剩余积分： <em>{{info.asset.score}}</em>分</p>
+                <p v-if="info.role=='Merchants'">税后佣金： <em>{{info.asset.commission}}</em>元</p>
+                <p>可用积分： <em>{{info.asset.score}}</em>分</p>
                 <p>积分基点： <em>{{info.asset.point}}</em>个<a @click="getpoint">领取积分</a></p>
             </div>
             <div class="customer-code customer-eqcode">
