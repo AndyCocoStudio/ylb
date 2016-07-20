@@ -1,5 +1,8 @@
 (function () {
-    var login = {};
+    var login = {
+        mobile: "",
+        password: ""
+    };
     var m = {
         init: function () {
             m.buildVue();
@@ -8,7 +11,21 @@
             login = new Vue({
                 el: "#login-main",
                 data: login,
-                methods: {}
+                methods: {
+                    login: function () {
+                        $.ajax({
+                            url: "/api/staff/login",
+                            contentType: "application/json; charset=utf-8",
+                            type: "POST",
+                            data: JSON.stringify({
+                                mobile: login.mobile,
+                                password: login.password
+                            })
+                        }).done(function (d) {
+                            
+                        })
+                    }
+                }
             });
         }
     };
