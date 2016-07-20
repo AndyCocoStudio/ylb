@@ -51,16 +51,14 @@
                 </h1>
             </div>
             <div class="customer-asset" :class="{salerasset:info.role=='Merchants'||info.role=='AM'||info.role=='CM'}">
-                <div class="customer-tag">资产
-                    <a v-if="info.role!='Ordinary'" @click="rewards">转出资产</a>
-                </div>
+                <div class="customer-tag">资产</div>
                 <h1>真实姓名： {{info.name||info.mobile}}</h1>
                 <p>账户余额： <em>{{info.asset.balance}}</em>元<a @click="recharge">充值</a></p>
                 <p v-if="info.role=='Merchants'||info.role=='AM'||info.role=='CM'">账户货款： <em>{{info.asset.paymentForGoods}}</em>元</p>
                 <p v-if="info.role=='Merchants'||info.role=='AM'||info.role=='CM'">税后佣金： <em>{{info.asset.commission}}</em>元</p>
                 <p>可用积分： <em>{{info.asset.score}}</em>分</p>
                 <p>积分基点： <em>{{info.asset.point}}</em>个<a @click="getpoint">领取积分</a></p>
-                <p></p>
+                <p class="btns"><a v-if="info.role!='Ordinary'" @click="rewards">转出资产</a><a href="asset.html">更多信息</a></p>
             </div>
             <div class="customer-code customer-eqcode">
                 <div class="customer-tag">扫我做单</div>
@@ -71,7 +69,8 @@
             <div v-if="info.role=='Merchants'||info.role=='AM'||info.role=='CM'" class="customer-code customer-control">
                 <div class="customer-tag">商家操作</div>
                 <div class="customer-pic">
-                    <a @click="spendpoints">积分兑换</a>
+                    <!--<a @click="spendpoints">积分兑换</a>-->
+                    <a href="spendpoint.html">积分兑换</a>
                     <a href="sendpoint.html">商家做单</a>
                 </div>
             </div>

@@ -82,6 +82,12 @@
 				case "4018":
 					$.ylbAlert("违规操作");
 					break;
+				case "4019":
+					$.ylbAlert("申请已处理");
+					break;
+				case "4020":
+					$.ylbAlert("该区域已有区域经理");
+					break;
 				default:
 					$.ylbAlert("服务器又开小差");
 					break;

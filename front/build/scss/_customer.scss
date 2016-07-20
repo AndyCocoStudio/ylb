@@ -209,6 +209,18 @@
                         margin: 4px 16px 0 0;
                     }
                 }
+                p.btns{
+                    text-align: left;
+                    margin-top: 5px;
+                    a{
+                        float: left;
+                        margin-right: 10px;
+                        border-radius: 4px;
+                        padding: 2px 8px;
+                        background-color: #3063cf;
+                        color: #fff;
+                    }
+                }
             }
             .salerasset{
                 font-size: 12px;

@@ -1,0 +1,44 @@
+<!-- @@master ../layout.html  -->
+
+<!-- @@block = title-->
+<title>资产详情</title>
+<!-- @@close-->
+
+<!-- @@block = content-->
+<section id="asset-main" class="asset-main" v-cloak>
+    <ul class="asset-point">
+        <li><span>当前可用积分</span><em>{{detail.score}}</em></li>
+        <li><span>剩余可领积分</span><em>{{detail.scoreInPool}}</em></li>
+        <li><span>已领积分</span><em>{{}}</em></li>
+        <li><span>已消费积分</span><em>{{}}</em></li>
+    </ul>
+    <h1 class="asset-title">资产转出记录</h1>
+    <table class="asset-table">
+        <tr>
+            <th>ID</th>
+            <th>转出时间</th>
+            <th>转出金额</th>
+            <th>银行卡</th>
+            <th>状态</th>
+            <th>备注</th>
+        </tr>
+        <tr v-for="t in transfer">
+            <td>{{t.transferID}}</td>
+            <td>{{t.createTime}}</td>
+            <td>{{t.amount}}</td>
+            <td>{{t.account}}</td>
+            <td>
+                <em v-if="t.status=='New'">审批中</em>
+                <em v-if="t.status=='Agree'">已同意</em>
+                <em v-if="t.status=='Reject'">已拒绝</em>
+            </td>
+            <td>{{t.reason}}</td>
+        </tr>
+    </table>
+    <h1 class="asset-title">充值记录</h1>
+</section>
+<!-- @@close-->
+
+<!-- @@block = scripts-->
+<script type="text/javascript" src="js/asset.js?rev=@@hash"></script>
+<!-- @@close-->
