@@ -1,0 +1,66 @@
+@import "common";
+$blue: #337ab7;
+$green: #5cb85c;
+$orange: #f0ad4e;
+$red: #d9534f;
+$black: #888;
+$white: #fff;
+
+@mixin button($color, $bgcolor, $bordercolor){
+    display: inline-block;
+    margin-left: 10px;
+    padding: 5px 10px;
+    color: $color;
+    background-color: $bgcolor;
+    border: 1px solid $bordercolor;
+}
+.white-button {
+    @include button($black, $white, $black);
+}
+.op-header{
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    background-color: #101010;
+    color: #cecec;
+    img{
+        height: 40px;
+        display: block;
+    }
+}
+.op-left{
+    width: 200px;
+    background-color: #101010;
+    float: left;
+    ul{
+        padding: 52px 0 60px 0;
+        li{
+            line-height: 32px;
+            font-size: 14px; 
+            padding-left: 20px;
+            border-top: 1px solid #222;
+            a{
+                color: #fff;
+                i{
+                    margin-right: 5px;
+                }
+            }
+            ul{
+                padding: 0 0 0 5px;
+                display: none;
+                li{
+                    font-size: 12px;
+                }
+            }
+        }
+    }
+}
+.op-right{
+    margin-left: 200px;
+    width: calc(100% - 200px);
+    margin-top: 30px;
+}
+
+@import "login";
+@import "index";
+@import "product";
