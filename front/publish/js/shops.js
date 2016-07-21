@@ -1,1 +1,0 @@
-!function(){var n={},t={init:function(){t.getShops()},getShops:function(){$.when($.ajax({url:$.apiUrl+"/merchants",type:"GET"})).done(function(i){$.ylbAjaxHandler(i,function(){n.list=i.data.merchants,t.buildVue()})})},buildVue:function(){n=new Vue({el:"#shops-main",data:n,methods:{}})}};t.init()}();
