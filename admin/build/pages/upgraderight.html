@@ -1,0 +1,42 @@
+<!-- @@master ../layout.html  -->
+
+<!-- @@block = title-->
+<title>提升区域经理权限</title>
+<!-- @@close-->
+
+<!-- @@block = content-->
+<section class="right-main" id="right-main" v-cloak>
+    <div class="op-header"><img src="images/logo.png" /></div>
+    <div class="op-left">
+        <ul>
+            <li><a href="upgraderight.html"><i class="fa fa-comments"></i>提升权限</a></li>
+            <li><a href="sendpoint.html"><i class="fa fa-dashboard"></i>直送积分</a></li>
+        </ul>
+    </div>
+    <div class="op-right">
+        <ul>
+            <li><span>选择区域</span>
+                <select @change="changeprov">
+                    <option value="-1">-请选择省-</option>
+                    <option v-for="p in plist" value="{{p.code}}">{{p.name}}</option>
+                </select>
+                <select @change="changecity">
+                    <option value="-1">-请选择市-</option>
+                    <option v-for="c in clist" value="{{c.code}}">{{c.name}}</option>
+                </select>
+                <select @change="changearea">
+                    <option value="-1">-请选择区-</option>
+                    <option v-for="a in alist" value="{{a.code}}">{{a.name}}</option>
+                </select>
+            </li>
+            <li><span>手机号</span>
+                <input maxlength="11" v-model="apply.mobile" type="text"></li>
+            <li><a @click="toupgrade" class="btn-submit">提交</a></li>
+        </ul>
+    </div>
+</section>
+<!-- @@close-->
+
+<!-- @@block = scripts-->
+<script type="text/javascript" src="js/right.js?rev=@@hash"></script>
+<!-- @@close-->
