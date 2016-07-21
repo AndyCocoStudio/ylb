@@ -1,0 +1,50 @@
+.asset-main{
+    width: 100%;
+    margin: 0 auto 132px;
+    .asset-point{
+        margin: 20px auto 30px;
+        width: 90%;
+        display: block;
+        overflow: hidden;
+        li{
+            width: 24.5%;
+            float: left;
+            text-align: center;
+            font-size: 16px;
+            border-right: 1px solid $base-border-color;
+            em{
+                color: $base-orange;
+                margin: 0 5px;
+            }
+            &:last-child{
+                border-right: 0;
+            }
+        }
+    }
+    .asset-title{
+        font-size: 14px;
+        line-height: 40px;
+        padding-left: 10px;
+        border-bottom: 1px solid $base-border-color;
+        width: 90%;
+        margin: 20px auto;
+    }
+    .asset-table{
+        width: 90%;
+        margin: 0 auto;
+        border-top: 1px solid $base-border-color;
+        border-left: 1px solid $base-border-color;
+        tr{
+            text-align: center;
+            height: 32px;
+            border-bottom: 1px solid $base-border-color;
+            border-right: 1px solid $base-border-color;
+            th{
+                background-color: #ddd;
+            }
+            &:nth-child(odd){
+                background-color: #f2f2f2;
+            }
+        }
+    }
+}

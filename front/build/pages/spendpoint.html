@@ -1,0 +1,21 @@
+<!-- @@master ../layout.html  -->
+
+<!-- @@block = title-->
+<title>积分兑换</title>
+<!-- @@close-->
+
+<!-- @@block = content-->
+<section class="spendpoint-main" id="spendpoint-main" v-cloak>
+    <h1>积分兑换</h1>
+    <ul>
+        <li><span>商家</span><input v-model="" type="text" v-model="name"></li>
+        <li><span>兑换积分</span><input type="text" v-model="points"></li>
+        <li><a @click="createOrder">生成二维码</a></li>
+    </ul>
+    <div id="qrcode" class="qrcode"></div>
+</section>
+<!-- @@close-->
+
+<!-- @@block = scripts-->
+<script type="text/javascript" src="js/sendpoint.js?rev=@@hash"></script>
+<!-- @@close-->

@@ -1,0 +1,162 @@
+<!-- @@master ../layout.html  -->
+
+<!-- @@block = title-->
+<title>编辑个人信息</title>
+<!-- @@close-->
+
+<!-- @@block = content-->
+<section class="customer-main" id="customer-main" v-cloak>
+    <div class="customer-header-wrap">
+        <img class="customer-logo" src="images/logo.png" />
+        <ul class="customer-nav">
+            <li><a href="index.html">首页</a></li>
+            <li class="select"><a href="customer.html">个人中心</a></li>
+            <li>加盟商</li>
+        </ul>
+        <div class="customer-seach">
+            <input type="search" placeholder="搜索">
+            <i class="customer-bag icon-ylbicon-23"></i>
+            <span>购物车</span>
+        </div>
+    </div>
+    <p class="ylb-navbar">您现在的位置：<a href="index.html">首页</a> > 会员中心</p>
+    <div class="customer-left">
+        <h1 class="customer-left-title">
+            会员中心
+        </h1>
+        <ul>
+            <li class="select"><a href="#customer-info"><i class="icon-ylbicon-01"></i>我的账号</a></li>
+        </ul>
+    </div>
+    <div class="customer-right">
+        <div id="customer-info" class="customer-info">
+            <div class="customer-base">
+                <img :src="info.avatar||'images/customer-default.png'" />
+                <h1>{{info.mobile}}</h1>
+            </div>
+            <div class="customer-asset" :class="{salerasset:info.role=='Merchants'}">
+                <div class="customer-tag">资产</div>
+                <h1>真实姓名： {{info.name||info.mobile}}<br /> 会员类型：
+                    <em v-if="info.role=='Ordinary'">普通会员</em>
+                    <em v-if="info.role=='Merchants'">加盟商家</em>
+                    <em v-if="info.role=='CustomerManager'">客户经理</em>
+                    <em v-if="info.role=='AreaManager'">区域经理</em>
+                </h1>
+                <p>账户余额： <em>{{info.asset.balance}}</em>元<a>充值</a></p>
+                <p v-if="info.role=='Merchants'">账户货款： <em>{{info.asset.paymentForGoods}}</em>元</p>
+                <p v-if="info.role=='Merchants'">税后佣金： <em>{{info.asset.commission}}</em>元</p>
+                <p>可用积分： <em>{{info.asset.score}}</em>分</p>
+                <p>积分基点： <em>{{info.asset.point}}</em>个<a @click="getpoint">领取积分</a></p>
+            </div>
+            <div class="customer-code customer-eqcode">
+                <div class="customer-tag">积分做单</div>
+                <div class="customer-pic ylb-center">
+                    <div id="customer-private-qrcode" class="customer-private-qrcode"></div>
+                </div>
+            </div>
+            <div v-if="info.role=='Merchants'" class="customer-code customer-control">
+                <div class="customer-tag">商家操作</div>
+                <div class="customer-pic">
+                    <a @click="spendpoints">积分兑换</a>
+                </div>
+            </div>
+            <img v-if="info.role=='Ordinary'" class="customer-adv" src="images/adv1.png" />
+        </div>
+        <div class="customer-edit">
+            <ul class="customer-edit-list">
+                <li data-role="password" @click="changetap" :class="{select:password}">二级密码管理</li>
+                <li data-role="avatar" @click="changetap" :class="{select:avatar}">头像修改</li>
+                <li data-role="address" @click="changetap" :class="{select:address}">地址管理</li>
+                <li data-role="detail" @click="changetap" :class="{select:detail}">详细资料</li>
+            </ul>
+            <div v-show="avatar" class="edit-avatar">
+                <h3>请选择jpg,png格式的图片，图片大小小于500k</h3>
+                <img :src="useravatar" />
+                <span id="txsc">点击上传头像</span>
+                <button @click="saveavatar">保存</button>
+            </div>
+            <div v-show="address" class="edit-address">
+                <h3>新增收货地址每均为必填项</span>
+                </h3>
+                <ul>
+                    <li><span>所在地区<em>*</em></span><select name="prov" @change="changeprov" id="prov">
+                            <option value="-1">-请选择省-</option>
+                            <option selected="{{newaddress.provinceCode==p.code}}" v-for="p in plist" value="{{p.code}}">{{p.name}}</option>
+                        </select>
+                        <select name="city" @change="changecity" id="city">
+                            <option value="-1">-请选择市-</option>
+                            <option selected="{{newaddress.cityCode==c.code}}" v-for="c in clist" value="{{c.code}}">{{c.name}}</option>
+                        </select>
+                        <select name="area" @change="changearea" id="area">
+                            <option value="-1">-请选择区-</option>
+                            <option selected="{{newaddress.areaCode==a.code}}" v-for="a in alist" value="{{a.code}}">{{a.name}}</option>
+                        </select>
+                    </li>
+                    <li><span>详细地址<em>*</em></span><input v-model="newaddress.street" type="text"></li>
+                    <li><span>邮政编码<em>*</em></span><input maxlength="6" v-model="newaddress.postCode" type="text"></li>
+                    <li><span>收货人姓名<em>*</em></span><input v-model="newaddress.name" type="text"></li>
+                    <li><span>手机号码<em>*</em></span><input maxlength="11" type="text" v-model="newaddress.mobile"></li>
+                    <!--<li><span>固定电话</span><input class="areacode" type="text"> - <input class="phone" type="text"></li>-->
+                    <li><input type="checkbox" v-model="newaddress.isDefault" id="default" /><label for="default">设置为默认收货地址</label></li>
+                    <li><button @click="saveaddress" class="edit-save">保存</button><button @click="clearaddress" class="edit-save">清空</button></li>
+                </ul>
+                <table>
+                    <tr>
+                        <th>收货人</th>
+                        <th>详细地址</th>
+                        <th>邮编</th>
+                        <th>手机</th>
+                        <th>操作</th>
+                    </tr>
+                    <tr :class="{'default':adr.isDefault}" v-for="adr in addrList">
+                        <td>{{adr.name}}</td>
+                        <td>{{adr.province+adr.city+adr.area+adr.street}}</td>
+                        <td>{{adr.postCode}}</td>
+                        <td>{{adr.mobile}}</td>
+                        <td><a @click="editaddress(adr)" data-index="$index">修改</a><a @click="deladdress" data-id="{{adr.id}}">删除</a></td>
+                    </tr>
+                </table>
+            </div>
+            <div v-show="password" class="edit-password">
+                <ul>
+                    <li><span>原密码</span><input v-model="pwd.currentPassword" type="password"></li>
+                    <li><span>新密码</span><input v-model="pwd.newPassword" type="password"></li>
+                    <li><span>确认密码</span><input v-model="confirmpwd" type="password"></li>
+                    <li><a @click="setpaypwd" class="edit-pwd">确认</a></li>
+                </ul>
+            </div>
+            <div v-show="detail" class="edit-info">
+                <ul>
+                    <li><span>真实姓名</span><input v-model="userinfo.name" type="text"></li>
+                    <li><span>性别</span><select @change="changegender">
+                        <option value="-1">-请选择性别-</option>
+                        <option value="f">男</option>
+                        <option value="fm">女</option>
+                        </select></li>
+                    <li><span>身份证号</span><input maxlength="18" v-model="userinfo.idCard" type="text"></li>
+                    <li><span>手机号码</span>{{userinfo.mobile}}</li>
+                    <li><span>所在地区<em>*</em></span><select name="prov" @change="changeprov" id="prov">
+                            <option value="-1">-请选择省-</option>
+                            <option selected="{{userinfo.provinceCode==p.code}}" v-for="p in plist" value="{{p.code}}">{{p.name}}</option>
+                        </select>
+                        <select name="city" @change="changecity" id="city">
+                            <option value="-1">-请选择市-</option>
+                            <option selected="{{userinfo.cityCode==c.code}}" v-for="c in clist" value="{{c.code}}">{{c.name}}</option>
+                        </select>
+                        <select name="area" @change="changearea" id="area">
+                            <option value="-1">-请选择区-</option>
+                            <option selected="{{userinfo.areaCode==a.code}}" v-for="a in alist" value="{{a.code}}">{{a.name}}</option>
+                        </select>
+                    </li>
+                    <li><span>详细地址<em>*</em></span><input v-model="userinfo.street" type="text"></li>
+                    <li><button @click="saveuserinfo">保存修改</button></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- @@close-->
+
+<!-- @@block = scripts-->
+<script type="text/javascript" src="js/edit.js?rev=@@hash"></script>
+<!-- @@close-->
