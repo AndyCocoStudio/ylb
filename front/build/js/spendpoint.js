@@ -24,7 +24,7 @@
                             alert("请填入商家手机号");
                             return;
                         }
-                        if (!spendpointer.order.merchantMobile) {
+                        if (!spendpointer.order.score) {
                             alert("请填入兑换积分数");
                             return;
                         }
