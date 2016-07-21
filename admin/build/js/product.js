@@ -27,6 +27,7 @@
 		"kind2": "",
 		"kind2Code": ""
 	};
+
 	var m = {
 		data: {
 			others: {
@@ -38,7 +39,18 @@
 		},
 		init: function() {
 			m.getFlist();
-			
+			$("#test").dropzone({
+				url: $.apiUrl + "/upload",
+				paramName: "file",
+				maxFiles: 1,
+				maxFilesize: 1.0, // MB
+				acceptedFiles: "image/*",
+				addRemoveLinks: true,
+				dictResponseError: '上传文件出错！',
+				success: function(file, response) {
+					vcustomer.tobesaler.license = response.data;
+				}
+			});
 			
 		},
 		getData: function () {
@@ -49,6 +61,7 @@
 					if(d.result) {
 						m.data.goods = d.data;
 						m.buildVue();
+						//setTimeout(m.imgUpload(),3000);
 					}
 				}
 			})
@@ -64,7 +77,22 @@
 				}
 			})
 		},
-		
+		imgUpload: function() {
+			alert(1);
+			$("#lbt").dropzone({
+				url: $.apiUrl + "/upload",
+				paramName: "file",
+				maxFiles: 1,
+				maxFilesize: 1.0, // MB
+				acceptedFiles: "image/*",
+				addRemoveLinks: true,
+				dictResponseError: '上传文件出错！',
+				success: function(file, response) {
+					vcustomer.tobesaler.license = response.data;
+				}
+			});
+			alert(2);
+		},
 		buildVue: function() {
 			product = new Vue({
 				el: "#product-main",
@@ -120,6 +148,20 @@
 					},
 				}
 			});
+			setTimeout(function(){
+				$("#tttt").dropzone({
+					url: $.apiUrl + "/upload",
+					paramName: "file",
+					maxFiles: 1,
+					maxFilesize: 1.0, // MB
+					acceptedFiles: "image/*",
+					addRemoveLinks: true,
+					dictResponseError: '上传文件出错！',
+					success: function(file, response) {
+						vcustomer.tobesaler.license = response.data;
+					}
+				});
+			},1000);
 		}
 	};
 	m.init();

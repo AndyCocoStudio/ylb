@@ -30,21 +30,27 @@
                 <ul>
                     <li><a href="areamanager.html"><i class="fa fa-table"></i>区域经理管理</a></li>
                     <li><a href="admin.html"><i class="fa fa-group"></i>后台用户管理</a></li>
+
                 </ul>
             </li>
+            <li><a id="test">test</a></li>
         </ul>
     </div>
     <div class="op-right">
         <h1>商品管理</h1>
-        <!-- <ul v-if="others.path != 'list'">
+        <ul v-show="others.path != 'list'">
             <li><span>商品名</span><input v-model="detail.name" type="text"></li>
             <li><span>价格</span><input v-model="detail.price" type="text"></li>
             <li><span>库存</span><input v-model="detail.sku" type="text"></li>
             <li><span>重量</span><input v-model="detail.weight" type="text"></li>
             <li><span>运费</span><input v-model="detail.freight" type="text"></li>
-            <li><span>列表图</span><span>{{detail.thumbnail[0]}}</span><img :src="detail.thumbnail[0]"></li>
+            <li>
+                <span>列表图</span>
+                <span id="tttt">{{detail.thumbnail[0] ? ' 图片已上传': '请上传图片'}}</span>
+                <img :src="detail.thumbnail[0]">
+            </li>
             <li><span>产品概述</span><input v-model="detail.brief.content" type="text"></li>
-            <li><span>概述图</span><span>{{detail.brief.img}}</span><img :src="detail.brief.img"></li>
+            <li><span>概述图</span><span id="gst">{{detail.brief.img}}gst111111</span><img :src="detail.brief.img"></li>
             <li><span>可抵用积分数</span><input v-model="detail.deduction" type="text"></li>
             <li><span>供应商</span><input v-model="detail.vendorID" type="text"></li>
             <li><span>所属类目</span>
@@ -62,14 +68,14 @@
             </li>
             <li>
                 <span>商品详情图</span>
-                <span id="xq1"><input type="file" name="uploadFile" /></span>
-                <span id="xq2"><input type="file" name="uploadFile" /></span>
-                <span class="xq3"><input type="file" name="uploadFile" /></span>
+                <span id="xq1">+</span>
+                <span id="xq2">+</span>
+                <span class="xq3">+</span>
                 </li>
             <li><span>状态</span><select><option value="OnSell">在售</option><option value="SoldOut">下架</option></select></li>
             <li><a class="white-button" @click="cancle()">取消</a><a class="white-button">确定</a></li>
-        </ul> -->
-        <ul v-if="others.path != 'list'">
+        </ul>
+        <!-- <ul v-if="others.path != 'list'">
             <li><span>商品名</span><input v-model="detail.name" type="text"></li>
             <li><span>价格</span><input v-model="detail.price" type="text"></li>
             <li><span>库存</span><input v-model="detail.sku" type="text"></li>
@@ -101,8 +107,8 @@
                 </li>
             <li><span>状态</span><select><option value="OnSell">在售</option><option value="SoldOut">下架</option></select></li>
             <li><a class="white-button" @click="cancle()">取消</a><a class="white-button" @click="setData()">确定</a></li>
-        </ul>
-        <div v-else>
+        </ul> -->
+        <div v-show="others.path == 'list'">
             <div>商品名称 <input type="text">
                 <select v-on:change="getSlist">
                     <option value="-1">-请选择一级类目-</option>
@@ -128,7 +134,8 @@
                     <td>{{good.name}}</td>
                     <td>{{good.price}}</td>
                     <td>{{good.deduction}}</td>
-                    <td><a class="white-button" @click="editGoods()">编辑</a><a id={{good.goodsID}} class="white-button" @click="delGoods">删除</a></td>
+                    <td><a class="white-button" @click="editGoods()">编辑</a>
+                    <a class="white-button" @click="">详情</a><a id={{good.goodsID}} class="white-button" @click="delGoods">删除</a></td>
                 </tr>
             </table>
         </div>
@@ -138,8 +145,10 @@
 </body>
 <script src="js/libs/jquery-2.1.4.min.js" type="text/javascript"></script>
 <script src="js/libs/bootstrap.min.js" type="text/javascript"></script>
+<script src="js/libs/dropzone.js"></script>
 <script src="js/libs/vue.min.js" type="text/javascript"></script>
 <script src="js/base.js?rev=@@hash" type="text/javascript"></script>
+
 
 <script type="text/javascript" src="js/product.js?rev=@@hash"></script>
 <!-- @@close
