@@ -88,6 +88,9 @@
 				case "4020":
 					$.ylbAlert("该区域已有区域经理");
 					break;
+				case "4021":
+					$.ylbAlert("该用户非加盟商家");
+					break;
 				default:
 					$.ylbAlert("服务器又开小差");
 					break;

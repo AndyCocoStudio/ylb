@@ -13,9 +13,9 @@
 
 
 
-	<link rel="stylesheet" type="text/css" href="css/style.css?rev=e821bcd585180c08344454cf6bc5fbb8" />
+	<link rel="stylesheet" type="text/css" href="css/style.css?rev=7e121d452f2ef7237a4ae1aa8a4b861c" />
 	<link rel="stylesheet" type="text/css" href="css/pickday.css" />
-	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=e821bcd585180c08344454cf6bc5fbb8" />
+	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=7e121d452f2ef7237a4ae1aa8a4b861c" />
 </head>
 
 <body>
@@ -35,9 +35,10 @@
 <section class="spendpoint-main" id="spendpoint-main" v-cloak>
     <h1>积分兑换</h1>
     <ul>
-        <li><span>商家</span><input v-model="" type="text" v-model="name"></li>
-        <li><span>兑换积分</span><input type="text" v-model="points"></li>
-        <li><a @click="createOrder">生成二维码</a></li>
+        <li><span>商家手机号</span><input type="text" maxlength="11" @change="getstoreinfo" v-model="order.merchantMobile"></li>
+        <li><span>店铺名：</span>{{merchant.name}}</li>
+        <li><span>积分数</span><input type="text" v-model="order.score"></li>
+        <li><a class="pay" @click="createOrder">支付</a></li>
     </ul>
     <div id="qrcode" class="qrcode"></div>
 </section>
@@ -66,9 +67,9 @@
 <script src="js/libs/pickday.min.js" type="text/javascript"></script>
 <script src="js/libs/qrcode.min.js" type="text/javascript"></script>
 <script src="js/libs/dropzone.js" type="text/javascript"></script>
-<script src="js/base.js?rev=e821bcd585180c08344454cf6bc5fbb8" type="text/javascript"></script>
+<script src="js/base.js?rev=7e121d452f2ef7237a4ae1aa8a4b861c" type="text/javascript"></script>
 
-<script type="text/javascript" src="js/sendpoint.js?rev=e821bcd585180c08344454cf6bc5fbb8"></script>
+<script type="text/javascript" src="js/spendpoint.js?rev=7e121d452f2ef7237a4ae1aa8a4b861c"></script>
 
 
 </html>

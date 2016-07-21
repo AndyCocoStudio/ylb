@@ -1,4 +1,4 @@
-.sendpoint-main{
+.sendpoint-main, .spendpoint-main{
     width: 320px;
     margin: 20px auto 0;
     padding-bottom: 132px;
@@ -50,6 +50,15 @@
                 margin-left: 20px;
                 text-decoration: underline;
                 color: $link-blue;
+            }
+            a.pay{
+                width: 80px;
+                background-color: $base-orange;
+                color: #fff;
+                text-align: center;
+                line-height: 28px;
+                display: inline-block;
+                text-decoration: none;
             }
             &:last-child{
                 text-align: center;

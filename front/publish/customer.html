@@ -13,9 +13,9 @@
 
 
 
-	<link rel="stylesheet" type="text/css" href="css/style.css?rev=7b52fece168735dda5353e8abe25f350" />
+	<link rel="stylesheet" type="text/css" href="css/style.css?rev=b6133163f9c54b458bb90881b12f7177" />
 	<link rel="stylesheet" type="text/css" href="css/pickday.css" />
-	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=7b52fece168735dda5353e8abe25f350" />
+	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=b6133163f9c54b458bb90881b12f7177" />
 </head>
 
 <body>
@@ -93,15 +93,15 @@
                     <div id="customer-private-qrcode" class="customer-private-qrcode"></div>
                 </div>
             </div>
-            <div v-if="info.role=='Merchants'||info.role=='AM'||info.role=='CM'" class="customer-code customer-control">
+            <div class="customer-code customer-control">
                 <div class="customer-tag">商家操作</div>
                 <div class="customer-pic">
                     <!--<a @click="spendpoints">积分兑换</a>-->
                     <a href="spendpoint.html">积分兑换</a>
-                    <a href="sendpoint.html">商家做单</a>
+                    <a v-if="info.role=='Merchants'||info.role=='AM'||info.role=='CM'" href="sendpoint.html">商家做单</a>
                 </div>
             </div>
-            <img v-if="info.role!='Merchants'&&info.role!='AM'&&info.role!='CM'" class="customer-adv" src="images/adv1.png" />
+            <!--<img v-if="info.role!='Merchants'&&info.role!='AM'&&info.role!='CM'" class="customer-adv" src="images/adv1.png" />-->
         </div>
         <!--客户经理统计-->
         <div v-if="info.role=='CustomerManager'||info.role=='CM'" class="customer-count">
@@ -125,13 +125,13 @@
                 <li @click="selectorder(1)" :class="{'select':jfdh}">积分兑换</li>
                 <li @click="selectorder(2)" :class="{'select':xsxf}">线上消费</li>
                 <li @click="selectorder(3)" :class="{'select':sjzd}">线下消费</li>
-                <li v-if="info.role=='Merchants'" @click="selectorder(4)" :class="{'select':zzsjzd}">商家做单</li>
+                <li v-if="info.role=='Merchants'||info.role=='AM'||info.role=='CM'" @click="selectorder(4)" :class="{'select':zzsjzd}">商家做单</li>
             </ul>
             <table v-show="jfdh" class="customer-order-list">
                 <tr>
                     <th>订单号</th>
-                    <th>商品名称</th>
-                    <th>商品类目</th>
+                    <!--<th>商品名称</th>
+                    <th>商品类目</th>-->
                     <th>商家</th>
                     <th>买家</th>
                     <th>总价</th>
@@ -145,8 +145,8 @@
                 </tr>
                 <tr v-for="h in jfdhlist">
                     <td>{{h.orderID}}</td>
-                    <td>{{h.items[0].name}}</td>
-                    <td>{{h.items[0].goodsKind}}</td>
+                    <!--<td>{{h.items[0].name}}</td>
+                    <td>{{h.items[0].goodsKind}}</td>-->
                     <td>{{h.storeName}}</td>
                     <td>{{h.buyer||h.buyerMobile}}</td>
                     <td>{{h.totalPrice}}</td>
@@ -703,9 +703,9 @@
 <script src="js/libs/pickday.min.js" type="text/javascript"></script>
 <script src="js/libs/qrcode.min.js" type="text/javascript"></script>
 <script src="js/libs/dropzone.js" type="text/javascript"></script>
-<script src="js/base.js?rev=7b52fece168735dda5353e8abe25f350" type="text/javascript"></script>
+<script src="js/base.js?rev=b6133163f9c54b458bb90881b12f7177" type="text/javascript"></script>
 
-<script type="text/javascript" src="js/customer.js?rev=7b52fece168735dda5353e8abe25f350"></script>
+<script type="text/javascript" src="js/customer.js?rev=b6133163f9c54b458bb90881b12f7177"></script>
 
 
 </html>
