@@ -1,1 +1,0 @@
-!function(){var i={mobile:"",password:""},n={init:function(){n.buildVue()},buildVue:function(){i=new Vue({el:"#login-main",data:i,methods:{login:function(){$.ajax({url:"/api/staff/login",contentType:"application/json; charset=utf-8",type:"POST",data:JSON.stringify({mobile:i.mobile,password:i.password})}).done(function(i){})}}})}};n.init()}();
