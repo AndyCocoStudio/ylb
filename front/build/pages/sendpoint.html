@@ -1,0 +1,30 @@
+<!-- @@master ../layout.html  -->
+
+<!-- @@block = title-->
+<title>支付方式</title>
+<!-- @@close-->
+
+<!-- @@block = content-->
+<section class="sendpoint-main" id="sendpoint-main" v-cloak>
+    <h1>商家做单</h1>
+    <div class="sendpoint-asset">
+        <span>货款：{{asset.paymentForGoods}}</span>
+        <span>佣金：{{asset.commission}}</span>
+        <span>余额：{{asset.balance}}</span>
+    </div>
+    <ul>
+        <li><span>赠送对象</span><label v-if="!free">{{uid}}</label><input v-if="free" maxlength="11" v-model="uid" type="text"></li>
+        <li><span>商品名</span><input type="text" v-model="name"></li>
+        <li><span>商品分类</span><input type="text" v-model="type"></li>
+        <li><span>积分数</span><input type="text" v-model="points"></li>
+        <li><span>所需服务费</span>{{(points*config.pr/100).toFixed(2)}}</li>
+        <li><span>使用货款/佣金</span><input type="text" @change="inuse" v-model="poundage"><!--<em>*货款/佣金最高可用{{(points*config.pr*config.gsd/10000).toFixed(2)}}</em>--></li>
+        <li><span>仍需支付金额</span>{{(points*config.pr/100-poundage).toFixed(2)}}</li>
+        <li><button @click="createOrder">支付</button><a>充值</a></li>
+    </ul>
+</section>
+<!-- @@close-->
+
+<!-- @@block = scripts-->
+<script type="text/javascript" src="js/sendpoint.js?rev=@@hash"></script>
+<!-- @@close-->

@@ -1,0 +1,76 @@
+<!-- @@master ../layout.html  -->
+
+<!-- @@block = title-->
+<title>优良宝商城</title>
+<!-- @@close-->
+
+<!-- @@block = content-->
+<section class="index-main" id="index-main" v-cloak>
+    <div class="ylb-inlinewrap l1">
+        <div class="d1 index-img ylb-hidden ylb-relative">
+            <article>
+                <span>{{banner[0].brief}}</span>
+                <a href="{{banner[0].images[0].url}}">更多</a>
+                <div></div>
+            </article>
+            <img :src="banner[0].images[0].image" />
+        </div>
+        <div class="d2 index-img ylb-hidden ylb-relative">
+            <article>
+                <span>{{banner[1].brief}}</span>
+                <a href="{{banner[1].images[0].url}}">更多</a>
+                <div></div>
+            </article>
+            <img :src="banner[1].images[0].image" />
+        </div>
+    </div>
+    <div class="ylb-inlinewrap l2">
+        <div class="d1 index-img ylb-hidden ylb-relative">
+            <article>
+                <span>{{banner[2].brief}}</span>
+                <a href="{{banner[2].images[0].url}}">更多</a>
+                <div></div>
+            </article>
+            <img :src="banner[2].images[0].image" />
+        </div>
+        <div class="d2 ylb-hidden ylb-relative">
+            <span>产品分类</span>
+            <a href="list.html?c=0">更多</a>
+        </div>
+    </div>
+    <div class="ylb-inlinewrap l3">
+        <div class="dt">
+            <div class="d1 index-img ylb-hidden ylb-relative">
+                <article>
+                    <span>{{banner[3].brief}}</span>
+                    <a href="{{banner[3].images[0].url}}">更多</a>
+                    <div></div>
+                </article>
+                <img :src="banner[3].images[0].image" />
+            </div>
+        </div>
+        <div class="dd">
+            <div class="d2 index-img ylb-hidden ylb-relative">
+                <article>
+                    <span>{{banner[4].brief}}</span>
+                    <a href="{{banner[4].images[0].url}}">更多</a>
+                    <div></div>
+                </article>
+                <img :src="banner[4].images[0].image" />
+            </div>
+            <div class="d3 index-img ylb-hidden ylb-relative">
+                <article>
+                    <span>{{banner[5].brief}}</span>
+                    <a href="{{banner[5].images[0].url}}">更多</a>
+                    <div></div>
+                </article>
+                <img :src="banner[5].images[0].image" />
+            </div>
+        </div>
+    </div>
+</section>
+<!-- @@close-->
+
+<!-- @@block = scripts-->
+<script type="text/javascript" src="js/index.js?rev=@@hash"></script>
+<!-- @@close-->

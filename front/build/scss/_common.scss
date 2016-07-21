@@ -1,7 +1,7 @@
 @charset "utf-8";
-html{ -webkit-text-size-adjust:none; }
+html{ -webkit-text-size-adjust:none; -webkit-appearance:none; }
 body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, dl, dt, dd, ul, ol, li, pre, form, fieldset, legend, button, input, textarea, th, td, img{ border:medium none; margin: 0; padding: 0; }
-body, button, input, select, textarea { color:#666; font:0.13rem Arial,MicrosoftYaHei,"微软雅黑"; }
+body, button, input, select, textarea { color:#666; font: 12px/1.5 Arial,Microsoft YaHei; }
 h1, h2, h3, h4, h5, h6 { font-size: 100%; font-weight:normal; }
 em { font-style:normal; }
 ul, ol { list-style: none; list-style-type:none; }
@@ -11,3 +11,7 @@ a { cursor:pointer; }
 table { border-collapse: collapse; border-spacing: 0; }
 .clearfloat { clear:both; font-size: 1px; height:0; line-height: 0px; }
 abbr, article, aside, audio, canvas, datalist, details, dialog, eventsource, figure, footer, header, hgroup, mark, menu, meter, nav, output, progress, section, time, video{ display:block; }
+button{ cursor:pointer; }
+[v-cloak] {
+  display: none;
+}

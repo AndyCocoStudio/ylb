@@ -1,0 +1,65 @@
+.shops-main{
+    width: 100%;
+    margin: 0 auto;
+    overflow-x: hidden;
+    h1{
+        width: 800px;
+        margin: 0 auto;
+        font-size: 24px;
+        line-height: 60px;
+    }
+    .shops-wrap{
+        width: 960px;
+        margin: 0 auto 128px;
+        border-top: 1px solid $base-border-color;
+        overflow: hidden;
+        .shops-product{
+            //margin-left: 157px;
+            margin: 0 auto;
+            width: 813px;
+            ul{
+                overflow: hidden;
+                li{
+                    position: relative;
+                    border: 1px solid $base-border-color;
+                    width: 253px;
+                    float: left;
+                    margin: 15px 0 0 15px;
+                    img{
+                        padding-bottom: 10px;
+                        width: 253px;
+                        height: 253px;
+                    }
+                    p{
+                        font-size: 18px;
+                        color: $base-orange;
+                        line-height: 1.5;
+                        padding: 0 15px;
+                        em{
+                            margin-left: 10px;
+                            font-size: 12px;
+                            color: #a6a6a6;
+                        }
+                    }
+                    h2{
+                        padding: 0 15px 10px;
+                        line-height: 15px;
+                        height: 30px;
+                    }
+                    &:hover{
+                        a{
+                            display: block;
+                            width: 253px;
+                            height: 100%;
+                            background: #000;
+                            opacity: 0.2;
+                            position: absolute;
+                            left: 0;
+                            top: 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

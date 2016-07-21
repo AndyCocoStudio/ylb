@@ -4,6 +4,7 @@ var sass = require('gulp-ruby-sass');
 var rev = require('gulp-rev-append');
 var uglify = require('gulp-uglify');
 var minify = require('gulp-minify-css');
+var prefixer = require('gulp-autoprefixer');
 
 gulp.task('extend', function(){
     gulp.src('./build/pages/*.html')
@@ -14,6 +15,7 @@ gulp.task('extend', function(){
 
 gulp.task('scss', function() {
     return sass('./build/scss',  { sourcemap: false })
+    .pipe(prefixer())
     .pipe(minify())
     .pipe(gulp.dest('./publish/css'));
 });

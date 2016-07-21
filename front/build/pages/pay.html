@@ -1,0 +1,35 @@
+<!-- @@master ../layout.html  -->
+
+<!-- @@block = title-->
+<title>支付方式</title>
+<!-- @@close-->
+
+<!-- @@block = content-->
+<section id="pay-main" class="pay-main" v-cloak>
+    <!--<ul class="pay-cource">
+        <li><span>1</span><br>确认订单信息</li>
+        <li class="select"><span>2</span><br>付款方式</li>
+        <li><span>3</span><br>确认收货</li>
+    </ul>-->
+    <div class="pay-detail">
+        <h1 v-for="p in order.product">{{p.name}}</h1>
+        <h2>订单提交成功，请您尽快付款！<br>订单号：{{id}}</h2>
+        <p>
+            <em>积分支付:<span>{{order.payInScore}}</span>元</em> 
+            <em>余额支付:<span>{{order.payInBalance}}</span>元</em>
+            <em>货款支付:<span>{{order.payInPaymentForGoods}}</span>元</em> 
+            <em>佣金支付:<span>{{order.payInCommission}}</span>元</em> 
+            <em>现金支付:<span>{{order.payInCash}}</span>元</em></p>
+    </div>
+    <div class="pay-way">
+        <h1>现金部分请选择支付方式</h1>
+        <!--<input name="payway" @change="selectpayway(1)" type="radio" checked="{{payway==1}}" id="zfb"><label for="zfb">支付宝支付</label>-->
+        <input name="payway" @change="selectpayway(2)" type="radio" checked="{{payway==2}}" id="wy"><label for="wy">网银支付</label>
+    </div>
+    <div class="payorder"><button @click="payorder">确认支付</button></div>
+</section>
+<!-- @@close-->
+
+<!-- @@block = scripts-->
+<script type="text/javascript" src="js/pay.js?rev=@@hash"></script>
+<!-- @@close-->
