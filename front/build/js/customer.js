@@ -26,6 +26,7 @@
         fzdsh: false,
         fjssh: false,
         zczc: false,
+        zzsjzd: false,
         spendpoint: {
             name: "",
             type: "",
@@ -82,7 +83,7 @@
             $.checkSession();
             $.checkFlag();
             m.getUserInfo();
-            m.imgUpload();
+            // m.imgUpload();
             m.getProvince();
         },
         // 获取省
@@ -127,7 +128,7 @@
                 maxFiles: 1,
                 maxFilesize: 1.0, // MB
                 acceptedFiles: "image/*",
-                addRemoveLinks: true,
+                addRemoveLinks: false,
                 dictResponseError: '上传文件出错！',
                 success: function (file, response) {
                     vcustomer.tobesaler.license = response.data;
@@ -139,7 +140,7 @@
                 maxFiles: 2,
                 maxFilesize: 1.0, // MB
                 acceptedFiles: "image/*",
-                addRemoveLinks: true,
+                addRemoveLinks: false,
                 dictResponseError: '上传文件出错！',
                 success: function (file, response) {
                     vcustomer.tobesaler.legalPersonIDCardImage.push(response.data);
@@ -151,7 +152,7 @@
                 maxFiles: 1,
                 maxFilesize: 1.0, // MB
                 acceptedFiles: "image/*",
-                addRemoveLinks: true,
+                addRemoveLinks: false,
                 dictResponseError: '上传文件出错！',
                 success: function (file, response) {
                     vcustomer.tobesaler.legalPersonWithIDCardInHandImage = response.data;
@@ -163,7 +164,7 @@
                 maxFiles: 1,
                 maxFilesize: 1.0, // MB
                 acceptedFiles: "image/*",
-                addRemoveLinks: true,
+                addRemoveLinks: false,
                 dictResponseError: '上传文件出错！',
                 success: function (file, response) {
                     vcustomer.tobesaler.storeAppearance = response.data;
@@ -175,7 +176,7 @@
                 maxFiles: 4,
                 maxFilesize: 4.0, // MB
                 acceptedFiles: "image/*",
-                addRemoveLinks: true,
+                addRemoveLinks: false,
                 dictResponseError: '上传文件出错！',
                 success: function (file, response) {
                     vcustomer.tobesaler.storeInsideImages.push(response.data);
@@ -187,7 +188,7 @@
                 maxFiles: 2,
                 maxFilesize: 4.0, // MB
                 acceptedFiles: "image/*",
-                addRemoveLinks: true,
+                addRemoveLinks: false,
                 dictResponseError: '上传文件出错！',
                 success: function (file, response) {
                     vcustomer.tobearea.legalPersonIDCardImage.push(response.data);
@@ -199,7 +200,7 @@
                 maxFiles: 1,
                 maxFilesize: 4.0, // MB
                 acceptedFiles: "image/*",
-                addRemoveLinks: true,
+                addRemoveLinks: false,
                 dictResponseError: '上传文件出错！',
                 success: function (file, response) {
                     vcustomer.tobearea.legalPersonWithIDCardInHandImage = response.data;
@@ -277,7 +278,7 @@
                 });
             });
         },
-        //获取商家做单订单列表
+        //获取普通会员做单订单列表
         getSJZDOrder: function () {
             $.when($.ajax({
                 url: $.apiUrl + "/user/orders?k=0",
@@ -285,6 +286,17 @@
             })).done(function (d) {
                 $.ylbAjaxHandler(d, function () {
                     vcustomer.sjzdlist = d.data.orders;
+                    m.getZZSJZDOrder();
+                });
+            });
+        },
+        getZZSJZDOrder: function () {
+            $.when($.ajax({
+                url: $.apiUrl + "/user/orders?k=3",
+                type: "GET"
+            })).done(function (d) {
+                $.ylbAjaxHandler(d, function () {
+                    vcustomer.zzsjzdlist = d.data.orders;
                     m.getReward();
                 });
             });
@@ -347,21 +359,31 @@
                                 vcustomer.jfdh = true;
                                 vcustomer.sjzd = false;
                                 vcustomer.xsxf = false;
+                                vcustomer.zzsjzd = false;
                                 break;
                             case 2:
                                 vcustomer.jfdh = false;
                                 vcustomer.sjzd = false;
                                 vcustomer.xsxf = true;
+                                vcustomer.zzsjzd = false;
                                 break;
                             case 3:
                                 vcustomer.jfdh = false;
                                 vcustomer.sjzd = true;
                                 vcustomer.xsxf = false;
+                                vcustomer.zzsjzd = false;
+                                break;
+                            case 4:
+                                vcustomer.jfdh = false;
+                                vcustomer.sjzd = false;
+                                vcustomer.xsxf = false;
+                                vcustomer.zzsjzd = true;
                                 break;
                             default:
                                 vcustomer.jfdh = true;
                                 vcustomer.sjzd = false;
                                 vcustomer.xsxf = false;
+                                vcustomer.zzsjzd = false;
                                 break;
                         }
                     },
@@ -776,6 +798,7 @@
                 }
             });
             m.createQRcode();
+            setTimeout(m.imgUpload(), 300);
         },
         countDown: function () {
             //## 再次获取验证码倒计时

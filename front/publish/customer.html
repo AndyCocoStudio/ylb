@@ -13,9 +13,9 @@
 
 
 
-	<link rel="stylesheet" type="text/css" href="css/style.css?rev=80fe0d9d4456a40a0d07a007ff7676dd" />
+	<link rel="stylesheet" type="text/css" href="css/style.css?rev=7b52fece168735dda5353e8abe25f350" />
 	<link rel="stylesheet" type="text/css" href="css/pickday.css" />
-	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=80fe0d9d4456a40a0d07a007ff7676dd" />
+	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=7b52fece168735dda5353e8abe25f350" />
 </head>
 
 <body>
@@ -49,7 +49,7 @@
     <p class="ylb-navbar">您现在的位置：<a href="index.html">首页</a> > 会员中心</p>
     <div class="customer-left">
         <h1 class="customer-left-title">
-            会员中心
+            会员中心<a id="test">heheh</a>
         </h1>
         <ul>
             <li class="select"><a href="#customer-info"><i class="icon-ylbicon-01"></i>我的账号</a></li>
@@ -124,7 +124,8 @@
             <ul class="customer-order-type">
                 <li @click="selectorder(1)" :class="{'select':jfdh}">积分兑换</li>
                 <li @click="selectorder(2)" :class="{'select':xsxf}">线上消费</li>
-                <li @click="selectorder(3)" :class="{'select':sjzd}">商家做单</li>
+                <li @click="selectorder(3)" :class="{'select':sjzd}">线下消费</li>
+                <li v-if="info.role=='Merchants'" @click="selectorder(4)" :class="{'select':zzsjzd}">商家做单</li>
             </ul>
             <table v-show="jfdh" class="customer-order-list">
                 <tr>
@@ -274,6 +275,59 @@
                         <a v-if="s.payStatus=='Paying'" href="http://api.hnylbsc.com/unionpay?id={{s.orderID}}">继续支付</a>
                         <a v-if="s.payStatus=='Paying'" @click="cancel(s.orderID)" data-id="{{s.orderID}}">取消</a>
                         <a v-if="s.payStatus=='Paid'&&s.orderStatus=='Reject'" @click="showreject(s.reason)">拒绝理由</a>
+                    </td>
+                </tr>
+            </table>
+            <table v-show="zzsjzd" class="customer-order-list">
+                <tr>
+                    <th>订单号</th>
+                    <th>商品名称</th>
+                    <th>商品类目</th>
+                    <th>商家</th>
+                    <th>买家</th>
+                    <th>手续费</th>
+                    <th>赠送积分</th>
+                    <th>创建时间</th>
+                    <th>状态</th>
+                    <th>操作</th>
+                </tr>
+                <tr v-show="zzsjzdlist.length<1">
+                    <td colspan="10">
+                        您暂无做单订单
+                    </td>
+                </tr>
+                <tr v-for="z in zzsjzdlist">
+                    <td>{{z.orderID}}</td>
+                    <td>{{z.goodsName}}</td>
+                    <td>{{z.goodsKind}}</td>
+                    <td>{{z.storeName}}</td>
+                    <td>{{z.buyer||z.buyerMobile}}</td>
+                    <td>{{z.totalPrice}}</td>
+                    <td>{{z.givingScore}}</td>
+                    <td>{{z.createTime.substring(0,z.createTime.length-6)}}</td>
+                    <td v-if="z.payStatus=='Unpaid'">
+                        <em v-if="z.orderStatus!='Cancel'">待支付</em>
+                        <em v-else>已取消</em>
+                    </td>
+                    <td v-else>
+                        <em v-if="z.orderStatus=='New'">审核中</em>
+                        <em v-if="z.orderStatus=='Agree'">完成</em>
+                        <em v-if="z.orderStatus=='Reject'">拒绝</em>
+                        <!--<em v-if="s.orderStatus=='Refund'">退款中</em>
+                        <em v-if="s.orderStatus=='Refunded'">已退款</em>
+                        <em v-if="s.orderStatus=='Sending'">待发货</em>
+                        <em v-if="s.orderStatus=='Sent'">已发货</em>
+                        <em v-if="s.orderStatus=='Received'">已收货</em>-->
+                    </td>
+                    <td>
+                        <a v-if="z.payStatus=='Unpaid'&&z.orderStatus!='Cancel'" href="pay.html?oid={{z.orderID}}">支付</a><br
+                            v-if="z.payStatus=='Unpaid'&&z.orderStatus!='Cancel'" />
+                        <a v-if="z.payStatus=='Unpaid'&&z.orderStatus!='Cancel'" @click="cancel(z.orderID)" data-id="{{z.orderID}}">取消</a><br
+                            v-if="z.payStatus=='Unpaid'&&z.orderStatus!='Cancel'" />
+                        <!--<a v-if="s.payStatus=='Paid'&&s.orderStatus!='Cancel'" data-id="{{s.orderID}}">退款</a>-->
+                        <a v-if="z.payStatus=='Paying'" href="http://api.hnylbsc.com/unionpay?id={{z.orderID}}">继续支付</a>
+                        <a v-if="z.payStatus=='Paying'" @click="cancel(z.orderID)" data-id="{{z.orderID}}">取消</a>
+                        <a v-if="z.payStatus=='Paid'&&z.orderStatus=='Reject'" @click="showreject(z.reason)">拒绝理由</a>
                     </td>
                 </tr>
             </table>
@@ -649,9 +703,9 @@
 <script src="js/libs/pickday.min.js" type="text/javascript"></script>
 <script src="js/libs/qrcode.min.js" type="text/javascript"></script>
 <script src="js/libs/dropzone.js" type="text/javascript"></script>
-<script src="js/base.js?rev=80fe0d9d4456a40a0d07a007ff7676dd" type="text/javascript"></script>
+<script src="js/base.js?rev=7b52fece168735dda5353e8abe25f350" type="text/javascript"></script>
 
-<script type="text/javascript" src="js/customer.js?rev=80fe0d9d4456a40a0d07a007ff7676dd"></script>
+<script type="text/javascript" src="js/customer.js?rev=7b52fece168735dda5353e8abe25f350"></script>
 
 
 </html>

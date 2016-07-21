@@ -24,9 +24,20 @@
             })).done(function (d) {
                 $.ylbAjaxHandler(d, function () {
                     asset.transfer = d.data.transfers;
-                    m.buildVue();
+                    m.getRecharge();
                 });
             });
+        },
+        getRecharge: function () {
+            $.when($.ajax({
+                url: $.apiUrl + "/user/recharges",
+                type: "GET"
+            })).done(function (d) {
+                $.ylbAjaxHandler(d, function () {
+                    asset.recharge=d.data.recharges;
+                    m.buildVue();
+                });
+            })
         },
         buildVue: function () {
             asset = new Vue({

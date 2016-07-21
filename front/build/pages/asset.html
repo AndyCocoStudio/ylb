@@ -9,8 +9,8 @@
     <ul class="asset-point">
         <li><span>当前可用积分</span><em>{{detail.score}}</em></li>
         <li><span>剩余可领积分</span><em>{{detail.scoreInPool}}</em></li>
-        <li><span>已领积分</span><em>{{}}</em></li>
-        <li><span>已消费积分</span><em>{{}}</em></li>
+        <li><span>已领取积分</span><em>{{detail.grantScore}}</em></li>
+        <li><span>已消费积分</span><em>{{detail.givenScore}}</em></li>
     </ul>
     <h1 class="asset-title">资产转出记录</h1>
     <table class="asset-table">
@@ -36,6 +36,25 @@
         </tr>
     </table>
     <h1 class="asset-title">充值记录</h1>
+    <table class="asset-table">
+        <tr>
+            <th>ID</th>
+            <th>充值时间</th>
+            <th>充值金额</th>
+            <th>状态</th>
+            <th>操作</th>
+        </tr>
+        <tr v-for="t in recharge">
+            <td>{{t.id}}</td>
+            <td>{{t.createTime}}</td>
+            <td>{{t.amount}}</td>>
+            <td>
+                <em v-if="t.payStatus=='Paid'">成功</em>
+                <em v-else>未支付</em>
+            </td>
+            <td><a v-if="t.payStatus!='Paid'" href="http://api.hnylbsc.com/unionpay?id={{t.id}}">支付</a></td>
+        </tr>
+    </table>
 </section>
 <!-- @@close-->
 

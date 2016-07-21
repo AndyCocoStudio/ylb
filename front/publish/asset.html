@@ -13,9 +13,9 @@
 
 
 
-	<link rel="stylesheet" type="text/css" href="css/style.css?rev=1b4d759ca433e94c77f46b180aff646f" />
+	<link rel="stylesheet" type="text/css" href="css/style.css?rev=db67c1af0fdfbbff44665e54ecb1a0e0" />
 	<link rel="stylesheet" type="text/css" href="css/pickday.css" />
-	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=1b4d759ca433e94c77f46b180aff646f" />
+	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=db67c1af0fdfbbff44665e54ecb1a0e0" />
 </head>
 
 <body>
@@ -36,8 +36,8 @@
     <ul class="asset-point">
         <li><span>当前可用积分</span><em>{{detail.score}}</em></li>
         <li><span>剩余可领积分</span><em>{{detail.scoreInPool}}</em></li>
-        <li><span>已领积分</span><em>{{}}</em></li>
-        <li><span>已消费积分</span><em>{{}}</em></li>
+        <li><span>已领取积分</span><em>{{detail.grantScore}}</em></li>
+        <li><span>已消费积分</span><em>{{detail.givenScore}}</em></li>
     </ul>
     <h1 class="asset-title">资产转出记录</h1>
     <table class="asset-table">
@@ -63,6 +63,25 @@
         </tr>
     </table>
     <h1 class="asset-title">充值记录</h1>
+    <table class="asset-table">
+        <tr>
+            <th>ID</th>
+            <th>充值时间</th>
+            <th>充值金额</th>
+            <th>状态</th>
+            <th>操作</th>
+        </tr>
+        <tr v-for="t in recharge">
+            <td>{{t.id}}</td>
+            <td>{{t.createTime}}</td>
+            <td>{{t.amount}}</td>>
+            <td>
+                <em v-if="t.payStatus=='Paid'">成功</em>
+                <em v-else>未支付</em>
+            </td>
+            <td><a v-if="t.payStatus!='Paid'" href="http://api.hnylbsc.com/unionpay?id={{t.id}}">支付</a></td>
+        </tr>
+    </table>
 </section>
 
 	<div id="ylb-layout">
@@ -89,9 +108,9 @@
 <script src="js/libs/pickday.min.js" type="text/javascript"></script>
 <script src="js/libs/qrcode.min.js" type="text/javascript"></script>
 <script src="js/libs/dropzone.js" type="text/javascript"></script>
-<script src="js/base.js?rev=1b4d759ca433e94c77f46b180aff646f" type="text/javascript"></script>
+<script src="js/base.js?rev=db67c1af0fdfbbff44665e54ecb1a0e0" type="text/javascript"></script>
 
-<script type="text/javascript" src="js/asset.js?rev=1b4d759ca433e94c77f46b180aff646f"></script>
+<script type="text/javascript" src="js/asset.js?rev=db67c1af0fdfbbff44665e54ecb1a0e0"></script>
 
 
 </html>

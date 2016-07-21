@@ -1,0 +1,1 @@
+!function(){var i={},n={init:function(){n.buildVue()},buildVue:function(){i=new Vue({el:"#spendpoint-main",data:i,methods:{createOrder:function(){$.ajax({url:$.apiUrl+"/order/shoppingoffline",type:"PUT",data:JSON.stringify({})})}}})}};n.init()}();

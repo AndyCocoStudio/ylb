@@ -53,7 +53,7 @@
 					$.ylbAlert("暂无可领取积分");
 					break;
 				case "4009":
-					$.ylbAlert("领取积分失败");
+					$.ylbAlert("今日已领取积分");
 					break;
 				case "4010":
 					$.ylbAlert("积分点为0");
