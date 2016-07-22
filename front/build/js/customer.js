@@ -681,11 +681,8 @@
                         }).done(function (d) {
                             $.ylbAjaxHandler(d, function () {
                                 $.ylbAlert("创建成功");
-                                vcustomer.tj = {
-                                    mobile: "",
-                                    captcha: "",
-                                    referrerMobile: ""
-                                };
+                                vcustomer.tj.mobile = "";
+                                vcustomer.tj.captcha = "";
                             })
                         })
                     },
