@@ -1,5 +1,5 @@
 (function() {
-	var product = {
+	var detail = {
 		"goodsID": "",
 		"name": "",
 		"price": "",
@@ -36,6 +36,7 @@
 			goods: {},
 			flist: [],
 			slist: [],
+			detail: detail
 		},
 		init: function() {
 			m.getFlist();
@@ -43,6 +44,30 @@
 				url: $.apiUrl + "/upload",
 				paramName: "file",
 				maxFiles: 1,
+				maxFilesize: 1.0, // MB
+				acceptedFiles: "image/*",
+				addRemoveLinks: true,
+				dictResponseError: '上传文件出错！',
+				success: function(file, response) {
+					vcustomer.tobesaler.license = response.data;
+				}
+			});
+			$("#gst").dropzone({
+				url: $.apiUrl + "/upload",
+				paramName: "file",
+				maxFiles: 1,
+				maxFilesize: 1.0, // MB
+				acceptedFiles: "image/*",
+				addRemoveLinks: true,
+				dictResponseError: '上传文件出错！',
+				success: function(file, response) {
+					vcustomer.tobesaler.license = response.data;
+				}
+			});
+			$("#spxqt").dropzone({
+				url: $.apiUrl + "/upload",
+				paramName: "file",
+				maxFiles: 3,
 				maxFilesize: 1.0, // MB
 				acceptedFiles: "image/*",
 				addRemoveLinks: true,

@@ -1,0 +1,1 @@
+!function(){var t={data:{},inIt:function(){t.getData()},getData:function(){$.ajax({url:"/api/transfers",type:"get"}).done(function(t){t.result&&console.log(t.result)})},bindVue:function(){new Vue({el:"#transfers-main",data:t.data,methods:{}})}};t.inIt()}();

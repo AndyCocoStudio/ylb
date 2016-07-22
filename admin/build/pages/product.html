@@ -34,7 +34,7 @@
                 <img :src="detail.thumbnail[0]">
             </li>
             <li><span>产品概述</span><input v-model="detail.brief.content" type="text"></li>
-            <li><span>概述图</span><span id="gst">{{detail.brief.img}}gst111111</span><img :src="detail.brief.img"></li>
+            <li><span>概述图</span><span id="gst">{{detail.brief.img ? ' 图片已上传': '请上传图片'}}</span><img :src="detail.brief.img"></li>
             <li><span>可抵用积分数</span><input v-model="detail.deduction" type="text"></li>
             <li><span>供应商</span><input v-model="detail.vendorID" type="text"></li>
             <li><span>所属类目</span>
@@ -52,9 +52,7 @@
             </li>
             <li>
                 <span>商品详情图</span>
-                <span id="xq1">+</span>
-                <span id="xq2">+</span>
-                <span class="xq3">+</span>
+                <span id="spxqt">+</span>
                 </li>
             <li><span>状态</span><select><option value="OnSell">在售</option><option value="SoldOut">下架</option></select></li>
             <li><a class="white-button" @click="cancle()">取消</a><a class="white-button">确定</a></li>
