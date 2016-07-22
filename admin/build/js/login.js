@@ -21,7 +21,7 @@
                         }).done(function(d) {
                             $.ylbAjaxHandler(d, function () {
                                 $.setID(d.data.sessionID);
-                                $.localStorageHandler("set", "flag", d.data.flag);
+                                //$.localStorageHandler("set", "flag", d.data.flag);
                                 window.location.href = 'index.html'
                             })
                         })

@@ -10,7 +10,12 @@
             cityCode: "",
             area: "",
             areaCode: "",
-            mobile: ""
+            mobile: "",
+            name: "",
+            captcha: "",
+            referrerMobile: "",
+            idCard: "",
+            idCardImages: [],
         }
     };
     var m = {
@@ -79,7 +84,7 @@
                     toupgrade: function () {
                         $.ajax({
                             url: $.apiUrl + "/areamanager",
-                            type: "POST",
+                            type: "PUT",
                             data: JSON.stringify(right.apply)
                         }).done(function (d) {
                             $.ylbAjaxHandler(d, function () {

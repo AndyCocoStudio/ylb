@@ -4,7 +4,7 @@
 	$.ajaxSetup({
         contentType: "application/json; charset=utf-8",
 		beforeSend: function (request) {
-			request.setRequestHeader("sid", $.getID());
+			request.setRequestHeader("osid", $.getID());
 		}
     });
 	/**
@@ -81,6 +81,18 @@
 					break;
 				case "4018":
 					$.ylbAlert("违规操作");
+					break;
+				case "4019":
+					$.ylbAlert("申请已经处理");
+					break;
+				case "4020":
+					$.ylbAlert("该区域已有区域经理");
+					break;
+				case "4021":
+					$.ylbAlert("该账号非加盟商");
+					break;
+				case "4022":
+					$.ylbAlert("该账号已经是区域经理/客户经理");
 					break;
 				default:
 					$.ylbAlert("服务器又开小差");
@@ -167,13 +179,13 @@
 	 * 存储sessionID
 	 * **/
 	$.setID = function (val) {
-		localStorage.setItem("sid", val);
+		localStorage.setItem("osid", val);
 	}
 	$.getID = function () {
-		return localStorage.getItem("sid");
+		return localStorage.getItem("osid");
 	}
 	$.clearID = function () {
-		localStorage.removeItem("sid");
+		localStorage.removeItem("osid");
 	}
 	/**
 	 * json和string互换

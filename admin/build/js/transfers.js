@@ -1,31 +1,60 @@
-(function() {
-		var m = {
-			data: {
+(function () {
+	var transfer = {
 
-			},
-			inIt: function() {
-				m.getData();
-			},
-			getData: function() {
-				$.ajax({
-					url: '/api/transfers',
-					type: 'get',
-				}).done(function(d) {
-					if (d.result) {
-						console.log(d.result);
-						// m.data = d.data;
-					}
-				})
-			},
-			bindVue: function() {
-				var transfers = new Vue({
-					el: '#transfers-main',
-					data: m.data,
-					methods: {
-
-					}
+	};
+	var m = {
+		init: function () {
+			m.getData();
+		},
+		getData: function () {
+			$.ajax({
+				url: $.apiUrl + '/transfers?k=1',
+				type: 'GET',
+			}).done(function (d) {
+				$.ylbAjaxHandler(d, function () {
+					transfer.list = d.data.transfers;
+					m.buildVue();
 				});
-			}
-		};
-		m.inIt();
+			})
+		},
+		buildVue: function () {
+			transfer = new Vue({
+				el: '#transfer-main',
+				data: transfer,
+				methods: {
+					agree: function (id) {
+						var c = confirm("确认同意该提现申请？");
+						if (c) {
+							$.ajax({
+								url: $.apiUrl + "/transfer/agree",
+								type: "POST",
+								data: JSON.stringify({ transferID: id })
+							}).done(function (d) {
+								$.ylbAjaxHandler(d, function () {
+									$.ylbAlert("操作成功");
+									m.getData();
+								})
+							})
+						}
+					},
+					disagree: function (id) {
+						var c = confirm("确认拒绝该提现申请？");
+						if (c) {
+							$.ajax({
+								url: $.apiUrl + "/transfer/reject",
+								type: "POST",
+								data: JSON.stringify({ transferID: id })
+							}).done(function (d) {
+								$.ylbAjaxHandler(d, function () {
+									$.ylbAlert("操作成功");
+									m.getData();
+								})
+							})
+						}
+					},
+				}
+			});
+		}
+	};
+	m.init();
 })()
