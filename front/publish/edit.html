@@ -13,9 +13,9 @@
 
 
 
-	<link rel="stylesheet" type="text/css" href="css/style.css?rev=281abf6cfeb89c16b9f018cda9006d7f" />
+	<link rel="stylesheet" type="text/css" href="css/style.css?rev=275f46e1f035c660f255cf1ab1d259c7" />
 	<link rel="stylesheet" type="text/css" href="css/pickday.css" />
-	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=281abf6cfeb89c16b9f018cda9006d7f" />
+	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=275f46e1f035c660f255cf1ab1d259c7" />
 </head>
 
 <body>
@@ -38,12 +38,12 @@
         <ul class="customer-nav">
             <li><a href="index.html">首页</a></li>
             <li class="select"><a href="customer.html">个人中心</a></li>
-            <li>加盟商</li>
+            <li>加盟商户</li>
         </ul>
         <div class="customer-seach">
-            <input type="search" placeholder="搜索">
+            <!--<input type="search" placeholder="搜索">-->
             <i class="customer-bag icon-ylbicon-23"></i>
-            <span>购物车</span>
+            <a href="shopcart.html">购物车</a>
         </div>
     </div>
     <p class="ylb-navbar">您现在的位置：<a href="index.html">首页</a> > 会员中心</p>
@@ -59,35 +59,42 @@
         <div id="customer-info" class="customer-info">
             <div class="customer-base">
                 <img :src="info.avatar||'images/customer-default.png'" />
-                <h1>{{info.mobile}}</h1>
-            </div>
-            <div class="customer-asset" :class="{salerasset:info.role=='Merchants'}">
-                <div class="customer-tag">资产</div>
-                <h1>真实姓名： {{info.name||info.mobile}}<br /> 会员类型：
+                <!--<a href="edit.html">编辑个人资料</a>-->
+                <!--<h1>{{info.mobile}}</h1>-->
+                <h1>
                     <em v-if="info.role=='Ordinary'">普通会员</em>
                     <em v-if="info.role=='Merchants'">加盟商家</em>
                     <em v-if="info.role=='CustomerManager'">客户经理</em>
                     <em v-if="info.role=='AreaManager'">区域经理</em>
+                    <em v-if="info.role=='CM'">客户经理/商家</em>
+                    <em v-if="info.role=='AM'">区域经理/商家</em>
                 </h1>
-                <p>账户余额： <em>{{info.asset.balance}}</em>元<a>充值</a></p>
-                <p v-if="info.role=='Merchants'">账户货款： <em>{{info.asset.paymentForGoods}}</em>元</p>
-                <p v-if="info.role=='Merchants'">税后佣金： <em>{{info.asset.commission}}</em>元</p>
+            </div>
+            <div class="customer-asset" :class="{salerasset:info.role=='Merchants'||info.role=='AM'||info.role=='CM'}">
+                <div class="customer-tag">资产</div>
+                <h1>真实姓名： {{info.name||info.mobile}}</h1>
+                <p>账户余额： <em>{{info.asset.balance}}</em>元<a @click="recharge">充值</a></p>
+                <p v-if="info.role=='Merchants'||info.role=='AM'||info.role=='CM'">账户货款： <em>{{info.asset.paymentForGoods}}</em>元</p>
+                <p v-if="info.role=='Merchants'||info.role=='AM'||info.role=='CM'">税后佣金： <em>{{info.asset.commission}}</em>元</p>
                 <p>可用积分： <em>{{info.asset.score}}</em>分</p>
                 <p>积分基点： <em>{{info.asset.point}}</em>个<a @click="getpoint">领取积分</a></p>
+                <p class="btns"><a v-if="info.role!='Ordinary'" @click="rewards">转出资产</a><a href="asset.html">更多信息</a></p>
             </div>
             <div class="customer-code customer-eqcode">
-                <div class="customer-tag">积分做单</div>
+                <div class="customer-tag">扫我做单</div>
                 <div class="customer-pic ylb-center">
                     <div id="customer-private-qrcode" class="customer-private-qrcode"></div>
                 </div>
             </div>
-            <div v-if="info.role=='Merchants'" class="customer-code customer-control">
+            <div class="customer-code customer-control">
                 <div class="customer-tag">商家操作</div>
                 <div class="customer-pic">
-                    <a @click="spendpoints">积分兑换</a>
+                    <!--<a @click="spendpoints">积分兑换</a>-->
+                    <a href="spendpoint.html">积分兑换</a>
+                    <a v-if="info.role=='Merchants'||info.role=='AM'||info.role=='CM'" href="sendpoint.html">商家做单</a>
                 </div>
             </div>
-            <img v-if="info.role=='Ordinary'" class="customer-adv" src="images/adv1.png" />
+            <!--<img v-if="info.role!='Merchants'&&info.role!='AM'&&info.role!='CM'" class="customer-adv" src="images/adv1.png" />-->
         </div>
         <div class="customer-edit">
             <ul class="customer-edit-list">
@@ -207,9 +214,9 @@
 <script src="js/libs/pickday.min.js" type="text/javascript"></script>
 <script src="js/libs/qrcode.min.js" type="text/javascript"></script>
 <script src="js/libs/dropzone.js" type="text/javascript"></script>
-<script src="js/base.js?rev=281abf6cfeb89c16b9f018cda9006d7f" type="text/javascript"></script>
+<script src="js/base.js?rev=275f46e1f035c660f255cf1ab1d259c7" type="text/javascript"></script>
 
-<script type="text/javascript" src="js/edit.js?rev=281abf6cfeb89c16b9f018cda9006d7f"></script>
+<script type="text/javascript" src="js/edit.js?rev=275f46e1f035c660f255cf1ab1d259c7"></script>
 
 
 </html>
