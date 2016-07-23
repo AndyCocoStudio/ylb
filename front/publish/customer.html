@@ -13,9 +13,9 @@
 
 
 
-	<link rel="stylesheet" type="text/css" href="css/style.css?rev=f73e790e7cb45bbdeeedb4e8e005605d" />
+	<link rel="stylesheet" type="text/css" href="css/style.css?rev=bcd33b3db7c16f1297dec9b1ee337236" />
 	<link rel="stylesheet" type="text/css" href="css/pickday.css" />
-	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=f73e790e7cb45bbdeeedb4e8e005605d" />
+	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=bcd33b3db7c16f1297dec9b1ee337236" />
 </head>
 
 <body>
@@ -99,6 +99,7 @@
                     <!--<a @click="spendpoints">积分兑换</a>-->
                     <a href="spendpoint.html">积分兑换</a>
                     <a v-if="info.role=='Merchants'||info.role=='AM'||info.role=='CM'" href="sendpoint.html">商家做单</a>
+                    <a v-if="info.role!='Ordinary'" href="referlist.html">推荐列表</a>
                 </div>
             </div>
             <!--<img v-if="info.role!='Merchants'&&info.role!='AM'&&info.role!='CM'" class="customer-adv" src="images/adv1.png" />-->
@@ -401,6 +402,7 @@
             <div class="customer-title">
                 推荐会员
             </div>
+            <h1>已经推荐会员100名</h1>
             <ul>
                 <li>
                     <input type="text" maxlength="11" v-model="tj.mobile" placeholder="请输入手机号码" /><input class="btn-code"
@@ -706,9 +708,9 @@
 <script src="js/libs/pickday.min.js" type="text/javascript"></script>
 <script src="js/libs/qrcode.min.js" type="text/javascript"></script>
 <script src="js/libs/dropzone.js" type="text/javascript"></script>
-<script src="js/base.js?rev=f73e790e7cb45bbdeeedb4e8e005605d" type="text/javascript"></script>
+<script src="js/base.js?rev=bcd33b3db7c16f1297dec9b1ee337236" type="text/javascript"></script>
 
-<script type="text/javascript" src="js/customer.js?rev=f73e790e7cb45bbdeeedb4e8e005605d"></script>
+<script type="text/javascript" src="js/customer.js?rev=bcd33b3db7c16f1297dec9b1ee337236"></script>
 
 
 </html>

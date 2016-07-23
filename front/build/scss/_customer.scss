@@ -258,10 +258,9 @@
                 box-shadow: 0 0 5px #cecece;
                 .customer-pic{
                     height: 136px;
-                    line-height: 136px;
                     a{
-                        display: block;
-                        width: 180px;
+                        display: inline-block;
+                        width: 80px;
                         height: 40px;
                         text-align: center;
                         border: 1px solid $base-orange;

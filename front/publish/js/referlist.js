@@ -1,0 +1,1 @@
+!function(){var n={},e={init:function(){e.getlist()},getlist:function(){$.when($.ajax({url:$.apiUrl+"/merchant/recommended",type:"GET"})).done(function(t){$.ylbAjaxHandler(t,function(){n=t.data,e.buildVue()})})},buildVue:function(){n=new Vue({el:"#refer-main",data:n,methods:{}})}};e.init()}();

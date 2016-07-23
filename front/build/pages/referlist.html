@@ -1,0 +1,27 @@
+<!-- @@master ../layout.html  -->
+
+<!-- @@block = title-->
+<title>推荐列表</title>
+<!-- @@close-->
+
+<!-- @@block = content-->
+<section class="refer-main" id="refer-main">
+    <h1>您总共已经推荐了{{totalCount}}人</h1>
+    <table>
+        <tr>
+            <th>手机号</th>
+            <th>姓名</th>
+            <th>推荐时间</th>
+        </tr>
+        <tr v-for="r in users">
+            <td>{{r.mobile}}</td>
+            <td>{{r.name}}</td>
+            <td>{{r.createTime}}</td>
+        </tr>
+    </table>
+</section>
+<!-- @@close-->
+
+<!-- @@block = scripts-->
+<script type="text/javascript" src="js/referlist.js?rev=@@hash"></script>
+<!-- @@close-->

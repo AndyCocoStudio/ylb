@@ -72,6 +72,7 @@
                     <!--<a @click="spendpoints">积分兑换</a>-->
                     <a href="spendpoint.html">积分兑换</a>
                     <a v-if="info.role=='Merchants'||info.role=='AM'||info.role=='CM'" href="sendpoint.html">商家做单</a>
+                    <a v-if="info.role!='Ordinary'" href="referlist.html">推荐列表</a>
                 </div>
             </div>
             <!--<img v-if="info.role!='Merchants'&&info.role!='AM'&&info.role!='CM'" class="customer-adv" src="images/adv1.png" />-->
@@ -374,6 +375,7 @@
             <div class="customer-title">
                 推荐会员
             </div>
+            <h1>已经推荐会员100名</h1>
             <ul>
                 <li>
                     <input type="text" maxlength="11" v-model="tj.mobile" placeholder="请输入手机号码" /><input class="btn-code"
