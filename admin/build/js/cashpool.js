@@ -201,7 +201,7 @@
             goods.setOption(goption);
             plat.setOption(poption);
             service.setOption(soption);
-            m.buildVue();
+            //m.buildVue();
         },
         getCashPool: function () {
             $.when($.ajax({
@@ -212,10 +212,7 @@
                     cash.goods = d.data[2];
                     cash.plat = d.data[1];
                     cash.service = d.data[0];
-                    console.log(cash.goods);
-                    console.log(cash.plat);
-                    console.log(cash.service);
-                    m.buildEcharts();
+                    m.buildVue();
                 });
             });
         },
@@ -227,6 +224,7 @@
 
                 }
             });
+            m.buildEcharts();
         }
     };
     m.init();

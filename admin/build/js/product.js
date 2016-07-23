@@ -3,6 +3,32 @@
 		path: "list",
 		goodsid: "",
 		detail: {
+			name: "",
+			price: "",
+			weight: "",
+			freight: "", //运费，一口价
+			thumbnail: [],
+			introduceImages: [],
+			brief: {
+				content: "",
+				img: ""
+			},
+			info: [
+				{
+					"name": "",
+					"value": ""
+				}
+			],
+			deduction: "",
+			sku: "",
+			vendorID: "",
+			status: "OnSell", //OnSell 在售,SoldOut 下架
+			kind1: "",
+			kind1Code: "",
+			kind2: "",
+			kind2Code: ""
+		},
+		eidt: {
 			goodsID: "",
 			name: "",
 			price: "",
@@ -23,7 +49,7 @@
 			deduction: "",
 			sku: "",
 			vendorID: "",
-			status: "", //OnSell 在售,SoldOut 下架
+			status: "OnSell", //OnSell 在售,SoldOut 下架
 			kind1: "",
 			kind1Code: "",
 			kind2: "",
@@ -44,10 +70,23 @@
 				type: 'GET'
 			})).done(function (d) {
 				$.ylbAjaxHandler(d, function () {
-					product.list = d.data;
+					product.list = d.data.goodses;
+					product.edit = product.list[0];
 					m.buildVue();
 				});
 			});
+		},
+		//获取单个商品详情
+		getGoods: function (id) {
+			$.when($.ajax({
+				url: $.apiUrl + "/goods?id="+id,
+				type: "GET"
+			})).done(function (d) {
+				$.ylbAjaxHandler(d, function () {
+					product.edit = d.data;
+					product.path = 'edit';
+				})
+			})
 		},
 		//获取一级类目列表
 		getFlist: function () {
@@ -123,33 +162,98 @@
 					product.detail.introduceImages.push(response.data);
 				}
 			});
+			$("#lbt1").dropzone({
+				url: $.apiUrl + "/upload",
+				paramName: "file",
+				maxFiles: 1,
+				maxFilesize: 1.0, // MB
+				acceptedFiles: "image/*",
+				addRemoveLinks: true,
+				dictResponseError: '上传文件出错！',
+				success: function (file, response) {
+					product.detail.thumbnail.push(response.data);
+				}
+			});
+			$("#gst1").dropzone({
+				url: $.apiUrl + "/upload",
+				paramName: "file",
+				maxFiles: 1,
+				maxFilesize: 1.0, // MB
+				acceptedFiles: "image/*",
+				addRemoveLinks: true,
+				dictResponseError: '上传文件出错！',
+				success: function (file, response) {
+					product.detail.brief.img = response.data;
+				}
+			});
+			$("#spxqt11").dropzone({
+				url: $.apiUrl + "/upload",
+				paramName: "file",
+				maxFiles: 3,
+				maxFilesize: 1.0, // MB
+				acceptedFiles: "image/*",
+				addRemoveLinks: true,
+				dictResponseError: '上传文件出错！',
+				success: function (file, response) {
+					product.detail.introduceImages.push(response.data);
+				}
+			});
+			$("#spxqt22").dropzone({
+				url: $.apiUrl + "/upload",
+				paramName: "file",
+				maxFiles: 3,
+				maxFilesize: 1.0, // MB
+				acceptedFiles: "image/*",
+				addRemoveLinks: true,
+				dictResponseError: '上传文件出错！',
+				success: function (file, response) {
+					product.detail.introduceImages.push(response.data);
+				}
+			});
+			$("#spxqt33").dropzone({
+				url: $.apiUrl + "/upload",
+				paramName: "file",
+				maxFiles: 3,
+				maxFilesize: 1.0, // MB
+				acceptedFiles: "image/*",
+				addRemoveLinks: true,
+				dictResponseError: '上传文件出错！',
+				success: function (file, response) {
+					product.detail.introduceImages.push(response.data);
+				}
+			});
 		},
 		buildVue: function () {
 			product = new Vue({
 				el: "#product-main",
 				data: product,
 				methods: {
+					//新增商品
+					addGoods: function () {
+						product.path = 'add';
+					},
 					//编辑商品
 					editGoods: function (id) {
-						product.path = 'edit';
-						if (id) product.goodsid = id;
+						m.getGoods(id);
 					},
 					//显示列表
 					cancel: function () {
 						product.path = 'list';
 					},
 					//删除商品
-					delGoods: function (e) {
-						var id = e.target.attributes["data-id"].value;
-						$.ajax({
-							url: $.apiUrl + '/goods?id=' + id,
-							type: 'DELETE',
-						}).done(function (d) {
-							$.ylbAjaxHandler(d, function () {
-								$.ylbAlert("删除成功！");
-								m.getData();
+					delGoods: function (id) {
+						var c = confirm("确认删除该商品？");
+						if (c) {
+							$.ajax({
+								url: $.apiUrl + '/goods?id=' + id,
+								type: 'DELETE',
+							}).done(function (d) {
+								$.ylbAjaxHandler(d, function () {
+									$.ylbAlert("删除成功！");
+									m.getData();
+								});
 							});
-						})
+						}
 					},
 					//添加属性
 					addparam: function () {
@@ -166,8 +270,8 @@
 					setflist: function (e) {
 						var t = $(e.target).find("option:selected").text();
 						var c = $(e.target).find("option:selected").val();
-						product.kind1 = t;
-						product.kind1Code = c;
+						product.detail.kind1 = t;
+						product.detail.kind1Code = c;
 						$.ajax({
 							url: $.apiUrl + '/goods/kinds?all=1&code=' + c,
 							type: 'GET',
@@ -181,25 +285,62 @@
 					setslist: function (e) {
 						var t = $(e.target).find("option:selected").text();
 						var c = $(e.target).find("option:selected").val();
-						product.kind2 = t;
-						product.kind2Code = c;
+						product.detail.kind2 = t;
+						product.detail.kind2Code = c;
 					},
-					//提交商品编辑
-					setData: function () {
-						var t = "";
-						product.goodsid ? t = "POST" : t = "PUT"
+					//新增商品
+					newPro: function () {
 						$.ajax({
 							url: $.apiUrl + '/goods',
-							type: t,
+							type: "PUT",
 							data: JSON.stringify(product.detail)
 						}).done(function (d) {
 							$.ylbAjaxHandler(d, function () {
 								$.ylbAlert("编辑成功");
 								m.getData();
 								product.path = "list";
-							})
+								product.detail = {
+									name: "",
+									price: "",
+									weight: "",
+									freight: "", //运费，一口价
+									thumbnail: [],
+									introduceImages: [],
+									brief: {
+										content: "",
+										img: ""
+									},
+									info: [
+										{
+											"name": "",
+											"value": ""
+										}
+									],
+									deduction: "",
+									sku: "",
+									vendorID: "",
+									status: "OnSell", //OnSell 在售,SoldOut 下架
+									kind1: "",
+									kind1Code: "",
+									kind2: "",
+									kind2Code: ""
+								};
+							});
 						});
 					},
+					//编辑商品
+					editPro: function () {
+						$.ajax({
+							url: $.apiUrl + '/goods',
+							type: "POST",
+							data: JSON.stringify(product.edit)
+						}).done(function (d) {
+							$.ylbAjaxHandler(d, function () {
+								$.ylbAlert("编辑成功");
+								product.path ="list";
+							 });
+						});
+					}
 				}
 			});
 			setTimeout(function () {

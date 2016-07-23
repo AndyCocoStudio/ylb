@@ -13,7 +13,6 @@
                         var loginData = {};
                         loginData.userName = login.user;
                         loginData.password = login.pwd;
-                        console.log(JSON.stringify(loginData));
                         $.ajax({
                             url: "/api/staff/login",
                             type: "POST",
