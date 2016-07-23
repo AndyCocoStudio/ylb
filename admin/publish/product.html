@@ -16,109 +16,103 @@
 	<link rel="stylesheet" type="text/css" href="css/libs/bootstrap.min.css" />
 	<link rel="stylesheet" type="text/css" href="css/libs/morris.css" />
 	<link rel="stylesheet" type="text/css" href="css/font-awesome.css" />
-	<link rel="stylesheet" type="text/css" href="css/style.css?rev=3369a7fc7b89067af2e36bd5a60cbafe" />
+	<link rel="stylesheet" type="text/css" href="css/style.css?rev=3e769a76822d7e180f360a5c24ab8c57" />
 </head>
 
 <body>
 
-<section class="product-main" id="product-main" >
+<section class="product-main" id="product-main" v-cloak>
     <div class="op-header"><img src="images/logo.png" /></div>
     <div class="op-left">
         <ul>
             <li><a href="product.html"><i class="fa fa-comments"></i>商品管理</a></li>
-            <li><a><i class="fa fa-dashboard"></i>用户管理 </a>
-                <ul>
-                    <li><a href="areamanager.html"><i class="fa fa-table"></i>区域经理管理</a></li>
-                    <li><a href="admin.html"><i class="fa fa-group"></i>后台用户管理</a></li>
-
-                </ul>
-            </li>
-            <li><a id="test">test</a></li>
         </ul>
     </div>
     <div class="op-right">
-        <h1>商品管理</h1>
-        <ul v-show="others.path != 'list'">
-            <li><span>商品名</span><input v-model="detail.name" type="text"></li>
-            <li><span>价格</span><input v-model="detail.price" type="text"></li>
-            <li><span>库存</span><input v-model="detail.sku" type="text"></li>
-            <li><span>重量</span><input v-model="detail.weight" type="text"></li>
-            <li><span>运费</span><input v-model="detail.freight" type="text"></li>
-            <li>
-                <span>列表图</span>
-                <span id="tttt">{{detail.thumbnail[0] ? ' 图片已上传': '请上传图片'}}</span>
-                <img :src="detail.thumbnail[0]">
-            </li>
-            <li><span>产品概述</span><input v-model="detail.brief.content" type="text"></li>
-            <li><span>概述图</span><span id="gst">{{detail.brief.img ? ' 图片已上传': '请上传图片'}}</span><img :src="detail.brief.img"></li>
-            <li><span>可抵用积分数</span><input v-model="detail.deduction" type="text"></li>
-            <li><span>供应商</span><input v-model="detail.vendorID" type="text"></li>
-            <li><span>所属类目</span>
-                <select v-on:change="getSlist">
-                    <option value="-1">-请选择一级类目-</option>
-                    <option v-for="f in flist" value={{f.code}}>{{f.name}}</option>
-                </select>
-                <select>
-                    <option value="-1">-请选择二级类目-</option>
-                    <option v-for="s in slist" value="s.code">{{s.name}}</option>
-                </select>
-            </li>
-            <li><span>商品属性</span><a>+</a>
-                <div><span></span><input type="text" placeholder="属性"><input type="text" placeholder="值"><a>x</a></div>
-            </li>
-            <li>
-                <span>商品详情图</span>
-                <span id="spxqt">+</span>
+        <h1>商品管理<a @click="cancel">查看列表</a><a @click="editGoods">添加商品</a></h1>
+        <div v-show="path=='edit'">
+            <h2>商品编辑</h2>
+            <ul>
+                <li>
+                    <span>商品名</span>
+                    <input v-model="detail.name" type="text">
                 </li>
-            <li><span>状态</span><select><option value="OnSell">在售</option><option value="SoldOut">下架</option></select></li>
-            <li><a class="white-button" @click="cancle()">取消</a><a class="white-button">确定</a></li>
-        </ul>
-        <!-- <ul v-if="others.path != 'list'">
-            <li><span>商品名</span><input v-model="detail.name" type="text"></li>
-            <li><span>价格</span><input v-model="detail.price" type="text"></li>
-            <li><span>库存</span><input v-model="detail.sku" type="text"></li>
-            <li><span>重量</span><input v-model="detail.weight" type="text"></li>
-            <li><span>运费</span><input v-model="detail.freight" type="text"></li>
-            <li><span>列表图</span><input type="file" v-model="detail.thumbnail[0]"><img :src="detail.thumbnail[0]"></li>
-            <li><span>产品概述</span><input v-model="detail.brief.content" type="text"></li>
-            <li><span>概述图</span><input type="file" v-model="detail.brief.img"><img :src="detail.brief.img"></li>
-            <li><span>可抵用积分数</span><input v-model="detail.deduction" type="text"></li>
-            <li><span>供应商</span><input v-model="detail.vendorID" type="text"></li>
-            <li><span>所属类目</span>
-                <select v-on:change="getSlist">
-                    <option value="-1">-请选择一级类目-</option>
-                    <option v-for="f in flist" value={{f.code}}>{{f.name}}</option>
-                </select>
-                <select>
-                    <option value="-1">-请选择二级类目-</option>
-                    <option v-for="s in slist" value="s.code">{{s.name}}</option>
-                </select>
-            </li>
-            <li><span>商品属性</span><a>+</a>
-                <div><span></span><input type="text" placeholder="属性"><input type="text" placeholder="值"><a>x</a></div>
-            </li>
-            <li>
-                <span>商品详情图</span>
-                <span id="xq1"><input type="file" name="uploadFile" v-model="detail.introduceImages[0]"/></span>
-                <span id="xq2"><input type="file" name="uploadFile"  v-model="detail.introduceImages[1]"/></span>
-                <span class="xq3"><input type="file" name="uploadFile"  v-model="detail.introduceImages[2]"/></span>
+                <li>
+                    <span>价格</span>
+                    <input v-model="detail.price" type="text">
                 </li>
-            <li><span>状态</span><select><option value="OnSell">在售</option><option value="SoldOut">下架</option></select></li>
-            <li><a class="white-button" @click="cancle()">取消</a><a class="white-button" @click="setData()">确定</a></li>
-        </ul> -->
-        <div v-show="others.path == 'list'">
-            <div>商品名称 <input type="text">
-                <select v-on:change="getSlist">
-                    <option value="-1">-请选择一级类目-</option>
-                    <option v-for="f in flist" value={{f.code}}>{{f.name}}</option>
-                </select>
-                <select>
-                    <option value="-1">-请选择二级类目-</option>
-                    <option v-for="s in slist" value="s.code">{{s.name}}</option>
-                </select>
-                <a class="white-button">查询</a>
-                <a class="white-button" @click="addGoods()">添加商品</a>
-            </div>
+                <li>
+                    <span>库存</span><input v-model="detail.sku" type="text">
+                </li>
+                <li>
+                    <span>重量</span><input v-model="detail.weight" type="text">
+                </li>
+                <li>
+                    <span>运费</span><input v-model="detail.freight" type="text">
+                </li>
+                <li>
+                    <span>列表图</span>
+                    <span class="uploadbtn" id="lbt">{{detail.thumbnail.length==0?'点击上传图片':'图片已上传'}}</span>
+                    <img :src="detail.thumbnail[0]">
+                </li>
+                <li>
+                    <span>产品概述</span>
+                    <input v-model="detail.brief.content" type="text">
+                </li>
+                <li>
+                    <span>概述图</span>
+                    <span class="uploadbtn" id="gst">{{detail.brief.img ? ' 图片已上传': '请上传图片'}}</span>
+                    <img :src="detail.brief.img">
+                </li>
+                <li>
+                    <span>可抵用积分数</span>
+                    <input v-model="detail.deduction" type="text">
+                </li>
+                <li>
+                    <span>供应商</span>
+                    <input v-model="detail.vendorID" type="text">
+                </li>
+                <li>
+                    <span>所属类目</span>
+                    <select @change="setflist">
+                        <option value="-1">-请选择一级类目-</option>
+                        <option v-for="f in flist" value={{f.code}}>{{f.name}}</option>
+                    </select>
+                    <select @change="setslist">
+                        <option value="-1">-请选择二级类目-</option>
+                        <option v-for="s in slist" value="s.code">{{s.name}}</option>
+                    </select>
+                </li>
+                <li>
+                    <span>商品属性</span><a @click="addparam">添加</a>
+                    <div v-for="p in detail.info">
+                        <input type="text" v-model="p.name" placeholder="属性">
+                        <input v-model="p.value" type="text" placeholder="值">
+                        <a class="deleteparam" @click="delparam($index)">x</a>
+                    </div>
+                </li>
+                <li>
+                    <span>商品详情图</span>
+                    <span class="uploadbtn" id="spxqt1">{{detail.introduceImages[0]?"图片已上传":'详情图1'}}</span>
+                    <span class="uploadbtn" id="spxqt2">{{detail.introduceImages[1]?"图片已上传":'详情图2'}}</span>
+                    <span class="uploadbtn" id="spxqt3">{{detail.introduceImages[2]?"图片已上传":'详情图3'}}</span>
+                    <img v-for="i in detail.introduceImages" :src="i">
+                </li>
+                <li>
+                    <span>状态</span>
+                    <select>
+                        <option value="OnSell">在售</option>
+                        <option value="SoldOut">下架</option>
+                    </select>
+                </li>
+                <li>
+                    <a class="blue-button" @click="setData">提交</a>
+                    <a class="white-button" @click="cancel">取消</a>
+                </li>
+            </ul>
+        </div>
+        <div v-show="path=='list'">
+            <h2>商品列表</h2>
             <table>
                 <tr>
                     <th>商品ID</th>
@@ -133,7 +127,7 @@
                     <td>{{good.price}}</td>
                     <td>{{good.deduction}}</td>
                     <td><a class="white-button" @click="editGoods()">编辑</a>
-                    <a class="white-button" @click="">详情</a><a id={{good.goodsID}} class="white-button" @click="delGoods">删除</a></td>
+                        <a class="white-button" @click="">详情</a><a id={{good.goodsID}} class="white-button" @click="delGoods">删除</a></td>
                 </tr>
             </table>
         </div>
@@ -146,10 +140,10 @@
 <script src="js/libs/dropzone.js" type="text/javascript"></script>
 <script src="js/libs/vue.min.js" type="text/javascript"></script>
 <script src="js/libs/echarts.min.js" type="text/javascript"></script>
-<script src="js/base.js?rev=3369a7fc7b89067af2e36bd5a60cbafe" type="text/javascript"></script>
+<script src="js/base.js?rev=3e769a76822d7e180f360a5c24ab8c57" type="text/javascript"></script>
 
 
-<script type="text/javascript" src="js/product.js?rev=3369a7fc7b89067af2e36bd5a60cbafe"></script>
+<script type="text/javascript" src="js/product.js?rev=3e769a76822d7e180f360a5c24ab8c57"></script>
 <!-- @@close
 
 

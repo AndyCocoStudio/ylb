@@ -11,11 +11,11 @@
                 methods: {
                     login: function() {
                         var loginData = {};
-                        loginData.mobile = login.user;
-                        loginData.captcha = login.pwd;
+                        loginData.userName = login.user;
+                        loginData.password = login.pwd;
                         console.log(JSON.stringify(loginData));
                         $.ajax({
-                            url: "/api/user/login",
+                            url: "/api/staff/login",
                             type: "POST",
                             data: JSON.stringify(loginData)
                         }).done(function(d) {

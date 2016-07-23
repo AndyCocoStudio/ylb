@@ -9,13 +9,16 @@ $white: #fff;
 @mixin button($color, $bgcolor, $bordercolor){
     display: inline-block;
     margin-left: 10px;
-    padding: 5px 10px;
+    padding: 0 20px;
     color: $color;
     background-color: $bgcolor;
     border: 1px solid $bordercolor;
 }
 .white-button {
     @include button($black, $white, $black);
+}
+.blue-button {
+    @include button($white, $blue, $blue);
 }
 .op-header{
     width: 100%;
@@ -61,34 +64,82 @@ $white: #fff;
     width: calc(100% - 200px);
     margin-top: 30px;
 	h1 {
-		padding: 10px 0;
+        font-size: 18px;
+        border-bottom: 1px solid #999;
+        padding-left: 10px;
+        margin-bottom: 20px;
+        height: 48px;
+        line-height: 48px;
+        overflow: hidden;
+        a{
+            display: block;
+            padding: 0 20px;
+            height: 28px;
+            line-height: 28px;
+            background-color: $green;
+            color: #fff;
+            float: right;
+            font-size: 14px;
+            margin: 10px 5px 0 0;
+        }
 	}
+    h2{
+        background-color: $blue;
+        color: #fff;
+        padding: 10px;
+    }
 	input, select {
 		height:30px;
 		width: 150px;
 		border: 1px solid #888;
 		margin-right: 5px;
+        border-radius: 3px;
 	}
 	input{
 		padding-left: 5px;
 	}
 	li {
-		margin-top: 20px;
-		margin-bottom: 20px;
+		margin: 20px 0;
+        line-height: 30px;
+        overflow: hidden;
 		span {
-			display: inline-block;
+			display: block;
 			width: 80px;
 			margin-right: 10px;
 			text-align: right;
+            float: left;
 			input[type="file"] {
                 height: 20px;
                 width: 64px;
 			}
 		}
-		
+        .uploadbtn{
+            width: 150px;
+            background-color: #cecece;
+            height: 30px;
+            line-height: 30px;
+            display: inline-block;
+            text-align: center;
+        }
+        div{
+            margin-left: 90px;
+            input{
+                margin-bottom: 8px;
+            }
+        }
+        .dz-preview{
+            display: none;
+        }
+        img{
+            width: 240px;
+            display: block;
+            margin: 10px 0 0 90px;
+        }
+        .deleteparam{
+            font-size: 18px;
+        }
 	}
 	table {
-        margin-top: 20px;
         width:100%;
 	}
 	th, td {

@@ -341,58 +341,7 @@
 	};
 	var m = {
 		init: function () {
-			m.getFList();
-			if ($.getID()) {
-				layout.islogin = true;
-				$(".btn-login").hide();
-				$(".btn-logout").show();
-			} else {
-				layout.islogin = false;
-				$(".btn-login").show();
-				$(".btn-logout").hide();
-			}
-		},
-		getFList: function () {
-			$.when($.ajax({
-				url: $.apiUrl + "/goods/kinds",
-				type: "GET"
-			})).done(function (d) {
-				$.ylbAjaxHandler(d, function () {
-					layout.flist = d.data;
-					if (d.data.length > 0) {
-						m.getSList(layout.flist[0].code);
-					} else {
-						m.buildVue();
-					}
-				});
-			});
-		},
-		getSList: function (code) {
-			$.when($.ajax({
-				url: $.apiUrl + "/goods/kinds?code=" + code,
-				type: "GET"
-			})).done(function (d) {
-				$.ylbAjaxHandler(d, function () {
-					layout.slist = d.data;
-					m.buildVue();
-				});
-			});
-		},
-		buildVue: function () {
-			layout = new Vue({
-				el: "#ylb-layout",
-				data: layout,
-				methods: {
-					search: function () {
-						if (this.sc) location.href = "list.html?n=" + this.sc;
-						else location.href = "list.html";
-					},
-					changeslist: function (el) {
-						var id = el.target.attributes["data-id"].value;
-						m.getSList(id);
-					}
-				}
-			})
+			
 		}
 	};
 	m.init();
