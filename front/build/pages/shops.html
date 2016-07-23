@@ -8,6 +8,22 @@
 <section class="shops-main" id="shops-main" v-cloak>
     <h1>加盟商列表</h1>
     <div class="shops-wrap">
+        <div class="shops-select">
+            <select @change="selprov">
+                <option value="-1">-请选择省-</option>
+                <option v-for="p in plist" value="{{p.code}}">{{p.name}}</option>
+            </select>
+            <select @change="selcity">
+                <option value="-1">-请选择市-</option>
+                <option v-for="c in clist" value="{{c.code}}">{{c.name}}</option>
+            </select>
+            <select @change="selarea">
+                <option value="-1">-请选择区-</option>
+                <option v-for="a in alist" value="{{a.code}}">{{a.name}}</option>
+            </select>
+            <a @click="searchshops">搜索</a>
+            <span @click="showall">全国加盟商</span>
+        </div>
         <div class="shops-product">
             <ul>
                 <li v-for="m in list">

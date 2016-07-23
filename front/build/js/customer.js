@@ -126,7 +126,7 @@
                 url: $.apiUrl + "/upload",
                 paramName: "file",
                 maxFiles: 1,
-                maxFilesize: 1.0, // MB
+                maxFilesize: 2.0, // MB
                 acceptedFiles: "image/*",
                 addRemoveLinks: false,
                 dictResponseError: '上传文件出错！',
@@ -138,7 +138,7 @@
                 url: $.apiUrl + "/upload",
                 paramName: "file",
                 maxFiles: 2,
-                maxFilesize: 1.0, // MB
+                maxFilesize: 2.0, // MB
                 acceptedFiles: "image/*",
                 addRemoveLinks: false,
                 dictResponseError: '上传文件出错！',
@@ -150,7 +150,7 @@
                 url: $.apiUrl + "/upload",
                 paramName: "file",
                 maxFiles: 1,
-                maxFilesize: 1.0, // MB
+                maxFilesize: 2.0, // MB
                 acceptedFiles: "image/*",
                 addRemoveLinks: false,
                 dictResponseError: '上传文件出错！',
@@ -162,7 +162,7 @@
                 url: $.apiUrl + "/upload",
                 paramName: "file",
                 maxFiles: 1,
-                maxFilesize: 1.0, // MB
+                maxFilesize: 2.0, // MB
                 acceptedFiles: "image/*",
                 addRemoveLinks: false,
                 dictResponseError: '上传文件出错！',
@@ -174,7 +174,7 @@
                 url: $.apiUrl + "/upload",
                 paramName: "file",
                 maxFiles: 4,
-                maxFilesize: 4.0, // MB
+                maxFilesize: 2.0, // MB
                 acceptedFiles: "image/*",
                 addRemoveLinks: false,
                 dictResponseError: '上传文件出错！',
@@ -186,7 +186,7 @@
                 url: $.apiUrl + "/upload",
                 paramName: "file",
                 maxFiles: 2,
-                maxFilesize: 4.0, // MB
+                maxFilesize: 2.0, // MB
                 acceptedFiles: "image/*",
                 addRemoveLinks: false,
                 dictResponseError: '上传文件出错！',
@@ -198,7 +198,7 @@
                 url: $.apiUrl + "/upload",
                 paramName: "file",
                 maxFiles: 1,
-                maxFilesize: 4.0, // MB
+                maxFilesize: 2.0, // MB
                 acceptedFiles: "image/*",
                 addRemoveLinks: false,
                 dictResponseError: '上传文件出错！',
@@ -435,7 +435,7 @@
                         this.sendshow = false;
                         this.spendshow = false;
                         this.nagtive = false;
-                        this.ordernative = false;
+                        this.ordernagtive = false;
                         this.zczc = false;
                     },
                     //积分兑换可用积分数限制
@@ -684,7 +684,7 @@
                                 vcustomer.tj.mobile = "";
                                 vcustomer.tj.captcha = "";
                             })
-                        })
+                        });
                     },
                     //显示拒绝做单申请理由
                     showorderreason: function (id) {

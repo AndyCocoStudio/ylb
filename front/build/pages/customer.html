@@ -595,7 +595,10 @@
                     <td>{{a.referrerName||a.referrerMobile}}</td>
                     <td><em v-if="a.applyRole=='Merchants'">商家</em><em v-if="a.applyRole=='CustomerManager'">客户经理</em></td>
                     <td>
-                        <em v-if="a.currentRole=='Merchants'">商家</em><em v-if="a.currentRole=='Ordinary'">普通会员</em>
+                        <em v-if="a.currentRole=='Merchants'">商家</em>
+                        <em v-if="a.currentRole=='Ordinary'">普通会员</em>
+                        <em v-if="a.currentRole=='CustomerManager'">客户经理</em>
+                        <em v-if="a.currentRole=='AreaManager'">区域经理</em>
                     </td>
                     <td>{{a.recommended}}</td>
                     <td>{{a.date}}</td>

@@ -13,6 +13,30 @@
         margin: 0 auto 128px;
         border-top: 1px solid $base-border-color;
         overflow: hidden;
+        .shops-select{
+            height: 30px;
+            line-height: 30px;
+            overflow: hidden;
+            margin: 20px 60px;
+            span{
+                display: block;
+                float: right;
+                padding: 5px 10px;
+                cursor: pointer;
+                background-color: $base-orange;
+                color: #fff;
+                height: 20px;
+                line-height: 20px;
+                border-radius: 3px;
+            }
+            a{
+                background-color: $link-blue;
+                color: #fff;
+                padding: 5px 10px;
+                border-radius: 2px;
+                margin-left: 10px;
+            }
+        }
         .shops-product{
             //margin-left: 157px;
             margin: 0 auto;
@@ -26,11 +50,11 @@
                     float: left;
                     margin: 15px 0 0 15px;
                     img{
-                        padding-bottom: 10px;
                         width: 253px;
                         height: 253px;
                     }
                     p{
+                        margin-top: 5px;
                         font-size: 18px;
                         color: $base-orange;
                         line-height: 1.5;
