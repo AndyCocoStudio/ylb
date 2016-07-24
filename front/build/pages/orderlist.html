@@ -1,0 +1,27 @@
+<!-- @@master ../layout.html  -->
+
+<!-- @@block = title-->
+<title>推荐列表</title>
+<!-- @@close-->
+
+<!-- @@block = content-->
+<section class="orderlist-main" id="orderlist-main" v-cloak>
+    <h1>该商家总共做单{{totalCount}}单</h1>
+    <table>
+        <tr>
+            <th>手机号</th>
+            <th>姓名</th>
+            <th>推荐时间</th>
+        </tr>
+        <tr v-for="r in list.users">
+            <td>{{r.mobile}}</td>
+            <td>{{r.name}}</td>
+            <td>{{r.createTime}}</td>
+        </tr>
+    </table>
+</section>
+<!-- @@close-->
+
+<!-- @@block = scripts-->
+<script type="text/javascript" src="js/orderlist.js?rev=@@hash"></script>
+<!-- @@close-->

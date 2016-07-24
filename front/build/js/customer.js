@@ -38,7 +38,8 @@
         reward: {
             way: 1,//1货款2佣金3余额
             amount: 0,
-            account: ""
+            account: "",
+            bank:""
         },
         total: {},
         tj: {

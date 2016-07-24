@@ -25,21 +25,33 @@
                 data: vlogin,
                 methods: {
                     login: function () {
-                        $.ajax({
-                            url: $.apiUrl + '/user/login',
-                            type: 'POST',
-                            data: JSON.stringify({
-                                "mobile": vlogin.mobile,
-                                "captcha": vlogin.password
-                            })
-                        }).done(function (d) {
-                            $.ylbAjaxHandler(d, function () {
-                                $.setID(d.data.sessionID);
-                                $.localStorageHandler("set", "flag", d.data.flag);
-                                if (vlogin.url) window.location.href = vlogin.url;
-                                else window.location.href = "customer.html";
-                            })
-                        });
+                        if (vlogin.mobile) {
+                            if (vlogin.mobile.length < 11) {
+                                $.ylbAlert("手机号码位数不正确");
+                            } else {
+                                if (!$.checkIsMobileNumber(vlogin.mobile)) {
+                                    $.ylbAlert("请输入正确手机号");
+                                } else {
+                                    $.ajax({
+                                        url: $.apiUrl + '/user/login',
+                                        type: 'POST',
+                                        data: JSON.stringify({
+                                            "mobile": vlogin.mobile,
+                                            "captcha": vlogin.password
+                                        })
+                                    }).done(function (d) {
+                                        $.ylbAjaxHandler(d, function () {
+                                            $.setID(d.data.sessionID);
+                                            $.localStorageHandler("set", "flag", d.data.flag);
+                                            if (vlogin.url) window.location.href = vlogin.url;
+                                            else window.location.href = "customer.html";
+                                        })
+                                    });
+                                }
+                            }
+                        } else {
+                            $.ylbAlert("请输入手机号码");
+                        }
                     },
                     //获取验证码
                     getCode: function () {

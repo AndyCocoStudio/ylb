@@ -59,6 +59,7 @@
                         color: $base-orange;
                         line-height: 1.5;
                         padding: 0 15px;
+                        height: 27px;
                         em{
                             margin-left: 10px;
                             font-size: 12px;
@@ -69,6 +70,10 @@
                         padding: 0 15px 10px;
                         line-height: 15px;
                         height: 30px;
+                    }
+                    h3{
+                        line-height: 15px;
+                        padding: 0 15px 10px;
                     }
                     &:hover{
                         a{
