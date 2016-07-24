@@ -336,12 +336,23 @@
 		$(".ylb-menu-wrap").fadeOut();
 	});
 	var layout = {
-		sc: "",
-		islogin: false
+		islogin: $.getID || false,
 	};
 	var m = {
 		init: function () {
-			
+			m.buildVue();
+		},
+		buildVue: function () {
+			layout = new Vue({
+				el: "#layout-main",
+				data: layout,
+				methods: {
+					logout: function () {
+						$.clearID();
+						window.location.href = "login.html";
+					}
+				}
+			})
 		}
 	};
 	m.init();

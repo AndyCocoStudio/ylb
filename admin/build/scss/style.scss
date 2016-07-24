@@ -26,13 +26,21 @@ $white: #fff;
     line-height: 40px;
     background-color: #101010;
     color: #cecece;
+    overflow: hidden;
     img{
         height: 40px;
         display: block;
+        float: left;
+    }
+    a{
+        float: right;
+        padding: 0 10px;
+        color: #fff
     }
 }
 .op-left{
     width: 200px;
+    min-height: 600px;
     background-color: #222;
     float: left;
     ul{
@@ -59,10 +67,10 @@ $white: #fff;
     }
 }
 .op-right {
-	padding: 0 20px;
+	padding: 20px;
     margin-left: 200px;
     width: calc(100% - 200px);
-    margin-top: 30px;
+    margin-bottom: 80px;
 	h1 {
         font-size: 18px;
         border-bottom: 1px solid #999;

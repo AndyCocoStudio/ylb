@@ -3,6 +3,7 @@
     var m = {
         init: function () {
             m.buildVue();
+            $(".op-header").hide();
         },
         buildVue: function () {
             login = new Vue({

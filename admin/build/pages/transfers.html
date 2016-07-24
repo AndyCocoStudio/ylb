@@ -6,7 +6,6 @@
 
 <!-- @@block = content -->
 <section class="transfer-main" id="transfer-main" v-cloak>
-	<div class="op-header"><img src="images/logo.png" /></div>
 	<div class="op-left">
 		<ul>
 			<li><a href="transfers.html"><i class="fa fa-money"></i>提现审核</a></li>
@@ -20,16 +19,20 @@
 					<th>申请ID</th>
 					<th>转出金额</th>
 					<th>银行卡号</th>
+					<th>店铺法人</th>
+					<th>店铺名</th>
+					<th>地址</th>
 					<th>申请时间</th>
-					<th>状态</th>
 					<th>操作</th>
 				</tr>
 				<tr v-if="t.status=='New'" v-for="t in list">
 					<td>{{t.transferID}}</td>
 					<td>{{t.amount}}</td>
 					<td>{{t.account}}</td>
+					<td>{{t.name}}</td>
+					<td>{{t.storeName}}</td>
+					<td>{{t.address}}</td>
 					<td>{{t.createTime}}</td>
-					<td>待审批</td>
 					<td><a @click="agree(t.transferID)">同意</a><a @click="disagree(t.transferID)">拒绝</a></td>
 				</tr>
 			</table>
@@ -40,6 +43,9 @@
 				<th>申请ID</th>
 				<th>转出金额</th>
 				<th>银行卡号</th>
+				<th>店铺法人</th>
+				<th>店铺名</th>
+				<th>地址</th>
 				<th>申请时间</th>
 				<th>状态</th>
 				<th>备注</th>
@@ -48,6 +54,9 @@
 				<td>{{t.transferID}}</td>
 				<td>{{t.amount}}</td>
 				<td>{{t.account}}</td>
+				<td>{{t.name}}</td>
+				<td>{{t.storeName}}</td>
+				<td>{{t.address}}</td>
 				<td>{{t.createTime}}</td>
 				<td>
 					<em v-if="t.status=='Agree'">已同意</em>
