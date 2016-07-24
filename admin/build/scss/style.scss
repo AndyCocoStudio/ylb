@@ -88,13 +88,18 @@ $white: #fff;
         color: #fff;
         padding: 10px;
     }
-	input, select {
-		height:30px;
+	input, select, textarea{
+		height: 30px;
 		width: 150px;
 		border: 1px solid #888;
 		margin-right: 5px;
         border-radius: 3px;
 	}
+    textarea{
+        width: 400px;
+        height: 200px;
+        resize: none;
+    }
 	input{
 		padding-left: 5px;
 	}

@@ -19,9 +19,21 @@
                             data: JSON.stringify(loginData)
                         }).done(function (d) {
                             $.ylbAjaxHandler(d, function () {
-                                console.log(d.data);
                                 $.setID(d.data.sessionID);
-                                window.location.href = 'upgraderight.html'
+                                switch (d.data.role) {
+                                    case "Admin":
+                                        window.location.href = "upgraderight.html";
+                                        break;
+                                    case "Marketing":
+                                        window.location.href = "product.html";
+                                        break;
+                                    case "FinancialAffairs":
+                                        window.location.href = "transfers.html";
+                                        break;
+                                    default:
+                                        break;
+
+                                }
                             })
                         })
                     }

@@ -79,10 +79,18 @@
 		//获取单个商品详情
 		getGoods: function (id) {
 			$.when($.ajax({
-				url: $.apiUrl + "/goods?id="+id,
+				url: $.apiUrl + "/goods?id=" + id,
 				type: "GET"
 			})).done(function (d) {
 				$.ylbAjaxHandler(d, function () {
+					$.ajax({
+						url: $.apiUrl + '/goods/kinds?all=1&code=' + d.data.kind1Code,
+						type: 'GET',
+					}).done(function (d) {
+						if (d.result) {
+							product.slist = d.data;
+						}
+					})
 					product.edit = d.data;
 					product.path = 'edit';
 				})
@@ -279,7 +287,22 @@
 							if (d.result) {
 								product.slist = d.data;
 							}
-						})
+						});
+					},
+					//设置一级类目
+					esetflist: function (e) {
+						var t = $(e.target).find("option:selected").text();
+						var c = $(e.target).find("option:selected").val();
+						product.edit.kind1 = t;
+						product.edit.kind1Code = c;
+						$.ajax({
+							url: $.apiUrl + '/goods/kinds?all=1&code=' + c,
+							type: 'GET',
+						}).done(function (d) {
+							if (d.result) {
+								product.slist = d.data;
+							}
+						});
 					},
 					//设置二级类目
 					setslist: function (e) {
@@ -287,6 +310,13 @@
 						var c = $(e.target).find("option:selected").val();
 						product.detail.kind2 = t;
 						product.detail.kind2Code = c;
+					},
+					//设置二级类目
+					esetslist: function (e) {
+						var t = $(e.target).find("option:selected").text();
+						var c = $(e.target).find("option:selected").val();
+						product.edit.kind2 = t;
+						product.edit.kind2Code = c;
 					},
 					//新增商品
 					newPro: function () {
@@ -337,8 +367,9 @@
 						}).done(function (d) {
 							$.ylbAjaxHandler(d, function () {
 								$.ylbAlert("编辑成功");
-								product.path ="list";
-							 });
+								product.path = "list";
+								m.getData();
+							});
 						});
 					}
 				}

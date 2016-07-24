@@ -17,7 +17,7 @@
 	<link rel="stylesheet" type="text/css" href="css/libs/morris.css" />
 	<link rel="stylesheet" type="text/css" href="css/libs/pickday.css" />
 	<link rel="stylesheet" type="text/css" href="css/font-awesome.css" />
-	<link rel="stylesheet" type="text/css" href="css/style.css?rev=13bdd6927a62c4c4162becf0e6cf754a" />
+	<link rel="stylesheet" type="text/css" href="css/style.css?rev=bcfff78042382f9f285d52698f96560b" />
 </head>
 
 <body>
@@ -58,7 +58,7 @@
                 </li>
                 <li>
                     <span>产品概述</span>
-                    <input v-model="detail.brief.content" type="text">
+                    <textarea v-model="detail.brief.content" type="text"></textarea>
                 </li>
                 <li>
                     <span>概述图</span>
@@ -138,16 +138,16 @@
                 </li>
                 <li>
                     <span>列表图</span>
-                    <span class="uploadbtn" id="lbt2">{{edit.thumbnail.length==0?'点击上传图片':'图片已上传'}}</span>
+                    <span class="uploadbtn" id="lbt1">{{edit.thumbnail.length==0?'点击上传图片':'图片已上传'}}</span>
                     <img :src="edit.thumbnail[0]">
                 </li>
                 <li>
                     <span>产品概述</span>
-                    <input v-model="edit.brief.content" type="text">
+                    <textarea v-model="edit.brief.content"></textarea>
                 </li>
                 <li>
                     <span>概述图</span>
-                    <span class="uploadbtn" id="gst2">{{edit.brief.img ? ' 图片已上传': '请上传图片'}}</span>
+                    <span class="uploadbtn" id="gst1">{{edit.brief.img ? ' 图片已上传': '请上传图片'}}</span>
                     <img :src="edit.brief.img">
                 </li>
                 <li>
@@ -160,11 +160,11 @@
                 </li>-->
                 <li>
                     <span>所属类目</span>
-                    <select @change="setflist">
+                    <select @change="esetflist">
                         <option value="-1">-请选择一级类目-</option>
                         <option selected="{{f.code==edit.kind1Code}}" v-for="f in flist" value={{f.code}}>{{f.name}}</option>
                     </select>
-                    <select @change="setslist">
+                    <select @change="esetslist">
                         <option value="-1">-请选择二级类目-</option>
                         <option selected="{{s.code==edit.kind2Code}}" v-for="s in slist" value="{{s.code}}">{{s.name}}</option>
                     </select>
@@ -212,8 +212,8 @@
                     <td>{{g.name}}</td>
                     <td>{{g.price}}</td>
                     <td>{{g.deduction}}</td>
-                    <td><a class="white-button" @click="editGoods(g.goodsID)">编辑</a>
-                        <a class="white-button" @click="delGoods(g.goodsID)">删除</a></td>
+                    <td><a class="white-button edit" @click="editGoods(g.goodsID)">编辑</a>
+                        <a class="white-button delete" @click="delGoods(g.goodsID)">删除</a></td>
                 </tr>
             </table>
         </div>
@@ -227,10 +227,10 @@
 <script src="js/libs/pickday.min.js" type="text/javascript"></script>
 <script src="js/libs/vue.min.js" type="text/javascript"></script>
 <script src="js/libs/echarts.min.js" type="text/javascript"></script>
-<script src="js/base.js?rev=13bdd6927a62c4c4162becf0e6cf754a" type="text/javascript"></script>
+<script src="js/base.js?rev=bcfff78042382f9f285d52698f96560b" type="text/javascript"></script>
 
 
-<script type="text/javascript" src="js/product.js?rev=13bdd6927a62c4c4162becf0e6cf754a"></script>
+<script type="text/javascript" src="js/product.js?rev=bcfff78042382f9f285d52698f96560b"></script>
 <!-- @@close
 
 
