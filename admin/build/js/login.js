@@ -1,24 +1,25 @@
-(function() {
+(function () {
     var login = {};
     var m = {
-        init: function() {
+        init: function () {
             m.buildVue();
         },
-        buildVue: function() {
+        buildVue: function () {
             login = new Vue({
                 el: "#login-main",
                 data: login,
                 methods: {
-                    login: function() {
+                    login: function () {
                         var loginData = {};
                         loginData.userName = login.user;
                         loginData.password = login.pwd;
                         $.ajax({
-                            url: "/api/staff/login",
+                            url: $.apiUrl + "/staff/login",
                             type: "POST",
                             data: JSON.stringify(loginData)
-                        }).done(function(d) {
+                        }).done(function (d) {
                             $.ylbAjaxHandler(d, function () {
+                                console.log(d.data);
                                 $.setID(d.data.sessionID);
                                 window.location.href = 'upgraderight.html'
                             })

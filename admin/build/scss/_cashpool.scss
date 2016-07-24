@@ -1,4 +1,9 @@
 .cashpool-main{
+    h1{
+        em{
+            color: $red;
+        }
+    }
     .cashpool-echarts{
         height: 400px;
         margin-bottom: 20px;

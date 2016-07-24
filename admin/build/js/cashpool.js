@@ -1,8 +1,5 @@
 (function () {
     var cash = {
-        goods: {},
-        plat: {},
-        service: {}
     };
     var m = {
         init: function () {
@@ -13,61 +10,36 @@
             var plat = echarts.init(document.getElementById('plat'));
             var service = echarts.init(document.getElementById('service'));
             var goption = {
-                backgroundColor: '#2c343c',
                 title: {
                     text: '货款资金池',
-                    left: 'center',
-                    top: 20,
-                    textStyle: {
-                        color: '#ccc'
-                    }
+                    subtext: '现金['+cash.pool.PaymentForGoods.cash+'] 佣金['+cash.pool.PaymentForGoods.commission+'] 货款['+cash.pool.PaymentForGoods.paymentForGoods+'] 积分['+cash.pool.PaymentForGoods.score+']',
+                    x: 'center'
                 },
-
                 tooltip: {
                     trigger: 'item',
                     formatter: "{a} <br/>{b} : {c} ({d}%)"
                 },
-
-                visualMap: {
-                    show: false,
-                    min: 80,
-                    max: 600,
-                    inRange: {
-                        colorLightness: [0, 1]
-                    }
+                legend: {
+                    orient: 'vertical',
+                    left: 'left',
+                    data: ['现金', '佣金', '货款', '积分']
                 },
                 series: [
                     {
                         name: '资金比例',
                         type: 'pie',
                         radius: '55%',
-                        center: ['50%', '50%'],
+                        center: ['50%', '60%'],
                         data: [
-                            { value: cash.goods.cash, name: '现金' },
-                            { value: cash.goods.score, name: '积分' }
-                        ].sort(function (a, b) { return a.value - b.value }),
-                        roseType: 'angle',
-                        label: {
-                            normal: {
-                                textStyle: {
-                                    color: 'rgba(255, 255, 255, 0.3)'
-                                }
-                            }
-                        },
-                        labelLine: {
-                            normal: {
-                                lineStyle: {
-                                    color: 'rgba(255, 255, 255, 0.3)'
-                                },
-                                smooth: 0.2,
-                                length: 10,
-                                length2: 20
-                            }
-                        },
+                            { value: cash.pool.PaymentForGoods.cash, name: '现金' },
+                            { value: cash.pool.PaymentForGoods.commission, name: '佣金' },
+                            { value: cash.pool.PaymentForGoods.paymentForGoods, name: '货款' },
+                            { value: cash.pool.PaymentForGoods.score, name: '积分' }
+                        ],
                         itemStyle: {
-                            normal: {
-                                color: '#c23531',
-                                shadowBlur: 200,
+                            emphasis: {
+                                shadowBlur: 10,
+                                shadowOffsetX: 0,
                                 shadowColor: 'rgba(0, 0, 0, 0.5)'
                             }
                         }
@@ -75,61 +47,36 @@
                 ]
             };
             var poption = {
-                backgroundColor: '#2c343c',
                 title: {
                     text: '平台费资金池',
-                    left: 'center',
-                    top: 20,
-                    textStyle: {
-                        color: '#ccc'
-                    }
+                    subtext: '现金['+cash.pool.PlatFormFee.cash+'] 佣金['+cash.pool.PlatFormFee.commission+'] 货款['+cash.pool.PlatFormFee.paymentForGoods+'] 积分['+cash.pool.PlatFormFee.score+']',
+                    x: 'center'
                 },
-
                 tooltip: {
                     trigger: 'item',
                     formatter: "{a} <br/>{b} : {c} ({d}%)"
                 },
-
-                visualMap: {
-                    show: false,
-                    min: 80,
-                    max: 600,
-                    inRange: {
-                        colorLightness: [0, 1]
-                    }
+                legend: {
+                    orient: 'vertical',
+                    left: 'left',
+                    data: ['现金', '佣金', '货款', '积分']
                 },
                 series: [
                     {
                         name: '资金比例',
                         type: 'pie',
                         radius: '55%',
-                        center: ['50%', '50%'],
+                        center: ['50%', '60%'],
                         data: [
-                            { value: cash.plat.cash, name: '现金' },
-                            { value: cash.plat.score, name: '积分' }
-                        ].sort(function (a, b) { return a.value - b.value }),
-                        roseType: 'angle',
-                        label: {
-                            normal: {
-                                textStyle: {
-                                    color: 'rgba(255, 255, 255, 0.3)'
-                                }
-                            }
-                        },
-                        labelLine: {
-                            normal: {
-                                lineStyle: {
-                                    color: 'rgba(255, 255, 255, 0.3)'
-                                },
-                                smooth: 0.2,
-                                length: 10,
-                                length2: 20
-                            }
-                        },
+                            { value: cash.pool.PlatFormFee.cash, name: '现金' },
+                            { value: cash.pool.PlatFormFee.commission, name: '佣金' },
+                            { value: cash.pool.PlatFormFee.paymentForGoods, name: '货款' },
+                            { value: cash.pool.PlatFormFee.score, name: '积分' }
+                        ],
                         itemStyle: {
-                            normal: {
-                                color: '#c23531',
-                                shadowBlur: 200,
+                            emphasis: {
+                                shadowBlur: 10,
+                                shadowOffsetX: 0,
                                 shadowColor: 'rgba(0, 0, 0, 0.5)'
                             }
                         }
@@ -137,61 +84,36 @@
                 ]
             };
             var soption = {
-                backgroundColor: '#2c343c',
                 title: {
                     text: '服务费资金池',
-                    left: 'center',
-                    top: 20,
-                    textStyle: {
-                        color: '#ccc'
-                    }
+                    subtext: '现金['+cash.pool.ServiceFee.cash+'] 佣金['+cash.pool.ServiceFee.commission+'] 货款['+cash.pool.ServiceFee.paymentForGoods+'] 积分['+cash.pool.ServiceFee.score+']',
+                    x: 'center'
                 },
-
                 tooltip: {
                     trigger: 'item',
                     formatter: "{a} <br/>{b} : {c} ({d}%)"
                 },
-
-                visualMap: {
-                    show: false,
-                    min: 80,
-                    max: 600,
-                    inRange: {
-                        colorLightness: [0, 1]
-                    }
+                legend: {
+                    orient: 'vertical',
+                    left: 'left',
+                    data: ['现金', '佣金', '货款', '积分']
                 },
                 series: [
                     {
                         name: '资金比例',
                         type: 'pie',
                         radius: '55%',
-                        center: ['50%', '50%'],
+                        center: ['50%', '60%'],
                         data: [
-                            { value: cash.service.cash, name: '现金' },
-                            { value: cash.service.score, name: '积分' }
-                        ].sort(function (a, b) { return a.value - b.value }),
-                        roseType: 'angle',
-                        label: {
-                            normal: {
-                                textStyle: {
-                                    color: 'rgba(255, 255, 255, 0.3)'
-                                }
-                            }
-                        },
-                        labelLine: {
-                            normal: {
-                                lineStyle: {
-                                    color: 'rgba(255, 255, 255, 0.3)'
-                                },
-                                smooth: 0.2,
-                                length: 10,
-                                length2: 20
-                            }
-                        },
+                            { value: cash.pool.ServiceFee.cash, name: '现金' },
+                            { value: cash.pool.ServiceFee.commission, name: '佣金' },
+                            { value: cash.pool.ServiceFee.paymentForGoods, name: '货款' },
+                            { value: cash.pool.ServiceFee.score, name: '积分' }
+                        ],
                         itemStyle: {
-                            normal: {
-                                color: '#c23531',
-                                shadowBlur: 200,
+                            emphasis: {
+                                shadowBlur: 10,
+                                shadowOffsetX: 0,
                                 shadowColor: 'rgba(0, 0, 0, 0.5)'
                             }
                         }
@@ -209,9 +131,7 @@
                 type: "GET"
             })).done(function (d) {
                 $.ylbAjaxHandler(d, function () {
-                    cash.goods = d.data[2];
-                    cash.plat = d.data[1];
-                    cash.service = d.data[0];
+                    cash = d.data;
                     m.buildVue();
                 });
             });
