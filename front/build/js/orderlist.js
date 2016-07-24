@@ -8,10 +8,13 @@
         },
         getList: function () {
             $.when($.ajax({
-                url: $.apiUrl + "",
+                url: $.apiUrl + "/merchant/givingscore?mid=" + list.mid,
                 type: "GET"
             })).done(function (d) {
-                
+                $.ylbAjaxHandler(d, function () {
+                    list.orderlist = d.data;
+                    m.buildVue();
+                })
             });
         },
         buildVue: function () {

@@ -24,12 +24,22 @@
         <tr>
             <th>手机号</th>
             <th>姓名</th>
+            <th>店铺法人</th>
+            <th>店铺名</th>
+            <th>地址</th>
+            <th>联系电话</th>
             <th>推荐时间</th>
+            <th>备注</th>
         </tr>
-        <tr v-for="r in mlist.users">
+        <tr v-for="r in mlist.merchants">
             <td>{{r.mobile}}</td>
             <td>{{r.name}}</td>
+            <td>{{r.legalPerson}}</td>
+            <td>{{r.storeName}}</td>
+            <td>{{r.address}}</td>
+            <td>{{r.tel}}</td>
             <td>{{r.createTime}}</td>
+            <td><a href="orderlist.html?mid={{r.merchantID}}">查看做单</a></td>
         </tr>
     </table>
 </section>

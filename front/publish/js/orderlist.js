@@ -1,0 +1,1 @@
+!function(){var i={mid:$.urlParam("mid")},n={init:function(){n.getList()},getList:function(){$.when($.ajax({url:$.apiUrl+"/merchant/givingscore?mid="+i.mid,type:"GET"})).done(function(t){$.ylbAjaxHandler(t,function(){i.orderlist=t.data,n.buildVue()})})},buildVue:function(){i=new Vue({el:"#orderlist-main",data:i,methods:{}})}};n.init()}();

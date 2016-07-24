@@ -30,7 +30,7 @@
         },
         getmlist: function () {
             $.when($.ajax({
-                url: $.apiUrl + "",
+                url: $.apiUrl + "/customermanager/recommend/merchant",
                 type: "GET"
             })).done(function (d) {
                 $.ylbAjaxHandler(d, function () {

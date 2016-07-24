@@ -18,21 +18,33 @@
                 data: vlogon,
                 methods: {
                     logon: function () {
-                        $.ajax({
-                            url: $.apiUrl + '/user/register',
-                            type: 'PUT',
-                            data: JSON.stringify({
-                                "mobile": vlogon.mobile,
-                                "captcha": vlogon.password,
-                                "referrerMobile": vlogon.ref
-                            })
-                        }).done(function (d) {
-                            $.ylbAjaxHandler(d, function () {
-                                $.setID(d.data.sessionID);
-                                $.localStorageHandler("set","flag",d.data.flag);
-                                window.location.href = "index.html";
-                            });
-                        });
+                        if (vlogon.mobile) {
+                            if (vlogon.mobile.length < 11) {
+                                $.ylbAlert("手机号码位数不正确");
+                            } else {
+                                if (!$.checkIsMobileNumber(vlogon.mobile)) {
+                                    $.ylbAlert("请输入正确手机号");
+                                } else {
+                                    $.ajax({
+                                        url: $.apiUrl + '/user/register',
+                                        type: 'PUT',
+                                        data: JSON.stringify({
+                                            "mobile": vlogon.mobile,
+                                            "captcha": vlogon.password,
+                                            "referrerMobile": vlogon.ref
+                                        })
+                                    }).done(function (d) {
+                                        $.ylbAjaxHandler(d, function () {
+                                            $.setID(d.data.sessionID);
+                                            $.localStorageHandler("set", "flag", d.data.flag);
+                                            window.location.href = "index.html";
+                                        });
+                                    });
+                                }
+                            }
+                        } else {
+                            $.ylbAlert("请输入手机号码");
+                        }
                     },
                     getCode: function () {
                         if (vlogon.counting) {

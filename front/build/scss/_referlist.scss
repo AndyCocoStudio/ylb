@@ -1,6 +1,6 @@
 .refer-main{
-    width: 320px;
-    margin: 0 auto;
+    width: 960px;
+    margin: 0 auto 140px;
     h1{
         font-size: 14px;
         line-height: 40px;
@@ -8,6 +8,7 @@
     }
     table{
         width: 100%;
+        border-bottom: 1px solid #ccc;
         tr{
             height: 40px; 
             text-align: center;
