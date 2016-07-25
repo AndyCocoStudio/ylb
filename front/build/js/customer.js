@@ -4,6 +4,8 @@
         sendshow: false,
         spendshow: false,
         applyrole: -1,
+        isapplyunder: false,
+        isapplymanager: false,
         nagtive: false,
         ordernagtive: false,
         sid: $.getID(),
@@ -39,7 +41,7 @@
             way: 1,//1货款2佣金3余额
             amount: 0,
             account: "",
-            bank:""
+            bank: ""
         },
         total: {},
         tj: {
@@ -603,60 +605,69 @@
                         vcustomer.tobearea.areaCode = v;
                         vcustomer.tobearea.area = t;
                     },
+
                     //申请加盟商
                     apysaler: function () {
-                        $.ajax({
-                            url: $.apiUrl + "/user/merchant",
-                            type: "PUT",
-                            data: JSON.stringify(vcustomer.tobesaler)
-                        }).done(function (d) {
-                            $.ylbAjaxHandler(d, function () {
-                                $.ylbAlert("申请成功！");
-                                vcustomer.tobesaler = {
-                                    "referrerMobile": "",
-                                    "idCard": "",
-                                    "storeName": "",
-                                    "province": "",
-                                    "provinceCode": "",
-                                    "city": "",
-                                    "cityCode": "",
-                                    "area": "",
-                                    "areaCode": "",
-                                    "street": "",
-                                    "legalPerson": "",
-                                    "legalPersonIDCardImage": [],//法人身份证
-                                    "legalPersonWithIDCardInHandImage": "",//法人手持身份证照片
-                                    "storeAppearance": "",//店招
-                                    "storeInsideImages": [],//店铺内部图片
-                                    "license": ""
-                                }
+                        if (vcustomer.isapplyunder) {
+                            $.ajax({
+                                url: $.apiUrl + "/user/merchant",
+                                type: "PUT",
+                                data: JSON.stringify(vcustomer.tobesaler)
+                            }).done(function (d) {
+                                $.ylbAjaxHandler(d, function () {
+                                    $.ylbAlert("申请成功！");
+                                    vcustomer.tobesaler = {
+                                        "referrerMobile": "",
+                                        "idCard": "",
+                                        "storeName": "",
+                                        "province": "",
+                                        "provinceCode": "",
+                                        "city": "",
+                                        "cityCode": "",
+                                        "area": "",
+                                        "areaCode": "",
+                                        "street": "",
+                                        "legalPerson": "",
+                                        "legalPersonIDCardImage": [],//法人身份证
+                                        "legalPersonWithIDCardInHandImage": "",//法人手持身份证照片
+                                        "storeAppearance": "",//店招
+                                        "storeInsideImages": [],//店铺内部图片
+                                        "license": ""
+                                    }
+                                });
                             });
-                        });
+                        } else {
+                            $.ylbAlert("阅读地面商家加盟合作条款并勾选已读");
+                        }
                     },
                     //申请客户经理
                     apymanager: function () {
-                        $.ajax({
-                            url: $.apiUrl + "/user/customermanager",
-                            type: "PUT",
-                            data: JSON.stringify(vcustomer.tobearea)
-                        }).done(function (d) {
-                            $.ylbAjaxHandler(d, function () {
-                                $.ylbAlert("申请成功！");
-                                vcustomer.tobearea = {
-                                    "applicantName": "",
-                                    "province": "",
-                                    "provinceCode": "",
-                                    "city": "",
-                                    "cityCode": "",
-                                    "street": "",
-                                    "area": "",
-                                    "areaCode": "",
-                                    "idCard": "",
-                                    "legalPersonIDCardImage": [],
-                                    "legalPersonWithIDCardInHandImage": ""
-                                }
+                        if (vcustomer.isapplymanager) {
+                            $.ajax({
+                                url: $.apiUrl + "/user/customermanager",
+                                type: "PUT",
+                                data: JSON.stringify(vcustomer.tobearea)
+                            }).done(function (d) {
+                                $.ylbAjaxHandler(d, function () {
+                                    $.ylbAlert("申请成功！");
+                                    vcustomer.tobearea = {
+                                        "applicantName": "",
+                                        "province": "",
+                                        "provinceCode": "",
+                                        "city": "",
+                                        "cityCode": "",
+                                        "street": "",
+                                        "area": "",
+                                        "areaCode": "",
+                                        "idCard": "",
+                                        "legalPersonIDCardImage": [],
+                                        "legalPersonWithIDCardInHandImage": ""
+                                    }
+                                });
                             });
-                        })
+                        } else {
+                            $.ylbAlert("阅读地面商家加盟合作条款并勾选已读");
+                        }
                     },
                     //取消订单
                     cancel: function (id) {
@@ -750,6 +761,13 @@
                     rewards: function () {
                         vcustomer.zczc = true;
                         vcustomer.covershow = true;
+                    },
+                    //阅读地面商家加盟合作条款
+                    selunder: function (el) {
+                        vcustomer.isapplyunder = $(el.target).is(":checked");
+                    },
+                    selmanager: function (el) {
+                        vcustomer.isapplymanager = $(el.target).is(":checked");
                     },
                     //转出资产
                     dorewards: function () {

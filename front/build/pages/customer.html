@@ -343,7 +343,8 @@
                 <li><span>店面或内部环境图(最多4张)</span><span id="dnt">{{tobesaler.storeInsideImages.length==0?'点击上传图片':'图片已上传'}}</span>
                     <img v-for="r in tobesaler.storeInsideImages" :src="r"></li>
                 <li><span>推荐人</span><input v-model="tobesaler.referrerMobile" maxlength="11" placeholder="请输入推荐人手机" type="text"></li>
-                <li><a @click="apysaler">提交</a></li>
+                <li><input @click="selunder" v-model="isapplyunder" type="checkbox">（勾选）本人已详细阅读<a target="_blank" href="groundinfo.html">地面商家加盟合作条款</a>，并同意接受以上条款，如有违反，愿意承担一切损失和法律责任。</li>
+                <li><a class="btn-sub" @click="apysaler">提交</a></li>
             </ul>
             <ul class="cutomer-apply-saler" v-show="role=='2'&&info.role!='CustomerManager'&&info.role!='AreaManager'&&info.role!='AM'&&info.role!='CM'">
                 <li>注：图片资料，请选择1024K以下的jpg格式的图片</li>
@@ -367,7 +368,8 @@
                     <img v-for="r in tobearea.legalPersonIDCardImage" :src="r"></li>
                 <li><span>申请人手持身份证图</span><span id="areasfz">{{tobearea.legalPersonWithIDCardInHandImage?'图片已上传':'点击上传图片'}}</span>
                     <img :src="tobearea.legalPersonWithIDCardInHandImage"></li>
-                <li><a @click="apymanager">提交</a></li>
+                <li><input @click="selmanager" v-model="isapplymanager" type="checkbox">（勾选）本人已详细阅读<a target="_blank" href="groundinfo.html">地面商家加盟合作条款</a>，并同意接受以上条款，如有违反，愿意承担一切损失和法律责任。</li>
+                <li><a class="btn-sub" @click="apymanager">提交</a></li>
             </ul>
         </div>
         <!--商家注册会员-->

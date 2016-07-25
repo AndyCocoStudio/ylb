@@ -1,5 +1,8 @@
 (function () {
-    var datas = {};
+    var datas = {
+        cover: true,
+        grayshow: true
+    };
     var m = {
         init: function () {
             m.getBanner();
@@ -19,11 +22,22 @@
         buildVue: function () {
             datas = new Vue({
                 el: "#index-main",
-                data: datas
+                data: datas,
+                methods: {
+                    hideall: function () {
+                        datas.cover = false;
+                        datas.grayshow = false;
+                    }
+                }
             });
             m.setImages();
             m.resizeWindow();
             m.domControl();
+            setTimeout(m.autohide, 30000);
+        },
+        autohide: function () {
+            datas.cover = false;
+            datas.grayshow = false;
         },
         setImages: function () {
             $(".index-main img").each(function () {
@@ -40,7 +54,7 @@
                     t.width("auto");
                 } else {
                     t.width(pw);
-                    t.height("auto")
+                    t.height("auto");
                 }
             });
         },

@@ -91,8 +91,14 @@
 				case "4021":
 					$.ylbAlert("该用户非加盟商家");
 					break;
+				case "4022":
+					$.ylbAlert("该用户已经是区域经理/客户经理");
+					break;
+				case "4023":
+					$.ylbAlert("做单金额需小于10W");
+					break;
 				default:
-					$.ylbAlert("服务器又开小差");
+					$.ylbAlert("服务器又开小差(err:" + code + ")");
 					break;
 			}
 		}
