@@ -13,9 +13,9 @@
 
 
 
-	<link rel="stylesheet" type="text/css" href="css/style.css?rev=38271d221185d0b6389079911d0b1cf7" />
+	<link rel="stylesheet" type="text/css" href="css/style.css?rev=562ffce83d0955a81f955abf1d9e6b1b" />
 	<link rel="stylesheet" type="text/css" href="css/pickday.css" />
-	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=38271d221185d0b6389079911d0b1cf7" />
+	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=562ffce83d0955a81f955abf1d9e6b1b" />
 </head>
 
 <body>
@@ -74,8 +74,8 @@
 		<div class="ylb-menu-wrap">
 			<ul>
 				<li>全部商品分类</li>
-				<li @mouseover="changeslist" data-id="{{f.code}}" v-for="f in flist"><a href="list.html?n={{f.name}}&k1={{f.code}}">{{f.name}}</a></li>
-				<li><a v-for="s in slist" href="list.html?n={{s.name}}&k2={{s.code}}">{{s.name}}></a></li>
+				<li @mouseover="changeslist" data-id="{{f.code}}" v-for="f in flist"><a href="list.html?k1={{f.code}}">{{f.name}}</a></li>
+				<li><a v-for="s in slist" href="list.html?k2={{s.code}}">{{s.name}}></a></li>
 			</ul>
 
 		</div>
@@ -89,9 +89,9 @@
 <script src="js/libs/pickday.min.js" type="text/javascript"></script>
 <script src="js/libs/qrcode.min.js" type="text/javascript"></script>
 <script src="js/libs/dropzone.js" type="text/javascript"></script>
-<script src="js/base.js?rev=38271d221185d0b6389079911d0b1cf7" type="text/javascript"></script>
+<script src="js/base.js?rev=562ffce83d0955a81f955abf1d9e6b1b" type="text/javascript"></script>
 
-<script type="text/javascript" src="js/shops.js?rev=38271d221185d0b6389079911d0b1cf7"></script>
+<script type="text/javascript" src="js/shops.js?rev=562ffce83d0955a81f955abf1d9e6b1b"></script>
 
 
 </html>

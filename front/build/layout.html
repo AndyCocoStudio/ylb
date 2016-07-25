@@ -37,8 +37,8 @@
 		<div class="ylb-menu-wrap">
 			<ul>
 				<li>全部商品分类</li>
-				<li @mouseover="changeslist" data-id="{{f.code}}" v-for="f in flist"><a href="list.html?n={{f.name}}&k1={{f.code}}">{{f.name}}</a></li>
-				<li><a v-for="s in slist" href="list.html?n={{s.name}}&k2={{s.code}}">{{s.name}}></a></li>
+				<li @mouseover="changeslist" data-id="{{f.code}}" v-for="f in flist"><a href="list.html?k1={{f.code}}">{{f.name}}</a></li>
+				<li><a v-for="s in slist" href="list.html?k2={{s.code}}">{{s.name}}></a></li>
 			</ul>
 
 		</div>
