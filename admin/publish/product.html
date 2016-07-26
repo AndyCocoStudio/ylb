@@ -17,7 +17,7 @@
 	<link rel="stylesheet" type="text/css" href="css/libs/morris.css" />
 	<link rel="stylesheet" type="text/css" href="css/libs/pickday.css" />
 	<link rel="stylesheet" type="text/css" href="css/font-awesome.css" />
-	<link rel="stylesheet" type="text/css" href="css/style.css?rev=7d59e6aa70e2c4a034e71293a17a0656" />
+	<link rel="stylesheet" type="text/css" href="css/style.css?rev=65c52bd69204502559630093b46fb37f" />
 </head>
 
 <body>
@@ -170,11 +170,11 @@
                     </select>
                 </li>
                 <li>
-                    <span>商品属性</span><a @click="addparam">添加</a>
+                    <span>商品属性</span><a @click="eaddparam">添加</a>
                     <div v-for="p in edit.info">
                         <input type="text" v-model="p.name" placeholder="属性">
                         <input v-model="p.value" type="text" placeholder="值">
-                        <a class="deleteparam" @click="delparam($index)">x</a>
+                        <a class="deleteparam" @click="edelparam($index)">x</a>
                     </div>
                 </li>
                 <li>
@@ -227,10 +227,10 @@
 <script src="js/libs/pickday.min.js" type="text/javascript"></script>
 <script src="js/libs/vue.min.js" type="text/javascript"></script>
 <script src="js/libs/echarts.min.js" type="text/javascript"></script>
-<script src="js/base.js?rev=7d59e6aa70e2c4a034e71293a17a0656" type="text/javascript"></script>
+<script src="js/base.js?rev=65c52bd69204502559630093b46fb37f" type="text/javascript"></script>
 
 
-<script type="text/javascript" src="js/product.js?rev=7d59e6aa70e2c4a034e71293a17a0656"></script>
+<script type="text/javascript" src="js/product.js?rev=65c52bd69204502559630093b46fb37f"></script>
 <!-- @@close
 
 

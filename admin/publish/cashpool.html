@@ -17,7 +17,7 @@
 	<link rel="stylesheet" type="text/css" href="css/libs/morris.css" />
 	<link rel="stylesheet" type="text/css" href="css/libs/pickday.css" />
 	<link rel="stylesheet" type="text/css" href="css/font-awesome.css" />
-	<link rel="stylesheet" type="text/css" href="css/style.css?rev=4d9d32236df60470751b902b08570283" />
+	<link rel="stylesheet" type="text/css" href="css/style.css?rev=bc8941b09b5f44665deb4f6f0870c8f3" />
 </head>
 
 <body>
@@ -30,7 +30,8 @@
         </ul>
     </div>
     <div class="op-right">
-        <h1>平台充值总额：<em>{{balance.balance}}</em>元</h1>
+        <h1>平台充值总额：<em>{{totalRecharge.totalAmount}}</em>元，平台用户余额总数：<em>{{balance.balance}}</em></h1>
+        <h2>计算公式： 平台充值总额 = 平台用户余额+资金池现金总额</h2>
         <div class="cashpool-echarts" id="goods"></div>
         <div class="cashpool-echarts" id="plat"></div>
         <div class="cashpool-echarts" id="service"></div>
@@ -44,10 +45,10 @@
 <script src="js/libs/pickday.min.js" type="text/javascript"></script>
 <script src="js/libs/vue.min.js" type="text/javascript"></script>
 <script src="js/libs/echarts.min.js" type="text/javascript"></script>
-<script src="js/base.js?rev=4d9d32236df60470751b902b08570283" type="text/javascript"></script>
+<script src="js/base.js?rev=bc8941b09b5f44665deb4f6f0870c8f3" type="text/javascript"></script>
 
 
-<script type="text/javascript" src="js/cashpool.js?rev=4d9d32236df60470751b902b08570283"></script>
+<script type="text/javascript" src="js/cashpool.js?rev=bc8941b09b5f44665deb4f6f0870c8f3"></script>
 
 
 </html>

@@ -274,6 +274,17 @@
 					delparam: function (i) {
 						product.detail.info.splice(i, 1);
 					},
+					//添加属性
+					eaddparam: function () {
+						var n = {
+							name: "",
+							value: ""
+						};
+						product.edit.info.push(n);
+					},
+					edelparam: function (i) {
+						product.edit.info.splice(i, 1);
+					},
 					//设置一级类目
 					setflist: function (e) {
 						var t = $(e.target).find("option:selected").text();

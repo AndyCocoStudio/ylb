@@ -152,11 +152,11 @@
                     </select>
                 </li>
                 <li>
-                    <span>商品属性</span><a @click="addparam">添加</a>
+                    <span>商品属性</span><a @click="eaddparam">添加</a>
                     <div v-for="p in edit.info">
                         <input type="text" v-model="p.name" placeholder="属性">
                         <input v-model="p.value" type="text" placeholder="值">
-                        <a class="deleteparam" @click="delparam($index)">x</a>
+                        <a class="deleteparam" @click="edelparam($index)">x</a>
                     </div>
                 </li>
                 <li>
