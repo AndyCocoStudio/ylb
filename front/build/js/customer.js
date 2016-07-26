@@ -219,6 +219,13 @@
                 height: 140,
                 text: url
             });
+            var logonurl = "http://www.hnylbsc.com/logon.html?rid=" + vcustomer.info.mobile;
+            $('#logon-qrcode').qrcode({
+                render: "canvas",
+                width: 280,
+                height: 280,
+                text: logonurl
+            });
         },
         //获取用户信息
         getUserInfo: function () {
@@ -609,6 +616,54 @@
                     //申请加盟商
                     apysaler: function () {
                         if (vcustomer.isapplyunder) {
+                            if(!vcustomer.tobesaler.idCard){
+                                $.ylbAlert("请输入法人身份证号");
+                                return;
+                            }
+                            if(!vcustomer.tobesaler.storeName){
+                                $.ylbAlert("请输入店铺名称");
+                                return;
+                            }
+                            if(!vcustomer.tobesaler.province){
+                                $.ylbAlert("请选择省");
+                                return;
+                            }
+                            if(!vcustomer.tobesaler.city){
+                                $.ylbAlert("请选择市");
+                                return;
+                            }
+                            if(!vcustomer.tobesaler.area){
+                                $.ylbAlert("请选择区");
+                                return;
+                            }
+                            if(!vcustomer.tobesaler.street){
+                                $.ylbAlert("请输入详细街道地址");
+                                return;
+                            }
+                            if(!vcustomer.tobesaler.legalPerson){
+                                $.ylbAlert("请输入法人名");
+                                return;
+                            }
+                            if(vcustomer.tobesaler.legalPersonIDCardImage.length<1){
+                                $.ylbAlert("请上传身份证正反面照");
+                                return;
+                            }
+                            if(!vcustomer.tobesaler.legalPersonWithIDCardInHandImage){
+                                $.ylbAlert("请上传法人手持身份证照");
+                                return;
+                            }
+                            if(vcustomer.tobesaler.storeInsideImages.length<1){
+                                $.ylbAlert("请上传店铺内饰图");
+                                return;
+                            }
+                            if(!vcustomer.tobesaler.storeAppearance){
+                                $.ylbAlert("请上传店招图");
+                                return;
+                            }
+                            if(!vcustomer.tobesaler.license){
+                                $.ylbAlert("请上传营业执照图");
+                                return;
+                            }
                             $.ajax({
                                 url: $.apiUrl + "/user/merchant",
                                 type: "PUT",
@@ -643,6 +698,34 @@
                     //申请客户经理
                     apymanager: function () {
                         if (vcustomer.isapplymanager) {
+                            if(!vcustomer.tobearea.applicantName){
+                                $.ylbAlert("请输入申请人姓名");
+                                return;
+                            }
+                            if(!vcustomer.tobearea.province){
+                                $.ylbAlert("请选择省");
+                                return;
+                            }
+                            if(!vcustomer.tobearea.city){
+                                $.ylbAlert("请选择市");
+                                return;
+                            }
+                            if(!vcustomer.tobearea.area){
+                                $.ylbAlert("请选择区");
+                                return;
+                            }
+                            if(vcustomer.tobearea.legalPersonIDCardImage.length<1){
+                                $.ylbAlert("请上传身份证正反面照");
+                                return;
+                            }
+                            if(!vcustomer.tobearea.legalPersonWithIDCardInHandImage){
+                                $.ylbAlert("请上传法人手持身份证照");
+                                return;
+                            }
+                            if(!vcustomer.tobearea.idCard){
+                                $.ylbAlert("请输入法人身份证号");
+                                return;
+                            }
                             $.ajax({
                                 url: $.apiUrl + "/user/customermanager",
                                 type: "PUT",

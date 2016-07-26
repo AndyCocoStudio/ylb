@@ -57,7 +57,7 @@
                 <p v-if="info.role=='Merchants'||info.role=='AM'||info.role=='CM'">账户货款： <em>{{info.asset.paymentForGoods}}</em>元</p>
                 <p v-if="info.role=='Merchants'||info.role=='AM'||info.role=='CM'">税后佣金： <em>{{info.asset.commission}}</em>元</p>
                 <p>可用积分： <em>{{info.asset.score}}</em>分</p>
-                <p>积分基点： <em>{{info.asset.point}}</em>个<a @click="getpoint">领取积分</a></p>
+                <p>积分基点： <em>{{info.asset.point}}</em>个<!--<a @click="getpoint">领取积分</a>--></p>
                 <p class="btns"><a v-if="info.role!='Ordinary'" @click="rewards">转出资产</a><a href="asset.html">更多信息</a></p>
             </div>
             <div class="customer-code customer-eqcode">
@@ -377,7 +377,7 @@
             <div class="customer-title">
                 推荐会员
             </div>
-            <ul>
+            <!--<ul>
                 <li>
                     <input type="text" maxlength="11" v-model="tj.mobile" placeholder="请输入手机号码" /><input class="btn-code"
                         @click="getcode" value="获取验证码" type="button" />
@@ -388,7 +388,8 @@
                 <li>
                     <button @click="logon">注册</button>
                 </li>
-            </ul>
+            </ul>-->
+            <div id="logon-qrcode" class="customer-recommendqrcode"></div>
         </div>
         <!--资产转出查看-->
         <div v-if="info.role!='Ordinary'" id="customer-reward" class="customer-reward">

@@ -120,6 +120,11 @@
         width: 832px;
         float: left;
         padding-bottom: 44px;
+        .customer-recommendqrcode{
+            width: 280px;
+            height: 280px;
+            margin: 0 auto;
+        }
         .customer-info{
             padding: 12px;
             background-color: $base-light-orange;
