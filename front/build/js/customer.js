@@ -221,10 +221,11 @@
             });
             var logonurl = "http://www.hnylbsc.com/logon.html?rid=" + vcustomer.info.mobile;
             $('#logon-qrcode').qrcode({
-                render: "canvas",
+                //render: "canvas",
                 width: 280,
                 height: 280,
-                text: logonurl
+                text: logonurl,
+                useSVG: true
             });
         },
         //获取用户信息
@@ -882,7 +883,8 @@
                             type: "PUT",
                             data: JSON.stringify({
                                 amount: vcustomer.reward.amount,
-                                account: vcustomer.reward.account
+                                account: vcustomer.reward.account,
+                                bank: vcustomer.reward.bank
                             })
                         }).done(function (d) {
                             $.ylbAjaxHandler(d, function () {

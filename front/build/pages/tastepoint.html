@@ -1,0 +1,27 @@
+<!-- @@master ../layout.html  -->
+
+<!-- @@block = title-->
+<title>赠送体验积分</title>
+<!-- @@close-->
+
+<!-- @@block = content-->
+<section class="orderlist-main" id="orderlist-main" v-cloak>
+    <h1>会员列表</h1>
+    <table>
+        <tr>
+            <th>会员名</th>
+            <th>手机号</th>
+            <th>操作</th>
+        </tr>
+        <tr v-for="r in list">
+            <td>{{r.name}}</td>
+            <td>{{r.mobile}}</td>
+            <td><a>赠送积分</a></td>
+        </tr>
+    </table>
+</section>
+<!-- @@close-->
+
+<!-- @@block = scripts-->
+<script type="text/javascript" src="js/orderlist.js?rev=@@hash"></script>
+<!-- @@close-->

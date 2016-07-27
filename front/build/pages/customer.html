@@ -73,6 +73,7 @@
                     <a href="spendpoint.html">积分兑换</a>
                     <a v-if="info.role=='Merchants'||info.role=='AM'||info.role=='CM'" href="sendpoint.html">商家做单</a>
                     <a v-if="info.role!='Ordinary'" href="referlist.html">推荐列表</a>
+                    <a v-if="info.role=='Merchants'||info.role=='AM'||info.role=='CM'" href="tastepoint.html">体验积分</a>
                 </div>
             </div>
             <!--<img v-if="info.role!='Merchants'&&info.role!='AM'&&info.role!='CM'" class="customer-adv" src="images/adv1.png" />-->
