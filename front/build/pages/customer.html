@@ -349,7 +349,7 @@
             </ul>
             <ul class="cutomer-apply-saler" v-show="role=='2'&&info.role!='CustomerManager'&&info.role!='AreaManager'&&info.role!='AM'&&info.role!='CM'">
                 <li>注：图片资料，请选择1024K以下的jpg格式的图片</li>
-                <li><span>申请人</span><input v-model="tobearea.applicantName" type="text"></li>
+                <li><span>真实姓名</span><input v-model="tobearea.applicantName" type="text"></li>
                 <li><span>所在地区</span><select @change="changeprov" v-model="tobearea.provinceCode">
                         <option selected value="-1">-请选择省-</option>
                         <option v-for="p in plist" value="{{p.code}}">{{p.name}}</option>

@@ -8,7 +8,7 @@
         },
         getlist: function () {
             $.when($.ajax({
-                url: $.apiUrl + "/merchant/recommended",
+                url: $.apiUrl + "/merchant/users",
                 type: "GET"
             })).done(function (d) {
                 $.ylbAjaxHandler(d, function () {
@@ -30,7 +30,7 @@
         },
         getmlist: function () {
             $.when($.ajax({
-                url: $.apiUrl + "/customermanager/recommend/merchant",
+                url: $.apiUrl + "/customermanager/merchants",
                 type: "GET"
             })).done(function (d) {
                 $.ylbAjaxHandler(d, function () {
