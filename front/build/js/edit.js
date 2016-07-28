@@ -5,10 +5,19 @@
         address: false,
         password: true,
         detail: false,
+        newpwd: false,
+        counting: false,
+        countdown: 0,
+        num: 60,
         confirmpwd: "",
         pwd: {
             currentPassword: "",
             newPassword: ""
+        },
+        repwd: {
+            mobile: "",
+            captcha: "",
+            password: ""
         },
         newaddress: {
             id: "",
@@ -82,6 +91,7 @@
                 $.ylbAjaxHandler(d, function () {
                     vcustomer.info = d.data;
                     vcustomer.useravatar = d.data.avatar;
+                    vcustomer.repwd.mobile = d.data.mobile;
                     m.getAddress();
                     //m.buildVue();
                 });
@@ -144,6 +154,19 @@
                     vcustomer.alist = d.data;
                 });
             });
+        },
+        //倒计时
+        countDown: function () {
+            //## 再次获取验证码倒计时
+            if (vcustomer.num > 1) {
+                vcustomer.num -= 1;
+                $(".btn-code").val(vcustomer.num + "秒后重新获取");
+            } else {
+                vcustomer.counting = false;
+                $(".btn-code").val("重新获取");
+                vcustomer.num = 60;
+                clearInterval(vcustomer.countdown);
+            }
         },
         buildVue: function () {
             vcustomer = new Vue({
@@ -383,6 +406,39 @@
                                 $.ylbAlert("修改成功！");
                             })
                         })
+                    },
+                    //获取验证码
+                    getcode: function () {
+                        if (vcustomer.counting) {
+                            return;
+                        } else {
+                            vcustomer.counting = true;
+                            $.ajax({
+                                url: $.apiUrl + "/captcha",
+                                type: "PUT",
+                                data: JSON.stringify({
+                                    mobile: vcustomer.repwd.mobile,
+                                })
+                            }).done(function (d) {
+                                $.ylbAjaxHandler(d, function () {
+                                    $.ylbAlert("发送成功");
+                                    vcustomer.countdown = setInterval(m.countDown, 1000);
+                                });
+                            });
+                        }
+                    },
+                    //重设支付密码
+                    resetpwd: function () {
+                        $.ajax({
+                            url: $.apiUrl + "/user/password/reset",
+                            type: "POST",
+                            data: JSON.stringify(vcustomer.repwd)
+                        }).done(function (d) {
+                            $.ylbAjaxHandler(d, function () {
+                                $.ylbAlert("修改成功！");
+                                vcustomer.newpwd = false;
+                            });
+                        });
                     }
                 }
             });

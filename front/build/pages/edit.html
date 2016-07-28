@@ -65,6 +65,8 @@
                     <!--<a @click="spendpoints">积分兑换</a>-->
                     <a href="spendpoint.html">积分兑换</a>
                     <a v-if="info.role=='Merchants'||info.role=='AM'||info.role=='CM'" href="sendpoint.html">商家做单</a>
+                    <a v-if="info.role!='Ordinary'" href="referlist.html">推荐列表</a>
+                    <!--<a v-if="info.role=='Merchants'||info.role=='AM'||info.role=='CM'" href="tastepoint.html">体验积分</a>-->
                 </div>
             </div>
             <!--<img v-if="info.role!='Merchants'&&info.role!='AM'&&info.role!='CM'" class="customer-adv" src="images/adv1.png" />-->
@@ -129,7 +131,13 @@
                     <li><span>原密码</span><input v-model="pwd.currentPassword" type="password"></li>
                     <li><span>新密码</span><input v-model="pwd.newPassword" type="password"></li>
                     <li><span>确认密码</span><input v-model="confirmpwd" type="password"></li>
-                    <li><a @click="setpaypwd" class="edit-pwd">确认</a></li>
+                    <li><a @click="setpaypwd" class="edit-pwd">确认</a><em @click="newpwd=!newpwd">忘记密码</em></li>
+                </ul>
+                <ul v-show="newpwd">
+                    <li><span>验证码</span><input type="text" class="btn-txt" maxlength="4" v-model="repwd.captcha" placeholder="请输入验证码"
+                        /><input class="btn-code" @click="getcode" value="获取验证码" type="button" /></li>
+                    <li><span>新密码</span><input v-model="repwd.password" type="password"></li>
+                    <li><a @click="resetpwd" class="edit-pwd">确认</a></li>
                 </ul>
             </div>
             <div v-show="detail" class="edit-info">

@@ -671,33 +671,59 @@
                 border: 1px solid $base-border-color;
                 border-top: none;
                 padding: 20px;
+                overflow: hidden;
                 ul{
                     display: block;
                     padding: 20px;
+                    float: left;
+                    margin-right: 30px;
                     li{
-                        line-height: 28px;
+                        line-height: 36px;
                         input{
-                            line-height: 20px;
+                            line-height: 26px;
                             padding-left: 5px;
                             border: 1px solid $base-border-color;
                             border-radius: 3px;
-                            width: 280px;
+                            width: 240px;
                         }
                         span{
                             display: inline-block;
-                            width: 90px;
+                            width: 70px;
                         }
                         a{
                             display: inline-block;
                             text-align: center;
-                            width: 68px;
+                            width: 80px;
                             height: 28px;
                             line-height: 28px;
                             text-align: center;
                             color: #fff;
                             background-color: $base-orange;
                             margin-top: 10px;
+                            border-radius: 3px; 
                         }
+                        em{
+                            margin-left: 20px;
+                            text-decoration: underline;
+                            color: $link-blue;
+                            cursor: pointer;
+                        }
+                        &:last-child{
+                            margin-top: 10px;
+                        }
+                        .btn-txt{
+                            width: 140px;
+                            border-right: 0;
+                            border-radius: 3px 0 0 3px;
+                        }
+                        .btn-code{
+                            width: 100px;
+                            cursor: pointer;
+                            border-radius: 0 3px 3px 0;
+                        }
+                    }
+                    &:last-child{
+                        margin-right: 0;
                     }
                 }
             }
