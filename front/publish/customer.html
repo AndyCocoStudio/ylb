@@ -13,15 +13,16 @@
 
 
 
-	<link rel="stylesheet" type="text/css" href="css/style.css?rev=f2789536044c240f87e3b74043ab68f1" />
+	<link rel="stylesheet" type="text/css" href="css/style.css?rev=fcbd1fa07b96d3482e3949e95f8e97cd" />
 	<link rel="stylesheet" type="text/css" href="css/pickday.css" />
-	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=f2789536044c240f87e3b74043ab68f1" />
+	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=fcbd1fa07b96d3482e3949e95f8e97cd" />
 </head>
 
 <body>
 	<header class="ylb-header">
 		<a class="ylb-home" href="index.html"><i class="icon-ylbicon-28"></i></a>
 		<a class="ylb-menu"><i class="icon-ylbicon-06"></i></a>
+		<a class="ylb-shops" href="shops.html"><i class="icon-ylbicon-26"></i></a>
 		<a class="ylb-search"><i class="icon-ylbicon-05"></i></a>
 		<div class="ylb-customer"><i class="icon-ylbicon-01"></i>
 			<ul>
@@ -33,6 +34,7 @@
 	</header>
 
 <section class="customer-main" id="customer-main" v-cloak>
+    <!--顶部导航-->
     <div class="customer-header-wrap">
         <img class="customer-logo" src="images/logo.png" />
         <ul class="customer-nav">
@@ -47,6 +49,7 @@
         </div>
     </div>
     <p class="ylb-navbar">您现在的位置：<a href="index.html">首页</a> > 会员中心</p>
+    <!--左侧导航-->
     <div class="customer-left">
         <h1 class="customer-left-title">
             会员中心
@@ -222,8 +225,8 @@
                         <a v-if="x.payStatus=='Unpaid'&&x.orderStatus!='Cancel'" @click="cancel(x.orderID)" data-id="{{x.orderID}}">取消</a><br
                             v-if="x.payStatus=='Unpaid'&&x.orderStatus!='Cancel'" />
                         <a v-if="x.payStatus=='Paid'&&x.orderStatus!='Cancel'" data-id="{{x.orderID}}">退款</a>
-                        <a v-if="h.payStatus=='Paying'" href="http://api.hnylbsc.com/unionpay?id={{x.orderID}}">继续支付</a>
-                        <a v-if="h.payStatus=='Paying'" @click="cancel(x.orderID)" data-id="{{x.orderID}}">取消</a>
+                        <a v-if="x.payStatus=='Paying'" href="http://api.hnylbsc.com/unionpay?id={{x.orderID}}">继续支付</a>
+                        <a v-if="x.payStatus=='Paying'" @click="cancel(x.orderID)" data-id="{{x.orderID}}">取消</a>
                     </td>
                 </tr>
             </table>
@@ -662,6 +665,7 @@
         </ul>
         <div id="spendpoint-qrcode" class="spendpoint-qrcode"></div>
     </div>
+    <!--资产转出-->
     <div class="ylb-graybox forward" v-show="zczc">
         <h1>选择转出资产类型：
             <select @change="changerewardway">
@@ -675,6 +679,7 @@
         <p><span>银行卡：</span><input v-model="reward.account" type="text"></p>
         <button @click="dorewards">提交</button>
     </div>
+    <!--拒绝-->
     <div class="ylb-graybox nagtive" v-show="nagtive">
         <h1>请输入拒绝理由</h1>
         <input v-model="reason" maxlength="128" placeholder="最多可填入128字" type="text" />
@@ -704,7 +709,14 @@
 		</div>
 	</div>
 	<footer class="ylb-footer">
-		<p>Copyright 2016-2017 <br>湘 ICP备 1002349号－1</p>
+		<div class="ylb-doclist">
+			<a>联系我们400-9016-899</a>
+			<a href="agreemengt.html">用户协议</a>
+			<a href="pointrule.html">积分规则</a>
+			<a href="disclaimer.html">免责申明</a>
+			<a href="refund.html">七天无理由退换货</a>
+			<p>Copyright 2016-2017 湘 ICP备 1002349号－1</p>
+		</div>
 	</footer>
 </body>
 <script src="js/libs/jquery-2.1.4.min.js" type="text/javascript"></script>
@@ -712,9 +724,9 @@
 <script src="js/libs/pickday.min.js" type="text/javascript"></script>
 <script src="js/libs/qrcode.min.js" type="text/javascript"></script>
 <script src="js/libs/dropzone.js" type="text/javascript"></script>
-<script src="js/base.js?rev=f2789536044c240f87e3b74043ab68f1" type="text/javascript"></script>
+<script src="js/base.js?rev=fcbd1fa07b96d3482e3949e95f8e97cd" type="text/javascript"></script>
 
-<script type="text/javascript" src="js/customer.js?rev=f2789536044c240f87e3b74043ab68f1"></script>
+<script type="text/javascript" src="js/customer.js?rev=fcbd1fa07b96d3482e3949e95f8e97cd"></script>
 
 
 </html>

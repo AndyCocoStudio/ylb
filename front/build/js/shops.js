@@ -74,6 +74,9 @@
                     },
                     searchshops: function () {
                         m.getShops(shops.ac);
+                    },
+                    showall: function () {
+                        m.getShops();
                     }
                 }
             })

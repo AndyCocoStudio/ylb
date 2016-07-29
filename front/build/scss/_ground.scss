@@ -1,15 +1,28 @@
-.ground-main{
+.ground-main, .refund-main, .agreement-main, .disclaimer-main, .pointrule-main{
     width: 960px;
     margin: 20px auto 60px;
     h1{
         font-size: 28px;
         margin-bottom: 10px;
     }
+    h2{
+        font-size: 24px;
+        margin-bottom: 5px;
+    }
     p{
         font-size: 16px;
     }
     article{
-        margin-top: 5px;
+        margin: 5px 0;
         font-size: 14px;
+        text-indent: 28px;
+    }
+    ul{
+        display: block;
+        margin: 5px 0;
+        font-size: 14px;
+        li{
+            padding-left: 14px;
+        }
     }
 }
