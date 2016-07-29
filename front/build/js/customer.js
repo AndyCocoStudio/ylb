@@ -1,5 +1,7 @@
 (function () {
     var vcustomer = {
+        pcode: "",
+        rcode: "",
         covershow: false,
         sendshow: false,
         spendshow: false,
@@ -100,7 +102,6 @@
                 });
             });
         },
-
         //获取市
         getCity: function (code) {
             $.when($.ajax({
@@ -213,20 +214,24 @@
         //生成做单二维码
         createQRcode: function () {
             var url = "http://www.hnylbsc.com/sendpoint.html?uid=" + vcustomer.info.mobile;
-            $('#customer-private-qrcode').qrcode({
-                render: "canvas",
-                width: 140,
-                height: 140,
-                text: url
-            });
-            var logonurl = "http://www.hnylbsc.com/logon.html?rid=" + vcustomer.info.mobile;
-            $('#logon-qrcode').qrcode({
-                //render: "canvas",
-                width: 280,
-                height: 280,
-                text: logonurl,
-                useSVG: true
-            });
+            if (!vcustomer.pcode) {
+                vcustomer.pcode = $('#customer-private-qrcode').qrcode({
+                    render: "canvas",
+                    width: 140,
+                    height: 140,
+                    text: url
+                });
+            }
+            if (!vcustomer.rcode) {
+                var logonurl = "http://www.hnylbsc.com/logon.html?rid=" + vcustomer.info.mobile;
+                vcustomer.rcode = $('#logon-qrcode').qrcode({
+                    //render: "canvas",
+                    width: 280,
+                    height: 280,
+                    text: logonurl,
+                    useSVG: true
+                });
+            }
         },
         //获取用户信息
         getUserInfo: function () {
@@ -480,6 +485,7 @@
                             })
                         });
                     },
+                    //显示拒绝理由
                     showreject: function (t) {
                         alert(t);
                     },
@@ -613,55 +619,54 @@
                         vcustomer.tobearea.areaCode = v;
                         vcustomer.tobearea.area = t;
                     },
-
                     //申请加盟商
                     apysaler: function () {
                         if (vcustomer.isapplyunder) {
-                            if(!vcustomer.tobesaler.idCard){
+                            if (!vcustomer.tobesaler.idCard) {
                                 $.ylbAlert("请输入法人身份证号");
                                 return;
                             }
-                            if(!vcustomer.tobesaler.storeName){
+                            if (!vcustomer.tobesaler.storeName) {
                                 $.ylbAlert("请输入店铺名称");
                                 return;
                             }
-                            if(!vcustomer.tobesaler.province){
+                            if (!vcustomer.tobesaler.province) {
                                 $.ylbAlert("请选择省");
                                 return;
                             }
-                            if(!vcustomer.tobesaler.city){
+                            if (!vcustomer.tobesaler.city) {
                                 $.ylbAlert("请选择市");
                                 return;
                             }
-                            if(!vcustomer.tobesaler.area){
+                            if (!vcustomer.tobesaler.area) {
                                 $.ylbAlert("请选择区");
                                 return;
                             }
-                            if(!vcustomer.tobesaler.street){
+                            if (!vcustomer.tobesaler.street) {
                                 $.ylbAlert("请输入详细街道地址");
                                 return;
                             }
-                            if(!vcustomer.tobesaler.legalPerson){
+                            if (!vcustomer.tobesaler.legalPerson) {
                                 $.ylbAlert("请输入法人名");
                                 return;
                             }
-                            if(vcustomer.tobesaler.legalPersonIDCardImage.length<1){
+                            if (vcustomer.tobesaler.legalPersonIDCardImage.length < 1) {
                                 $.ylbAlert("请上传身份证正反面照");
                                 return;
                             }
-                            if(!vcustomer.tobesaler.legalPersonWithIDCardInHandImage){
+                            if (!vcustomer.tobesaler.legalPersonWithIDCardInHandImage) {
                                 $.ylbAlert("请上传法人手持身份证照");
                                 return;
                             }
-                            if(vcustomer.tobesaler.storeInsideImages.length<1){
+                            if (vcustomer.tobesaler.storeInsideImages.length < 1) {
                                 $.ylbAlert("请上传店铺内饰图");
                                 return;
                             }
-                            if(!vcustomer.tobesaler.storeAppearance){
+                            if (!vcustomer.tobesaler.storeAppearance) {
                                 $.ylbAlert("请上传店招图");
                                 return;
                             }
-                            if(!vcustomer.tobesaler.license){
+                            if (!vcustomer.tobesaler.license) {
                                 $.ylbAlert("请上传营业执照图");
                                 return;
                             }
@@ -699,31 +704,31 @@
                     //申请客户经理
                     apymanager: function () {
                         if (vcustomer.isapplymanager) {
-                            if(!vcustomer.tobearea.applicantName){
+                            if (!vcustomer.tobearea.applicantName) {
                                 $.ylbAlert("请输入申请人姓名");
                                 return;
                             }
-                            if(!vcustomer.tobearea.province){
+                            if (!vcustomer.tobearea.province) {
                                 $.ylbAlert("请选择省");
                                 return;
                             }
-                            if(!vcustomer.tobearea.city){
+                            if (!vcustomer.tobearea.city) {
                                 $.ylbAlert("请选择市");
                                 return;
                             }
-                            if(!vcustomer.tobearea.area){
+                            if (!vcustomer.tobearea.area) {
                                 $.ylbAlert("请选择区");
                                 return;
                             }
-                            if(vcustomer.tobearea.legalPersonIDCardImage.length<1){
+                            if (vcustomer.tobearea.legalPersonIDCardImage.length < 1) {
                                 $.ylbAlert("请上传身份证正反面照");
                                 return;
                             }
-                            if(!vcustomer.tobearea.legalPersonWithIDCardInHandImage){
+                            if (!vcustomer.tobearea.legalPersonWithIDCardInHandImage) {
                                 $.ylbAlert("请上传法人手持身份证照");
                                 return;
                             }
-                            if(!vcustomer.tobearea.idCard){
+                            if (!vcustomer.tobearea.idCard) {
                                 $.ylbAlert("请输入法人身份证号");
                                 return;
                             }
@@ -785,7 +790,7 @@
                     //显示拒绝做单申请理由
                     showorderreason: function (id) {
                         vcustomer.orderID = id;
-                        this.cover = true;
+                        this.covershow = true;
                         this.ordernagtive = true;
                     },
                     //同意做单申请
@@ -801,7 +806,7 @@
                             }).done(function (d) {
                                 $.ylbAjaxHandler(d, function () {
                                     $.ylbAlert("操作成功");
-                                    m.getOrder();
+                                    m.getUserInfo();
                                 });
                             });
                         }

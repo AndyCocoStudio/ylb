@@ -59,7 +59,8 @@
                 <p v-if="info.role=='Merchants'||info.role=='AM'||info.role=='CM'">账户货款： <em>{{info.asset.paymentForGoods}}</em>元</p>
                 <p v-if="info.role=='Merchants'||info.role=='AM'||info.role=='CM'">税后佣金： <em>{{info.asset.commission}}</em>元</p>
                 <p>可用积分： <em>{{info.asset.score}}</em>分</p>
-                <p>积分基点： <em>{{info.asset.point}}</em>个<!--<a @click="getpoint">领取积分</a>--></p>
+                <p>积分基点： <em>{{info.asset.point}}</em>个
+                    <!--<a @click="getpoint">领取积分</a>--></p>
                 <p class="btns"><a v-if="info.role!='Ordinary'" @click="rewards">转出资产</a><a href="asset.html">更多信息</a></p>
             </div>
             <div class="customer-code customer-eqcode">
@@ -120,7 +121,7 @@
                 <tr v-show="jfdhlist.length<1">
                     <td colspan="10">您暂无线下订单</td>
                 </tr>
-                <tr v-for="h in jfdhlist">
+                <tr v-if="h.orderStatus!='Cancel'" v-for="h in jfdhlist">
                     <td>{{h.orderID}}</td>
                     <!--<td>{{h.items[0].name}}</td>
                     <td>{{h.items[0].goodsKind}}</td>-->
@@ -129,17 +130,23 @@
                     <td>{{h.totalPrice}}</td>
                     <td>{{h.score}}</td>
                     <td>{{h.createTime.substring(0,h.createTime.length-6)}}</td>
-                    <td v-if="h.payStatus=='Unpaid'">
-                        <em v-if="h.orderStatus!='Cancel'">待支付</em>
-                        <em v-else>已取消</em>
-                    </td>
-                    <td v-else>
-                        <em v-if="h.items[0].status=='New'">完成</em>
-                        <em v-if="h.items[0].status=='Refund'">退款中</em>
-                        <em v-if="h.items[0].status=='Refunded'">已退款</em>
-                        <em v-if="h.items[0].status=='Sending'">待发货</em>
-                        <em v-if="h.items[0].status=='Sent'">已发货</em>
-                        <em v-if="h.items[0].status=='Received'">已收货</em>
+                    <td>
+                        <p v-if="h.payStatus=='Unpaid'">
+                            <em v-if="h.orderStatus=='Cancel'">已取消</em>
+                            <em v-if="h.orderStatus!='Cancel'">待支付</em>
+                        </p>
+                        <p v-if="h.payStatus=='Paying'">
+                            <em v-if="h.orderStatus=='Cancel'">已取消</em>
+                            <em v-if="h.orderStatus!='Cancel'">继续支付</em>
+                        </p>
+                        <p v-if="h.payStatus=='Paid'">
+                            <em v-if="h.items[0].status=='New'">已支付</em>
+                            <em v-if="h.items[0].status=='Refund'">退款中</em>
+                            <em v-if="h.items[0].status=='Refunded'">已退款</em>
+                            <em v-if="h.items[0].status=='Sending'">待发货</em>
+                            <em v-if="h.items[0].status=='Sent'">已发货</em>
+                            <em v-if="h.items[0].status=='Received'">已收货</em>
+                        </p>
                     </td>
                     <td>
                         <a v-if="h.payStatus=='Unpaid'&&h.orderStatus!='Cancel'" href="pay.html?oid={{h.orderID}}">支付</a><br
@@ -179,24 +186,30 @@
                     <td>{{x.totalPrice}}</td>
                     <td>{{x.score}}</td>
                     <td>{{x.createTime.substring(0,x.createTime.length-6)}}</td>
-                    <td v-if="x.payStatus=='Unpaid'">
-                        <em v-if="x.orderStatus!='Cancel'">待支付</em>
-                        <em v-else>已取消</em>
-                    </td>
-                    <td v-else>
-                        <em v-if="x.items[0].status=='New'">已支付</em>
-                        <em v-if="x.items[0].status=='Refund'">退款中</em>
-                        <em v-if="x.items[0].status=='Refunded'">已退款</em>
-                        <em v-if="x.items[0].status=='Sending'">待发货</em>
-                        <em v-if="x.items[0].status=='Sent'">已发货</em>
-                        <em v-if="x.items[0].status=='Received'">已收货</em>
+                    <td>
+                        <p v-if="x.payStatus=='Unpaid'">
+                            <em v-if="x.orderStatus=='Cancel'">已取消</em>
+                            <em v-if="x.orderStatus!='Cancel'">待支付</em>
+                        </p>
+                        <p v-if="x.payStatus=='Paying'">
+                            <em v-if="x.orderStatus=='Cancel'">已取消</em>
+                            <em v-if="x.orderStatus!='Cancel'">继续支付</em>
+                        </p>
+                        <p v-if="x.payStatus=='Paid'">
+                            <em v-if="x.items[0].status=='New'">已支付</em>
+                            <em v-if="x.items[0].status=='Refund'">退款中</em>
+                            <em v-if="x.items[0].status=='Refunded'">已退款</em>
+                            <em v-if="x.items[0].status=='Sending'">待发货</em>
+                            <em v-if="x.items[0].status=='Sent'">已发货</em>
+                            <em v-if="x.items[0].status=='Received'">已收货</em>
+                        </p>
                     </td>
                     <td>
                         <a v-if="x.payStatus=='Unpaid'&&x.orderStatus!='Cancel'" href="pay.html?oid={{x.orderID}}">支付</a><br
                             v-if="x.payStatus=='Unpaid'&&x.orderStatus!='Cancel'" />
                         <a v-if="x.payStatus=='Unpaid'&&x.orderStatus!='Cancel'" @click="cancel(x.orderID)" data-id="{{x.orderID}}">取消</a><br
                             v-if="x.payStatus=='Unpaid'&&x.orderStatus!='Cancel'" />
-                        <a v-if="x.payStatus=='Paid'&&x.orderStatus!='Cancel'" data-id="{{x.orderID}}">退款</a>
+                        <!--<a v-if="x.payStatus=='Paid'&&x.orderStatus!='Cancel'" data-id="{{x.orderID}}">退款</a>-->
                         <a v-if="x.payStatus=='Paying'" href="http://api.hnylbsc.com/unionpay?id={{x.orderID}}">继续支付</a>
                         <a v-if="x.payStatus=='Paying'" @click="cancel(x.orderID)" data-id="{{x.orderID}}">取消</a>
                     </td>
@@ -229,19 +242,21 @@
                     <td>{{s.totalPrice}}</td>
                     <td>{{s.givingScore}}</td>
                     <td>{{s.createTime.substring(0,s.createTime.length-6)}}</td>
-                    <td v-if="s.payStatus=='Unpaid'">
-                        <em v-if="s.orderStatus!='Cancel'">待支付</em>
-                        <em v-else>已取消</em>
-                    </td>
-                    <td v-else>
-                        <em v-if="s.orderStatus=='New'">审核中</em>
-                        <em v-if="s.orderStatus=='Agree'">完成</em>
-                        <em v-if="s.orderStatus=='Reject'">拒绝</em>
-                        <!--<em v-if="s.orderStatus=='Refund'">退款中</em>
-                        <em v-if="s.orderStatus=='Refunded'">已退款</em>
-                        <em v-if="s.orderStatus=='Sending'">待发货</em>
-                        <em v-if="s.orderStatus=='Sent'">已发货</em>
-                        <em v-if="s.orderStatus=='Received'">已收货</em>-->
+                    <td>
+                        <p v-if="s.payStatus=='Unpaid'">
+                            <em v-if="s.orderStatus=='Cancel'">已取消</em>
+                            <em v-else>待支付</em>
+                        </p>
+                        <p v-if="s.payStatus=='Paying'">
+                            <em v-if="s.orderStatus=='Cancel'">已取消</em>
+                            <em v-else>支付中</em>
+                        </p>
+                        <p v-if="s.payStatus=='Paid'">
+                            <em v-if="s.orderStatus=='Cancel'">已取消</em>
+                            <em v-if="s.orderStatus=='New'">审核中</em>
+                            <em v-if="s.orderStatus=='Agree'">已完成</em>
+                            <em v-if="s.orderStatus=='Reject'">已拒绝</em>
+                        </p>
                     </td>
                     <td>
                         <a v-if="s.payStatus=='Unpaid'&&s.orderStatus!='Cancel'" href="pay.html?oid={{s.orderID}}">支付</a><br
@@ -282,19 +297,21 @@
                     <td>{{z.totalPrice}}</td>
                     <td>{{z.givingScore}}</td>
                     <td>{{z.createTime.substring(0,z.createTime.length-6)}}</td>
-                    <td v-if="z.payStatus=='Unpaid'">
-                        <em v-if="z.orderStatus!='Cancel'">待支付</em>
-                        <em v-else>已取消</em>
-                    </td>
-                    <td v-else>
-                        <em v-if="z.orderStatus=='New'">审核中</em>
-                        <em v-if="z.orderStatus=='Agree'">完成</em>
-                        <em v-if="z.orderStatus=='Reject'">拒绝</em>
-                        <!--<em v-if="s.orderStatus=='Refund'">退款中</em>
-                        <em v-if="s.orderStatus=='Refunded'">已退款</em>
-                        <em v-if="s.orderStatus=='Sending'">待发货</em>
-                        <em v-if="s.orderStatus=='Sent'">已发货</em>
-                        <em v-if="s.orderStatus=='Received'">已收货</em>-->
+                    <td>
+                        <p v-if="z.payStatus=='Unpaid'">
+                            <em v-if="z.orderStatus=='Cancel'">已取消</em>
+                            <em v-else>待支付</em>
+                        </p>
+                        <p v-if="z.payStatus=='Paying'">
+                            <em v-if="z.orderStatus=='Cancel'">已取消</em>
+                            <em v-else>支付中</em>
+                        </p>
+                        <p v-if="z.payStatus=='Paid'">
+                            <em v-if="z.orderStatus=='Cancel'">已取消</em>
+                            <em v-if="z.orderStatus=='New'">审核中</em>
+                            <em v-if="z.orderStatus=='Agree'">已完成</em>
+                            <em v-if="z.orderStatus=='Reject'">已拒绝</em>
+                        </p>
                     </td>
                     <td>
                         <a v-if="z.payStatus=='Unpaid'&&z.orderStatus!='Cancel'" href="pay.html?oid={{z.orderID}}">支付</a><br

@@ -301,7 +301,7 @@ $base-border-color: #c7c7c7;
     padding: 10px 20px;
     background-color: rgba(0,0,0,0.6);
     color: #fff;
-    border-radius: 5px;
+    border-radius: 6px;
     text-align: center;
     z-index: 999;
 }
@@ -325,7 +325,7 @@ $base-border-color: #c7c7c7;
     width: 240px;
     min-height: 120px;
     background: #fff;
-    border-radius: 10px;
+    border-radius: 5px;
     text-align: center;
     overflow: hidden;
     z-index: 200; 
@@ -347,7 +347,7 @@ $base-border-color: #c7c7c7;
     .btn-cancel, .btn-yes {
         height: 35px;
         width: 100px;
-        border-radius: 8px;
+        border-radius: 4px;
         background: #fff;
         border: 1px solid #f0f0f0;
         cursor: pointer;
