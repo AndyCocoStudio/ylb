@@ -40,11 +40,22 @@
                 <td>{{o.mobile}}</td>
                 <td>{{o.address}}</td>
                 <td>
-                    <p v-if="g.status=='Sending'" v-for="g in o.items"><a href="">发货</a></p>
+                    <p v-if="g.status=='Sending'" v-for="g in o.items"><a @click="showexpress(g.orderID)">发货</a></p>
                     <p v-if="g.status=='Sent'" v-for="g in o.items">已发货</p>
                 </td>
             </tr>
         </table>
+    </div>
+    <div class="ylb-cover" @click="hideall" v-show="cover"></div>
+    <div class="ylb-graybox" v-show="express">
+        <ul>
+            <li>
+                <span>订单号</span><em>{{send.orderID}}</em>
+            </li>
+            <li><span>快递公司</span><input v-model="send.expressName" type="text" /></li>
+            <li><span>快递单号</span><input v-model="send.expressID" type="text" /></li>
+            <li><a @click="sendgoods">发货</a></li>
+        </ul>
     </div>
 </section>
 <!-- @@close-->
