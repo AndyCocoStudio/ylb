@@ -1,0 +1,29 @@
+.taste-main{
+    width: 960px;
+    margin: 0 auto;
+    h1{
+        font-size: 18px;
+        border-bottom: 1px solid #cecece;
+        line-height: 40px;
+        background-color: $link-blue;
+        padding-left: 10px;
+        color: #fff;
+        margin-bottom: 20px;
+    }
+    h2{
+        padding-left: 5px;
+        border-bottom: 1px solid #ccc;
+        line-height: 32px;
+        font-size: 14px;
+        margin-bottom: 10px; 
+    }
+    table{
+        width: 100%;
+        tr{
+            line-height: 28px;
+            th{
+                font-weight: normal;
+            }
+        }
+    }
+}

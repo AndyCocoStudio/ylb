@@ -5,8 +5,10 @@
 <!-- @@close-->
 
 <!-- @@block = content-->
-<section class="orderlist-main" id="orderlist-main" v-cloak>
-    <h1>会员列表</h1>
+<section class="taste-main" id="taste-main" v-cloak>
+    <h1>已送出名额：{{count.usedQuantity}}，剩余可用名额：{{count.totalQuantity}}</h1>
+    <div v-if="user.role=='Merchants'"></div>
+    <h2>可赠送用户列表</h2>
     <table>
         <tr>
             <th>会员名</th>
@@ -23,5 +25,5 @@
 <!-- @@close-->
 
 <!-- @@block = scripts-->
-<script type="text/javascript" src="js/orderlist.js?rev=@@hash"></script>
+<script type="text/javascript" src="js/tastepoint.js?rev=@@hash"></script>
 <!-- @@close-->

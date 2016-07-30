@@ -1,0 +1,37 @@
+<!-- @@master ../layout.html  -->
+
+<!-- @@block = title-->
+<title>工资管理</title>
+<!-- @@close-->
+
+<!-- @@block = content-->
+<section class="wages-main" id="wages-main" v-cloak>
+    <h1>工资管理</h1>
+    <div>
+        选择时间<input id="sdt" v-model="filter.st" type="text">~<input v-model="filter.et" id="edt" type="text"><a>查看</a>
+    </div>
+    <h2>该月可得工资{{totalWage}}元，客户经理可得工资{{totalWage}}元</h2>
+    <table>
+        <tr>
+            <th>姓名</th>
+            <th>手机</th>
+            <th>名下商家总数</th>
+            <th>名下商家做单总数</th>
+            <th>名下商家做单总金额</th>
+            <th>可得工资</th>
+        </tr>
+        <tr v-for="w in list">
+            <td>{{w.name}}</td>
+            <td>{{w.mobile}}</td>
+            <td>{{w.merchantsCount}}</td>
+            <td>{{w.orderCount}}</td>
+            <td>{{w.orderPay}}</td>
+            <td>{{w.wage}}</td>
+        </tr>
+    </table>
+</section>
+<!-- @@close-->
+
+<!-- @@block = scripts-->
+<script type="text/javascript" src="js/wages.js?rev=@@hash"></script>
+<!-- @@close-->

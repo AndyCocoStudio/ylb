@@ -21,6 +21,13 @@ $base-border-color: #c7c7c7;
             font-size: 24px;
         }
     }
+    label{
+        display: block;
+        position: absolute;
+        top: 4px;
+        color: #fff;
+        left: 25%;
+    }
     .ylb-home{
         left: 5%;
     }
@@ -381,3 +388,4 @@ $base-border-color: #c7c7c7;
 @import "referlist";
 @import "orderlist";
 @import "ground";
+@import "taste";

@@ -353,7 +353,10 @@
 				layout.islogin = false;
 				$(".btn-login").show();
 				$(".btn-logout").hide();
-			}
+			};
+			setTimeout(function () {
+				$(".ylb-header label").fadeOut();
+			}, 5000);
 		},
 		getFList: function () {
 			$.when($.ajax({

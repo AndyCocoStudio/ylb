@@ -61,7 +61,7 @@
                 <p>可用积分： <em>{{info.asset.score}}</em>分</p>
                 <p>积分基点： <em>{{info.asset.point}}</em>个
                     <!--<a @click="getpoint">领取积分</a>--></p>
-                <p class="btns"><a v-if="info.role!='Ordinary'" @click="rewards">转出资产</a><a href="asset.html">更多信息</a></p>
+                <p class="btns"><a v-if="info.role!='Ordinary'" @click="rewards">转出资产</a><a href="asset.html">更多信息</a><!--<a v-if="info.role=='AreaManager'||info.role=='AM'" href="wages.html">工资管理</a>--></p>
             </div>
             <div class="customer-code customer-eqcode">
                 <div class="customer-tag">扫我做单</div>
@@ -72,11 +72,10 @@
             <div class="customer-code customer-control">
                 <div class="customer-tag">商家操作</div>
                 <div class="customer-pic">
-                    <!--<a @click="spendpoints">积分兑换</a>-->
                     <a href="spendpoint.html">积分兑换</a>
                     <a v-if="info.role=='Merchants'||info.role=='AM'||info.role=='CM'" href="sendpoint.html">商家做单</a>
                     <a v-if="info.role!='Ordinary'" href="referlist.html">推荐列表</a>
-                    <!--<a v-if="info.role=='Merchants'||info.role=='AM'||info.role=='CM'" href="tastepoint.html">体验积分</a>-->
+                    <!--<a v-if="info.role!='Ordinary'" href="tastepoint.html">体验积分</a>-->
                 </div>
             </div>
             <!--<img v-if="info.role!='Merchants'&&info.role!='AM'&&info.role!='CM'" class="customer-adv" src="images/adv1.png" />-->

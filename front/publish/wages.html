@@ -3,7 +3,7 @@
 
 <head>
 
-<title>赠送体验积分</title>
+<title>工资管理</title>
 
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1" />
@@ -13,9 +13,9 @@
 
 
 
-	<link rel="stylesheet" type="text/css" href="css/style.css?rev=db43460a232367cc38deabf92816cbf3" />
+	<link rel="stylesheet" type="text/css" href="css/style.css?rev=09d7f5e75996724e25b12142925363e1" />
 	<link rel="stylesheet" type="text/css" href="css/pickday.css" />
-	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=db43460a232367cc38deabf92816cbf3" />
+	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=09d7f5e75996724e25b12142925363e1" />
 </head>
 
 <body>
@@ -34,20 +34,28 @@
 		</div>
 	</header>
 
-<section class="taste-main" id="taste-main" v-cloak>
-    <h1>已送出名额：{{count.usedQuantity}}，剩余可用名额：{{count.totalQuantity}}</h1>
-    <div v-if="user.role=='Merchants'"></div>
-    <h2>可赠送用户列表</h2>
+<section class="wages-main" id="wages-main" v-cloak>
+    <h1>工资管理</h1>
+    <div>
+        选择时间<input id="sdt" v-model="filter.st" type="text">~<input v-model="filter.et" id="edt" type="text"><a>查看</a>
+    </div>
+    <h2>该月可得工资{{totalWage}}元，客户经理可得工资{{totalWage}}元</h2>
     <table>
         <tr>
-            <th>会员名</th>
-            <th>手机号</th>
-            <th>操作</th>
+            <th>姓名</th>
+            <th>手机</th>
+            <th>名下商家总数</th>
+            <th>名下商家做单总数</th>
+            <th>名下商家做单总金额</th>
+            <th>可得工资</th>
         </tr>
-        <tr v-for="r in list">
-            <td>{{r.name}}</td>
-            <td>{{r.mobile}}</td>
-            <td><a>赠送积分</a></td>
+        <tr v-for="w in list">
+            <td>{{w.name}}</td>
+            <td>{{w.mobile}}</td>
+            <td>{{w.merchantsCount}}</td>
+            <td>{{w.orderCount}}</td>
+            <td>{{w.orderPay}}</td>
+            <td>{{w.wage}}</td>
         </tr>
     </table>
 </section>
@@ -83,9 +91,9 @@
 <script src="js/libs/pickday.min.js" type="text/javascript"></script>
 <script src="js/libs/qrcode.min.js" type="text/javascript"></script>
 <script src="js/libs/dropzone.js" type="text/javascript"></script>
-<script src="js/base.js?rev=db43460a232367cc38deabf92816cbf3" type="text/javascript"></script>
+<script src="js/base.js?rev=09d7f5e75996724e25b12142925363e1" type="text/javascript"></script>
 
-<script type="text/javascript" src="js/tastepoint.js?rev=db43460a232367cc38deabf92816cbf3"></script>
+<script type="text/javascript" src="js/wages.js?rev=09d7f5e75996724e25b12142925363e1"></script>
 
 
 </html>
