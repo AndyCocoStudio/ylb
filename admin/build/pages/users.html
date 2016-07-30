@@ -1,0 +1,45 @@
+<!-- @@master ../layout.html  -->
+
+<!-- @@block = title-->
+<title>有效会员统计</title>
+<!-- @@close-->
+
+<!-- @@block = content-->
+<section class="users-main" id="users-main" v-cloak>
+    <h1>有效会员统计({{}})</h1>
+    <div>
+        <select @change="changeprev">
+            <option value="">-请选择省-</option>
+            <option v-for="p in plist" value="{{p.code}}">{{p.name}}</option>
+        </select>
+        <select @change="changecity">
+            <option value="">-请选择省市-</option>
+            <option v-for="c in clist" value="{{c.code}}">{{c.name}}</option>
+        </select>
+        <select @change="changearea">
+            <option value="">-请选择区-</option>
+            <option v-for="a in alist" value="{{a.code}}">{{a.name}}</option>
+        </select>
+    </div>
+    <table>
+        <tr>
+            <th>真实姓名</th>
+            <th>手机号码</th>
+            <th>积分点</th>
+            <th>可用积分</th>
+            <th>总积分</th>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+</section>
+<!-- @@close-->
+
+<!-- @@block = scripts-->
+<script type="text/javascript" src="js/users.js?rev=@@hash"></script>
+<!-- @@close-->
