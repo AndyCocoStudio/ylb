@@ -21,12 +21,16 @@
                 <th>已赠送名额数</th>
                 <th>操作</th>
             </tr>
-            <tr v-for="">
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+            <tr v-for="a in list">
+                <td>{{a.area}}</td>
+                <td>{{a.name}}</td>
+                <td>{{a.mobile}}</td>
+                <td>{{a.sentCount}}</td>
+                <td>
+                    <input placeholder="输入赠送名额数量" type="text">
+                    <a data-id="{{a.userID}}" @click="sends">赠送</a>
+                    <a href="areasend.html?aid={{a.userID}}">查看详情</a>
+                </td>
             </tr>
         </table>
     </div>
