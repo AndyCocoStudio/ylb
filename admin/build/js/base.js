@@ -95,7 +95,7 @@
 					$.ylbAlert("该账号已经是区域经理/客户经理");
 					break;
 				default:
-					$.ylbAlert("服务器又开小差");
+					$.ylbAlert("服务器又开小差(error:" + code + ")");
 					break;
 			}
 		}

@@ -1,0 +1,1 @@
+!function(){online={};var n={init:function(){n.getList()},getList:function(){$.when($.ajax({url:$.apiUrl+"/user/orders?k=2",type:"GET"})).done(function(i){$.ylbAjaxHandler(i,function(){online.list=i.data.orders,n.buildVue()})})}};n.init()}();

@@ -23,7 +23,7 @@
                                 $.setID(d.data.sessionID);
                                 switch (d.data.role) {
                                     case "Admin":
-                                        window.location.href = "upgraderight.html";
+                                        window.location.href = "superadmin.html";
                                         break;
                                     case "Marketing":
                                         window.location.href = "product.html";
