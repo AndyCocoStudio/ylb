@@ -25,17 +25,24 @@
                 <th>发货地址</th>
                 <th>操作</th>
             </tr>
-            <tr v-for="o in list">
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+            <tr v-if="o.payStatus=='Paid'&o.orderStatus!='Cancel'" v-for="o in list">
+                <td>{{o.orderID}}</td>
+                <td>
+                    <p v-for="p in o.items">{{p.name}}</p>
+                </td>
+                <td>
+                    <p v-for="c in o.items">{{c.quantity}}</p>
+                </td>
+                <td>{{o.totalPrice}}</td>
+                <td>{{o.score}}</td>
+                <td>{{o.freight}}</td>
+                <td>{{o.name}}</td>
+                <td>{{o.mobile}}</td>
+                <td>{{o.address}}</td>
+                <td>
+                    <p v-if="g.status=='Sending'" v-for="g in o.items"><a href="">发货</a></p>
+                    <p v-if="g.status=='Sent'" v-for="g in o.items">已发货</p>
+                </td>
             </tr>
         </table>
     </div>

@@ -1,1 +1,1 @@
-!function(){online={};var n={init:function(){n.getList()},getList:function(){$.when($.ajax({url:$.apiUrl+"/user/orders?k=2",type:"GET"})).done(function(i){$.ylbAjaxHandler(i,function(){online.list=i.data.orders,n.buildVue()})})}};n.init()}();
+!function(){online={};var n={init:function(){n.getList()},getList:function(){$.when($.ajax({url:$.apiUrl+"/order/shoppingonline",type:"GET"})).done(function(i){$.ylbAjaxHandler(i,function(){online.list=i.data.orders,n.buildVue()})})},buildVue:function(){online=new Vue({el:"#online-main",data:online,methods:{}})}};n.init()}();

@@ -6,7 +6,7 @@
         },
         getList: function () {
             $.when($.ajax({
-                url: $.apiUrl + "/user/orders?k=2",
+                url: $.apiUrl + "/order/shoppingonline",
                 type: "GET"
             })).done(function (d) {
                 $.ylbAjaxHandler(d, function () {
@@ -15,6 +15,15 @@
                 });
             })
         },
+        buildVue: function () {
+            online = new Vue({
+                el: "#online-main",
+                data: online,
+                methods: {
+
+                }
+            })
+        }
     };
     m.init();
 })();
