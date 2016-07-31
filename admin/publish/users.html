@@ -17,7 +17,7 @@
 	<link rel="stylesheet" type="text/css" href="css/libs/morris.css" />
 	<link rel="stylesheet" type="text/css" href="css/libs/pickday.css" />
 	<link rel="stylesheet" type="text/css" href="css/font-awesome.css" />
-	<link rel="stylesheet" type="text/css" href="css/style.css?rev=ee5548ae4da932991115da41d6c5d6a2" />
+	<link rel="stylesheet" type="text/css" href="css/style.css?rev=9f3cc255b7a6c8d738421e450908a156" />
 </head>
 
 <body>
@@ -58,7 +58,7 @@
                 <th>地址</th>
                 <th>注册时间</th>
             </tr>
-            <tr v-for="u in list">
+            <tr v-for="u in info.users">
                 <td>{{u.name}}</td>
                 <td>{{u.mobile}}</td>
                 <td>{{u.point}}</td>
@@ -67,7 +67,7 @@
                 <td>{{u.paymentForGoods}}</td>
                 <td>{{u.commission}}</td>
                 <td>{{u.address}}</td>
-                <td>{{u.logondate}}</td>
+                <td>{{u.createTime}}</td>
             </tr>
         </table>
     </div>
@@ -80,10 +80,10 @@
 <script src="js/libs/pickday.min.js" type="text/javascript"></script>
 <script src="js/libs/vue.min.js" type="text/javascript"></script>
 <script src="js/libs/echarts.min.js" type="text/javascript"></script>
-<script src="js/base.js?rev=ee5548ae4da932991115da41d6c5d6a2" type="text/javascript"></script>
+<script src="js/base.js?rev=9f3cc255b7a6c8d738421e450908a156" type="text/javascript"></script>
 
 
-<script type="text/javascript" src="js/users.js?rev=ee5548ae4da932991115da41d6c5d6a2"></script>
+<script type="text/javascript" src="js/users.js?rev=9f3cc255b7a6c8d738421e450908a156"></script>
 
 
 </html>

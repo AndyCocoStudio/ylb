@@ -22,7 +22,7 @@
                 <th>工资</th>
                 <th>操作</th>
             </tr>
-            <tr>
+            <tr v-if="list.length<1">
                 <td colspan="5">
                     这个月所有的工资都发放了
                 </td>

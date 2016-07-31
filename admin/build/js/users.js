@@ -29,8 +29,7 @@
                 type: "GET"
             })).done(function (d) {
                 $.ylbAjaxHandler(d, function () {
-                    users.info = d.data;
-                    users.list = d.data.users;  
+                    users.info = d.data; 
                 });
             });
         },
@@ -61,7 +60,6 @@
             })).done(function (d) {
                 $.ylbAjaxHandler(d, function () {
                     users.info = d.data;
-                    users.list = d.data.users;
                 });
             });
         },
