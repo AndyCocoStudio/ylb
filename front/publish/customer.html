@@ -13,9 +13,9 @@
 
 
 
-	<link rel="stylesheet" type="text/css" href="css/style.css?rev=ec140a16a2228c8b4f99f5fff6d30fae" />
+	<link rel="stylesheet" type="text/css" href="css/style.css?rev=aa73a323bbcbee2105c99ee12c2aa8cb" />
 	<link rel="stylesheet" type="text/css" href="css/pickday.css" />
-	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=ec140a16a2228c8b4f99f5fff6d30fae" />
+	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=aa73a323bbcbee2105c99ee12c2aa8cb" />
 </head>
 
 <body>
@@ -90,7 +90,7 @@
                 <p>可用积分： <em>{{info.asset.score}}</em>分</p>
                 <p>积分基点： <em>{{info.asset.point}}</em>个
                     <!--<a @click="getpoint">领取积分</a>--></p>
-                <p class="btns"><a v-if="info.role!='Ordinary'" @click="rewards">转出资产</a><a href="asset.html">更多信息</a><!--<a v-if="info.role=='AreaManager'||info.role=='AM'" href="wages.html">工资管理</a>--></p>
+                <p class="btns"><a v-if="info.role!='Ordinary'" @click="rewards">转出资产</a><a href="asset.html">更多信息</a><a v-if="info.role=='AreaManager'||info.role=='AM'" href="wages.html">工资管理</a></p>
             </div>
             <div class="customer-code customer-eqcode">
                 <div class="customer-tag">扫我做单</div>
@@ -741,9 +741,9 @@
 <script src="js/libs/pickday.min.js" type="text/javascript"></script>
 <script src="js/libs/qrcode.min.js" type="text/javascript"></script>
 <script src="js/libs/dropzone.js" type="text/javascript"></script>
-<script src="js/base.js?rev=ec140a16a2228c8b4f99f5fff6d30fae" type="text/javascript"></script>
+<script src="js/base.js?rev=aa73a323bbcbee2105c99ee12c2aa8cb" type="text/javascript"></script>
 
-<script type="text/javascript" src="js/customer.js?rev=ec140a16a2228c8b4f99f5fff6d30fae"></script>
+<script type="text/javascript" src="js/customer.js?rev=aa73a323bbcbee2105c99ee12c2aa8cb"></script>
 
 
 </html>

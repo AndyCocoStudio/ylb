@@ -1,0 +1,37 @@
+.wages-main{
+    width: 960px;
+    margin: 0 auto;
+    h1{
+        line-height: 44px;
+        font-size: 24px;
+    }
+    h2{
+        background-color: $link-blue;
+        color: #fff;
+        font-size: 14px;
+        padding: 5px;
+    }
+    table{
+        width: 100%;
+        border-top: 1px solid #cecece;
+        border-left: 1px solid #cecece;
+        tr{
+            line-height: 32px;
+            text-align: center;
+            th{
+                font-weight: normal;
+                border-bottom: 1px solid #cecece;
+                border-right: 1px solid #cecece;
+                background-color: #cecece;
+                color: #333;
+            }
+            td{
+                border-bottom: 1px solid #cecece;
+                border-right: 1px solid #cecece;
+            }
+            &:nth-child(odd){
+                background-color: #ececec;
+            }
+        }
+    }
+}

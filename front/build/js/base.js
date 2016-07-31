@@ -97,6 +97,18 @@
 				case "4023":
 					$.ylbAlert("做单金额需小于10W");
 					break;
+				case "4024":
+					$.ylbAlert("手动领取积分功能尚未开放");
+					break;
+				case "4025":
+					$.ylbAlert("获取验证码太频繁");
+					break;
+				case "4026":
+					$.ylbAlert("工资尚未结算");
+					break;
+				case "4027":
+					$.ylbAlert("当月工资已支付");
+					break;
 				default:
 					$.ylbAlert("服务器又开小差(err:" + code + ")");
 					break;
