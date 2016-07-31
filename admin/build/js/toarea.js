@@ -11,8 +11,10 @@
                 url: $.apiUrl + "/areamanagers",
                 type: "GET"
             })).done(function (d) {
-                toarea.list = d.data;
-                m.buildVue();
+                $.ylbAjaxHandler(d, function () {
+                    toarea.list = d.data.wages;
+                    m.buildVue();
+                });
             });
         },
         buildVue: function () {

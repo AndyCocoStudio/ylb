@@ -10,6 +10,7 @@
     var m = {
         init: function () {
             m.getUserList();
+            m.getplist();
         },
         getplist: function () {
             $.when($.ajax({
@@ -17,8 +18,19 @@
                 type: "GET"
             })).done(function (d) {
                 $.ylbAjaxHandler(d, function () {
-                    user.plist = d.data;
+                    users.plist = d.data;
                     m.buildVue();
+                });
+            });
+        },
+        filterusers: function () {
+            $.when($.ajax({
+                url: $.apiUrl + "/statistics/marketing?cityCode=" + users.cc + "&areaCode=" + users.ac,
+                type: "GET"
+            })).done(function (d) {
+                $.ylbAjaxHandler(d, function () {
+                    users.info = d.data;
+                    users.list = d.data.users;  
                 });
             });
         },
@@ -44,12 +56,12 @@
         },
         getUserList: function () {
             $.when($.ajax({
-                url: $.apiUrl + "",
+                url: $.apiUrl + "/statistics/marketing",
                 type: "GET"
             })).done(function (d) {
                 $.ylbAjaxHandler(d, function () {
-                    user.list = d.data;
-                    m.getplist();
+                    users.info = d.data;
+                    users.list = d.data.users;
                 });
             });
         },
@@ -76,6 +88,9 @@
                         var c = $(el.target).find("option:selected").val();
                         users.ac = c;
                     },
+                    filteruser: function () {
+                        m.filterusers();
+                    }
                 }
             })
         }
