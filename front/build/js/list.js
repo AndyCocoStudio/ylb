@@ -17,7 +17,8 @@
                 data: {
                     k1: datas.k1,
                     k2: datas.k2,
-                    n: datas.n
+                    n: datas.n,
+                    sz: 6000
                 }
             })).done(function (d) {
                 $.ylbAjaxHandler(d, function () {
