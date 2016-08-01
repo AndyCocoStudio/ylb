@@ -17,7 +17,7 @@
 	<link rel="stylesheet" type="text/css" href="css/libs/morris.css" />
 	<link rel="stylesheet" type="text/css" href="css/libs/pickday.css" />
 	<link rel="stylesheet" type="text/css" href="css/font-awesome.css" />
-	<link rel="stylesheet" type="text/css" href="css/style.css?rev=90a262ed17873bf69053a0625c1ea375" />
+	<link rel="stylesheet" type="text/css" href="css/style.css?rev=797e29fac2f8cdb2fe2fbe218574c908" />
 </head>
 
 <body>
@@ -30,7 +30,8 @@
         </ul>
     </div>
     <div class="op-right">
-        <h1>平台充值总额：<em>{{totalRecharge.totalAmount}}</em>元，平台用户总余额：<em>{{balance.balance}}</em>元，转出总金额：<em>{{totalTransfer.amount}}</em>元，转出已支付：<em>{{paidTransfer.amount}}</em>元</h1>
+        <h1>平台充值总额：<em>{{totalRecharge}}</em>元，平台用户总余额：<em>{{balance}}</em>元<br>
+        转出总金额：<em>{{totalTransfer}}</em>元，转出已支付：<em>{{paidTransfer}}</em>元(货款池:<em>{{paidTransferDetail.PaymentForGoods}}</em>元，服务费池:<em>{{paidTransferDetail.Commission}}</em>元，平台费池:<em>{{paidTransferDetail.Balance}}</em>元)</h1>
         <h2>计算公式： 剩余资金 = 平台充值总额-平台用户总余额-已转出金额</h2>
         <div class="cashpool-echarts" id="goods"></div>
         <div class="cashpool-echarts" id="plat"></div>
@@ -45,10 +46,10 @@
 <script src="js/libs/pickday.min.js" type="text/javascript"></script>
 <script src="js/libs/vue.min.js" type="text/javascript"></script>
 <script src="js/libs/echarts.min.js" type="text/javascript"></script>
-<script src="js/base.js?rev=90a262ed17873bf69053a0625c1ea375" type="text/javascript"></script>
+<script src="js/base.js?rev=797e29fac2f8cdb2fe2fbe218574c908" type="text/javascript"></script>
 
 
-<script type="text/javascript" src="js/cashpool.js?rev=90a262ed17873bf69053a0625c1ea375"></script>
+<script type="text/javascript" src="js/cashpool.js?rev=797e29fac2f8cdb2fe2fbe218574c908"></script>
 
 
 </html>

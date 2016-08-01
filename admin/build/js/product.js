@@ -66,7 +66,7 @@
 		//获取商品列表
 		getData: function () {
 			$.when($.ajax({
-				url: $.apiUrl + '/goods/query',
+				url: $.apiUrl + '/goods/query?sz=6000',
 				type: 'GET'
 			})).done(function (d) {
 				$.ylbAjaxHandler(d, function () {
