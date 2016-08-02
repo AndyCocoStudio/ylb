@@ -19,7 +19,6 @@
             })).done(function (d) {
                 $.ylbAjaxHandler(d, function () {
                     users.plist = d.data;
-                    m.buildVue();
                 });
             });
         },
@@ -60,6 +59,7 @@
             })).done(function (d) {
                 $.ylbAjaxHandler(d, function () {
                     users.info = d.data;
+                    m.buildVue();
                 });
             });
         },

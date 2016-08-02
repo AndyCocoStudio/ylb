@@ -31,12 +31,23 @@
                                     case "FinancialAffairs":
                                         window.location.href = "transfers.html";
                                         break;
+                                    case "CustomerService":
+                                        window.location.href = "onlineorder.html";
+                                        break;
+                                    case "GeneralManager":
+                                        window.location.href = "upgraderight.html";
+                                        break;
                                     default:
                                         break;
 
                                 }
-                            })
-                        })
+                            });
+                        });
+                    },
+                    trylogin: function (e) {
+                        if(e.keyCode==13){
+                            login.login();
+                        }
                     }
                 }
             });
