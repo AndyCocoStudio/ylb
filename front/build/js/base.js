@@ -342,6 +342,9 @@
 		$(".ylb-cover").fadeIn();
 		$(".ylb-menu-wrap").fadeIn();
 	});
+	$(".ylb-customer").on("click", function () {
+		$(this).find("ul").toggle();
+	});
 	/**
 	 * 关闭所有弹窗
 	 * **/

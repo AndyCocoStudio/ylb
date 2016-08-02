@@ -1,0 +1,1 @@
+!function(){var i={rid:$.urlParam("rid")},t={init:function(){$(".ylb-footer").hide(),t.buildVue()},buildVue:function(){i=new Vue({el:"#referlogon-main",data:i}),t.getImg()},getImg:function(){var t="http://www.hnylbsc.com/logon.html?rid="+i.rid;$("#img").qrcode({width:300,height:300,text:t,useSVG:!0})}};t.init()}();
