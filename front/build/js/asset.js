@@ -4,7 +4,18 @@
     };
     var m = {
         init: function () {
-            m.getAsset();
+            m.getUserInfo();
+        },
+        getUserInfo: function () {
+            $.when($.ajax({
+                url: $.apiUrl + "/user/abstract",
+                type: "GET"
+            })).done(function (d) {
+                $.ylbAjaxHandler(d, function () {
+                    asset.user = d.data;
+                    m.getAsset();
+                });
+            });
         },
         getAsset: function () {
             $.when($.ajax({
@@ -34,10 +45,26 @@
                 type: "GET"
             })).done(function (d) {
                 $.ylbAjaxHandler(d, function () {
-                    asset.recharge=d.data.recharges;
-                    m.buildVue();
+                    asset.recharge = d.data.recharges;
+                    if (asset.user.role == "Merchants" || asset.user.role == "AM" || asset.user.role == "CM") {
+                        m.getCommission();
+                    }
+                    else {
+                        m.buildVue();
+                    }
                 });
             })
+        },
+        getCommission: function () {
+            $.when($.ajax({
+                url: $.apiUrl + "/commissions?cp=1&sz=1000",
+                type: "GET"
+            })).done(function (d) {
+                $.ylbAjaxHandler(d, function () {
+                    asset.commission = d.data.commissions;
+                    m.buildVue();
+                });
+            });
         },
         buildVue: function () {
             asset = new Vue({

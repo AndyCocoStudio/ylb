@@ -55,6 +55,35 @@
             <td><a v-if="t.payStatus!='Paid'" href="http://api.hnylbsc.com/unionpay?id={{t.id}}">支付</a></td>
         </tr>
     </table>
+    <h1 v-if="user.role=='Merchant'||user.role=='AM'||user.info=='CM'" class="asset-title">佣金记录</h1>
+    <table v-if="user.role=='Merchant'||user.role=='AM'||user.info=='CM'" class="asset-table">
+        <tr>
+            <th>名下会员</th>
+            <th>会员手机号</th>
+            <th>做单人</th>
+            <th>做单人手机</th>
+            <th>商家名</th>
+            <th>商家地址</th>
+            <th>做单积分</th>
+            <th>佣金</th>
+            <th>佣金比例</th>
+            <th>做单时间</th>
+            <th>备注</th>
+        </tr>
+        <tr v-for="t in commission">
+            <td>{{t.receiverName}}</td>
+            <td>{{t.receiverMobile}}</td>
+            <td>{{t.giverName}}</td>
+            <td>{{t.giverMobile}}</td>
+            <td>{{t.storeName}}</td>
+            <td>{{t.address}}</td>
+            <td>{{t.commissionBase}}</td>
+            <td>{{t.amount}}</td>
+            <td>{{t.rate}}</td>
+            <td>{{t.createTime}}</td>
+            <td>{{t.reason}}</td>
+        </tr>
+    </table>
 </section>
 <!-- @@close-->
 

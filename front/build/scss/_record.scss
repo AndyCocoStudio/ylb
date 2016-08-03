@@ -1,27 +1,7 @@
-.asset-main{
-    width: 100%;
+.record-main{
+    width: 960px;
     margin: 0 auto 132px;
-    .asset-point{
-        margin: 20px auto 30px;
-        width: 90%;
-        display: block;
-        overflow: hidden;
-        li{
-            width: 24.5%;
-            float: left;
-            text-align: center;
-            font-size: 16px;
-            border-right: 1px solid $base-border-color;
-            em{
-                color: $base-orange;
-                margin: 0 5px;
-            }
-            &:last-child{
-                border-right: 0;
-            }
-        }
-    }
-    .asset-title{
+    .record-title{
         font-size: 14px;
         line-height: 40px;
         padding-left: 10px;
@@ -29,7 +9,7 @@
         width: 90%;
         margin: 20px auto;
     }
-    .asset-table{
+    .record-table{
         width: 90%;
         margin: 0 auto;
         border-top: 1px solid $base-border-color;
@@ -41,12 +21,18 @@
             border-right: 1px solid $base-border-color;
             th{
                 background-color: #ddd;
+                font-weight: normal;
             }
             &:nth-child(odd){
                 background-color: #f2f2f2;
             }
             th, td{
                 padding: 5px;
+                max-width: 120px;
+                a{
+                    text-decoration: underline;
+                    color: $link-blue;
+                }
             }
         }
     }

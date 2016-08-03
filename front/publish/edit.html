@@ -13,9 +13,9 @@
 
 
 
-	<link rel="stylesheet" type="text/css" href="css/style.css?rev=16abb1c8c8cfb2607fc89e79227e4c4c" />
+	<link rel="stylesheet" type="text/css" href="css/style.css?rev=a9097e01f9069e7ed37cbbfb60f73f0b" />
 	<link rel="stylesheet" type="text/css" href="css/pickday.css" />
-	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=16abb1c8c8cfb2607fc89e79227e4c4c" />
+	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=a9097e01f9069e7ed37cbbfb60f73f0b" />
 </head>
 
 <body>
@@ -106,6 +106,7 @@
                 <li data-role="avatar" @click="changetap" :class="{select:avatar}">头像修改</li>
                 <li data-role="address" @click="changetap" :class="{select:address}">地址管理</li>
                 <li data-role="detail" @click="changetap" :class="{select:detail}">详细资料</li>
+                <li data-role="loginpwd" @click="changetap" :class="{select:loginpwd}">登录密码管理</li>
             </ul>
             <div v-show="avatar" class="edit-avatar">
                 <h3>请选择jpg,png格式的图片，图片大小小于500k</h3>
@@ -169,6 +170,20 @@
                     <li><a @click="resetpwd" class="edit-pwd">确认</a></li>
                 </ul>
             </div>
+            <div v-show="loginpwd" class="edit-password">
+                <ul>
+                    <li><span>原密码</span><input v-model="logpwd.currentPassword" type="password"></li>
+                    <li><span>新密码</span><input v-model="logpwd.newPassword" type="password"></li>
+                    <li><span>确认密码</span><input v-model="confirmlogpwd" type="password"></li>
+                    <li><a @click="setlogpwd" class="edit-pwd">确认</a></li>
+                </ul>
+                <!--<ul v-show="newpwd">
+                    <li><span>验证码</span><input type="text" class="btn-txt" maxlength="4" v-model="repwd.captcha" placeholder="请输入验证码"
+                        /><input class="btn-code" @click="getcode" value="获取验证码" type="button" /></li>
+                    <li><span>新密码</span><input v-model="repwd.password" type="password"></li>
+                    <li><a @click="resetpwd" class="edit-pwd">确认</a></li>
+                </ul>-->
+            </div>
             <div v-show="detail" class="edit-info">
                 <ul>
                     <li><span>真实姓名</span><input v-model="userinfo.name" type="text"></li>
@@ -231,9 +246,9 @@
 <script src="js/libs/pickday.min.js" type="text/javascript"></script>
 <script src="js/libs/qrcode.min.js" type="text/javascript"></script>
 <script src="js/libs/dropzone.js" type="text/javascript"></script>
-<script src="js/base.js?rev=16abb1c8c8cfb2607fc89e79227e4c4c" type="text/javascript"></script>
+<script src="js/base.js?rev=a9097e01f9069e7ed37cbbfb60f73f0b" type="text/javascript"></script>
 
-<script type="text/javascript" src="js/edit.js?rev=16abb1c8c8cfb2607fc89e79227e4c4c"></script>
+<script type="text/javascript" src="js/edit.js?rev=a9097e01f9069e7ed37cbbfb60f73f0b"></script>
 
 
 </html>

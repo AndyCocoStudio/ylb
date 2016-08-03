@@ -4,6 +4,7 @@
         avatar: false,
         address: false,
         password: true,
+        loginpwd: false,
         detail: false,
         newpwd: false,
         counting: false,
@@ -11,6 +12,10 @@
         num: 60,
         confirmpwd: "",
         pwd: {
+            currentPassword: "",
+            newPassword: ""
+        },
+        logpwd: {
             currentPassword: "",
             newPassword: ""
         },
@@ -183,30 +188,42 @@
                                 this.address = false;
                                 this.password = false;
                                 this.detail = false;
+                                this.loginpwd = false;
                                 break;
                             case "address":
                                 this.avatar = false;
                                 this.address = true;
                                 this.password = false;
                                 this.detail = false;
+                                this.loginpwd = false;
                                 break;
                             case "password":
                                 this.avatar = false;
                                 this.address = false;
                                 this.password = true;
                                 this.detail = false;
+                                this.loginpwd = false;
                                 break;
                             case "detail":
                                 this.avatar = false;
                                 this.address = false;
                                 this.password = false;
                                 this.detail = true;
+                                this.loginpwd = false;
+                                break;
+                            case "loginpwd":
+                                this.avatar = false;
+                                this.address = false;
+                                this.password = false;
+                                this.detail = false;
+                                this.loginpwd = true;
                                 break;
                             default:
                                 this.avatar = false;
                                 this.address = false;
                                 this.password = true;
                                 this.detail = false;
+                                this.loginpwd = false;
                                 break;
                         }
                     },
@@ -234,6 +251,28 @@
                                         // if (url) window.location.href = url;
                                         window.location = "/customer.html";
                                     }, 1500);
+                                });
+                            });
+                        }
+                    },
+                    //设置登录密码
+                    setlogpwd: function () {
+                        if (vcustomer.confirmlogpwd !== vcustomer.logpwd.newPassword) {
+                            alert("两次输入的密码不一致");
+                            return;
+                        } else {
+                            $.ajax({
+                                url: $.apiUrl + "/user/login/password",
+                                type: "POST",
+                                data: JSON.stringify(vcustomer.logpwd)
+                            }).done(function (d) {
+                                $.ylbAjaxHandler(d, function () {
+                                    alert("密码设置成功");
+                                    vcustomer.logpwd = {
+                                        currentPassword: "",
+                                        newPassword: ""
+                                    }
+                                    vcustomer.confirmlogpwd = "";
                                 });
                             });
                         }

@@ -17,9 +17,9 @@
             <th>操作</th>
         </tr>
         <tr v-if="wage.wages.length<1">
-            所有客户经理的工资都已发
+            <td colspan="5">所有客户经理的工资都已发</td>
         </tr>
-        <tr v-for="w in wage.wages">
+        <tr v-if="wage.wages.length>0" v-for="w in wage.wages">
             <td>{{w.name}}</td>
             <td>{{w.mobile}}</td>
             <td>{{w.address}}</td>

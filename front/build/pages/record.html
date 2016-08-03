@@ -1,0 +1,70 @@
+<!-- @@master ../layout.html  -->
+
+<!-- @@block = title-->
+<title>业绩管理</title>
+<!-- @@close-->
+
+<!-- @@block = content-->
+<section class="record-main" id="record-main" v-cloak>
+    <h1 class="record-title">名下商家列表</h1>
+    <table class="record-table">
+        <tr>
+            <th>会员名</th>
+            <th>手机</th>
+            <th>店铺名</th>
+            <th>地址</th>
+            <th>赠送积分总数</th>
+            <th>做单总数</th>
+            <th>推荐会员数</th>
+            <th>注册时间</th>
+            <th>已使用体验名额</th>
+            <th>总体验名额</th>
+            <th>剩余体验名额</th>
+            <th>操作</th>
+        </tr>
+        <tr v-for="r in ml">
+            <td>{{r.name}}</td>
+            <td>{{r.tel}}</td>
+            <td>{{r.storeName}}</td>
+            <td>{{r.address}}</td>
+            <td>{{r.totalScore}}</td>
+            <td>{{r.totalCount}}</td>
+            <td>{{r.recommended}}</td>
+            <td>{{r.createTime}}</td>
+            <td>{{r.usedQuantity}}</td>
+            <td>{{r.totalQuantity}}</td>
+            <td>{{r.totalQuantity-r.usedQuantity}}</td>
+            <td><a href="orderlist.html?mid={{r.merchantID}}">做单查看</a></td>
+        </tr>
+    </table>
+    <h1 class="record-title" v-if="user.role=='AM'||user.role=='AreaManager'">客户经理列表</h1>
+    <table class="record-table" v-if="user.role=='AM'||user.role=='AreaManager'">
+        <tr>
+            <th>姓名</th>
+            <th>手机号</th>
+            <th>地址</th>
+            <th>名下商家数</th>
+            <th>体验名额总数</th>
+            <th>已用体验名额数</th>
+            <th>剩余体验名额数</th>
+            <th>入职时间</th>
+            <th>备注</th>
+        </tr>
+        <tr v-for="c in cm">
+            <td>{{c.name}}</td>
+            <td>{{c.mobile}}</td>
+            <td>{{c.address}}</td>
+            <td>{{c.recommended}}</td>
+            <td>{{c.totalQuantity}}</td>
+            <td>{{c.usedQuantity}}</td>
+            <td>{{c.totalQuantity-c.usedQuantity}}</td>
+            <td>{{c.createTime}}</td>
+            <td>&nbsp;</td>
+        </tr>
+    </table>
+</section>
+<!-- @@close-->
+
+<!-- @@block = scripts-->
+<script type="text/javascript" src="js/record.js?rev=@@hash"></script>
+<!-- @@close-->

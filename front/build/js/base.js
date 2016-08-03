@@ -29,7 +29,7 @@
 		} else {
 			switch (code) {
 				case "4001":
-					$.ylbAlert("验证码错误");
+					$.ylbAlert("密码错误");
 					break;
 				case "4002":
 					$.ylbAlert("验证码过期");

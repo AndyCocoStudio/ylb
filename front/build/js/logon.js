@@ -30,7 +30,7 @@
                                         type: 'PUT',
                                         data: JSON.stringify({
                                             "mobile": vlogon.mobile,
-                                            "captcha": vlogon.password,
+                                            "password": vlogon.password,
                                             "referrerMobile": vlogon.ref
                                         })
                                     }).done(function (d) {
