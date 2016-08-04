@@ -1,0 +1,55 @@
+<!-- @@master ../layout.html  -->
+
+<!-- @@block = title-->
+<title>降权管理</title>
+<!-- @@close-->
+
+<!-- @@block = content-->
+<section class="right-main" id="right-main" v-cloak>
+    <div class="op-left">
+        <ul>
+            <li><a href="users.html"><i class="fa fa-money"></i>有效会员查看</a></li>
+            <li><a href="upgraderight.html"><i class="fa fa-money"></i>提升区域经理</a></li>
+            <li><a href="upgraderight.html"><i class="fa fa-money"></i>降权管理</a></li>
+        </ul>
+    </div>
+    <div class="op-right">
+        <ul>
+            <li><span>手机号</span>
+                <input maxlength="11" v-model="mobile" type="text"></li>
+            <li><a @click="showinfo">查看详情</a><a @click="todowngrade" class="btn-submit">降权</a></li>
+        </ul>
+        <table>
+            <tr>
+                <th>姓名</th>
+                <th>地址</th>
+                <th>店铺名</th>
+                <th>角色</th>
+                <th>手机</th>
+                <th>推荐人</th>
+                <th>名下会员</th>
+                <th>资产</th>
+            </tr>
+            <tr>
+                <td>{{user.name}}</td>
+                <td>{{user.address}}</td>
+                <td>{{user.storeName}}</td>
+                <td>{{user.role}}</td>
+                <td>{{user.mobile}}</td>
+                <td>{{user.referName||user.referMobile}}</td>
+                <td>{{user.recommends}}</td>
+                <td>
+                    <p>余额：{{user.balance}}</p>
+                    <p>佣金：{{user.commission}}</p>
+                    <p>货款：{{user.paymentForGoods}}</p>
+                    <p>积分：{{user.score}}</p>
+                </td>
+            </tr>
+        </table>
+    </div>
+</section>
+<!-- @@close-->
+
+<!-- @@block = scripts-->
+<script type="text/javascript" src="js/dright.js?rev=@@hash"></script>
+<!-- @@close-->
