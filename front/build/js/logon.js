@@ -25,6 +25,10 @@
                                 if (!$.checkIsMobileNumber(vlogon.mobile)) {
                                     $.ylbAlert("请输入正确手机号");
                                 } else {
+                                    if(!vlogon.password){
+                                        $.ylbAlert("请输入密码");
+                                        return;
+                                    }
                                     $.ajax({
                                         url: $.apiUrl + '/user/register',
                                         type: 'PUT',
@@ -44,6 +48,11 @@
                             }
                         } else {
                             $.ylbAlert("请输入手机号码");
+                        }
+                    },
+                    tologon: function (e) {
+                        if (e.keyCode == 13) {
+                            vlogon.logon();
                         }
                     },
                     getCode: function () {

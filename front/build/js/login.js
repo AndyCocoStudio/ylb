@@ -53,6 +53,11 @@
                             $.ylbAlert("请输入手机号码");
                         }
                     },
+                    tologin: function (e) {
+                        if (e.keyCode == 13) {
+                            vlogin.login();
+                        }
+                    },
                     //获取验证码
                     getCode: function () {
                         if (vlogin.counting) {
