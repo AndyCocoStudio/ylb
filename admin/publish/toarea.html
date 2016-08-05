@@ -17,7 +17,7 @@
 	<link rel="stylesheet" type="text/css" href="css/libs/morris.css" />
 	<link rel="stylesheet" type="text/css" href="css/libs/pickday.css" />
 	<link rel="stylesheet" type="text/css" href="css/font-awesome.css" />
-	<link rel="stylesheet" type="text/css" href="css/style.css?rev=c4d5cfb430232279c4dd9bade95cade0" />
+	<link rel="stylesheet" type="text/css" href="css/style.css?rev=e64427ea02d4b7099efe5561a0d2513e" />
 </head>
 
 <body>
@@ -36,18 +36,19 @@
                 <th>区域</th>
                 <th>真实姓名</th>
                 <th>手机号</th>
-                <th>已赠送名额数</th>
+                <th>总赠送名额数</th>
+                <th>已使用名额数</th>
                 <th>操作</th>
             </tr>
             <tr v-for="a in list">
-                <td>{{a.area}}</td>
+                <td>{{a.address}}</td>
                 <td>{{a.name}}</td>
                 <td>{{a.mobile}}</td>
-                <td>{{a.sentCount}}</td>
+                <td>{{a.totalQuantity}}</td>
+                <td>{{a.usedQuantity}}</td>
                 <td>
                     <input placeholder="输入赠送名额数量" type="text">
                     <a data-id="{{a.userID}}" @click="sends">赠送</a>
-                    <a href="areasend.html?aid={{a.userID}}">查看详情</a>
                 </td>
             </tr>
         </table>
@@ -61,10 +62,10 @@
 <script src="js/libs/pickday.min.js" type="text/javascript"></script>
 <script src="js/libs/vue.min.js" type="text/javascript"></script>
 <script src="js/libs/echarts.min.js" type="text/javascript"></script>
-<script src="js/base.js?rev=c4d5cfb430232279c4dd9bade95cade0" type="text/javascript"></script>
+<script src="js/base.js?rev=e64427ea02d4b7099efe5561a0d2513e" type="text/javascript"></script>
 
 
-<script type="text/javascript" src="js/toarea.js?rev=c4d5cfb430232279c4dd9bade95cade0"></script>
+<script type="text/javascript" src="js/toarea.js?rev=e64427ea02d4b7099efe5561a0d2513e"></script>
 
 
 </html>

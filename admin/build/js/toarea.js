@@ -8,11 +8,11 @@
         },
         getAreaList: function () {
             $.when($.ajax({
-                url: $.apiUrl + "/areamanagers",
+                url: $.apiUrl + "/user/all?cp=1&sz=1000&k=0", 
                 type: "GET"
             })).done(function (d) {
                 $.ylbAjaxHandler(d, function () {
-                    toarea.list = d.data.wages;
+                    toarea.list = d.data.areaManagers;
                     m.buildVue();
                 });
             });
@@ -31,11 +31,11 @@
                             return;
                         } else {
                             $.ajax({
-                                url: $.apiUrl + "/areamanager/places",
+                                url: $.apiUrl + "/areamanager/quota",
                                 type: "PuT",
                                 data: JSON.stringify({
                                     userID: id,
-                                    quantity: num
+                                    quota: num
                                 })
                             }).done(function (d) {
                                 $.ylbAjaxHandler(d, function () {
