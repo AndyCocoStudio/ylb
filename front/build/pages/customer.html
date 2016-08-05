@@ -352,13 +352,13 @@
                     </select>
                     <input class="streetinput" placeholder="请填入详细街道地址" v-model="tobesaler.street" type="text" />
                 </li>
-                <li><span>法人</span><input v-model="tobesaler.legalPerson" type="text" /></li>
-                <li><span>法人身份证号</span><input maxlength="18" v-model="tobesaler.idCard" type="text" /></li>
+                <li><span>真实姓名</span><input v-model="tobesaler.legalPerson" type="text" /></li>
+                <!--<li><span>法人身份证号</span><input maxlength="18" v-model="tobesaler.idCard" type="text" /></li>-->
                 <li><span>联系号码</span><input maxlength="12" v-model="tobesaler.tel" type="text" /></li>
-                <li><span>法人身份证正、反面</span><span id="frsfz">{{tobesaler.legalPersonIDCardImage.length==0?'点击上传图片':'图片已上传'}}</span>
+                <!--<li><span>法人身份证正、反面</span><span id="frsfz">{{tobesaler.legalPersonIDCardImage.length==0?'点击上传图片':'图片已上传'}}</span>
                     <img v-for="r in tobesaler.legalPersonIDCardImage" :src="r"></li>
                 <li><span>法人手持正面身份证照图</span><span id="zmt">{{tobesaler.legalPersonWithIDCardInHandImage?'图片已上传':'点击上传图片'}}</span>
-                    <img :src="tobesaler.legalPersonWithIDCardInHandImage"></li>
+                    <img :src="tobesaler.legalPersonWithIDCardInHandImage"></li>-->
                 <li><span>店招图</span><span id="dzt">{{tobesaler.storeAppearance?'图片已上传':'点击上传图片'}}</span><img :src="tobesaler.storeAppearance"></li>
                 <li><span>店面或内部环境图(最多4张)</span><span id="dnt">{{tobesaler.storeInsideImages.length==0?'点击上传图片':'图片已上传'}}</span>
                     <img v-for="r in tobesaler.storeInsideImages" :src="r"></li>

@@ -13,9 +13,9 @@
 
 
 
-	<link rel="stylesheet" type="text/css" href="css/style.css?rev=c3403f5296ce6b46ee3d4dd0456befb3" />
+	<link rel="stylesheet" type="text/css" href="css/style.css?rev=ba720eba97b8ca2a3d3806a430ced72f" />
 	<link rel="stylesheet" type="text/css" href="css/pickday.css" />
-	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=c3403f5296ce6b46ee3d4dd0456befb3" />
+	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=ba720eba97b8ca2a3d3806a430ced72f" />
 </head>
 
 <body>
@@ -47,22 +47,22 @@
         <li><span>申请时间</span>{{detail.date}}</li>
         <li v-if="detail.applyRole=='Merchants'"><span>店铺名称</span>{{detail.storeName}}</li>
         <li v-if="detail.applyRole=='Merchants'"><span>店铺地址</span>{{detail.province+detail.city+detail.area+detail.street}}</li>
-        <li v-if="detail.applyRole=='Merchants'"><span>法人</span>{{detail.legalPerson}}</li>
+        <li v-if="detail.applyRole=='Merchants'"><span>真实姓名</span>{{detail.legalPerson}}</li>
         <li v-if="detail.applyRole=='Merchants'"><span>联系方式</span>{{detail.tel}}</li>
-        <li v-if="detail.applyRole=='Merchants'"><span>法人身份证号</span>{{detail.idCard}}</li>
+        <!--<li v-if="detail.applyRole=='Merchants'"><span>法人身份证号</span>{{detail.idCard}}</li>-->
         <li v-if="detail.applyRole=='CustomerManager'"><span>身份证号</span>{{detail.idCard}}</li>
-        <li v-if="detail.applyRole=='Merchants'"><span>法人身份证正反照</span>
+        <!--<li v-if="detail.applyRole=='Merchants'"><span>法人身份证正反照</span>
             <a v-for="i in detail.legalPersonIdCardImage" href="{{i}}" target="_blank"><img :src="i"></a>
-        </li>
+        </li>-->
         <li v-if="detail.applyRole=='CustomerManager'"><span>身份证正反照</span>
             <a v-for="i in detail.legalPersonIdCardImage" href="{{i}}" target="_blank"><img :src="i"></a>
         </li>
         <li v-if="detail.applyRole=='CustomerManager'"><span>持身份证照</span>
             <a href="detail.legalPersonWithIdCardInHandImage" target="_blank"><img :src="detail.legalPersonWithIdCardInHandImage"></a>
         </li>
-        <li v-if="detail.applyRole=='Merchants'"><span>法人手持身份证照</span>
+        <!--<li v-if="detail.applyRole=='Merchants'"><span>法人手持身份证照</span>
             <a href="detail.legalPersonWithIdCardInHandImage" target="_blank"><img :src="detail.legalPersonWithIdCardInHandImage"></a>
-        </li>
+        </li>-->
         <li v-if="detail.applyRole=='Merchants'"><span>营业执照</span>
             <a href="detail.license" target="_blank"><img :src="detail.license"></a>
         </li>
@@ -115,9 +115,9 @@
 <script src="js/libs/pickday.min.js" type="text/javascript"></script>
 <script src="js/libs/qrcode.min.js" type="text/javascript"></script>
 <script src="js/libs/dropzone.js" type="text/javascript"></script>
-<script src="js/base.js?rev=c3403f5296ce6b46ee3d4dd0456befb3" type="text/javascript"></script>
+<script src="js/base.js?rev=ba720eba97b8ca2a3d3806a430ced72f" type="text/javascript"></script>
 
-<script type="text/javascript" src="js/apply.js?rev=c3403f5296ce6b46ee3d4dd0456befb3"></script>
+<script type="text/javascript" src="js/apply.js?rev=ba720eba97b8ca2a3d3806a430ced72f"></script>
 
 
 </html>

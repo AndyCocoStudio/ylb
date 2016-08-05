@@ -622,10 +622,10 @@
                     //申请加盟商
                     apysaler: function () {
                         if (vcustomer.isapplyunder) {
-                            if (!vcustomer.tobesaler.idCard) {
-                                $.ylbAlert("请输入法人身份证号");
-                                return;
-                            }
+                            // if (!vcustomer.tobesaler.idCard) {
+                            //     $.ylbAlert("请输入法人身份证号");
+                            //     return;
+                            // }
                             if (!vcustomer.tobesaler.storeName) {
                                 $.ylbAlert("请输入店铺名称");
                                 return;
@@ -647,17 +647,17 @@
                                 return;
                             }
                             if (!vcustomer.tobesaler.legalPerson) {
-                                $.ylbAlert("请输入法人名");
+                                $.ylbAlert("请输入真实姓名");
                                 return;
                             }
-                            if (vcustomer.tobesaler.legalPersonIDCardImage.length < 1) {
-                                $.ylbAlert("请上传身份证正反面照");
-                                return;
-                            }
-                            if (!vcustomer.tobesaler.legalPersonWithIDCardInHandImage) {
-                                $.ylbAlert("请上传法人手持身份证照");
-                                return;
-                            }
+                            // if (vcustomer.tobesaler.legalPersonIDCardImage.length < 1) {
+                            //     $.ylbAlert("请上传身份证正反面照");
+                            //     return;
+                            // }
+                            // if (!vcustomer.tobesaler.legalPersonWithIDCardInHandImage) {
+                            //     $.ylbAlert("请上传法人手持身份证照");
+                            //     return;
+                            // }
                             if (vcustomer.tobesaler.storeInsideImages.length < 1) {
                                 $.ylbAlert("请上传店铺内饰图");
                                 return;
