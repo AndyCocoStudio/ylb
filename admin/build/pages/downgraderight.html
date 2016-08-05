@@ -14,38 +14,66 @@
         </ul>
     </div>
     <div class="op-right">
-        <ul>
-            <li><span>手机号</span>
-                <input maxlength="11" v-model="mobile" type="text"></li>
-            <li><a @click="showinfo">查看详情</a><a @click="todowngrade" class="btn-submit">降权</a></li>
-        </ul>
-        <table>
-            <tr>
-                <th>姓名</th>
-                <th>地址</th>
-                <th>店铺名</th>
-                <th>角色</th>
-                <th>手机</th>
-                <th>推荐人</th>
-                <th>名下会员</th>
-                <th>资产</th>
-            </tr>
-            <tr>
-                <td>{{user.name}}</td>
-                <td>{{user.address}}</td>
-                <td>{{user.storeName}}</td>
-                <td>{{user.role}}</td>
-                <td>{{user.mobile}}</td>
-                <td>{{user.referName||user.referMobile}}</td>
-                <td>{{user.recommends}}</td>
-                <td>
-                    <p>余额：{{user.balance}}</p>
-                    <p>佣金：{{user.commission}}</p>
-                    <p>货款：{{user.paymentForGoods}}</p>
-                    <p>积分：{{user.score}}</p>
-                </td>
-            </tr>
-        </table>
+        <h1>区域经理列表 <a @click="toggleaml"><i class="fa fa-arrow-down"></i></a></h1>
+        <div v-show="amshow">
+            <div class="filters">手机号码<input v-model="af.mobile" type="text">姓名<input v-model="af.name" type="text"><a @click="fam">搜索</a></div>
+            <table>
+                <tr>
+                    <th>姓名</th>
+                    <th>区域</th>
+                    <th>手机</th>
+                    <th>时间</th>
+                    <th>操作</th>
+                </tr>
+                <tr v-for="a in amlist">
+                    <td>{{a.name}}</td>
+                    <td>{{a.address}}</td>
+                    <td>{{a.mobile}}</td>
+                    <td>{{a.createTime}}</td>
+                    <td><a @click="todr(a.userID)">降权</a></td>
+                </tr>
+            </table>
+        </div>
+        <h1>客户经理列表 <a @click="togglecml"><i class="fa fa-arrow-down"></i></a></h1>
+        <div v-show="cmshow">
+            <div class="filters">手机号码<input v-model="cf.mobile" type="text">姓名<input v-model="cf.name" type="text"><a @click="fcm">搜索</a></div>
+            <table>
+                <tr>
+                    <th>姓名</th>
+                    <th>区域</th>
+                    <th>手机</th>
+                    <th>时间</th>
+                    <th>操作</th>
+                </tr>
+                <tr v-for="c in cmlist">
+                    <td>{{c.name}}</td>
+                    <td>{{c.address}}</td>
+                    <td>{{c.mobile}}</td>
+                    <td>{{c.createTime}}</td>
+                    <td><a @click="todr(c.userID)">降权</a></td>
+                </tr>
+            </table>
+        </div>
+        <h1>加盟商列表 <a @click="toggleml"><i class="fa fa-arrow-down"></i></a></h1>
+        <div v-show="mshow">
+            <div class="filters">手机号码<input v-model="mf.mobile" type="text">姓名/店铺名<input v-model="mf.name" type="text"><a @click="fm">搜索</a></div>
+            <table>
+                <tr>
+                    <th>店铺名</th>
+                    <th>区域</th>
+                    <th>手机</th>
+                    <th>时间</th>
+                    <th>操作</th>
+                </tr>
+                <tr v-for="m in mlist">
+                    <td>{{m.name}}</td>
+                    <td>{{m.address}}</td>
+                    <td>{{m.mobile}}</td>
+                    <td>{{m.createTime}}</td>
+                    <td><a @click="todr(m.userID)">降权</a></td>
+                </tr>
+            </table>
+        </div>
     </div>
 </section>
 <!-- @@close-->
