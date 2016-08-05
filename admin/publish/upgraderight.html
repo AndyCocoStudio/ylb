@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>提升区域经理权限</title>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1" />
+	<meta name="description" content="优良宝" />
+	<meta name="keywords" content="优良宝" />
+	<link rel="shortcut icon" type="image/png" href="images/favicon.png" />
+
+
+
+	<link rel="stylesheet" type="text/css" href="css/libs/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/libs/morris.css" />
+	<link rel="stylesheet" type="text/css" href="css/libs/pickday.css" />
+	<link rel="stylesheet" type="text/css" href="css/font-awesome.css" />
+	<link rel="stylesheet" type="text/css" href="css/style.css?rev=00b68211b0a21dec45d4298d70cc8f71" />
+</head>
+
+<body>
+	<div id="layout-main" class="op-header"><img src="images/logo.png" /><a @click="logout" v-if="islogin">注销登录</a></div>
+
+<section class="right-main" id="right-main" v-cloak>
+    <div class="op-left">
+        <ul>
+            <li><a href="users.html"><i class="fa fa-money"></i>有效会员查看</a></li>
+            <li><a href="upgraderight.html"><i class="fa fa-money"></i>提升区域经理</a></li>
+        </ul>
+    </div>
+    <div class="op-right">
+        <ul>
+            <li><span>选择区域</span>
+                <select @change="changeprov">
+                    <option value="-1">-请选择省-</option>
+                    <option v-for="p in plist" value="{{p.code}}">{{p.name}}</option>
+                </select>
+                <select @change="changecity">
+                    <option value="-1">-请选择市-</option>
+                    <option v-for="c in clist" value="{{c.code}}">{{c.name}}</option>
+                </select>
+                <select @change="changearea">
+                    <option value="-1">-请选择区-</option>
+                    <option v-for="a in alist" value="{{a.code}}">{{a.name}}</option>
+                </select>
+            </li>
+            <li><span>手机号</span>
+                <input maxlength="11" v-model="apply.mobile" type="text"></li>
+            <li><span>真实姓名</span>
+                <input maxlength="11" v-model="apply.name" type="text"></li>
+            <li><span>推荐人手机</span>
+                <input maxlength="11" v-model="apply.referrerMobile" type="text"></li>
+            <li><a @click="toupgrade" class="btn-submit">提交</a></li>
+        </ul>
+    </div>
+</section>
+
+</body>
+<script src="js/libs/jquery-2.1.4.min.js" type="text/javascript"></script>
+<script src="js/libs/bootstrap.min.js" type="text/javascript"></script>
+<script src="js/libs/dropzone.js" type="text/javascript"></script>
+<script src="js/libs/pickday.min.js" type="text/javascript"></script>
+<script src="js/libs/vue.min.js" type="text/javascript"></script>
+<script src="js/libs/echarts.min.js" type="text/javascript"></script>
+<script src="js/base.js?rev=00b68211b0a21dec45d4298d70cc8f71" type="text/javascript"></script>
+
+
+<script type="text/javascript" src="js/right.js?rev=00b68211b0a21dec45d4298d70cc8f71"></script>
+
+
+</html>

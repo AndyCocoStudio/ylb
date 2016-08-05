@@ -1,0 +1,249 @@
+@import "common";
+$blue: #337ab7;
+$green: #5cb85c;
+$orange: #f0ad4e;
+$red: #d9534f;
+$black: #888;
+$white: #fff;
+
+@mixin button($color, $bgcolor, $bordercolor){
+    display: inline-block;
+    margin-left: 10px;
+    padding: 0 20px;
+    color: $color;
+    background-color: $bgcolor;
+    border: 1px solid $bordercolor;
+}
+body{
+    background-color: #cecece;
+}
+.white-button {
+    @include button($black, $white, $black);
+}
+.blue-button {
+    @include button($white, $blue, $blue);
+}
+.op-header{
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    background-color: #aaa;
+    color: #666;
+    overflow: hidden;
+    img{
+        height: 40px;
+        display: block;
+        float: left;
+    }
+    a{
+        float: right;
+        padding: 0 10px;
+        color: #333;
+    }
+}
+.op-left{
+    width: 200px;
+    min-height: 600px;
+    background-color: #cecece;
+    float: left;
+    ul{
+        padding: 52px 0 60px 0;
+        li{
+            line-height: 32px;
+            font-size: 14px; 
+            padding-left: 20px;
+            border-top: 1px solid #efefef;
+            a{
+                color: #333;
+                i{
+                    margin-right: 5px;
+                }
+            }
+            ul{
+                padding: 0 0 0 5px;
+                display: none;
+                li{
+                    font-size: 12px;
+                }
+            }
+        }
+    }
+}
+.op-right {
+	padding: 20px;
+    margin-left: 200px;
+    width: calc(100% - 200px);
+    margin-bottom: 80px;
+    background-color: #fff;
+	h1 {
+        font-size: 18px;
+        border-bottom: 1px solid #999;
+        padding-left: 10px;
+        margin-bottom: 20px;
+        height: 48px;
+        line-height: 48px;
+        overflow: hidden;
+        a{
+            display: block;
+            padding: 0 20px;
+            height: 28px;
+            line-height: 28px;
+            background-color: $green;
+            color: #fff;
+            float: right;
+            font-size: 14px;
+            margin: 10px 5px 0 0;
+        }
+	}
+    h2{
+        background-color: $red;
+        color: #fff;
+        padding: 10px;
+    }
+	input, select, textarea{
+		height: 30px;
+		width: 150px;
+		border: 1px solid #888;
+		margin-right: 5px;
+        border-radius: 3px;
+	}
+    textarea{
+        width: 400px;
+        height: 200px;
+        resize: none;
+    }
+	input{
+		padding-left: 5px;
+	}
+	li {
+		margin: 20px 0;
+        line-height: 30px;
+        overflow: hidden;
+		span {
+			display: block;
+			width: 80px;
+			margin-right: 10px;
+			text-align: right;
+            float: left;
+			input[type="file"] {
+                height: 20px;
+                width: 64px;
+			}
+		}
+        .uploadbtn{
+            width: 150px;
+            background-color: #cecece;
+            height: 30px;
+            line-height: 30px;
+            display: inline-block;
+            text-align: center;
+        }
+        div{
+            margin-left: 90px;
+            input{
+                margin-bottom: 8px;
+            }
+        }
+        .dz-preview{
+            display: none;
+        }
+        img{
+            width: 240px;
+            display: block;
+            margin: 10px 0 0 90px;
+        }
+        .deleteparam{
+            font-size: 18px;
+        }
+	}
+	table {
+        width:100%;
+	}
+	th, td {
+        height: 40px;
+        text-align: center;
+        border: 1px solid #888;
+        a{
+            margin-right: 5px;
+            padding: 0 5px;
+        }
+	}
+    th{
+        background-color: $blue;
+        font-weight: 400;
+        color: #fff;
+    }
+}
+.ylb-alert {
+    top: 10%;
+    width: 240px;
+    padding: 10px 20px;
+    background-color: rgba(0,0,0,.6);
+    color: #fff;
+    border-radius: 5px;
+    text-align: center;
+    z-index: 999;
+    position: fixed;
+}
+.ylb-cover{
+    background-color: #26201e;
+    opacity: .86;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 9;
+    position: fixed
+}
+.ylb-graybox{
+    position: fixed;
+    width: 420px;
+    min-height: 160px;
+    padding: 20px;
+    z-index: 10;
+    top: 40%;
+    left: 50%;
+    margin: -150px 0 0 -230px;
+    background-color: #fff;
+    border-radius: 5px;
+    ul{
+        display: block;
+        margin: 10px 0 0 20px;
+        li{
+            height: 32px;
+            line-height: 32px;
+            span{
+                display: inline-block;
+                width: 90px;
+            }
+            input{
+                width: 190px;
+                border: 1px solid #cecece;
+                border-radius: 3px;
+                line-height: 28px;
+                padding-left: 5px;
+            }
+            a{
+                width: 90px;
+                display: inline-block;
+                margin: 10px 0 0 90px;
+                height: 28px;
+                background-color: $orange;
+                color: #fff;
+                text-align: center;
+            }
+        }
+    }
+}
+
+@import "login";
+@import "index";
+@import "product";
+@import "right";
+@import "sendpoint";
+@import "cashpool";
+@import "transfer";
+@import "order";
+@import "online";
+@import "banner";
+@import "users";

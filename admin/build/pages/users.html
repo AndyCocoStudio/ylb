@@ -1,0 +1,62 @@
+<!-- @@master ../layout.html  -->
+
+<!-- @@block = title-->
+<title>有效会员统计</title>
+<!-- @@close-->
+
+<!-- @@block = content-->
+<section class="users-main" id="users-main" v-cloak>
+    <div class="op-left">
+        <ul>
+            <li><a href="users.html"><i class="fa fa-money"></i>有效会员统计</a></li>
+            <li><a href="upgraderight.html"><i class="fa fa-money"></i>提升区域经理</a></li>
+        </ul>
+    </div>
+    <div class="op-right">
+        <h1>有效会员统计({{info.activeMember}})</h1>
+        <div class="users-filter">
+            <select @change="changeprov">
+                <option value="">-请选择省-</option>
+                <option v-for="p in plist" value="{{p.code}}">{{p.name}}</option>
+            </select>
+            <select @change="changecity">
+                <option value="">-请选择省市-</option>
+                <option v-for="c in clist" value="{{c.code}}">{{c.name}}</option>
+            </select>
+            <select @change="changearea">
+                <option value="">-请选择区-</option>
+                <option v-for="a in alist" value="{{a.code}}">{{a.name}}</option>
+            </select>
+            <a @click="filteruser">搜索</a>
+        </div>
+        <table>
+            <tr>
+                <th>真实姓名</th>
+                <th>手机号码</th>
+                <th>积分点</th>
+                <th>可用积分</th>
+                <th>余额</th>
+                <th>货款</th>
+                <th>佣金</th>
+                <th>地址</th>
+                <th>注册时间</th>
+            </tr>
+            <tr v-for="u in info.users">
+                <td>{{u.name}}</td>
+                <td>{{u.mobile}}</td>
+                <td>{{u.point}}</td>
+                <td>{{u.score}}</td>
+                <td>{{u.balance}}</td>
+                <td>{{u.paymentForGoods}}</td>
+                <td>{{u.commission}}</td>
+                <td>{{u.address}}</td>
+                <td>{{u.createTime}}</td>
+            </tr>
+        </table>
+    </div>
+</section>
+<!-- @@close-->
+
+<!-- @@block = scripts-->
+<script type="text/javascript" src="js/users.js?rev=@@hash"></script>
+<!-- @@close-->

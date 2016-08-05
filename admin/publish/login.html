@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>登录优良宝商城管理平台</title>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1" />
+	<meta name="description" content="优良宝" />
+	<meta name="keywords" content="优良宝" />
+	<link rel="shortcut icon" type="image/png" href="images/favicon.png" />
+
+
+
+	<link rel="stylesheet" type="text/css" href="css/libs/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/libs/morris.css" />
+	<link rel="stylesheet" type="text/css" href="css/libs/pickday.css" />
+	<link rel="stylesheet" type="text/css" href="css/font-awesome.css" />
+	<link rel="stylesheet" type="text/css" href="css/style.css?rev=ccbe7e44831e7de0e808fe2a29c13d20" />
+</head>
+
+<body>
+	<div id="layout-main" class="op-header"><img src="images/logo.png" /><a @click="logout" v-if="islogin">注销登录</a></div>
+
+<section class="login-main" id="login-main" v-cloak>
+    <div class="login-wrap">
+        <h1>登录</h1>
+        <ul>
+            <li>
+                <input type="text" @keydown="trylogin" maxlength="11" v-model="user" placeholder="账号" />
+            </li>
+            <li>
+                <input type="password" @keydown="trylogin" v-model="pwd" placeholder="密码" />
+            </li>
+            <li>
+                <button @click="login">登录</button>
+            </li>
+        </ul>
+    </div>
+</section>
+
+</body>
+<script src="js/libs/jquery-2.1.4.min.js" type="text/javascript"></script>
+<script src="js/libs/bootstrap.min.js" type="text/javascript"></script>
+<script src="js/libs/dropzone.js" type="text/javascript"></script>
+<script src="js/libs/pickday.min.js" type="text/javascript"></script>
+<script src="js/libs/vue.min.js" type="text/javascript"></script>
+<script src="js/libs/echarts.min.js" type="text/javascript"></script>
+<script src="js/base.js?rev=ccbe7e44831e7de0e808fe2a29c13d20" type="text/javascript"></script>
+
+
+<script type="text/javascript" src="js/login.js?rev=ccbe7e44831e7de0e808fe2a29c13d20"></script>
+
+
+</html>

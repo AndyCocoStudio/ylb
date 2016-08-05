@@ -1,0 +1,65 @@
+<!-- @@master ../layout.html  -->
+
+<!-- @@block = title-->
+<title>商城订单管理</title>
+<!-- @@close-->
+
+<!-- @@block = content-->
+<section class="online-main" id="online-main" v-cloak>
+    <div class="op-left">
+        <ul>
+            <li><a href="onlineorder.html"><i class="fa fa-money"></i>商城订单管理</a></li>
+        </ul>
+    </div>
+    <div class="op-right">
+        <table>
+            <tr>
+                <th>订单号</th>
+                <th>商品名</th>
+                <th>数量</th>
+                <th>总价</th>
+                <th>抵用积分</th>
+                <th>运费</th>
+                <th>收件人</th>
+                <th>联系方式</th>
+                <th>发货地址</th>
+                <th>操作</th>
+            </tr>
+            <tr v-if="o.payStatus=='Paid'&o.orderStatus!='Cancel'" v-for="o in list">
+                <td>{{o.orderID}}</td>
+                <td>
+                    <p v-for="p in o.items">{{p.name}}</p>
+                </td>
+                <td>
+                    <p v-for="c in o.items">{{c.quantity}}</p>
+                </td>
+                <td>{{o.totalPrice}}</td>
+                <td>{{o.score}}</td>
+                <td>{{o.freight}}</td>
+                <td>{{o.name}}</td>
+                <td>{{o.mobile}}</td>
+                <td>{{o.address}}</td>
+                <td>
+                    <p v-if="g.status=='Sending'" v-for="g in o.items"><a @click="showexpress(g.orderID)">发货</a></p>
+                    <p v-if="g.status=='Sent'" v-for="g in o.items">已发货</p>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="ylb-cover" @click="hideall" v-show="cover"></div>
+    <div class="ylb-graybox" v-show="express">
+        <ul>
+            <li>
+                <span>订单号</span><em>{{send.orderID}}</em>
+            </li>
+            <li><span>快递公司</span><input v-model="send.expressName" type="text" /></li>
+            <li><span>快递单号</span><input v-model="send.expressID" type="text" /></li>
+            <li><a @click="sendgoods">发货</a></li>
+        </ul>
+    </div>
+</section>
+<!-- @@close-->
+
+<!-- @@block = scripts-->
+<script type="text/javascript" src="js/online.js?rev=@@hash"></script>
+<!-- @@close-->

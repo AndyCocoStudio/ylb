@@ -1,0 +1,83 @@
+<!-- @@master ../layout.html  -->
+
+<!-- @@block = title-->
+<title>降权管理</title>
+<!-- @@close-->
+
+<!-- @@block = content-->
+<section class="right-main" id="right-main" v-cloak>
+    <div class="op-left">
+        <ul>
+            <li><a href="users.html"><i class="fa fa-money"></i>有效会员查看</a></li>
+            <li><a href="upgraderight.html"><i class="fa fa-money"></i>提升区域经理</a></li>
+            <li><a href="upgraderight.html"><i class="fa fa-money"></i>降权管理</a></li>
+        </ul>
+    </div>
+    <div class="op-right">
+        <h1>区域经理列表 <a @click="toggleaml"><i class="fa fa-arrow-down"></i></a></h1>
+        <div v-show="amshow">
+            <div class="filters">手机号码<input v-model="af.mobile" type="text">姓名<input v-model="af.name" type="text"><a @click="fam">搜索</a></div>
+            <table>
+                <tr>
+                    <th>姓名</th>
+                    <th>区域</th>
+                    <th>手机</th>
+                    <th>时间</th>
+                    <th>操作</th>
+                </tr>
+                <tr v-for="a in amlist">
+                    <td>{{a.name}}</td>
+                    <td>{{a.address}}</td>
+                    <td>{{a.mobile}}</td>
+                    <td>{{a.createTime}}</td>
+                    <td><a @click="todr(a.userID)">降权</a></td>
+                </tr>
+            </table>
+        </div>
+        <h1>客户经理列表 <a @click="togglecml"><i class="fa fa-arrow-down"></i></a></h1>
+        <div v-show="cmshow">
+            <div class="filters">手机号码<input v-model="cf.mobile" type="text">姓名<input v-model="cf.name" type="text"><a @click="fcm">搜索</a></div>
+            <table>
+                <tr>
+                    <th>姓名</th>
+                    <th>区域</th>
+                    <th>手机</th>
+                    <th>时间</th>
+                    <th>操作</th>
+                </tr>
+                <tr v-for="c in cmlist">
+                    <td>{{c.name}}</td>
+                    <td>{{c.address}}</td>
+                    <td>{{c.mobile}}</td>
+                    <td>{{c.createTime}}</td>
+                    <td><a @click="todr(c.userID)">降权</a></td>
+                </tr>
+            </table>
+        </div>
+        <h1>加盟商列表 <a @click="toggleml"><i class="fa fa-arrow-down"></i></a></h1>
+        <div v-show="mshow">
+            <div class="filters">手机号码<input v-model="mf.mobile" type="text">姓名/店铺名<input v-model="mf.name" type="text"><a @click="fm">搜索</a></div>
+            <table>
+                <tr>
+                    <th>店铺名</th>
+                    <th>区域</th>
+                    <th>手机</th>
+                    <th>时间</th>
+                    <th>操作</th>
+                </tr>
+                <tr v-for="m in mlist">
+                    <td>{{m.name}}</td>
+                    <td>{{m.address}}</td>
+                    <td>{{m.mobile}}</td>
+                    <td>{{m.createTime}}</td>
+                    <td><a @click="todr(m.userID)">降权</a></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</section>
+<!-- @@close-->
+
+<!-- @@block = scripts-->
+<script type="text/javascript" src="js/dright.js?rev=@@hash"></script>
+<!-- @@close-->

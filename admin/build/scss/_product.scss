@@ -1,0 +1,17 @@
+.product-main{
+    margin-bottom: 80px;
+    table{
+        td{
+            a.edit{
+                background-color: $green;
+                border-color: $green;
+                color: #fff;
+            }
+            a.delete{
+                background-color: $red;
+                border-color: $red;
+                color: #fff;
+            }
+        }
+    }
+}

@@ -1,0 +1,29 @@
+<!-- @@master ../layout.html  -->
+
+<!-- @@block = title-->
+<title>直接赠送积分</title>
+<!-- @@close-->
+
+<!-- @@block = content-->
+<section class="sendpoint-main" id="sendpoint-main" v-cloak>
+    <div class="op-left">
+        <ul>
+            <li><a href="upgraderight.html"><i class="fa fa-comments"></i>提升权限</a></li>
+            <li><a href="sendpoint.html"><i class="fa fa-dashboard"></i>直送积分</a></li>
+        </ul>
+    </div>
+    <div class="op-right">
+        <ul>
+            <li><span>手机号</span>
+                <input maxlength="11" v-model="mobile" type="text"></li>
+            <li><span>积分数</span>
+                <input v-model="score" type="text"></li>
+            <li><a @click="toupgrade" class="btn-submit">提交</a></li>
+        </ul>
+    </div>
+</section>
+<!-- @@close-->
+
+<!-- @@block = scripts-->
+<script type="text/javascript" src="js/sendpoint.js?rev=@@hash"></script>
+<!-- @@close-->

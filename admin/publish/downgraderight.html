@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>降权管理</title>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1" />
+	<meta name="description" content="优良宝" />
+	<meta name="keywords" content="优良宝" />
+	<link rel="shortcut icon" type="image/png" href="images/favicon.png" />
+
+
+
+	<link rel="stylesheet" type="text/css" href="css/libs/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/libs/morris.css" />
+	<link rel="stylesheet" type="text/css" href="css/libs/pickday.css" />
+	<link rel="stylesheet" type="text/css" href="css/font-awesome.css" />
+	<link rel="stylesheet" type="text/css" href="css/style.css?rev=94024e1e7bc3b3535abb2e5296ceb970" />
+</head>
+
+<body>
+	<div id="layout-main" class="op-header"><img src="images/logo.png" /><a @click="logout" v-if="islogin">注销登录</a></div>
+
+<section class="right-main" id="right-main" v-cloak>
+    <div class="op-left">
+        <ul>
+            <li><a href="users.html"><i class="fa fa-money"></i>有效会员查看</a></li>
+            <li><a href="upgraderight.html"><i class="fa fa-money"></i>提升区域经理</a></li>
+            <li><a href="upgraderight.html"><i class="fa fa-money"></i>降权管理</a></li>
+        </ul>
+    </div>
+    <div class="op-right">
+        <h1>区域经理列表 <a @click="toggleaml"><i class="fa fa-arrow-down"></i></a></h1>
+        <div v-show="amshow">
+            <div class="filters">手机号码<input v-model="af.mobile" type="text">姓名<input v-model="af.name" type="text"><a @click="fam">搜索</a></div>
+            <table>
+                <tr>
+                    <th>姓名</th>
+                    <th>区域</th>
+                    <th>手机</th>
+                    <th>时间</th>
+                    <th>操作</th>
+                </tr>
+                <tr v-for="a in amlist">
+                    <td>{{a.name}}</td>
+                    <td>{{a.address}}</td>
+                    <td>{{a.mobile}}</td>
+                    <td>{{a.createTime}}</td>
+                    <td><a @click="todr(a.userID)">降权</a></td>
+                </tr>
+            </table>
+        </div>
+        <h1>客户经理列表 <a @click="togglecml"><i class="fa fa-arrow-down"></i></a></h1>
+        <div v-show="cmshow">
+            <div class="filters">手机号码<input v-model="cf.mobile" type="text">姓名<input v-model="cf.name" type="text"><a @click="fcm">搜索</a></div>
+            <table>
+                <tr>
+                    <th>姓名</th>
+                    <th>区域</th>
+                    <th>手机</th>
+                    <th>时间</th>
+                    <th>操作</th>
+                </tr>
+                <tr v-for="c in cmlist">
+                    <td>{{c.name}}</td>
+                    <td>{{c.address}}</td>
+                    <td>{{c.mobile}}</td>
+                    <td>{{c.createTime}}</td>
+                    <td><a @click="todr(c.userID)">降权</a></td>
+                </tr>
+            </table>
+        </div>
+        <h1>加盟商列表 <a @click="toggleml"><i class="fa fa-arrow-down"></i></a></h1>
+        <div v-show="mshow">
+            <div class="filters">手机号码<input v-model="mf.mobile" type="text">姓名/店铺名<input v-model="mf.name" type="text"><a @click="fm">搜索</a></div>
+            <table>
+                <tr>
+                    <th>店铺名</th>
+                    <th>区域</th>
+                    <th>手机</th>
+                    <th>时间</th>
+                    <th>操作</th>
+                </tr>
+                <tr v-for="m in mlist">
+                    <td>{{m.name}}</td>
+                    <td>{{m.address}}</td>
+                    <td>{{m.mobile}}</td>
+                    <td>{{m.createTime}}</td>
+                    <td><a @click="todr(m.userID)">降权</a></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</section>
+
+</body>
+<script src="js/libs/jquery-2.1.4.min.js" type="text/javascript"></script>
+<script src="js/libs/bootstrap.min.js" type="text/javascript"></script>
+<script src="js/libs/dropzone.js" type="text/javascript"></script>
+<script src="js/libs/pickday.min.js" type="text/javascript"></script>
+<script src="js/libs/vue.min.js" type="text/javascript"></script>
+<script src="js/libs/echarts.min.js" type="text/javascript"></script>
+<script src="js/base.js?rev=94024e1e7bc3b3535abb2e5296ceb970" type="text/javascript"></script>
+
+
+<script type="text/javascript" src="js/dright.js?rev=94024e1e7bc3b3535abb2e5296ceb970"></script>
+
+
+</html>
