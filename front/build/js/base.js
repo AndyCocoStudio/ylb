@@ -319,7 +319,7 @@
 	/**
 	 * 注销登录
 	 * **/
-	$(".logout").on("click", function () {
+	$(".customer-logout").on("click", function () {
 		if (layout.islogin) {
 			$.clearID();
 			$.localStorageHandler("clear", "flag");

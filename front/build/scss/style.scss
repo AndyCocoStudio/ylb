@@ -83,6 +83,10 @@ $base-border-color: #c7c7c7;
     line-height: 36px;
     background-color: #f9f9f9;
     margin-bottom: 5px;
+    overflow: hidden;
+    .customer-logout{
+        float: right;
+    }
 }
 .ylb-footer{
     height: 88px;

@@ -16,11 +16,11 @@
         </ul>
         <div class="customer-seach">
             <!--<input type="search" placeholder="搜索">-->
-            <i class="customer-bag icon-ylbicon-23"></i>
-            <a href="shopcart.html">购物车</a>
+            <!--<i class="customer-bag icon-ylbicon-23"></i>-->
+            <a href="shopcart.html"><i class="customer-bag icon-ylbicon-23"></i>购物车</a> 
         </div>
     </div>
-    <p class="ylb-navbar">您现在的位置：<a href="index.html">首页</a> > 会员中心</p>
+    <p class="ylb-navbar">您现在的位置：<a href="index.html">首页</a> > 会员中心 <a class="customer-logout"><i class="icon-ylbicon-29"></i><em class="btn-logout">注销登录</em></a></p>
     <!--左侧导航-->
     <div class="customer-left">
         <h1 class="customer-left-title">
@@ -28,6 +28,7 @@
         </h1>
         <ul>
             <li class="select"><a href="#customer-info"><i class="icon-ylbicon-01"></i>我的账号</a></li>
+            <li><a href="edit.html"><i class="icon-ylbicon-37"></i>个人资料</a></li>
             <li><a href="#customer-order"><i class="icon-ylbicon-02"></i>我的订单</a></li>
             <li><a href="#customer-apply"><i class="icon-ylbicon-04"></i>角色申请</a></li>
             <li v-if="info.role=='Merchants'||info.role=='AM'||info.role=='CM'"><a href="#customer-logon"><i class="icon-ylbicon-37"></i>推荐会员</a></li>

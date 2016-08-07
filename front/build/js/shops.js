@@ -60,19 +60,20 @@
                         var c = $(el.target).find("option:selected").val();
                         shops.alist = [];
                         m.updateclist(c);
-                        shops.ac = "";
+                        shops.ac = c;
                     },
                     selcity: function (el) {
                         var c = $(el.target).find("option:selected").val();
                         shops.alist = [];
                         m.updatealist(c);
-                        shops.ac = "";
+                        shops.ac = c;
                     },
                     selarea: function (el) {
                         var c = $(el.target).find("option:selected").val();
                         shops.ac = c;
                     },
                     searchshops: function () {
+                        var p="";
                         m.getShops(shops.ac);
                     },
                     showall: function () {

@@ -27,9 +27,8 @@
         <div class="shops-product">
             <ul>
                 <li v-for="m in list">
-                    <a></a>
-                    <img :src="m.storeAppearance" />
-                    <p>{{m.storeName}}</p>
+                    <a><img :src="m.storeAppearance" /></a>
+                    <p title="{{m.storeName}}"><a>{{m.storeName}}</a></p>
                     <h3>Tel: {{m.tel}}</h3>
                     <h2>{{m.address}}</h2>
                 </li>

@@ -40,23 +40,19 @@
         <table>
             <tr>
                 <th>商家</th>
-                <th>联系号码</th>
+                <th>商家手机</th>
                 <th>店铺名</th>
-                <th>店主</th>
-                <th>地址</th>
+                <th>客户</th>
                 <th>积分</th>
-                <th>推荐人</th>
-                <th>时间</th>
+                <th>创建时间</th>
                 <th>状态</th>
             </tr>
             <tr v-for="o in list.orders">
-                <td>{{o.userName}}</td>
-                <td>{{o.userMobile}}</td>
+                <td>{{o.merchantName}}</td>
+                <td>{{o.merchantMobile}}</td>
                 <td>{{o.storeName}}</td>
-                <td>{{o.legalPerson}}</td>
-                <td>{{o.address}}</td>
+                <td>{{o.userName}}({{o.userMobile}})</td>
                 <td>{{o.score}}</td>
-                <td>{{o.referrerName}}</td>
                 <td>{{o.createTime}}</td>
                 <td>
                     <em v-if="o.orderStatus=='New'">未审批</em>
