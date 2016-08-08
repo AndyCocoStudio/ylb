@@ -34,7 +34,7 @@
                                 url: $.apiUrl + "/areamanager/quota",
                                 type: "PuT",
                                 data: JSON.stringify({
-                                    userID: id,
+                                    receiverID: id,
                                     quota: num
                                 })
                             }).done(function (d) {
