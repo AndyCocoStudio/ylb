@@ -78,10 +78,13 @@
             }
             a{
                 display: inline-block;
-                margin: 15px 0;
+                //margin: 15px 0;
                 vertical-align: top;
-                line-height: 1.5;
+                //line-height: 1.5;
                 cursor: pointer;
+                i{
+
+                }
             } 
         }
     }
@@ -142,14 +145,15 @@
                     height: 100px;
                     border-radius: 100px;
                     display: block;
-                    margin: 10px auto 5px;
+                    margin: 5px auto;
                 }
                 a{
                     text-decoration: underline;
                 }
                 h1{
                     color: #444;
-                    font-size: 18px;
+                    font-size: 16px;
+                    padding-top: 10px;
                 }
             }
             .customer-tag{
@@ -447,24 +451,32 @@
                     }
                     line-height: 24px;
                     margin-bottom: 8px;
-                    span{
+                    span.sptxt{
                         display: inline-block;
                         width: 176px;
                         text-align: right;
                         margin-right: 25px;
                     }
                     #yyzz, #zmt, #dzt, #dnt, #frsfz, #areafr, #areasfz{
-                        background-color: #ececec;
-                        height: 30px;
+                        //background-color: #ececec;
+                        //height: 30px;
                         vertical-align: middle;
                         text-align: center;
                         cursor: pointer;
                         width: 320px;
                         line-height: 30px;
-                        overflow-x: hidden;
+                        //overflow-x: hidden;
                         text-overflow: ellipsis;
                         .dz-preview{
-                            display: none;
+                            .dz-success-mark, .dz-error-mark, .dz-size, .dz-filename{
+                                display: none;
+                            }
+                            .dz-remove{
+                                background-color: $link-blue;
+                                padding: 0 15px;
+                                color: #fff;
+                                display: inline-block;
+                            }
                         }
                         .preimg{
                             width: 160px;
@@ -498,9 +510,9 @@
                         height: 24px;
                     }
                     img{
-                        width: 320px;
+                        width: 200px;
                         display: inline-block;
-                        margin: 10px 10px 0 201px;
+                        margin-top: 10px;
                     }
                     a.btn-sub{
                         text-align: center;

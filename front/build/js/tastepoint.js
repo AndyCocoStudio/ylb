@@ -1,6 +1,6 @@
 (function () {
     var taste = {
-
+        
     };
     var m = {
         init: function () {

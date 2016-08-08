@@ -28,6 +28,7 @@
         </h1>
         <ul>
             <li class="select"><a href="#customer-info"><i class="icon-ylbicon-01"></i>我的账号</a></li>
+            <li><a href="tastepoint.html"><i class="icon-ylbicon-09"></i>体验积分</a></li>
             <li><a href="edit.html"><i class="icon-ylbicon-37"></i>个人资料</a></li>
             <li><a href="#customer-order"><i class="icon-ylbicon-02"></i>我的订单</a></li>
             <li><a href="#customer-apply"><i class="icon-ylbicon-04"></i>角色申请</a></li>
@@ -41,9 +42,6 @@
         <!--用户信息-->
         <div id="customer-info" class="customer-info">
             <div class="customer-base">
-                <img :src="info.avatar||'images/customer-default.png'" />
-                <a href="edit.html">编辑个人资料</a>
-                <!--<h1>{{info.mobile}}</h1>-->
                 <h1>
                     <em v-if="info.role=='Ordinary'">普通会员</em>
                     <em v-if="info.role=='Merchants'">加盟商家</em>
@@ -52,6 +50,10 @@
                     <em v-if="info.role=='CM'">客户经理/商家</em>
                     <em v-if="info.role=='AM'">区域经理/商家</em>
                 </h1>
+                <img :src="info.avatar||'images/customer-default.png'" />
+                <!--<a href="edit.html">编辑个人资料</a>-->
+                <!--<h1>{{info.mobile}}</h1>-->
+                <p>{{info.address}}</p>
             </div>
             <div class="customer-asset" :class="{salerasset:info.role=='Merchants'||info.role=='AM'||info.role=='CM'}">
                 <div class="customer-tag">资产</div>
@@ -337,9 +339,9 @@
                 </select>,请认真如实提交以下内容</p>
             <ul class="cutomer-apply-saler" v-show="role=='1'&&info.role!='Merchants'&&info.role!='AM'&&info.role!='CM'">
                 <li>注：图片资料，请选择1024K以下的jpg格式的图片</li>
-                <li><span>营业执照图</span><span id="yyzz">{{tobesaler.license?'图片已上传':'点击上传图片'}}</span><img :src="tobesaler.license"></li>
-                <li><span>店铺名称</span><input v-model="tobesaler.storeName" type="text" /></li>
-                <li><span>实际经营地址</span><select @change="changeprov" v-model="tobesaler.provinceCode">
+                <li><span class="sptxt">营业执照图</span><span id="yyzz">{{tobesaler.license?'图片已上传':'点击上传图片'}}</span></li>
+                <li><span class="sptxt">店铺名称</span><input v-model="tobesaler.storeName" type="text" /></li>
+                <li><span class="sptxt">实际经营地址</span><select @change="changeprov" v-model="tobesaler.provinceCode">
                         <option selected value="-1">-请选择省-</option>
                         <option v-for="p in plist" value="{{p.code}}">{{p.name}}</option>
                     </select>
@@ -353,24 +355,23 @@
                     </select>
                     <input class="streetinput" placeholder="请填入详细街道地址" v-model="tobesaler.street" type="text" />
                 </li>
-                <li><span>真实姓名</span><input v-model="tobesaler.legalPerson" type="text" /></li>
-                <!--<li><span>法人身份证号</span><input maxlength="18" v-model="tobesaler.idCard" type="text" /></li>-->
-                <li><span>联系号码</span><input maxlength="12" v-model="tobesaler.tel" type="text" /></li>
+                <li><span class="sptxt">真实姓名</span><input v-model="tobesaler.legalPerson" type="text" /></li>
+                <li><span class="sptxt">法人身份证号</span><input maxlength="18" v-model="tobesaler.idCard" type="text" /></li>
+                <li><span class="sptxt">联系号码</span><input maxlength="12" v-model="tobesaler.tel" type="text" /></li>
                 <!--<li><span>法人身份证正、反面</span><span id="frsfz">{{tobesaler.legalPersonIDCardImage.length==0?'点击上传图片':'图片已上传'}}</span>
                     <img v-for="r in tobesaler.legalPersonIDCardImage" :src="r"></li>
                 <li><span>法人手持正面身份证照图</span><span id="zmt">{{tobesaler.legalPersonWithIDCardInHandImage?'图片已上传':'点击上传图片'}}</span>
                     <img :src="tobesaler.legalPersonWithIDCardInHandImage"></li>-->
-                <li><span>店招图</span><span id="dzt">{{tobesaler.storeAppearance?'图片已上传':'点击上传图片'}}</span><img :src="tobesaler.storeAppearance"></li>
-                <li><span>店面或内部环境图(最多4张)</span><span id="dnt">{{tobesaler.storeInsideImages.length==0?'点击上传图片':'图片已上传'}}</span>
-                    <img v-for="r in tobesaler.storeInsideImages" :src="r"></li>
-                <li><span>推荐人</span><input v-model="tobesaler.referrerMobile" maxlength="11" placeholder="请输入推荐人手机" type="text"></li>
+                <li><span class="sptxt">店面图</span><span id="dzt">{{tobesaler.storeAppearance?'图片已上传':'点击上传图片'}}</span></li>
+                <li><span class="sptxt">产品/店内环境图(可多选)</span><span id="dnt">{{tobesaler.storeInsideImages.length==0?'点击上传图片':'图片已上传'}}</span></li>
+                <li><span class="sptxt">推荐人</span><input v-model="tobesaler.referrerMobile" maxlength="11" placeholder="请输入推荐人手机" type="text"></li>
                 <li><input @click="selunder" v-model="isapplyunder" type="checkbox">（勾选）本人已详细阅读<a target="_blank" href="groundinfo.html">地面商家加盟合作条款</a>，并同意接受以上条款，如有违反，愿意承担一切损失和法律责任。</li>
                 <li><a class="btn-sub" @click="apysaler">提交</a></li>
             </ul>
             <ul class="cutomer-apply-saler" v-show="role=='2'&&info.role!='CustomerManager'&&info.role!='AreaManager'&&info.role!='AM'&&info.role!='CM'">
                 <li>注：图片资料，请选择1024K以下的jpg格式的图片</li>
-                <li><span>真实姓名</span><input v-model="tobearea.applicantName" type="text"></li>
-                <li><span>所在地区</span><select @change="changeprov" v-model="tobearea.provinceCode">
+                <li><span class="sptxt">真实姓名</span><input v-model="tobearea.applicantName" type="text"></li>
+                <li><span class="sptxt">所在地区</span><select @change="changeprov" v-model="tobearea.provinceCode">
                         <option selected value="-1">-请选择省-</option>
                         <option v-for="p in plist" value="{{p.code}}">{{p.name}}</option>
                     </select>
@@ -384,11 +385,11 @@
                     </select>
                     <input class="streetinput" placeholder="请填入详细街道地址" v-model="tobearea.street" type="text" />
                 </li>
-                <li><span>身份证号</span><input maxlength="18" v-model="tobearea.idCard" type="text"></li>
-                <li><span>身份证正、反面图</span><span id="areafr">{{tobearea.legalPersonIDCardImage.length==0?'点击上传图片':'图片已上传'}}</span>
-                    <img v-for="r in tobearea.legalPersonIDCardImage" :src="r"></li>
-                <li><span>申请人手持身份证图</span><span id="areasfz">{{tobearea.legalPersonWithIDCardInHandImage?'图片已上传':'点击上传图片'}}</span>
-                    <img :src="tobearea.legalPersonWithIDCardInHandImage"></li>
+                <li><span class="sptxt">身份证号</span><input maxlength="18" v-model="tobearea.idCard" type="text"></li>
+                <li><span class="sptxt">身份证正、反面图</span><span id="areafr">{{tobearea.legalPersonIDCardImage.length==0?'点击上传图片':'图片已上传'}}</span>
+                    <!--<img v-for="r in tobearea.legalPersonIDCardImage" :src="r">--></li>
+                <!--<li><span class="sptxt">申请人手持身份证图</span><span id="areasfz">{{tobearea.legalPersonWithIDCardInHandImage?'图片已上传':'点击上传图片'}}</span>
+                    <img :src="tobearea.legalPersonWithIDCardInHandImage"></li>-->
                 <li><input @click="selmanager" v-model="isapplymanager" type="checkbox">（勾选）本人已详细阅读<a target="_blank" href="groundinfo.html">地面商家加盟合作条款</a>，并同意接受以上条款，如有违反，愿意承担一切损失和法律责任。</li>
                 <li><a class="btn-sub" @click="apymanager">提交</a></li>
             </ul>

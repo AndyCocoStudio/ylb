@@ -45,6 +45,7 @@ html,body{
         border: 1px solid #fff;
         width: 60px;
         text-align: center;
+        box-shadow: 0 0 4px #888;
     }
     span{
         position: absolute;
@@ -76,7 +77,9 @@ html,body{
             height: 45%;
             a{
                 left: 5%;
-                bottom: 5%;  
+                bottom: 5%; 
+                background-color: #fff;
+                color: $base-orange; 
             }
             span{
                 left: 5%;
@@ -129,13 +132,14 @@ html,body{
             height: 65%;
             a{
                 left: 5%; 
-                bottom: 50%; 
+                bottom: 5%; 
                 border-color: $base-orange;
-                color: $base-orange; 
+                background-color: $base-orange;
+                color: #fff; 
             }
             span{
                 left: 5%;
-                top: 8%;
+                top: 5%;
                 padding-left: 10px;
                 &:after{
                     width: 2px;
@@ -154,7 +158,9 @@ html,body{
             background-color: $base-orange;
             a{
                 left: 5%;
-                bottom: 5%;  
+                bottom: 5%; 
+                background-color: #fff;
+                color: $base-orange; 
             }
             span{
                 left: 5%;
@@ -188,7 +194,8 @@ html,body{
                     right: 5%;
                     bottom: 5%; 
                     border-color: $base-orange;
-                    color: $base-orange;
+                    background-color: $base-orange;
+                    color: #fff;
                 }
                 span{
                     left: 55%;
@@ -219,7 +226,8 @@ html,body{
                     left: 5%;
                     bottom: 5%; 
                     border-color: $base-orange;
-                    color: $base-orange;
+                    background-color: $base-orange;
+                    color: #fff;
                 }
                 span{
                     left: 5%;
@@ -243,7 +251,9 @@ html,body{
                 float: left;
                 a{
                     left: 5%; 
-                    bottom: 5%;  
+                    bottom: 5%; 
+                    background-color: #fff;
+                    color: $base-orange; 
                 }
                 span{
                     left: 5%;

@@ -30,9 +30,11 @@
                     }
                 }
             });
-            m.setImages();
-            m.resizeWindow();
-            m.domControl();
+            setTimeout(function () {
+                m.setImages();
+                m.resizeWindow();
+                m.domControl();
+            }, 100);
             setTimeout(m.autohide, 30000);
         },
         autohide: function () {

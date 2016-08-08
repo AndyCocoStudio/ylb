@@ -127,12 +127,17 @@
         //图片上传初始化
         imgUpload: function () {
             $("#yyzz").dropzone({
+                init: function () {
+                    this.on("removedfile", function (file) {
+                        vcustomer.tobesaler.license = "";
+                    });
+                },
                 url: $.apiUrl + "/upload",
                 paramName: "file",
                 maxFiles: 1,
                 maxFilesize: 2.0, // MB
                 acceptedFiles: "image/*",
-                addRemoveLinks: false,
+                addRemoveLinks: true,
                 dictResponseError: '上传文件出错！',
                 success: function (file, response) {
                     vcustomer.tobesaler.license = response.data;
@@ -163,12 +168,17 @@
                 }
             });
             $("#dzt").dropzone({
+                init: function () {
+                    this.on("removedfile", function (file) {
+                        vcustomer.tobesaler.storeAppearance = "";
+                    });
+                },
                 url: $.apiUrl + "/upload",
                 paramName: "file",
                 maxFiles: 1,
                 maxFilesize: 2.0, // MB
                 acceptedFiles: "image/*",
-                addRemoveLinks: false,
+                addRemoveLinks: true,
                 dictResponseError: '上传文件出错！',
                 success: function (file, response) {
                     vcustomer.tobesaler.storeAppearance = response.data;
@@ -622,10 +632,10 @@
                     //申请加盟商
                     apysaler: function () {
                         if (vcustomer.isapplyunder) {
-                            // if (!vcustomer.tobesaler.idCard) {
-                            //     $.ylbAlert("请输入法人身份证号");
-                            //     return;
-                            // }
+                            if (!vcustomer.tobesaler.idCard) {
+                                $.ylbAlert("请输入法人身份证号");
+                                return;
+                            }
                             if (!vcustomer.tobesaler.storeName) {
                                 $.ylbAlert("请输入店铺名称");
                                 return;
@@ -677,24 +687,27 @@
                             }).done(function (d) {
                                 $.ylbAjaxHandler(d, function () {
                                     $.ylbAlert("申请成功！");
-                                    vcustomer.tobesaler = {
-                                        "referrerMobile": "",
-                                        "idCard": "",
-                                        "storeName": "",
-                                        "province": "",
-                                        "provinceCode": "",
-                                        "city": "",
-                                        "cityCode": "",
-                                        "area": "",
-                                        "areaCode": "",
-                                        "street": "",
-                                        "legalPerson": "",
-                                        "legalPersonIDCardImage": [],//法人身份证
-                                        "legalPersonWithIDCardInHandImage": "",//法人手持身份证照片
-                                        "storeAppearance": "",//店招
-                                        "storeInsideImages": [],//店铺内部图片
-                                        "license": ""
-                                    }
+                                    // vcustomer.tobesaler = {
+                                    //     "referrerMobile": "",
+                                    //     "idCard": "",
+                                    //     "storeName": "",
+                                    //     "province": "",
+                                    //     "provinceCode": "",
+                                    //     "city": "",
+                                    //     "cityCode": "",
+                                    //     "area": "",
+                                    //     "areaCode": "",
+                                    //     "street": "",
+                                    //     "legalPerson": "",
+                                    //     "legalPersonIDCardImage": [],//法人身份证
+                                    //     "legalPersonWithIDCardInHandImage": "",//法人手持身份证照片
+                                    //     "storeAppearance": "",//店招
+                                    //     "storeInsideImages": [],//店铺内部图片
+                                    //     "license": ""
+                                    // }
+                                    setTimeout(function () {
+                                        window.location.href = window.location.href;
+                                    }, 1500);
                                 });
                             });
                         } else {
@@ -724,10 +737,10 @@
                                 $.ylbAlert("请上传身份证正反面照");
                                 return;
                             }
-                            if (!vcustomer.tobearea.legalPersonWithIDCardInHandImage) {
-                                $.ylbAlert("请上传法人手持身份证照");
-                                return;
-                            }
+                            // if (!vcustomer.tobearea.legalPersonWithIDCardInHandImage) {
+                            //     $.ylbAlert("请上传法人手持身份证照");
+                            //     return;
+                            // }
                             if (!vcustomer.tobearea.idCard) {
                                 $.ylbAlert("请输入法人身份证号");
                                 return;
@@ -739,19 +752,22 @@
                             }).done(function (d) {
                                 $.ylbAjaxHandler(d, function () {
                                     $.ylbAlert("申请成功！");
-                                    vcustomer.tobearea = {
-                                        "applicantName": "",
-                                        "province": "",
-                                        "provinceCode": "",
-                                        "city": "",
-                                        "cityCode": "",
-                                        "street": "",
-                                        "area": "",
-                                        "areaCode": "",
-                                        "idCard": "",
-                                        "legalPersonIDCardImage": [],
-                                        "legalPersonWithIDCardInHandImage": ""
-                                    }
+                                    // vcustomer.tobearea = {
+                                    //     "applicantName": "",
+                                    //     "province": "",
+                                    //     "provinceCode": "",
+                                    //     "city": "",
+                                    //     "cityCode": "",
+                                    //     "street": "",
+                                    //     "area": "",
+                                    //     "areaCode": "",
+                                    //     "idCard": "",
+                                    //     "legalPersonIDCardImage": [],
+                                    //     "legalPersonWithIDCardInHandImage": ""
+                                    // }
+                                    setTimeout(function () {
+                                        window.location.href = window.location.href;
+                                    }, 1500);
                                 });
                             });
                         } else {
