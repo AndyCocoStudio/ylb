@@ -6,21 +6,155 @@
 
 <!-- @@block = content-->
 <section class="taste-main" id="taste-main" v-cloak>
-    <h1>已送出名额：{{count.usedQuantity}}，剩余可用名额：{{count.totalQuantity}}</h1>
-    <div v-if="user.role=='Merchants'"></div>
-    <h2>可赠送用户列表</h2>
-    <table>
-        <tr>
-            <th>会员名</th>
-            <th>手机号</th>
-            <th>操作</th>
-        </tr>
-        <tr v-for="r in list">
-            <td>{{r.name}}</td>
-            <td>{{r.mobile}}</td>
-            <td><a>赠送积分</a></td>
-        </tr>
-    </table>
+    <h1 v-if="user.role=='Merchants'||user.role=='CustomerManager'||user.role=='AreaManager'">
+        已送出名额：<em>{{total.count.usedQuota||'0'}}</em>个，剩余可用名额：<em>{{total.count.totalQuota||'0'}}</em>个
+    </h1>
+    <h1 v-if="user.role=='AM'">
+        <p v-if="total.area">已送出客户经理体验名额：<em>{{total.area.usedQuota}}</em>，剩余可用名额：<em>{{total.area.totalQuota}}</em></p>
+        <p v-if="total.merchant">已送出普通用户体验名额：<em>{{total.merchant.usedQuota}}</em>，剩余可用名额：<em>{{total.merchant.totalQuota}}</em></p>
+    </h1>
+    <h1 v-if="user.role=='CM'">
+        <p v-if="total.customer">已送出加盟商体验名额：<em>{{total.customer.usedQuota}}</em>，剩余可用名额：<em>{{total.customer.totalQuota}}</em></p>
+        <p v-if="total.merchant">已送出普通用户体验名额：<em>{{total.merchant.usedQuota}}</em>，剩余可用名额：<em>{{total.merchant.totalQuota}}</em></p>
+    </h1>
+    <div v-if="user.role=='Merchants'">
+        <h2>可赠送用户列表</h2>
+        <table>
+            <tr>
+                <th>真实姓名</th>
+                <th>会员号</th>
+                <th>操作</th>
+            </tr>
+            <tr v-if="olist.length==0">
+                <td colspan="5">您名下暂无会员</td>
+            </tr>
+            <tr v-for="r in olist">
+                <td>{{r.name}}</td>
+                <td>{{r.mobile}}</td>
+                <td><a data-id="{{r.userID}}" @click="too">赠送积分</a></td>
+            </tr>
+        </table>
+    </div>
+    <div v-if="user.role=='CustomerManager'">
+        <h2>可赠送用户列表</h2>
+        <table>
+            <tr>
+                <th>真实姓名</th>
+                <th>会员号</th>
+                <th>总共获得名额</th>
+                <th>已使用名额</th>
+                <th>操作</th>
+            </tr>
+            <tr v-if="olist.length==0">
+                <td colspan="5">您名下暂无加盟商</td>
+            </tr>
+            <tr v-for="r in olist">
+                <td>{{r.name}}</td>
+                <td>{{r.mobile}}</td>
+                <td>{{r.totalQuota}}</td>
+                <td>{{r.usedQuota}}</td>
+                <td><input type="text"><a data-id="{{r.merchantID}}" @click="tom">赠送名额</a></td>
+            </tr>
+        </table>
+    </div>
+    <div v-if="user.role=='AreaManager'">
+        <h2>可赠送用户列表</h2>
+        <table>
+            <tr>
+                <th>真实姓名</th>
+                <th>会员号</th>
+                <th>总共获得名额</th>
+                <th>已使用名额</th>
+                <th>操作</th>
+            </tr>
+            <tr v-if="clist.length==0">
+                <td colspan="5">本区域暂无客户经理</td>
+            </tr>
+            <tr v-for="r in clist">
+                <td>{{r.name}}</td>
+                <td>{{r.mobile}}</td>
+                <td>{{r.totalQuota}}</td>
+                <td>{{r.usedQuota}}</td>
+                <td><input type="text"><a data-id="{{r.customerManagerID}}" @click="toc">赠送名额</a></td>
+            </tr>
+        </table>
+    </div>
+    <div v-if="user.role=='AM'">
+        <h2 v-if="total.area">可赠送客户经理列表</h2>
+        <table v-if="total.area">
+            <tr>
+                <th>真实姓名</th>
+                <th>会员号</th>
+                <th>总共获得名额</th>
+                <th>已使用名额</th>
+                <th>操作</th>
+            </tr>
+            <tr v-if="clist.length==0">
+                <td colspan="5">本区域暂无客户经理</td>
+            </tr>
+            <tr v-for="r in clist">
+                <td>{{r.name}}</td>
+                <td>{{r.mobile}}</td>
+                <td>{{r.totalQuota}}</td>
+                <td>{{r.usedQuota}}</td>
+                <td><input type="text"><a data-id="{{r.customerManagerID}}" @click="toc">赠送名额</a></td>
+            </tr>
+        </table>
+        <h2 v-if="total.merchant">可赠送普通会员列表</h2>
+        <table v-if="total.merchant">
+            <tr>
+                <th>真实姓名</th>
+                <th>会员号</th>
+                <th>操作</th>
+            </tr>
+            <tr v-if="olist.length==0">
+                <td colspan="5">您名下暂无会员</td>
+            </tr>
+            <tr v-for="r in olist">
+                <td>{{r.name}}</td>
+                <td>{{r.mobile}}</td>
+                <td><a data-id="{{r.userID}}" @click="too">赠送积分</a></td>
+            </tr>
+        </table>
+    </div>
+    <div v-if="user.role=='CM'">
+        <h2>可赠送加盟商列表</h2>
+        <table>
+            <tr>
+                <th>真实姓名</th>
+                <th>会员号</th>
+                <th>总共获得名额</th>
+                <th>已使用名额</th>
+                <th>操作</th>
+            </tr>
+            <tr v-if="list.length==0">
+                <td colspan="5">您名下暂无会员</td>
+            </tr>
+            <tr v-for="r in list">
+                <td>{{r.name}}</td>
+                <td>{{r.mobile}}</td>
+                <td>{{r.totalQuota}}</td>
+                <td>{{r.usedQuota}}</td>
+                <td><input type="text"><a data-id="{{r.merchantID}}" @click="tom">赠送名额</a></td>
+            </tr>
+        </table>
+        <h2>可赠送普通会员列表</h2>
+        <table>
+            <tr>
+                <th>真实姓名</th>
+                <th>会员号</th>
+                <th>操作</th>
+            </tr>
+            <tr v-if="list.length==0">
+                <td colspan="5">您名下暂无会员</td>
+            </tr>
+            <tr v-for="r in list">
+                <td>{{r.name}}</td>
+                <td>{{r.mobile}}</td>
+                <td><a data-id="{{r.userID}}" @click="too">赠送积分</a></td>
+            </tr>
+        </table>
+    </div>
 </section>
 <!-- @@close-->
 
