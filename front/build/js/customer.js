@@ -856,7 +856,7 @@
                                     data: JSON.stringify({ amount: money })
                                 }).done(function (d) {
                                     $.ylbAjaxHandler(d, function () {
-                                        window.location.href = "http://api.hnylbsc.com/unionpay?id=" + d.data;
+                                        window.location.href = "pay.html?oid=" + d.data;
                                     })
                                 })
                             }

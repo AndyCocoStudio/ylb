@@ -12,6 +12,7 @@
         num: 60,
         confirmpwd: "",
         hasall: {},
+        sqrcode: "",
         pwd: {
             currentPassword: "",
             newPassword: ""
@@ -81,12 +82,15 @@
         //创建做单二维码
         createQRcode: function () {
             var url = "http://www.hnylbsc.com/sendpoint.html?uid=" + vcustomer.info.mobile;
-            $('#customer-private-qrcode').qrcode({
-                render: "table",
-                width: 130,
-                height: 130,
-                text: url
-            });
+            if (!vcustomer.sqrcode) {
+                vcustomer.sqrcode = $('#customer-private-qrcode').qrcode({
+                    render: "table",
+                    width: 130,
+                    height: 130,
+                    text: url
+                });
+            }
+
         },
         //获取用户信息
         getUserInfo: function () {

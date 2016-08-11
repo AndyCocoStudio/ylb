@@ -1,7 +1,7 @@
 (function () {
     var pay = {
         id: $.urlParam("oid"),
-        payway: 2
+        payway: 1
     };
     var m = {
         init: function () {
@@ -44,6 +44,8 @@
                                             //补差价
                                             if (pay.payway == 2) {
                                                 window.location.href = "http://api.hnylbsc.com/unionpay?id=" + pay.id;
+                                            } else if (pay.payway == 1) {
+                                                window.location.href = "http://api.hnylbsc.com/alipay?id=" + pay.id;
                                             }
                                         } else {
                                             //不补差价
