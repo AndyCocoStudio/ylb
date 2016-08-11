@@ -13,9 +13,9 @@
 
 
 
-	<link rel="stylesheet" type="text/css" href="css/style.css?rev=a3c58dede07b37567d3a80e68925404a" />
+	<link rel="stylesheet" type="text/css" href="css/style.css?rev=91400182c2b0ad8885db47d0edb2ab94" />
 	<link rel="stylesheet" type="text/css" href="css/pickday.css" />
-	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=a3c58dede07b37567d3a80e68925404a" />
+	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=91400182c2b0ad8885db47d0edb2ab94" />
 </head>
 
 <body>
@@ -36,15 +36,15 @@
 
 <section class="taste-main" id="taste-main" v-cloak>
     <h1 v-if="user.role=='Merchants'||user.role=='CustomerManager'||user.role=='AreaManager'">
-        已送出名额：<em>{{total.count.usedQuota||'0'}}</em>个，剩余可用名额：<em>{{total.count.totalQuota||'0'}}</em>个
+        总共获得名额：<em>{{(total.count[0].totalQuota}}</em>个，已送出名额：<em>{{total.count[0].usedQuota||'0'}}</em>个，剩余可用名额：<em>{{(total.count[0].totalQuota-total.count[0].usedQuota)||'0'}}</em>个
     </h1>
     <h1 v-if="user.role=='AM'">
-        <p v-if="total.area">已送出客户经理体验名额：<em>{{total.area.usedQuota}}</em>，剩余可用名额：<em>{{total.area.totalQuota}}</em></p>
-        <p v-if="total.merchant">已送出普通用户体验名额：<em>{{total.merchant.usedQuota}}</em>，剩余可用名额：<em>{{total.merchant.totalQuota}}</em></p>
+        <p v-if="total.area">总共获得名额：<em>{{total.area.totalQuota}}</em>个，已送出客户经理体验名额：<em>{{total.area.usedQuota}}</em>，剩余可用名额：<em>{{(total.area.totalQuota-total.area.usedQuota)||'0'}}</em></p>
+        <p v-if="total.merchant">总共获得名额：<em>{{total.merchant.totalQuota}}</em>个，已送出普通用户体验名额：<em>{{total.merchant.usedQuota}}</em>，剩余可用名额：<em>{{(total.merchant.totalQuota-total.merchant.usedQuota)||'0'}}</em></p>
     </h1>
     <h1 v-if="user.role=='CM'">
-        <p v-if="total.customer">已送出加盟商体验名额：<em>{{total.customer.usedQuota}}</em>，剩余可用名额：<em>{{total.customer.totalQuota}}</em></p>
-        <p v-if="total.merchant">已送出普通用户体验名额：<em>{{total.merchant.usedQuota}}</em>，剩余可用名额：<em>{{total.merchant.totalQuota}}</em></p>
+        <p v-if="total.customer">总共获得名额：<em>{{total.customer.totalQuota}}</em>个，已送出加盟商体验名额：<em>{{total.customer.usedQuota}}</em>，剩余可用名额：<em>{{(total.customer.totalQuota-total.customer.usedQuota)||'0'}}</em></p>
+        <p v-if="total.merchant">总共获得名额：<em>{{total.merchant.totalQuota}}</em>个，已送出普通用户体验名额：<em>{{total.merchant.usedQuota}}</em>，剩余可用名额：<em>{{(total.merchant.totalQuota-total.merchant.usedQuota)||'0'}}</em></p>
     </h1>
     <div v-if="user.role=='Merchants'">
         <h2>可赠送用户列表</h2>
@@ -65,7 +65,7 @@
         </table>
     </div>
     <div v-if="user.role=='CustomerManager'">
-        <h2>可赠送用户列表</h2>
+        <h2>可赠送加盟商列表</h2>
         <table>
             <tr>
                 <th>真实姓名</th>
@@ -74,10 +74,10 @@
                 <th>已使用名额</th>
                 <th>操作</th>
             </tr>
-            <tr v-if="olist.length==0">
+            <tr v-if="mlist.length==0">
                 <td colspan="5">您名下暂无加盟商</td>
             </tr>
-            <tr v-for="r in olist">
+            <tr v-for="r in mlist">
                 <td>{{r.name}}</td>
                 <td>{{r.mobile}}</td>
                 <td>{{r.totalQuota}}</td>
@@ -217,9 +217,9 @@
 <script src="js/libs/pickday.min.js" type="text/javascript"></script>
 <script src="js/libs/qrcode.min.js" type="text/javascript"></script>
 <script src="js/libs/dropzone.js" type="text/javascript"></script>
-<script src="js/base.js?rev=a3c58dede07b37567d3a80e68925404a" type="text/javascript"></script>
+<script src="js/base.js?rev=91400182c2b0ad8885db47d0edb2ab94" type="text/javascript"></script>
 
-<script type="text/javascript" src="js/tastepoint.js?rev=a3c58dede07b37567d3a80e68925404a"></script>
+<script type="text/javascript" src="js/tastepoint.js?rev=91400182c2b0ad8885db47d0edb2ab94"></script>
 
 
 </html>

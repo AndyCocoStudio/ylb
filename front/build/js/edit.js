@@ -11,6 +11,7 @@
         countdown: 0,
         num: 60,
         confirmpwd: "",
+        hasall: {},
         pwd: {
             currentPassword: "",
             newPassword: ""
@@ -121,8 +122,22 @@
                 type: "GET"
             })).done(function (d) {
                 $.ylbAjaxHandler(d, function () {
-                    vcustomer.userDetail = d.data;
                     vcustomer.userinfo = d.data;
+                    if (d.data.name) {
+                        vcustomer.hasall.hasname = true;
+                    }
+                    if (d.data.idCard) {
+                        vcustomer.hasall.hasidCard = true;
+                    }
+                    if (d.data.gender) {
+                        vcustomer.hasall.hasgender = true;
+                    }
+                    if (d.data.street) {
+                        vcustomer.hasall.hasaddress = true;
+                    }
+                    if (d.data.province || d.data.city || d.data.area) {
+                        vcustomer.hasall.hasarea = true;
+                    }
                     m.buildVue();
                 });
             });
@@ -443,6 +458,10 @@
                         }).done(function (d) {
                             $.ylbAjaxHandler(d, function () {
                                 $.ylbAlert("修改成功！");
+                                // setTimeout(function () {
+                                //     window.location.href = window.location.href;
+                                // }, 1000);
+                                m.getDetail();
                             })
                         })
                     },

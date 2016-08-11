@@ -19,21 +19,26 @@
             <a href="shopcart.html">购物车</a>
         </div>
     </div>
-    <p class="ylb-navbar">您现在的位置：<a href="index.html">首页</a> > 会员中心</p>
+    <p class="ylb-navbar">您现在的位置：<a href="index.html">首页</a> > 个人资料 <a class="customer-logout"><i class="icon-ylbicon-29"></i><em class="btn-logout">注销登录</em></a></p>
     <div class="customer-left">
         <h1 class="customer-left-title">
-            会员中心
+            个人资料
         </h1>
         <ul>
-            <li class="select"><a href="#customer-info"><i class="icon-ylbicon-01"></i>我的账号</a></li>
+            <li><a href="customer.html"><i class="icon-ylbicon-01"></i>个人中心</a></li>
+            <li><a href="tastepoint.html"><i class="icon-ylbicon-09"></i>体验积分</a></li>
+            <li class="select"><a href="edit.html"><i class="icon-ylbicon-37"></i>个人资料</a></li>
+            <li><a href="#customer-order"><i class="icon-ylbicon-02"></i>我的订单</a></li>
+            <li><a href="#customer-apply"><i class="icon-ylbicon-04"></i>角色申请</a></li>
+            <li v-if="info.role=='Merchants'||info.role=='AM'||info.role=='CM'"><a href="#customer-logon"><i class="icon-ylbicon-37"></i>推荐会员</a></li>
+            <li v-if="info.role!='Ordinary'"><a href="#customer-reward"><i class="icon-ylbicon-41"></i>转出记录</a></li>
+            <li v-if="info.role=='Merchants'||info.role=='AM'||info.role=='CM'"><a href="#customer-managerorder"><i class="icon-ylbicon-22"></i>名下业绩</a></li>
+            <li v-if="info.role=='AreaManager'||info.role=='AM'"><a href="#customer-approve"><i class="icon-ylbicon-18"></i>审核管理</a></li>
         </ul>
     </div>
     <div class="customer-right">
         <div id="customer-info" class="customer-info">
             <div class="customer-base">
-                <img :src="info.avatar||'images/customer-default.png'" />
-                <!--<a href="edit.html">编辑个人资料</a>-->
-                <!--<h1>{{info.mobile}}</h1>-->
                 <h1>
                     <em v-if="info.role=='Ordinary'">普通会员</em>
                     <em v-if="info.role=='Merchants'">加盟商家</em>
@@ -42,16 +47,22 @@
                     <em v-if="info.role=='CM'">客户经理/商家</em>
                     <em v-if="info.role=='AM'">区域经理/商家</em>
                 </h1>
+                <img :src="info.avatar||'images/customer-default.png'" />
+                <!--<a href="edit.html">编辑个人资料</a>-->
+                <!--<h1>{{info.mobile}}</h1>-->
+                <p>{{info.address}}</p>
             </div>
             <div class="customer-asset" :class="{salerasset:info.role=='Merchants'||info.role=='AM'||info.role=='CM'}">
                 <div class="customer-tag">资产</div>
                 <h1>真实姓名： {{info.name||info.mobile}}</h1>
-                <p>账户余额： <em>{{info.asset.balance}}</em>元<a @click="recharge">充值</a></p>
+                <p>账户余额： <em>{{info.asset.balance}}</em>元</p>
                 <p v-if="info.role=='Merchants'||info.role=='AM'||info.role=='CM'">账户货款： <em>{{info.asset.paymentForGoods}}</em>元</p>
                 <p v-if="info.role=='Merchants'||info.role=='AM'||info.role=='CM'">税后佣金： <em>{{info.asset.commission}}</em>元</p>
                 <p>可用积分： <em>{{info.asset.score}}</em>分</p>
-                <p>积分基点： <em>{{info.asset.point}}</em>个<a @click="getpoint">领取积分</a></p>
-                <p class="btns"><a v-if="info.role!='Ordinary'" @click="rewards">转出资产</a><a href="asset.html">更多信息</a></p>
+                <p>积分基点： <em>{{info.asset.point}}</em>个
+                    <!--<a @click="getpoint">领取积分</a>--></p>
+                <p class="btns"><a v-if="info.role!='Ordinary'" @click="rewards">转出资产</a><a href="asset.html">更多信息</a><a v-if="info.role=='AreaManager'||info.role=='AM'"
+                        href="wages.html">工资管理</a></p>
             </div>
             <div class="customer-code customer-eqcode">
                 <div class="customer-tag">扫我做单</div>
@@ -62,11 +73,11 @@
             <div class="customer-code customer-control">
                 <div class="customer-tag">商家操作</div>
                 <div class="customer-pic">
-                    <!--<a @click="spendpoints">积分兑换</a>-->
                     <a href="spendpoint.html">积分兑换</a>
                     <a v-if="info.role=='Merchants'||info.role=='AM'||info.role=='CM'" href="sendpoint.html">商家做单</a>
                     <a v-if="info.role!='Ordinary'" href="referlist.html">推荐列表</a>
-                    <!--<a v-if="info.role=='Merchants'||info.role=='AM'||info.role=='CM'" href="tastepoint.html">体验积分</a>-->
+                    <a v-if="info.role!='Ordinary'&&info.role!='Merchants'" href="record.html">业绩统计</a>
+                    <!--<a v-if="info.role!='Ordinary'" href="tastepoint.html">体验积分</a>-->
                 </div>
             </div>
             <!--<img v-if="info.role!='Merchants'&&info.role!='AM'&&info.role!='CM'" class="customer-adv" src="images/adv1.png" />-->
@@ -156,30 +167,36 @@
                 </ul>-->
             </div>
             <div v-show="detail" class="edit-info">
+                <p v-show="!hasall.hasname||!hasall.hasgender||!hasall.hasidCard||!hasall.hasarea||!hasall.hasaddress">* 请认真填写以下信息，一旦提交将无法修改</p>
                 <ul>
-                    <li><span>真实姓名</span><input v-model="userinfo.name" type="text"></li>
-                    <li><span>性别</span><select @change="changegender">
+                    <li><span>真实姓名</span><em v-show="hasall.hasname">{{userinfo.name}}</em><input v-show="!hasall.hasname" v-model="userinfo.name"
+                            type="text"></li>
+                    <li><span>性别</span><em v-show="hasall.hasgender">{{userinfo.gender=="fm"?"女":"男"}}</em><select v-show="!hasall.hasgender"
+                            @change="changegender">
                         <option value="">-请选择性别-</option>
                         <option value="f">男</option>
                         <option value="fm">女</option>
                         </select></li>
-                    <li><span>身份证号</span><input maxlength="18" v-model="userinfo.idCard" type="text"></li>
+                    <li><span>身份证号</span><em v-show="hasall.hasidCard">{{userinfo.idCard}}</em><input v-show="!hasall.hasidCard"
+                            maxlength="18" v-model="userinfo.idCard" type="text"></li>
                     <li><span>手机号码</span>{{userinfo.mobile}}</li>
-                    <li><span>所在地区<em>*</em></span><select name="prov" @change="changeprov" id="prov">
+                    <li><span>所在地区</span><em v-if="hasall.hasarea">{{userinfo.province+userinfo.city+userinfo.area}}</em>
+                        <select v-if="!hasall.hasarea" name="prov" @change="changeprov" id="prov">
                             <option value="-1">-请选择省-</option>
                             <option selected="{{userinfo.provinceCode==p.code}}" v-for="p in plist" value="{{p.code}}">{{p.name}}</option>
-                        </select>
-                        <select name="city" @change="changecity" id="city">
+                            </select>
+                        <select v-if="!hasall.hasarea" name="city" @change="changecity" id="city">
                             <option value="-1">-请选择市-</option>
                             <option selected="{{userinfo.cityCode==c.code}}" v-for="c in clist" value="{{c.code}}">{{c.name}}</option>
                         </select>
-                        <select name="area" @change="changearea" id="area">
+                        <select v-if="!hasall.hasarea" name="area" @change="changearea" id="area">
                             <option value="-1">-请选择区-</option>
                             <option selected="{{userinfo.areaCode==a.code}}" v-for="a in alist" value="{{a.code}}">{{a.name}}</option>
                         </select>
                     </li>
-                    <li><span>详细地址<em>*</em></span><input v-model="userinfo.street" type="text"></li>
-                    <li><button @click="saveuserinfo">保存修改</button></li>
+                    <li><span>详细地址</span><em v-show="hasall.hasaddress">{{userinfo.street}}</em><input v-show="!hasall.hasaddress"
+                            v-model="userinfo.street" type="text"></li>
+                    <li><button v-show="!hasall.hasname||!hasall.hasgender||!hasall.hasidCard||!hasall.hasarea||!hasall.hasaddress" @click="saveuserinfo">保存修改</button></li>
                 </ul>
             </div>
         </div>

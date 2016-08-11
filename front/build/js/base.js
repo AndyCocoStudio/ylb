@@ -109,6 +109,12 @@
 				case "4027":
 					$.ylbAlert("当月工资已支付");
 					break;
+				case "4028":
+					$.ylbAlert("可用赠送名额不足");
+					break;
+				case "4029":
+					$.ylbAlert("该用户已经体验过该优惠");
+					break;
 				default:
 					$.ylbAlert("服务器又开小差(err:" + code + ")");
 					break;
