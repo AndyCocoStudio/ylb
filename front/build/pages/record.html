@@ -9,9 +9,8 @@
     <h1 class="record-title">名下商家列表</h1>
     <table class="record-table">
         <tr>
-            <th>会员名</th>
-            <th>手机</th>
-            <th>店铺名</th>
+            <th>商家</th>
+            <th>注册号</th>
             <th>地址</th>
             <th>赠送积分总数</th>
             <th>做单总数</th>
@@ -23,17 +22,16 @@
             <th>操作</th>
         </tr>
         <tr v-for="r in ml">
-            <td>{{r.name}}</td>
-            <td>{{r.tel}}</td>
             <td>{{r.storeName}}</td>
+            <td>{{r.mobile}}</td>
             <td>{{r.address}}</td>
             <td>{{r.totalScore}}</td>
             <td>{{r.totalCount}}</td>
             <td>{{r.recommended}}</td>
             <td>{{r.createTime}}</td>
-            <td>{{r.usedQuantity}}</td>
-            <td>{{r.totalQuantity}}</td>
-            <td>{{r.totalQuantity-r.usedQuantity}}</td>
+            <td>{{r.usedQuota}}</td>
+            <td>{{r.totalQuota}}</td>
+            <td>{{(r.totalQuota-r.usedQuota)||"0"}}</td>
             <td><a href="orderlist.html?mid={{r.merchantID}}">做单查看</a></td>
         </tr>
     </table>
@@ -55,9 +53,9 @@
             <td>{{c.mobile}}</td>
             <td>{{c.address}}</td>
             <td>{{c.recommended}}</td>
-            <td>{{c.totalQuantity}}</td>
-            <td>{{c.usedQuantity}}</td>
-            <td>{{c.totalQuantity-c.usedQuantity}}</td>
+            <td>{{c.totalQuota||"0"}}</td>
+            <td>{{c.usedQuota||"0"}}</td>
+            <td>{{(c.totalQuota-c.usedQuota)||"0"}}</td>
             <td>{{c.createTime}}</td>
             <td>&nbsp;</td>
         </tr>

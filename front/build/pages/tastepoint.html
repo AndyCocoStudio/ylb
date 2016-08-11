@@ -7,15 +7,15 @@
 <!-- @@block = content-->
 <section class="taste-main" id="taste-main" v-cloak>
     <h1 v-if="user.role=='Merchants'||user.role=='CustomerManager'||user.role=='AreaManager'">
-        总共获得名额：<em>{{total.count[0].totalQuota}}</em>个，已送出名额：<em>{{total.count[0].usedQuota||'0'}}</em>个，剩余可用名额：<em>{{(total.count[0].totalQuota-total.count[0].usedQuota)||'0'}}</em>个
+        总共获得名额：<em>{{total.count[0].totalQuota||0}}</em>个，已送出名额：<em>{{total.count[0].usedQuota||'0'}}</em>个，剩余可用名额：<em>{{(total.count[0].totalQuota-total.count[0].usedQuota)||'0'}}</em>个
     </h1>
     <h1 v-if="user.role=='AM'">
-        <p v-if="total.area">总共获得名额：<em>{{total.area.totalQuota}}</em>个，已送出客户经理体验名额：<em>{{total.area.usedQuota}}</em>，剩余可用名额：<em>{{(total.area.totalQuota-total.area.usedQuota)||'0'}}</em></p>
-        <p v-if="total.merchant">总共获得名额：<em>{{total.merchant.totalQuota}}</em>个，已送出普通用户体验名额：<em>{{total.merchant.usedQuota}}</em>，剩余可用名额：<em>{{(total.merchant.totalQuota-total.merchant.usedQuota)||'0'}}</em></p>
+        <p v-if="total.area">总共获得名额：<em>{{total.area.totalQuota||0}}</em>个，已送出客户经理体验名额：<em>{{total.area.usedQuota||0}}</em>，剩余可用名额：<em>{{(total.area.totalQuota-total.area.usedQuota)||'0'}}</em></p>
+        <p v-if="total.merchant">总共获得名额：<em>{{total.merchant.totalQuota||0}}</em>个，已送出普通用户体验名额：<em>{{total.merchant.usedQuota||0}}</em>，剩余可用名额：<em>{{(total.merchant.totalQuota-total.merchant.usedQuota)||'0'}}</em></p>
     </h1>
     <h1 v-if="user.role=='CM'">
-        <p v-if="total.customer">总共获得名额：<em>{{total.customer.totalQuota}}</em>个，已送出加盟商体验名额：<em>{{total.customer.usedQuota}}</em>，剩余可用名额：<em>{{(total.customer.totalQuota-total.customer.usedQuota)||'0'}}</em></p>
-        <p v-if="total.merchant">总共获得名额：<em>{{total.merchant.totalQuota}}</em>个，已送出普通用户体验名额：<em>{{total.merchant.usedQuota}}</em>，剩余可用名额：<em>{{(total.merchant.totalQuota-total.merchant.usedQuota)||'0'}}</em></p>
+        <p v-if="total.customer">总共获得名额：<em>{{total.customer.totalQuota||0}}</em>个，已送出加盟商体验名额：<em>{{total.customer.usedQuota||0}}</em>，剩余可用名额：<em>{{(total.customer.totalQuota-total.customer.usedQuota)||'0'}}</em></p>
+        <p v-if="total.merchant">总共获得名额：<em>{{total.merchant.totalQuota||0}}</em>个，已送出普通用户体验名额：<em>{{total.merchant.usedQuota||0}}</em>，剩余可用名额：<em>{{(total.merchant.totalQuota-total.merchant.usedQuota)||'0'}}</em></p>
     </h1>
     <div v-if="user.role=='Merchants'">
         <h2>可赠送用户列表</h2>

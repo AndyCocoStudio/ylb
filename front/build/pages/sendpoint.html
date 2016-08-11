@@ -15,7 +15,7 @@
     <ul>
         <li><span>赠送对象</span><label v-if="!free">{{uid}}</label><input v-if="free" maxlength="11" v-model="uid" type="text"></li>
         <li><span>商品名</span><input type="text" v-model="name"></li>
-        <li><span>商品分类</span><input type="text" v-model="type"></li>
+        <!--<li><span>商品分类</span><input type="text" v-model="type"></li>-->
         <li><span>积分数</span><input type="text" v-model="points"></li>
         <li><span>所需服务费</span>{{(points*config.pr/100).toFixed(2)}}</li>
         <li><span>使用货款/佣金</span><input type="text" @change="inuse" v-model="poundage"><!--<em>*货款/佣金最高可用{{(points*config.pr*config.gsd/10000).toFixed(2)}}</em>--></li>
