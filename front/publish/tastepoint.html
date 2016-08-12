@@ -13,9 +13,9 @@
 
 
 
-	<link rel="stylesheet" type="text/css" href="css/style.css?rev=a5393de3bc84bc15eede67df45891dd3" />
+	<link rel="stylesheet" type="text/css" href="css/style.css?rev=9017e8774557500216c1754da175e268" />
 	<link rel="stylesheet" type="text/css" href="css/pickday.css" />
-	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=a5393de3bc84bc15eede67df45891dd3" />
+	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=9017e8774557500216c1754da175e268" />
 </head>
 
 <body>
@@ -159,7 +159,7 @@
             <tr v-if="list.length==0">
                 <td colspan="5">您名下暂无会员</td>
             </tr>
-            <tr v-for="r in list">
+            <tr v-for="r in mlist">
                 <td>{{r.name}}</td>
                 <td>{{r.mobile}}</td>
                 <td>{{r.totalQuota}}</td>
@@ -177,7 +177,7 @@
             <tr v-if="list.length==0">
                 <td colspan="5">您名下暂无会员</td>
             </tr>
-            <tr v-for="r in list">
+            <tr v-for="r in olist">
                 <td>{{r.name}}</td>
                 <td>{{r.mobile}}</td>
                 <td><a data-id="{{r.userID}}" @click="too">赠送积分</a></td>
@@ -217,9 +217,9 @@
 <script src="js/libs/pickday.min.js" type="text/javascript"></script>
 <script src="js/libs/qrcode.min.js" type="text/javascript"></script>
 <script src="js/libs/dropzone.js" type="text/javascript"></script>
-<script src="js/base.js?rev=a5393de3bc84bc15eede67df45891dd3" type="text/javascript"></script>
+<script src="js/base.js?rev=9017e8774557500216c1754da175e268" type="text/javascript"></script>
 
-<script type="text/javascript" src="js/tastepoint.js?rev=a5393de3bc84bc15eede67df45891dd3"></script>
+<script type="text/javascript" src="js/tastepoint.js?rev=9017e8774557500216c1754da175e268"></script>
 
 
 </html>

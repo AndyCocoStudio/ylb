@@ -130,7 +130,7 @@
             <tr v-if="list.length==0">
                 <td colspan="5">您名下暂无会员</td>
             </tr>
-            <tr v-for="r in list">
+            <tr v-for="r in mlist">
                 <td>{{r.name}}</td>
                 <td>{{r.mobile}}</td>
                 <td>{{r.totalQuota}}</td>
@@ -148,7 +148,7 @@
             <tr v-if="list.length==0">
                 <td colspan="5">您名下暂无会员</td>
             </tr>
-            <tr v-for="r in list">
+            <tr v-for="r in olist">
                 <td>{{r.name}}</td>
                 <td>{{r.mobile}}</td>
                 <td><a data-id="{{r.userID}}" @click="too">赠送积分</a></td>
