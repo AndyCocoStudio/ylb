@@ -13,9 +13,9 @@
 
 
 
-	<link rel="stylesheet" type="text/css" href="css/style.css?rev=a4af0c99c13315f4185d0dc8a042f4ef" />
+	<link rel="stylesheet" type="text/css" href="css/style.css?rev=5981d89bb745047d1cf71e147a190273" />
 	<link rel="stylesheet" type="text/css" href="css/pickday.css" />
-	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=a4af0c99c13315f4185d0dc8a042f4ef" />
+	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=5981d89bb745047d1cf71e147a190273" />
 </head>
 
 <body>
@@ -586,9 +586,14 @@
                     <td>{{a.id}}</td>
                     <td>{{a.applicantName||a.applicantMobile}}</td>
                     <td>{{a.referrerName||a.referrerMobile}}</td>
-                    <td><em v-if="a.applyRole=='Merchants'">商家</em><em v-if="a.applyRole=='CustomerManager'">客户经理</em></td>
+                    <td><em v-if="a.applyRole=='Merchants'">商家</em>
+                        <em v-if="a.applyRole=='CustomerManager'">客户经理</em>
+                    </td>
                     <td>
-                        <em v-if="a.currentRole=='Merchants'">商家</em><em v-if="a.currentRole=='Ordinary'">普通会员</em>
+                        <em v-if="a.currentRole=='Merchants'">商家</em>
+                        <em v-if="a.currentRole=='Ordinary'">普通会员</em>
+                        <em v-if="a.currentRole=='CustomerManager'">客户经理</em>
+                        <em v-if="a.currentRole=='AreaManager'">区域经理</em>
                     </td>
                     <td>{{a.recommended}}</td>
                     <td>{{a.date}}</td>
@@ -749,9 +754,9 @@
 <script src="js/libs/pickday.min.js" type="text/javascript"></script>
 <script src="js/libs/qrcode.min.js" type="text/javascript"></script>
 <script src="js/libs/dropzone.js" type="text/javascript"></script>
-<script src="js/base.js?rev=a4af0c99c13315f4185d0dc8a042f4ef" type="text/javascript"></script>
+<script src="js/base.js?rev=5981d89bb745047d1cf71e147a190273" type="text/javascript"></script>
 
-<script type="text/javascript" src="js/customer.js?rev=a4af0c99c13315f4185d0dc8a042f4ef"></script>
+<script type="text/javascript" src="js/customer.js?rev=5981d89bb745047d1cf71e147a190273"></script>
 
 
 </html>

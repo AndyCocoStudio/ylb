@@ -27,7 +27,7 @@
         <div class="shops-product">
             <ul>
                 <li v-for="m in list">
-                    <a><img :src="m.storeAppearance" /></a>
+                    <a href="shopdetail.html?sid={{m.merchantID}}"><img :src="m.storeAppearance" /></a>
                     <p title="{{m.storeName}}"><a>{{m.storeName}}</a></p>
                     <h3>Tel: {{m.tel}}</h3>
                     <h2>{{m.address}}</h2>

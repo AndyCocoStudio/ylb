@@ -15,7 +15,15 @@
                 height: 100%;
             }
         }
-        .detail-buy{
+        .detail-infos{
+            h1{
+                margin-bottom: 20px;
+            }
+            h2{
+                font-size: 16px;
+            }
+        }
+        .detail-buy, .detail-infos{
             margin-left: 50%;
             width: 40%;
             padding: 5%;

@@ -1,5 +1,6 @@
 (function () {
     var taste = {
+        mobile: "",
         total: {
             count: [],
             area: {},
@@ -34,13 +35,11 @@
                             for (var i = 0; i < d.data.length; i++) {
                                 if (d.data[i].role == "CustomerManager") {
                                     taste.total.customer = d.data[i];
-                                } else {
-                                    taste.total.customer = "";
+                                    continue;
                                 }
-                                if (d.data[i].role == "Merchant") {
+                                if (d.data[i].role == "Merchants") {
                                     taste.total.merchant = d.data[i];
-                                } else {
-                                    taste.total.merchant = "";
+                                    continue;
                                 }
                             }
                             m.cm();
@@ -49,13 +48,11 @@
                             for (var i = 0; i < d.data.length; i++) {
                                 if (d.data[i].role == "AreaManager") {
                                     taste.total.area = d.data[i];
-                                } else {
-                                    taste.total.area = "";
+                                    continue;
                                 }
-                                if (d.data[i].role == "Merchant") {
+                                if (d.data[i].role == "Merchants") {
                                     taste.total.merchant = d.data[i];
-                                } else {
-                                    taste.total.merchant = "";
+                                    continue;
                                 }
                             }
                             m.am();
@@ -219,6 +216,27 @@
                                     m.getCount();
                                 });
                             })
+                        }
+                    },
+                    givept: function () {
+                        if (!taste.mobile) {
+                            $.ylbAlert("请输入手机号");
+                        } else {
+                            var c = confirm("确认要赠送积分给用户" + taste.mobile + "?");
+                            if (c) {
+                                $.ajax({
+                                    url: $.apiUrl + "/user/quota",
+                                    type: "PUT",
+                                    data: JSON.stringify({
+                                        mobile: taste.mobile
+                                    })
+                                }).done(function (d) {
+                                    $.ylbAjaxHandler(d, function () {
+                                        $.ylbAlert("发送成功");
+                                        m.getCount();
+                                    });
+                                });
+                            }
                         }
                     }
 

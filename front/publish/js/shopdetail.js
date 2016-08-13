@@ -1,0 +1,1 @@
+!function(){var i={sid:$.urlParam("sid")||"",info:{}},n={init:function(){n.getDetail()},getDetail:function(){$.when($.ajax({url:$.apiUrl+"/merchant/detail?id="+i.sid,type:"GET"})).done(function(t){$.ylbAjaxHandler(t,function(){i.info=t.data,n.buildVue()})})},buildVue:function(){i=new Vue({el:"#detail-main",data:i,methods:{}})}};n.init()}();

@@ -5,47 +5,27 @@
 <!-- @@close-->
 
 <!-- @@block = content-->
-<section class="shopdetail-main" id="shopdetail-main" v-cloak>
-    <div class="shopdetail-wrap">
-        <div class="shopdetail-img">
-            <img :src="data.goodses[0].thumbnail" />
+<section class="detail-main" id="detail-main" v-cloak>
+    <div class="detail-wrap">
+        <div class="detail-img">
+            <img :src="info.storeAppearance" />
         </div>
-        <div class="shopdetail-buy">
-            <h1>{{data.goodses[0].name}}<em>积分最高可抵{{data.goodses[0].deduction}}</em></h1>
-            <p>￥{{data.goodses[0].price}}</p>
-            <div class="detail-num">
-                <span>数量</span><a @click="reducecount">-</a><input disabled="false" type="text" v-model="data.goodses[0].count"><a @click="addcount">+</a>
-            </div>
-            <div class="detail-btn">
-                <a href="order.html?id={{id}}&count={{data.goodses[0].count}}">立即购买</a>
-                <a @click="addcart">加入购物车</a>
-            </div>
+        <div class="detail-infos">
+            <h1>{{info.storeName}}</h1>
+            <h2>地址：{{info.address}}</h2>
+            <h2>联系人：{{info.name}}</h2>
+            <h2>电话：{{info.mobile}}</h2>
         </div>
     </div>
     <div class="detail-info">
-        <article class="detail-base">
-            <h1>基础信息</h1>
-            <ul class="detail-base-wrap">
-                <li v-for="det in data.goodses[0].info">{{det.name}}： {{det.value}}</li>
-            </ul>
-        </article>
-        <article class="detail-des">
-            <h1>产品概述</h1>
-            <div class="detail-des-wrap">
-                <article>
-                    {{data.goodses[0].abstract.content}}
-                </article>
-                <img :src="data.goodses[0].abstract.img">
-            </div>
-        </article>
         <article class="detail-imgs">
-            <h1>产品详情</h1>
-            <img v-for="imgurl in data.goodses[0].introduceImages" :src="imgurl">
+            <h1>店铺图</h1>
+            <img v-for="i in info.storeInsideImages" :src="i">
         </article>
     </div>
 </section>
 <!-- @@close-->
 
 <!-- @@block = scripts-->
-<script type="text/javascript" src="js/detail.js?rev=@@hash"></script>
+<script type="text/javascript" src="js/shopdetail.js?rev=@@hash"></script>
 <!-- @@close-->

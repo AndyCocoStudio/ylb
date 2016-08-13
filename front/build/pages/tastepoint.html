@@ -17,6 +17,9 @@
         <p v-if="total.customer">总共获得名额：<em>{{total.customer.totalQuota||0}}</em>个，已送出加盟商体验名额：<em>{{total.customer.usedQuota||0}}</em>，剩余可用名额：<em>{{(total.customer.totalQuota-total.customer.usedQuota)||'0'}}</em></p>
         <p v-if="total.merchant">总共获得名额：<em>{{total.merchant.totalQuota||0}}</em>个，已送出普通用户体验名额：<em>{{total.merchant.usedQuota||0}}</em>，剩余可用名额：<em>{{(total.merchant.totalQuota-total.merchant.usedQuota)||'0'}}</em></p>
     </h1>
+    <h3 v-if="user.role=='AreaManager'||user.role=='AM'">
+        您可以直接赠送体验积分给普通会员：<input v-model='mobile' maxlength="11" placeholder="请输入手机号" type="text"/><a @click="givept">赠送</a>
+    </h3>
     <div v-if="user.role=='Merchants'">
         <h2>可赠送用户列表</h2>
         <table>
