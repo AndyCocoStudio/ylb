@@ -162,8 +162,8 @@
                         <a v-if="h.payStatus=='Unpaid'&&h.orderStatus!='Cancel'" @click="cancel(h.orderID)" data-id="{{h.orderID}}">取消</a><br
                             v-if="h.payStatus=='Unpaid'&&h.orderStatus!='Cancel'" />
                         <!--<a v-if="h.payStatus=='Paid'&&h.orderStatus!='Cancel'" data-id="{{h.orderID}}">退款</a>-->
-                        <a v-if="h.payStatus=='Paying'" href="pay.html?oid={{h.orderID}}">继续支付</a>
-                        <a v-if="h.payStatus=='Paying'" @click="cancel(h.orderID)" data-id="{{h.orderID}}">取消</a>
+                        <a v-if="h.payStatus=='Paying'&&h.orderStatus!='Cancel'" href="pay.html?oid={{h.orderID}}">继续支付</a>
+                        <a v-if="h.payStatus=='Paying'&&h.orderStatus!='Cancel'" @click="cancel(h.orderID)" data-id="{{h.orderID}}">取消</a>
                     </td>
                 </tr>
             </table>
@@ -214,8 +214,8 @@
                         <a v-if="x.payStatus=='Unpaid'&&x.orderStatus!='Cancel'" @click="cancel(x.orderID)" data-id="{{x.orderID}}">取消</a><br
                             v-if="x.payStatus=='Unpaid'&&x.orderStatus!='Cancel'" />
                         <!--<a v-if="x.payStatus=='Paid'&&x.orderStatus!='Cancel'" data-id="{{x.orderID}}">退款</a>-->
-                        <a v-if="x.payStatus=='Paying'" href="pay.html?oid={{x.orderID}}">继续支付</a>
-                        <a v-if="x.payStatus=='Paying'" @click="cancel(x.orderID)" data-id="{{x.orderID}}">取消</a>
+                        <a v-if="x.payStatus=='Paying'&&x.orderStatus!='Cancel'" href="pay.html?oid={{x.orderID}}">继续支付</a>
+                        <a v-if="x.payStatus=='Paying'&&x.orderStatus!='Cancel'" @click="cancel(x.orderID)" data-id="{{x.orderID}}">取消</a>
                     </td>
                 </tr>
             </table>
@@ -270,8 +270,8 @@
                         <a v-if="s.payStatus=='Unpaid'&&s.orderStatus!='Cancel'" @click="cancel(s.orderID)" data-id="{{s.orderID}}">取消</a><br
                             v-if="s.payStatus=='Unpaid'&&s.orderStatus!='Cancel'" />
                         <!--<a v-if="s.payStatus=='Paid'&&s.orderStatus!='Cancel'" data-id="{{s.orderID}}">退款</a>-->
-                        <a v-if="s.payStatus=='Paying'" href="pay.html?oid={{s.orderID}}">继续支付</a>
-                        <a v-if="s.payStatus=='Paying'" @click="cancel(s.orderID)" data-id="{{s.orderID}}">取消</a>
+                        <a v-if="s.payStatus=='Paying'&&s.orderStatus!='Cancel'" href="pay.html?oid={{s.orderID}}">继续支付</a>
+                        <a v-if="s.payStatus=='Paying'&&s.orderStatus!='Cancel'" @click="cancel(s.orderID)" data-id="{{s.orderID}}">取消</a>
                         <a v-if="s.payStatus=='Paid'&&s.orderStatus=='Reject'" @click="showreject(s.reason)">拒绝理由</a>
                     </td>
                 </tr>
@@ -325,8 +325,8 @@
                         <a v-if="z.payStatus=='Unpaid'&&z.orderStatus!='Cancel'" @click="cancel(z.orderID)" data-id="{{z.orderID}}">取消</a><br
                             v-if="z.payStatus=='Unpaid'&&z.orderStatus!='Cancel'" />
                         <!--<a v-if="s.payStatus=='Paid'&&s.orderStatus!='Cancel'" data-id="{{s.orderID}}">退款</a>-->
-                        <a v-if="z.payStatus=='Paying'" href="pay.html?oid={{z.orderID}}">继续支付</a>
-                        <a v-if="z.payStatus=='Paying'" @click="cancel(z.orderID)" data-id="{{z.orderID}}">取消</a>
+                        <a v-if="z.payStatus=='Paying'&&z.orderStatus!='Cancel'" href="pay.html?oid={{z.orderID}}">继续支付</a>
+                        <a v-if="z.payStatus=='Paying'&&z.orderStatus!='Cancel'" @click="cancel(z.orderID)" data-id="{{z.orderID}}">取消</a>
                         <a v-if="z.payStatus=='Paid'&&z.orderStatus=='Reject'" @click="showreject(z.reason)">拒绝理由</a>
                     </td>
                 </tr>

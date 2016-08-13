@@ -2,7 +2,10 @@
     var shops = {
         plist: [],
         clist: [],
-        alist: []
+        alist: [],
+        pc: "",
+        cc: "",
+        ac: ""
     };
     var m = {
         init: function () {
@@ -17,10 +20,8 @@
                 shops.plist = d.data;
             });
         },
-        getShops: function (ac) {
-            var url = "";
-            if (ac) url = "/merchants?ac=" + ac;
-            else url = "/merchants";
+        getShops: function () {
+            var url = "/merchants?pc=" + shops.pc + "&cc=" + shops.cc + "&ac=" + shops.ac;
             $.when($.ajax({
                 url: $.apiUrl + url,
                 type: "GET"
@@ -60,23 +61,26 @@
                         var c = $(el.target).find("option:selected").val();
                         shops.alist = [];
                         m.updateclist(c);
-                        shops.ac = c;
+                        shops.pc = c;
                     },
                     selcity: function (el) {
                         var c = $(el.target).find("option:selected").val();
                         shops.alist = [];
                         m.updatealist(c);
-                        shops.ac = c;
+                        shops.cc = c;
                     },
                     selarea: function (el) {
                         var c = $(el.target).find("option:selected").val();
                         shops.ac = c;
                     },
                     searchshops: function () {
-                        var p="";
-                        m.getShops(shops.ac);
+                        //var p="";
+                        m.getShops();
                     },
                     showall: function () {
+                        shops.pc = "";
+                        shops.cc = "";
+                        shops.ac = "";
                         m.getShops();
                     }
                 }
