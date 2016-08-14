@@ -1,6 +1,10 @@
 (function () {
     var refer = {
-
+        sz: 2,
+        t: 0,
+        cp: 1,
+        mt: 0,
+        mcp: 1
     };
     var m = {
         init: function () {
@@ -8,11 +12,12 @@
         },
         getlist: function () {
             $.when($.ajax({
-                url: $.apiUrl + "/merchant/users",
+                url: $.apiUrl + "/merchant/users?cp=" + refer.cp + "&sz=" + refer.sz,
                 type: "GET"
             })).done(function (d) {
                 $.ylbAjaxHandler(d, function () {
                     refer.list = d.data;
+                    refer.t = d.data.totalCount;
                     m.getInfo();
                 });
             });
@@ -30,7 +35,7 @@
         },
         getmlist: function () {
             $.when($.ajax({
-                url: $.apiUrl + "/customermanager/merchants",
+                url: $.apiUrl + "/customermanager/merchants?cp=" + refer.cp + "&sz=" + refer.sz,
                 type: "GET"
             })).done(function (d) {
                 $.ylbAjaxHandler(d, function () {
@@ -43,7 +48,50 @@
             refer = new Vue({
                 el: "#refer-main",
                 data: refer,
-                methods: {}
+                methods: {
+                    prev: function () {
+                        if (refer.cp <= 1) {
+                            return;
+                        } else {
+                            refer.cp = +refer.cp - 1;
+                            m.getlist();
+                        }
+                    },
+                    next: function () {
+                        if (refer.cp >= Math.ceil(refer.t / refer.sz)) {
+                            return;
+                        } else {
+                            refer.cp = +refer.cp + 1;
+                            m.getlist();
+                        }
+                    },
+                    jump: function () {
+                        if (refer.cp >= Math.ceil(refer.t / refer.sz)) refer.cp = Math.ceil(refer.t / refer.sz);
+                        if (refer.cp <= 1) refer.cp = 1;
+                        m.getlist();
+                    },
+                    mprev: function () {
+                        if (refer.mcp <= 1) {
+                            return;
+                        } else {
+                            refer.mcp = +refer.mcp - 1;
+                            m.getmlist();
+                        }
+                    },
+                    mnext: function () {
+                        if (refer.mcp >= Math.ceil(refer.mt / refer.sz)) {
+                            return;
+                        } else {
+                            refer.mcp = +refer.mcp + 1;
+                            m.getmlist();
+                        }
+                    },
+                    mjump: function () {
+                        if (refer.mcp >= Math.ceil(refer.mt / refer.sz)) refer.mcp = Math.ceil(refer.mt / refer.sz);
+                        if (refer.mcp <= 1) refer.mcp = 1;
+                        m.getmlist();
+                    }
+                }
             });
         }
     };

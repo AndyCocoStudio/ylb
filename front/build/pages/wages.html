@@ -27,6 +27,13 @@
             <td><a @click="sendwage(w.customerManagerID)">发工资</a></td>
         </tr>
     </table>
+    <div class="ylb-page">
+        总共{{Math.ceil(t/sz)}}页，当前第{{cp}}页
+        <a @click="prev">上一页</a>
+        <a @click="next">下一页</a>
+        <input v-model="cp" type="text" />
+        <a @click="jump">跳转</a>
+    </div>
 </section>
 <!-- @@close-->
 

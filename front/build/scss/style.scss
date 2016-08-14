@@ -5,6 +5,26 @@ $top-bg: #26201e;
 $link-blue: #3063cf;
 $base-border-color: #c7c7c7;
 
+.ylb-page{
+    text-align: center;
+    margin: 10px auto;
+    input{
+        width: 40px;
+        height: 24px;
+        border: 1px solid #ccc;
+        margin: 0 5px;
+        border-radius: 3px;
+        padding-left: 3px; 
+    }
+    a{
+        display: inline-block;
+        margin: 0 5px;
+        color: $link-blue;
+        &:last-child{
+            text-decoration: underline;
+        }
+    }
+}
 .ylb-header{
     height: 44px;
     line-height: 44px;

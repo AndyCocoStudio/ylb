@@ -1,16 +1,21 @@
 (function () {
-    var wages = {};
+    var wages = {
+        sz: 20,
+        t: 0,
+        cp: 1
+    };
     var m = {
         init: function () {
             m.getList();
         },
         getList: function () {
             $.when($.ajax({
-                url: $.apiUrl + "/customermanager/wages",
+                url: $.apiUrl + "/customermanager/wages?cp=" + wages.cp + "&sz=" + wages.sz,
                 type: "GET"
             })).done(function (d) {
                 $.ylbAjaxHandler(d, function () {
                     wages.wage = d.data;
+                    wages.t = d.data.totalCount;
                     //m.getAreaWage();
                     m.buildVue();
                 });
@@ -45,7 +50,28 @@
                                 m.getList();
                             });
                         })
-                    }
+                    },
+                    prev: function () {
+                        if (wages.cp <= 1) {
+                            return;
+                        } else {
+                            wages.cp = +wages.cp - 1;
+                            m.getList();
+                        }
+                    },
+                    next: function () {
+                        if (wages.cp >= Math.ceil(wages.t / wages.sz)) {
+                            return;
+                        } else {
+                            wages.cp = +wages.cp + 1;
+                            m.getList();
+                        }
+                    },
+                    jump: function () {
+                        if (wages.cp >= Math.ceil(wages.t / wages.sz)) wages.cp = Math.ceil(wages.t / wages.sz);
+                        if (wages.cp <= 1) wages.cp = 1;
+                        m.getList();
+                    },
                 }
             })
         }

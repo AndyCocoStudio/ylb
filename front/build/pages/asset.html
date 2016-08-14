@@ -35,6 +35,13 @@
             <td>{{t.reason}}</td>
         </tr>
     </table>
+    <div class="ylb-page">
+        总共{{Math.ceil(tt/sz)}}页，当前第{{tcp}}页
+        <a @click="tprev">上一页</a>
+        <a @click="tnext">下一页</a>
+        <input v-model="tcp" type="text"/>
+        <a @click="tjump">跳转</a>
+    </div>
     <h1 class="asset-title">充值记录</h1>
     <table class="asset-table">
         <tr>
@@ -55,6 +62,13 @@
             <td><a v-if="t.payStatus!='Paid'" href="http://api.hnylbsc.com/unionpay?id={{t.id}}">支付</a></td>
         </tr>
     </table>
+    <div class="ylb-page">
+        总共{{Math.ceil(rt/sz)}}页，当前第{{rcp}}页
+        <a @click="rprev">上一页</a>
+        <a @click="rnext">下一页</a>
+        <input v-model="rcp" type="text"/>
+        <a @click="rjump">跳转</a>
+    </div>
     <h1 v-if="user.role=='Merchant'||user.role=='AM'||user.info=='CM'" class="asset-title">佣金记录</h1>
     <table v-if="user.role=='Merchant'||user.role=='AM'||user.info=='CM'" class="asset-table">
         <tr>
@@ -84,6 +98,13 @@
             <td>{{t.reason}}</td>
         </tr>
     </table>
+    <div class="ylb-page">
+        总共{{Math.ceil(ct/sz)}}页，当前第{{ccp}}页
+        <a @click="cprev">上一页</a>
+        <a @click="cnext">下一页</a>
+        <input v-model="ccp" type="text"/>
+        <a @click="cjump">跳转</a>
+    </div>
 </section>
 <!-- @@close-->
 

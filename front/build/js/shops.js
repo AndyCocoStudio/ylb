@@ -5,7 +5,10 @@
         alist: [],
         pc: "",
         cc: "",
-        ac: ""
+        ac: "",
+        cp: 1,
+        t: 0,
+        sz: 6,
     };
     var m = {
         init: function () {
@@ -21,13 +24,14 @@
             });
         },
         getShops: function () {
-            var url = "/merchants?pc=" + shops.pc + "&cc=" + shops.cc + "&ac=" + shops.ac;
+            var url = "/merchants?pc=" + shops.pc + "&cc=" + shops.cc + "&ac=" + shops.ac + "&cp=" + shops.cp + "&sz=" + shops.sz;
             $.when($.ajax({
                 url: $.apiUrl + url,
                 type: "GET"
             })).done(function (d) {
                 $.ylbAjaxHandler(d, function () {
                     shops.list = d.data.merchants;
+                    shops.t = d.data.totalCount;
                     m.buildVue();
                 });
             });
@@ -75,12 +79,35 @@
                     },
                     searchshops: function () {
                         //var p="";
+                        shops.cp = 1;
+                        shops.t = 0;
                         m.getShops();
                     },
                     showall: function () {
                         shops.pc = "";
                         shops.cc = "";
                         shops.ac = "";
+                        m.getShops();
+                    },
+                    prev: function () {
+                        if (shops.cp <= 1) {
+                            return;
+                        } else {
+                            shops.cp = +shops.cp - 1;
+                            m.getShops();
+                        }
+                    },
+                    next: function () {
+                        if (shops.cp >= Math.ceil(shops.t / shops.sz)) {
+                            return;
+                        } else {
+                            shops.cp = +shops.cp + 1;
+                            m.getShops();
+                        }
+                    },
+                    jump: function () {
+                        if (shops.cp >= Math.ceil(shops.t / shops.sz)) shops.cp = Math.ceil(shops.t / shops.sz);
+                        if (shops.cp <= 1) shops.cp = 1;
                         m.getShops();
                     }
                 }

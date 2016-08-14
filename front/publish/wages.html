@@ -13,9 +13,9 @@
 
 
 
-	<link rel="stylesheet" type="text/css" href="css/style.css?rev=24fd07a654dd8a887cac510072a58c44" />
+	<link rel="stylesheet" type="text/css" href="css/style.css?rev=cc82cbd9098a1847c92365285409e65b" />
 	<link rel="stylesheet" type="text/css" href="css/pickday.css" />
-	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=24fd07a654dd8a887cac510072a58c44" />
+	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=cc82cbd9098a1847c92365285409e65b" />
 </head>
 
 <body>
@@ -56,6 +56,13 @@
             <td><a @click="sendwage(w.customerManagerID)">发工资</a></td>
         </tr>
     </table>
+    <div class="ylb-page">
+        总共{{Math.ceil(t/sz)}}页，当前第{{cp}}页
+        <a @click="prev">上一页</a>
+        <a @click="next">下一页</a>
+        <input v-model="cp" type="text" />
+        <a @click="jump">跳转</a>
+    </div>
 </section>
 
 	<div id="ylb-layout">
@@ -89,9 +96,9 @@
 <script src="js/libs/pickday.min.js" type="text/javascript"></script>
 <script src="js/libs/qrcode.min.js" type="text/javascript"></script>
 <script src="js/libs/dropzone.js" type="text/javascript"></script>
-<script src="js/base.js?rev=24fd07a654dd8a887cac510072a58c44" type="text/javascript"></script>
+<script src="js/base.js?rev=cc82cbd9098a1847c92365285409e65b" type="text/javascript"></script>
 
-<script type="text/javascript" src="js/wages.js?rev=24fd07a654dd8a887cac510072a58c44"></script>
+<script type="text/javascript" src="js/wages.js?rev=cc82cbd9098a1847c92365285409e65b"></script>
 
 
 </html>

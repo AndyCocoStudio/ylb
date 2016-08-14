@@ -18,7 +18,7 @@
         <p v-if="total.merchant">加盟商身份总体验名额：<em>{{total.merchant.totalQuota||0}}</em>个，已送出名额：<em>{{total.merchant.usedQuota||0}}</em>，剩余可用名额：<em>{{(total.merchant.totalQuota-total.merchant.usedQuota)||'0'}}</em></p>
     </h1>
     <h3 v-if="user.role=='AreaManager'||user.role=='AM'">
-        您可以直接赠送体验积分给普通会员：<input v-model='mobile' maxlength="11" placeholder="请输入手机号" type="text"/><a @click="givept">赠送</a>
+        您可以直接赠送体验积分给普通会员：<input v-model='mobile' maxlength="11" placeholder="请输入手机号" type="text" /><a @click="givept">赠送</a>
     </h3>
     <div v-if="user.role=='Merchants'">
         <h2>可赠送用户列表</h2>
@@ -37,6 +37,13 @@
                 <td><a data-id="{{r.userID}}" @click="too">赠送积分</a></td>
             </tr>
         </table>
+        <div class="ylb-page">
+            总共{{Math.ceil(ot/sz)}}页，当前第{{ocp}}页
+            <a @click="oprev">上一页</a>
+            <a @click="onext">下一页</a>
+            <input v-model="ocp" type="text" />
+            <a @click="ojump">跳转</a>
+        </div>
     </div>
     <div v-if="user.role=='CustomerManager'">
         <h2>可赠送加盟商列表</h2>
@@ -59,9 +66,16 @@
                 <td><input type="text"><a data-id="{{r.merchantID}}" @click="tom">赠送名额</a></td>
             </tr>
         </table>
+        <div class="ylb-page">
+            总共{{Math.ceil(mt/sz)}}页，当前第{{mcp}}页
+            <a @click="mprev">上一页</a>
+            <a @click="mnext">下一页</a>
+            <input v-model="mcp" type="text" />
+            <a @click="mjump">跳转</a>
+        </div>
     </div>
     <div v-if="user.role=='AreaManager'">
-        <h2>可赠送用户列表</h2>
+        <h2>可赠送客户经理列表</h2>
         <table>
             <tr>
                 <th>真实姓名</th>
@@ -81,6 +95,13 @@
                 <td><input type="text"><a data-id="{{r.customerManagerID}}" @click="toc">赠送名额</a></td>
             </tr>
         </table>
+        <div class="ylb-page">
+            总共{{Math.ceil(ct/sz)}}页，当前第{{ccp}}页
+            <a @click="cprev">上一页</a>
+            <a @click="cnext">下一页</a>
+            <input v-model="ccp" type="text" />
+            <a @click="cjump">跳转</a>
+        </div>
     </div>
     <div v-if="user.role=='AM'">
         <h2 v-if="total.area">可赠送客户经理列表</h2>
@@ -103,6 +124,13 @@
                 <td><input type="text"><a data-id="{{r.customerManagerID}}" @click="toc">赠送名额</a></td>
             </tr>
         </table>
+        <div class="ylb-page">
+            总共{{Math.ceil(amct/sz)}}页，当前第{{amccp}}页
+            <a @click="amcprev">上一页</a>
+            <a @click="amcnext">下一页</a>
+            <input v-model="amccp" type="text" />
+            <a @click="amcjump">跳转</a>
+        </div>
         <h2 v-if="total.merchant">可赠送普通会员列表</h2>
         <table v-if="total.merchant">
             <tr>
@@ -119,6 +147,13 @@
                 <td><a data-id="{{r.userID}}" @click="too">赠送积分</a></td>
             </tr>
         </table>
+        <div class="ylb-page">
+            总共{{Math.ceil(amot/sz)}}页，当前第{{amocp}}页
+            <a @click="amoprev">上一页</a>
+            <a @click="amonext">下一页</a>
+            <input v-model="amocp" type="text" />
+            <a @click="amojump">跳转</a>
+        </div>
     </div>
     <div v-if="user.role=='CM'">
         <h2>可赠送加盟商列表</h2>
@@ -141,6 +176,13 @@
                 <td><input type="text"><a data-id="{{r.merchantID}}" @click="tom">赠送名额</a></td>
             </tr>
         </table>
+        <div class="ylb-page">
+            总共{{Math.ceil(cmmt/sz)}}页，当前第{{cmmcp}}页
+            <a @click="cmmprev">上一页</a>
+            <a @click="cmmnext">下一页</a>
+            <input v-model="cmmcp" type="text" />
+            <a @click="cmmjump">跳转</a>
+        </div>
         <h2>可赠送普通会员列表</h2>
         <table>
             <tr>
@@ -157,6 +199,13 @@
                 <td><a data-id="{{r.userID}}" @click="too">赠送积分</a></td>
             </tr>
         </table>
+        <div class="ylb-page">
+            总共{{Math.ceil(cmot/sz)}}页，当前第{{cmocp}}页
+            <a @click="cmoprev">上一页</a>
+            <a @click="cmonext">下一页</a>
+            <input v-model="cmocp" type="text" />
+            <a @click="cmojump">跳转</a>
+        </div>
     </div>
 </section>
 <!-- @@close-->

@@ -3,7 +3,7 @@
 
 <head>
 
-<title>推荐列表</title>
+<title>做单记录</title>
 
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1" />
@@ -13,9 +13,9 @@
 
 
 
-	<link rel="stylesheet" type="text/css" href="css/style.css?rev=9a6bffc10ae06d55574dc7b77de2c9ca" />
+	<link rel="stylesheet" type="text/css" href="css/style.css?rev=6562f9af0a5e85a4f1d33f3cdb4571f6" />
 	<link rel="stylesheet" type="text/css" href="css/pickday.css" />
-	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=9a6bffc10ae06d55574dc7b77de2c9ca" />
+	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=6562f9af0a5e85a4f1d33f3cdb4571f6" />
 </head>
 
 <body>
@@ -70,6 +70,13 @@
             <td><em v-if="r.orderStatus=='Reject'">{{r.reason}}</em></td>
         </tr>
     </table>
+    <div class="ylb-page">
+        总共{{Math.ceil(t/sz)}}页，当前第{{cp}}页
+        <a @click="prev">上一页</a>
+        <a @click="next">下一页</a>
+        <input v-model="cp" type="text" />
+        <a @click="jump">跳转</a>
+    </div>
 </section>
 
 	<div id="ylb-layout">
@@ -103,9 +110,9 @@
 <script src="js/libs/pickday.min.js" type="text/javascript"></script>
 <script src="js/libs/qrcode.min.js" type="text/javascript"></script>
 <script src="js/libs/dropzone.js" type="text/javascript"></script>
-<script src="js/base.js?rev=9a6bffc10ae06d55574dc7b77de2c9ca" type="text/javascript"></script>
+<script src="js/base.js?rev=6562f9af0a5e85a4f1d33f3cdb4571f6" type="text/javascript"></script>
 
-<script type="text/javascript" src="js/orderlist.js?rev=9a6bffc10ae06d55574dc7b77de2c9ca"></script>
+<script type="text/javascript" src="js/orderlist.js?rev=6562f9af0a5e85a4f1d33f3cdb4571f6"></script>
 
 
 </html>

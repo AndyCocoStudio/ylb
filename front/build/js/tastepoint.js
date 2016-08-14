@@ -1,5 +1,20 @@
 (function () {
     var taste = {
+        sz: 20,
+        mt: 0,
+        mcp: 1,
+        ot: 0,
+        ocp: 1,
+        ct: 0,
+        ccp: 1,
+        amct: 0,
+        amccp: 1,
+        amot: 0,
+        amocp: 1,
+        cmmt: 0,
+        cmmcp: 1,
+        cmot: 0,
+        cmocp: 1,
         mobile: "",
         total: {
             count: [],
@@ -78,50 +93,55 @@
         },
         merchants: function () {
             $.when($.ajax({
-                url: $.apiUrl + "/merchant/users?cp=1&sz=1000",
+                url: $.apiUrl + "/merchant/users?cp=" + taste.ocp + "&sz=" + taste.sz,
                 type: "GET"
             })).done(function (d) {
                 $.ylbAjaxHandler(d, function () {
                     taste.olist = d.data.users;
+                    taste.ot = d.data.totalCount;
                     m.buildVue();
                 });
             });
         },
         customerManager: function () {
             $.when($.ajax({
-                url: $.apiUrl + "/customermanager/merchants?cp=1&sz=1000",
+                url: $.apiUrl + "/customermanager/merchants?cp=" + taste.mcp + "&sz=" + taste.sz,
                 type: "GET"
             })).done(function (d) {
                 $.ylbAjaxHandler(d, function () {
                     taste.mlist = d.data.merchants;
+                    taste.mt = d.data.totalCount;
                     m.buildVue();
                 });
             });
         },
         areaManager: function () {
             $.when($.ajax({
-                url: $.apiUrl + "/area/customermanager?cp=1&sz=1000",
+                url: $.apiUrl + "/area/customermanager?cp=" + taste.ccp + "&sz=" + taste.sz,
                 type: "GET"
             })).done(function (d) {
                 $.ylbAjaxHandler(d, function () {
                     taste.clist = d.data.customerManagers;
+                    taste.ct = d.data.totalCount;
                     m.buildVue();
                 });
             });
         },
         am: function () {
             $.when($.ajax({
-                url: $.apiUrl + "/area/customermanager?cp=1&sz=1000",
+                url: $.apiUrl + "/area/customermanager?cp=" + taste.amccp + "&sz=" + taste.sz,
                 type: "GET"
             })).done(function (d) {
                 $.ylbAjaxHandler(d, function () {
                     taste.clist = d.data.customerManagers;
+                    taste.amct = d.data.totalCount;
                     $.when($.ajax({
-                        url: $.apiUrl + "/merchant/users?cp=1&sz=1000",
+                        url: $.apiUrl + "/merchant/users?cp=" + taste.amocp + "&sz=" + taste.sz,
                         type: "GET"
                     })).done(function (d) {
                         $.ylbAjaxHandler(d, function () {
                             taste.olist = d.data.users;
+                            taste.amot = d.data.totalCount;
                             m.buildVue();
                         });
                     });
@@ -130,17 +150,19 @@
         },
         cm: function () {
             $.when($.ajax({
-                url: $.apiUrl + "/customermanager/merchants?cp=1&sz=1000",
+                url: $.apiUrl + "/customermanager/merchants?cp=" + taste.cmmcp + "&sz=" + taste.sz,
                 type: "GET"
             })).done(function (d) {
                 $.ylbAjaxHandler(d, function () {
                     taste.mlist = d.data.merchants;
+                    taste.cmmt = d.data.totalCount;
                     $.when($.ajax({
-                        url: $.apiUrl + "/merchant/users?cp=1&sz=1000",
+                        url: $.apiUrl + "/merchant/users?cp=" + taste.cmocp + "&sz=" + taste.sz,
                         type: "GET"
                     })).done(function (d) {
                         $.ylbAjaxHandler(d, function () {
                             taste.olist = d.data.users;
+                            taste.cmot = d.data.totalCount;
                             m.buildVue();
                         });
                     });
@@ -238,8 +260,154 @@
                                 });
                             }
                         }
-                    }
-
+                    },
+                    mprev: function () {
+                        if (taste.mcp <= 1) {
+                            return;
+                        } else {
+                            taste.mcp = +taste.mcp - 1;
+                            m.getCustomer();
+                        }
+                    },
+                    mnext: function () {
+                        if (taste.mcp >= Math.ceil(taste.mt / taste.sz)) {
+                            return;
+                        } else {
+                            taste.mcp = +taste.mcp + 1;
+                            m.getCustomer();
+                        }
+                    },
+                    mjump: function () {
+                        if (taste.mcp >= Math.ceil(taste.mt / taste.sz)) taste.mcp = Math.ceil(taste.mt / taste.sz);
+                        if (taste.mcp <= 1) taste.mcp = 1;
+                        m.getCustomer();
+                    },
+                    oprev: function () {
+                        if (taste.ocp <= 1) {
+                            return;
+                        } else {
+                            taste.ocp = +taste.ocp - 1;
+                            m.customerManager();
+                        }
+                    },
+                    onext: function () {
+                        if (taste.ocp >= Math.ceil(taste.ot / taste.sz)) {
+                            return;
+                        } else {
+                            taste.ocp = +taste.ocp + 1;
+                            m.customerManager();
+                        }
+                    },
+                    ojump: function () {
+                        if (taste.ocp >= Math.ceil(taste.ot / taste.sz)) taste.ocp = Math.ceil(taste.ot / taste.sz);
+                        if (taste.ocp <= 1) taste.ocp = 1;
+                        m.customerManager();
+                    },
+                    cprev: function () {
+                        if (taste.ccp <= 1) {
+                            return;
+                        } else {
+                            taste.ccp = +taste.ccp - 1;
+                            m.customerManager();
+                        }
+                    },
+                    cnext: function () {
+                        if (taste.ccp >= Math.ceil(taste.ct / taste.sz)) {
+                            return;
+                        } else {
+                            taste.ccp = +taste.ccp + 1;
+                            m.customerManager();
+                        }
+                    },
+                    cjump: function () {
+                        if (taste.ccp >= Math.ceil(taste.ct / taste.sz)) taste.ccp = Math.ceil(taste.ct / taste.sz);
+                        if (taste.ccp <= 1) taste.ccp = 1;
+                        m.customerManager();
+                    },
+                    amcprev: function () {
+                        if (taste.amccp <= 1) {
+                            return;
+                        } else {
+                            taste.amccp = +taste.amccp - 1;
+                            m.am();
+                        }
+                    },
+                    amcnext: function () {
+                        if (taste.amccp >= Math.ceil(taste.amct / taste.sz)) {
+                            return;
+                        } else {
+                            taste.amccp = +taste.amccp + 1;
+                            m.am();
+                        }
+                    },
+                    amcjump: function () {
+                        if (taste.amccp >= Math.ceil(taste.amct / taste.sz)) taste.amccp = Math.ceil(taste.amct / taste.sz);
+                        if (taste.amccp <= 1) taste.amccp = 1;
+                        m.am();
+                    },
+                    amoprev: function () {
+                        if (taste.amocp <= 1) {
+                            return;
+                        } else {
+                            taste.amocp = +taste.amocp - 1;
+                            m.am();
+                        }
+                    },
+                    amonext: function () {
+                        if (taste.amocp >= Math.ceil(taste.amot / taste.sz)) {
+                            return;
+                        } else {
+                            taste.amocp = +taste.amocp + 1;
+                            m.am();
+                        }
+                    },
+                    amojump: function () {
+                        if (taste.amocp >= Math.ceil(taste.amot / taste.sz)) taste.amocp = Math.ceil(taste.amot / taste.sz);
+                        if (taste.amocp <= 1) taste.amocp = 1;
+                        m.am();
+                    },
+                    cmmprev: function () {
+                        if (taste.cmmcp <= 1) {
+                            return;
+                        } else {
+                            taste.cmmcp = +taste.cmmcp - 1;
+                            m.cm();
+                        }
+                    },
+                    cmmnext: function () {
+                        if (taste.cmmcp >= Math.ceil(taste.cmmt / taste.sz)) {
+                            return;
+                        } else {
+                            taste.cmmcp = +taste.cmmcp + 1;
+                            m.cm();
+                        }
+                    },
+                    cmmjump: function () {
+                        if (taste.cmmcp >= Math.ceil(taste.cmmt / taste.sz)) taste.cmmcp = Math.ceil(taste.cmmt / taste.sz);
+                        if (taste.cmmcp <= 1) taste.cmmcp = 1;
+                        m.cm();
+                    },
+                    cmoprev: function () {
+                        if (taste.cmocp <= 1) {
+                            return;
+                        } else {
+                            taste.cmocp = +taste.cmocp - 1;
+                            m.cm();
+                        }
+                    },
+                    cmonext: function () {
+                        if (taste.cmocp >= Math.ceil(taste.cmot / taste.sz)) {
+                            return;
+                        } else {
+                            taste.cmocp = +taste.cmocp + 1;
+                            m.cm();
+                        }
+                    },
+                    cmojump: function () {
+                        if (taste.cmocp >= Math.ceil(taste.cmot / taste.sz)) taste.cmocp = Math.ceil(taste.cmot / taste.sz);
+                        if (taste.cmocp <= 1) taste.cmocp = 1;
+                        m.cm();
+                    },
                 }
             });
         }

@@ -19,6 +19,13 @@
             <td>{{r.createTime}}</td>
         </tr>
     </table>
+    <div class="ylb-page">
+        总共{{Math.ceil(t/sz)}}页，当前第{{cp}}页
+        <a @click="prev">上一页</a>
+        <a @click="next">下一页</a>
+        <input v-model="cp" type="text" />
+        <a @click="jump">跳转</a>
+    </div>
     <h1>您总共已经推荐了{{mlist.totalCount}}商家</h1>
     <table>
         <tr>
@@ -42,6 +49,13 @@
             <td><a href="orderlist.html?mid={{r.merchantID}}">查看做单</a></td>
         </tr>
     </table>
+    <div class="ylb-page">
+        总共{{Math.ceil(mt/sz)}}页，当前第{{mcp}}页
+        <a @click="mprev">上一页</a>
+        <a @click="mnext">下一页</a>
+        <input v-model="mcp" type="text" />
+        <a @click="mjump">跳转</a>
+    </div>
 </section>
 <!-- @@close-->
 

@@ -331,6 +331,34 @@
                     </td>
                 </tr>
             </table>
+            <div v-show="jfdh" class="ylb-page">
+                总共{{Math.ceil(ht/sz)}}页，当前第{{hcp}}页
+                <a @click="hprev">上一页</a>
+                <a @click="hnext">下一页</a>
+                <input v-model="hcp" type="text" />
+                <a @click="hjump">跳转</a>
+            </div>
+            <div v-show="xsxf" class="ylb-page">
+                总共{{Math.ceil(xt/sz)}}页，当前第{{xcp}}页
+                <a @click="xprev">上一页</a>
+                <a @click="xnext">下一页</a>
+                <input v-model="xcp" type="text" />
+                <a @click="xjump">跳转</a>
+            </div>
+            <div v-show="sjzd" class="ylb-page">
+                总共{{Math.ceil(st/sz)}}页，当前第{{scp}}页
+                <a @click="sprev">上一页</a>
+                <a @click="snext">下一页</a>
+                <input v-model="scp" type="text" />
+                <a @click="sjump">跳转</a>
+            </div>
+            <div v-show="zzsjzd" class="ylb-page">
+                总共{{Math.ceil(zt/sz)}}页，当前第{{zcp}}页
+                <a @click="zprev">上一页</a>
+                <a @click="znext">下一页</a>
+                <input v-model="zcp" type="text" />
+                <a @click="zjump">跳转</a>
+            </div>
         </div>
         <!--角色申请-->
         <div v-if="info.role!='AM'" v-if="info.role!='CM'" id="customer-apply" class="customer-apply">
@@ -446,6 +474,13 @@
                     </td>
                 </tr>
             </table>
+            <div class="ylb-page">
+                总共{{Math.ceil(zczct/sz)}}页，当前第{{zczcp}}页
+                <a @click="zczcprev">上一页</a>
+                <a @click="zczcnext">下一页</a>
+                <input v-model="zczcp" type="text" />
+                <a @click="zczcjump">跳转</a>
+            </div>
         </div>
         <!--客户经理名下商家做单查看-->
         <div v-if="info.role=='CustomerManager'||info.role=='CM'" id="customer-managerorder" class="customer-managerorder">
@@ -490,6 +525,13 @@
                     </td>
                 </tr>
             </table>
+            <div class="ylb-page">
+                总共{{Math.ceil(cmt/sz)}}页，当前第{{cmcp}}页
+                <a @click="cmprev">上一页</a>
+                <a @click="zcmnext">下一页</a>
+                <input v-model="cmcp" type="text" />
+                <a @click="cmjump">跳转</a>
+            </div>
         </div>
         <!--区域经理审批管理-->
         <div v-if="info.role=='AreaManager'||info.role=='AM'" id="customer-approve" class="customer-approve">
@@ -645,6 +687,34 @@
                     <td><a href="apply.html?aid={{a.id}}&r={{a.applyRole}}">详情</a></td>
                 </tr>
             </table>
+            <!--<div v-show="zdsh" class="ylb-page">
+                总共{{Math.ceil(zdt/sz)}}页，当前第{{zdcp}}页
+                <a @click="zdprev">上一页</a>
+                <a @click="zdnext">下一页</a>
+                <input v-model="zdcp" type="text" />
+                <a @click="zdjump">跳转</a>
+            </div>
+            <div v-show="jssh" class="ylb-page">
+                总共{{Math.ceil(jst/sz)}}页，当前第{{jscp}}页
+                <a @click="jsprev">上一页</a>
+                <a @click="jsnext">下一页</a>
+                <input v-model="jscp" type="text" />
+                <a @click="jsjump">跳转</a>
+            </div>
+            <div v-show="fzdsh" class="ylb-page">
+                总共{{Math.ceil(fzdt/sz)}}页，当前第{{fzdcp}}页
+                <a @click="fzdprev">上一页</a>
+                <a @click="fzdnext">下一页</a>
+                <input v-model="fzdcp" type="text" />
+                <a @click="fzdjump">跳转</a>
+            </div>
+            <div v-show="fjssh" class="ylb-page">
+                总共{{Math.ceil(fjst/sz)}}页，当前第{{fjscp}}页
+                <a @click="fjsprev">上一页</a>
+                <a @click="fjsnext">下一页</a>
+                <input v-model="fjscp" type="text" />
+                <a @click="fjsjump">跳转</a>
+            </div>-->
         </div>
         <!--区域经理工资管理-->
         <div v-if="info.role=='AreaManager'||info.role=='AM'" class="customer-cash"></div>

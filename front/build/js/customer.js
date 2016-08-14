@@ -1,5 +1,26 @@
 (function () {
     var vcustomer = {
+        sz: 1,
+        hcp: 1,
+        ht: 0,
+        scp: 1,
+        st: 0,
+        xcp: 1,
+        xt: 0,
+        zcp: 1,
+        zt: 0,
+        zczcp: 1,
+        zczct: 0,
+        cmcp: 1,
+        cmt: 0,
+        jscp: 1,
+        jst: 0,
+        zdcp: 1,
+        zdt: 0,
+        fjscp: 1,
+        fjst: 0,
+        fzdcp: 1,
+        fzdt: 0,
         pcode: "",
         rcode: "",
         covershow: false,
@@ -283,11 +304,12 @@
         //获取积分兑换订单列表
         getJFDHOrder: function () {
             $.when($.ajax({
-                url: $.apiUrl + "/user/orders?k=1",
+                url: $.apiUrl + "/user/orders?k=1&cp=" + vcustomer.hcp + "&sz=" + vcustomer.sz,
                 type: "GET"
             })).done(function (d) {
                 $.ylbAjaxHandler(d, function () {
                     vcustomer.jfdhlist = d.data.orders;
+                    vcustomer.ht = d.data.totalCount;
                     m.getXSXFOrder();
                 });
             });
@@ -295,11 +317,12 @@
         //获取线上消费订单列表
         getXSXFOrder: function () {
             $.when($.ajax({
-                url: $.apiUrl + "/user/orders?k=2",
+                url: $.apiUrl + "/user/orders?k=2&cp=" + vcustomer.xcp + "&sz=" + vcustomer.sz,
                 type: "GET"
             })).done(function (d) {
                 $.ylbAjaxHandler(d, function () {
                     vcustomer.xsxflist = d.data.orders;
+                    vcustomer.xt = d.data.totalCount;
                     m.getSJZDOrder();
                 });
             });
@@ -307,22 +330,24 @@
         //获取普通会员做单订单列表
         getSJZDOrder: function () {
             $.when($.ajax({
-                url: $.apiUrl + "/user/orders?k=0",
+                url: $.apiUrl + "/user/orders?k=0&cp=" + vcustomer.scp + "&sz=" + vcustomer.sz,
                 type: "GET"
             })).done(function (d) {
                 $.ylbAjaxHandler(d, function () {
                     vcustomer.sjzdlist = d.data.orders;
+                    vcustomer.st = d.data.totalCount;
                     m.getZZSJZDOrder();
                 });
             });
         },
         getZZSJZDOrder: function () {
             $.when($.ajax({
-                url: $.apiUrl + "/user/orders?k=3",
+                url: $.apiUrl + "/user/orders?k=3&cp=" + vcustomer.zcp + "&sz=" + vcustomer.sz,
                 type: "GET"
             })).done(function (d) {
                 $.ylbAjaxHandler(d, function () {
                     vcustomer.zzsjzdlist = d.data.orders;
+                    vcustomer.zt = d.data.totalCount;
                     m.getReward();
                 });
             });
@@ -330,11 +355,12 @@
         //获取资金转出记录
         getReward: function () {
             $.when($.ajax({
-                url: $.apiUrl + "/user/transfers",
+                url: $.apiUrl + "/user/transfers?cp=" + vcustomer.zczcp + "&sz=" + vcustomer.sz,
                 type: "GET"
             })).done(function (d) {
                 $.ylbAjaxHandler(d, function () {
                     vcustomer.rlist = d.data.transfers;
+                    vcustomer.zczct = d.data.totalCount;
                     if (vcustomer.info.role == 'CustomerManager' || vcustomer.info.role == 'AreaManager' || vcustomer.info.role == 'AM' || vcustomer.info.role == 'CM') {
                         m.getTotal();
                     }
@@ -364,11 +390,12 @@
         //获取客户经理名下商家做单列表
         getOrders: function () {
             $.when($.ajax({
-                url: $.apiUrl + "/customermanager/givingscore",
+                url: $.apiUrl + "/customermanager/givingscore?cp=" + vcustomer.cmcp + "&sz=" + vcustomer.sz,
                 type: "GET"
             })).done(function (d) {
                 $.ylbAjaxHandler(d, function () {
                     vcustomer.customerorders = d.data;
+                    vcustomer.cmt == d.data.totalCount;
                     m.buildVue();
                 });
             });
@@ -378,6 +405,133 @@
                 el: "#customer-main",
                 data: vcustomer,
                 methods: {
+                    tprev: function () {
+                        if (vcustomer.hcp <= 1) {
+                            return;
+                        } else {
+                            vcustomer.hcp = +vcustomer.hcp - 1;
+                            m.getJFDHOrder();
+                        }
+                    },
+                    tnext: function () {
+                        if (vcustomer.hcp >= Math.ceil(vcustomer.ht / vcustomer.sz)) {
+                            return;
+                        } else {
+                            vcustomer.hcp = +vcustomer.hcp + 1;
+                            m.getJFDHOrder();
+                        }
+                    },
+                    tjump: function () {
+                        if (vcustomer.hcp >= Math.ceil(vcustomer.ht / vcustomer.sz)) vcustomer.hcp = Math.ceil(vcustomer.ht / vcustomer.sz);
+                        if (vcustomer.hcp <= 1) vcustomer.hcp = 1;
+                        m.getJFDHOrder();
+                    },
+                    xprev: function () {
+                        if (vcustomer.xcp <= 1) {
+                            return;
+                        } else {
+                            vcustomer.xcp = +vcustomer.xcp - 1;
+                            m.getXSXFOrder();
+                        }
+                    },
+                    xnext: function () {
+                        if (vcustomer.xcp >= Math.ceil(vcustomer.xt / vcustomer.sz)) {
+                            return;
+                        } else {
+                            vcustomer.xcp = +vcustomer.xcp + 1;
+                            m.getXSXFOrder();
+                        }
+                    },
+                    xjump: function () {
+                        if (vcustomer.xcp >= Math.ceil(vcustomer.xt / vcustomer.sz)) vcustomer.xcp = Math.ceil(vcustomer.xt / vcustomer.sz);
+                        if (vcustomer.xcp <= 1) vcustomer.xcp = 1;
+                        m.getXSXFOrder();
+                    },
+                    sprev: function () {
+                        if (vcustomer.scp <= 1) {
+                            return;
+                        } else {
+                            vcustomer.scp = +vcustomer.scp - 1;
+                            m.getSJZDOrder();
+                        }
+                    },
+                    snext: function () {
+                        if (vcustomer.scp >= Math.ceil(vcustomer.st / vcustomer.sz)) {
+                            return;
+                        } else {
+                            vcustomer.scp = +vcustomer.scp + 1;
+                            m.getSJZDOrder();
+                        }
+                    },
+                    sjump: function () {
+                        if (vcustomer.scp >= Math.ceil(vcustomer.st / vcustomer.sz)) vcustomer.scp = Math.ceil(vcustomer.st / vcustomer.sz);
+                        if (vcustomer.scp <= 1) vcustomer.scp = 1;
+                        m.getSJZDOrder();
+                    },
+                    zprev: function () {
+                        if (vcustomer.zcp <= 1) {
+                            return;
+                        } else {
+                            vcustomer.zcp = +vcustomer.zcp - 1;
+                            m.getZZSJZDOrder();
+                        }
+                    },
+                    znext: function () {
+                        if (vcustomer.zcp >= Math.ceil(vcustomer.zt / vcustomer.sz)) {
+                            return;
+                        } else {
+                            vcustomer.zcp = +vcustomer.zcp + 1;
+                            m.getZZSJZDOrder();
+                        }
+                    },
+                    zjump: function () {
+                        if (vcustomer.zcp >= Math.ceil(vcustomer.zt / vcustomer.sz)) vcustomer.zcp = Math.ceil(vcustomer.zt / vcustomer.sz);
+                        if (vcustomer.zcp <= 1) vcustomer.zcp = 1;
+                        m.getZZSJZDOrder();
+                    },
+                    zczcprev: function () {
+                        if (vcustomer.zczcp <= 1) {
+                            return;
+                        } else {
+                            vcustomer.zczcp = +vcustomer.zczcp - 1;
+                            m.getReward();
+                        }
+                    },
+                    zczcnext: function () {
+                        if (vcustomer.zczcp >= Math.ceil(vcustomer.zczct / vcustomer.sz)) {
+                            return;
+                        } else {
+                            vcustomer.zczcp = +vcustomer.zczcp + 1;
+                            m.getReward();
+                        }
+                    },
+                    zczcjump: function () {
+                        if (vcustomer.zczcp >= Math.ceil(vcustomer.zczct / vcustomer.sz)) vcustomer.zczcp = Math.ceil(vcustomer.zczct / vcustomer.sz);
+                        if (vcustomer.zczcp <= 1) vcustomer.zczcp = 1;
+                        m.getReward();
+                    },
+                    cmprev: function () {
+                        if (vcustomer.cmcp <= 1) {
+                            return;
+                        } else {
+                            vcustomer.cmcp = +vcustomer.cmcp - 1;
+                            m.getOrders();
+                        }
+                    },
+                    cmnext: function () {
+                        if (vcustomer.cmcp >= Math.ceil(vcustomer.cmt / vcustomer.sz)) {
+                            return;
+                        } else {
+                            vcustomer.cmcp = +vcustomer.cmcp + 1;
+                            m.getOrders();
+                        }
+                    },
+                    cmjump: function () {
+                        if (vcustomer.cmcp >= Math.ceil(vcustomer.cmt / vcustomer.sz)) vcustomer.cmcp = Math.ceil(vcustomer.cmt / vcustomer.sz);
+                        if (vcustomer.cmcp <= 1) vcustomer.cmcp = 1;
+                        m.getOrders();
+                    },
+
                     //选择订单列表
                     selectorder: function (t) {
                         switch (t) {

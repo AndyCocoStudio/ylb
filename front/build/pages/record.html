@@ -35,6 +35,13 @@
             <td><a href="orderlist.html?mid={{r.merchantID}}">做单查看</a></td>
         </tr>
     </table>
+    <div class="ylb-page">
+        总共{{Math.ceil(cmt/sz)}}页，当前第{{cmcp}}页
+        <a @click="cmprev">上一页</a>
+        <a @click="cmnext">下一页</a>
+        <input v-model="cmcp" type="text" />
+        <a @click="cmjump">跳转</a>
+    </div>
     <h1 class="record-title" v-if="user.role=='AM'||user.role=='AreaManager'">客户经理列表</h1>
     <table class="record-table" v-if="user.role=='AM'||user.role=='AreaManager'">
         <tr>
@@ -60,6 +67,13 @@
             <td>&nbsp;</td>
         </tr>
     </table>
+    <div class="ylb-page">
+        总共{{Math.ceil(ct/sz)}}页，当前第{{ccp}}页
+        <a @click="prev">上一页</a>
+        <a @click="next">下一页</a>
+        <input v-model="ccp" type="text" />
+        <a @click="jump">跳转</a>
+    </div>
 </section>
 <!-- @@close-->
 
