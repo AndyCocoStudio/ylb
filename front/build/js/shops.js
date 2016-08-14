@@ -8,7 +8,7 @@
         ac: "",
         cp: 1,
         t: 0,
-        sz: 6,
+        sz: 9,
     };
     var m = {
         init: function () {

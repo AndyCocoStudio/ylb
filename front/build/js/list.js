@@ -2,7 +2,7 @@
     var datas = {
         cp: 1,
         t: 0,
-        sz: 6,
+        sz: 9,
         k1: $.urlParam("k1") || "",
         k2: $.urlParam("k2") || "",
         n: $.urlParam("n") || ""

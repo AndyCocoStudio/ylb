@@ -1,6 +1,6 @@
 (function () {
     var refer = {
-        sz: 2,
+        sz: 20,
         t: 0,
         cp: 1,
         mt: 0,

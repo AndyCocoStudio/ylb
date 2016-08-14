@@ -1,6 +1,6 @@
 (function () {
     var vcustomer = {
-        sz: 1,
+        sz: 10,
         hcp: 1,
         ht: 0,
         scp: 1,
