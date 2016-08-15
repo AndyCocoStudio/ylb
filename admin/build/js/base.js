@@ -187,6 +187,15 @@
 	$.clearID = function () {
 		localStorage.removeItem("osid");
 	}
+	$.setRole = function (val) {
+		localStorage.setItem("role", val);
+	}
+	$.getRole = function () {
+		return localStorage.getItem("role");
+	}
+	$.clearRole = function () {
+		localStorage.removeItem("role");
+	}
 	/**
 	 * json和string互换
 	 * **/
@@ -307,6 +316,7 @@
 	$(".logout").on("click", function () {
 		if (layout.islogin) {
 			$.clearID();
+			$.clearRole();
 			$.localStorageHandler("clear", "flag");
 			window.location.href = "login.html";
 		} else {
@@ -336,7 +346,8 @@
 		$(".ylb-menu-wrap").fadeOut();
 	});
 	var layout = {
-		islogin: $.getID || false,
+		islogin: $.getID() || false,
+		role: $.getRole() || ""
 	};
 	var m = {
 		init: function () {
@@ -347,10 +358,6 @@
 				el: "#layout-main",
 				data: layout,
 				methods: {
-					logout: function () {
-						$.clearID();
-						window.location.href = "login.html";
-					}
 				}
 			})
 		}

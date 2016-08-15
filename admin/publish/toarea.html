@@ -17,44 +17,56 @@
 	<link rel="stylesheet" type="text/css" href="css/libs/morris.css" />
 	<link rel="stylesheet" type="text/css" href="css/libs/pickday.css" />
 	<link rel="stylesheet" type="text/css" href="css/font-awesome.css" />
-	<link rel="stylesheet" type="text/css" href="css/style.css?rev=562ffcf63bfad5c8cfb10999a17f7406" />
+	<link rel="stylesheet" type="text/css" href="css/style.css?rev=e443e505f09a60403535adc6a6110b19" />
 </head>
 
 <body>
-	<div id="layout-main" class="op-header"><img src="images/logo.png" /><a @click="logout" v-if="islogin">注销登录</a></div>
+	<header class="op-header"><img src="images/logo.png" /><a class="logout">注销登录</a></header>
+	<section class="layout-main">
+		<div class="op-left" id="layout-main" v-cloak>
+			<ul>
+				<li v-show="role=='Admin'"><a href="order.html"><i class="fa fa-money"></i>做单查询</a></li>
+				<li v-show="role=='Admin'||role=='FinancialAffairs'"><a href="transfers.html"><i class="fa fa-money"></i>提现管理</a></li>
+				<li v-show="role=='Admin'||role=='GeneralManager'"><a href="upgraderight.html"><i class="fa fa-money"></i>提升区域经理</a></li>
+				<li v-show="role=='Admin'"><a href="cashpool.html"><i class="fa fa-money"></i>资金池统计</a></li>
+				<li v-show="role=='Admin'||role=='Marketing'"><a href="product.html"><i class="fa fa-money"></i>商品管理</a></li>
+				<li v-show="role=='Admin'||role=='CustomerService'"><a href="onlineorder.html"><i class="fa fa-money"></i>商城订单管理</a></li>
+				<li v-show="role=='Admin'||role=='GeneralManager'"><a href="downgraderight.html"><i class="fa fa-money"></i>降权管理</a></li>
+				<li v-show="role=='Admin'||role=='Marketing'"><a href="banner.html"><i class="fa fa-money"></i>首页管理</a></li>
+				<li v-show="role=='Admin'||role=='GeneralManager'"><a href="users.html"><i class="fa fa-money"></i>有效用户</a></li>
+				<li v-show="role=='Admin'||role=='FinancialAffairs'"><a href="wages.html"><i class="fa fa-money"></i>工资管理</a></li>
+				<li v-show="role=='Admin'"><a href="toarea.html"><i class="fa fa-money"></i>体验积分</a></li>
+			</ul>
+		</div>
+		<div class="op-right">
 
-<section class="toarea-main" id="toarea-main" v-cloak>
-    <div class="op-left">
-        <ul>
-            <li><a href="toarea.html"><i class="fa fa-money"></i>体验积分管理</a></li>
-        </ul>
-    </div>
-    <div class="op-right">
-        <h1>赠送体验积分名额给区域经理</h1>
-        <table>
-            <tr>
-                <th>区域</th>
-                <th>真实姓名</th>
-                <th>手机号</th>
-                <th>总赠送名额数</th>
-                <th>已使用名额数</th>
-                <th>操作</th>
-            </tr>
-            <tr v-for="a in list">
-                <td>{{a.address}}</td>
-                <td>{{a.name}}</td>
-                <td>{{a.mobile}}</td>
-                <td>{{a.totalQuota}}</td>
-                <td>{{a.usedQuota}}</td>
-                <td>
-                    <input placeholder="输入赠送名额数量" type="text">
-                    <a data-id="{{a.userID}}" @click="sends">赠送</a>
-                </td>
-            </tr>
-        </table>
-    </div>
-</section>
+<div class="toarea-main" id="toarea-main" v-cloak>
+    <h1>赠送体验积分名额给区域经理</h1>
+    <table>
+        <tr>
+            <th>区域</th>
+            <th>真实姓名</th>
+            <th>手机号</th>
+            <th>总赠送名额数</th>
+            <th>已使用名额数</th>
+            <th>操作</th>
+        </tr>
+        <tr v-for="a in list">
+            <td>{{a.address}}</td>
+            <td>{{a.name}}</td>
+            <td>{{a.mobile}}</td>
+            <td>{{a.totalQuota}}</td>
+            <td>{{a.usedQuota}}</td>
+            <td>
+                <input placeholder="输入赠送名额数量" type="text">
+                <a data-id="{{a.userID}}" @click="sends">赠送</a>
+            </td>
+        </tr>
+    </table>
+</div>
 
+		</div>
+	</section>
 </body>
 <script src="js/libs/jquery-2.1.4.min.js" type="text/javascript"></script>
 <script src="js/libs/bootstrap.min.js" type="text/javascript"></script>
@@ -62,10 +74,10 @@
 <script src="js/libs/pickday.min.js" type="text/javascript"></script>
 <script src="js/libs/vue.min.js" type="text/javascript"></script>
 <script src="js/libs/echarts.min.js" type="text/javascript"></script>
-<script src="js/base.js?rev=562ffcf63bfad5c8cfb10999a17f7406" type="text/javascript"></script>
+<script src="js/base.js?rev=e443e505f09a60403535adc6a6110b19" type="text/javascript"></script>
 
 
-<script type="text/javascript" src="js/toarea.js?rev=562ffcf63bfad5c8cfb10999a17f7406"></script>
+<script type="text/javascript" src="js/toarea.js?rev=e443e505f09a60403535adc6a6110b19"></script>
 
 
 </html>

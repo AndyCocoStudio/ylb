@@ -5,99 +5,91 @@
 <!-- @@close-->
 
 <!-- @@block = content-->
-<section class="banner-main" id="banner-main" v-cloak>
-    <div class="op-left">
+<div class="op-right" id="banner-main" v-cloak>
+    <div class="banner-preview">
         <ul>
-            <li><a href="banner.html"><i class="fa fa-money"></i>首页管理</a></li>
-            <li><a href="product.html"><i class="fa fa-money"></i>商品管理</a></li>
+            <li class="l2">
+                <div class="b1">
+                    <img :src="list[0].images[0].image">
+                    <span>{{list[0].images[0].brief}}</span>
+                    <div class="upload">banner1</div>
+                </div>
+                <div class="b2">
+                    <img :src="list[1].images[0].image">
+                    <span>{{list[1].images[0].brief}}</span>
+                    <div class="upload">banner2</div>
+                </div>
+            </li>
+            <li class="l2">
+                <div class="b3">
+                    <img :src="list[2].images[0].image">
+                    <span>{{list[2].images[0].brief}}</span>
+                    <div class="upload">banner3</div>
+                </div>
+                <div class="ba">所有分类</div>
+            </li>
+            <li class="l6">
+                <div class="b4">
+                    <img :src="list[3].images[0].image">
+                    <span>{{list[3].images[0].brief}}</span>
+                    <div class="upload">banner4</div>
+                </div>
+                <div class="b7">
+                    <div class="b5">
+                        <img :src="list[4].images[0].image">
+                        <span>{{list[4].images[0].brief}}</span>
+                        <div class="upload">banner5</div>
+                    </div>
+                    <div class="b6">
+                        <img :src="list[5].images[0].image">
+                        <span>{{list[5].images[0].brief}}</span>
+                        <div class="upload">banner6</div>
+                    </div>
+                </div>
+            </li>
         </ul>
     </div>
-    <div class="op-right">
-        <div class="banner-preview">
-            <ul>
-                <li class="l2">
-                    <div class="b1">
-                        <img :src="list[0].images[0].image">
-                        <span>{{list[0].images[0].brief}}</span>
-                        <div class="upload">banner1</div>
-                    </div>
-                    <div class="b2">
-                        <img :src="list[1].images[0].image">
-                        <span>{{list[1].images[0].brief}}</span>
-                        <div class="upload">banner2</div>
-                    </div>
-                </li>
-                <li class="l2">
-                    <div class="b3">
-                        <img :src="list[2].images[0].image">
-                        <span>{{list[2].images[0].brief}}</span>
-                        <div class="upload">banner3</div>
-                    </div>
-                    <div class="ba">所有分类</div>
-                </li>
-                <li class="l6">
-                    <div class="b4">
-                        <img :src="list[3].images[0].image">
-                        <span>{{list[3].images[0].brief}}</span>
-                        <div class="upload">banner4</div>
-                    </div>
-                    <div class="b7">
-                        <div class="b5">
-                            <img :src="list[4].images[0].image">
-                            <span>{{list[4].images[0].brief}}</span>
-                            <div class="upload">banner5</div>
-                        </div>
-                        <div class="b6">
-                            <img :src="list[5].images[0].image">
-                            <span>{{list[5].images[0].brief}}</span>
-                            <div class="upload">banner6</div>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        </div>
-        <ul class="banner-edit">
-            <li>
-                <span>banner1:</span>
-                <a id="banner1">{{update[0].images[0].image?"已传":'点击上传图片'}}</a>
-                <input placeholder="输入标题" v-model="update[0].images[0].brief" maxlength="8" type="text">
-                <input class="urls" placeholder="输入跳转地址" v-model="update[0].images[0].url" type="text">
+    <ul class="banner-edit">
+        <li>
+            <span>banner1:</span>
+            <a id="banner1">{{update[0].images[0].image?"已传":'点击上传图片'}}</a>
+            <input placeholder="输入标题" v-model="update[0].images[0].brief" maxlength="8" type="text">
+            <input class="urls" placeholder="输入跳转地址" v-model="update[0].images[0].url" type="text">
 
-            </li>
-            <li>
-                <span>banner2:</span>
-                <a id="banner2">{{update[1].images[0].image?"已传":'点击上传图片'}}</a>
-                <input placeholder="输入标题" v-model="update[1].images[0].brief" maxlength="8" type="text">
-                <input class="urls" placeholder="输入跳转地址" v-model="update[1].images[0].url" type="text">
-            </li>
-            <li>
-                <span>banner3:</span>
-                <a id="banner3">{{update[2].images[0].image?"已传":'点击上传图片'}}</a>
-                <input placeholder="输入标题" v-model="update[2].images[0].brief" maxlength="8" type="text">
-                <input class="urls" placeholder="输入跳转地址" v-model="update[2].images[0].url" type="text">
-            </li>
-            <li>
-                <span>banner4:</span>
-                <a id="banner4">{{update[3].images[0].image?"已传":'点击上传图片'}}</a>
-                <input placeholder="输入标题" v-model="update[3].images[0].brief" maxlength="8" type="text">
-                <input class="urls" placeholder="输入跳转地址" v-model="update[3].images[0].url" type="text">
-            </li>
-            <li>
-                <span>banner5:</span>
-                <a id="banner5">{{update[4].images[0].image?"已传":'点击上传图片'}}</a>
-                <input placeholder="输入标题" v-model="update[4].images[0].brief" maxlength="8" type="text">
-                <input class="urls" placeholder="输入跳转地址" v-model="update[4].images[0].url" type="text">
-            </li>
-            <li>
-                <span>banner6:</span>
-                <a id="banner6">{{update[5].images[0].image?"已传":'点击上传图片'}}</a>
-                <input placeholder="输入标题" v-model="update[5].images[0].brief" maxlength="8" type="text">
-                <input class="urls" placeholder="输入跳转地址" v-model="update[5].images[0].url" type="text">
-            </li>
-            <li><button @click="updatebanner">提交</button></li>
-        </ul>
-    </div>
-</section>
+        </li>
+        <li>
+            <span>banner2:</span>
+            <a id="banner2">{{update[1].images[0].image?"已传":'点击上传图片'}}</a>
+            <input placeholder="输入标题" v-model="update[1].images[0].brief" maxlength="8" type="text">
+            <input class="urls" placeholder="输入跳转地址" v-model="update[1].images[0].url" type="text">
+        </li>
+        <li>
+            <span>banner3:</span>
+            <a id="banner3">{{update[2].images[0].image?"已传":'点击上传图片'}}</a>
+            <input placeholder="输入标题" v-model="update[2].images[0].brief" maxlength="8" type="text">
+            <input class="urls" placeholder="输入跳转地址" v-model="update[2].images[0].url" type="text">
+        </li>
+        <li>
+            <span>banner4:</span>
+            <a id="banner4">{{update[3].images[0].image?"已传":'点击上传图片'}}</a>
+            <input placeholder="输入标题" v-model="update[3].images[0].brief" maxlength="8" type="text">
+            <input class="urls" placeholder="输入跳转地址" v-model="update[3].images[0].url" type="text">
+        </li>
+        <li>
+            <span>banner5:</span>
+            <a id="banner5">{{update[4].images[0].image?"已传":'点击上传图片'}}</a>
+            <input placeholder="输入标题" v-model="update[4].images[0].brief" maxlength="8" type="text">
+            <input class="urls" placeholder="输入跳转地址" v-model="update[4].images[0].url" type="text">
+        </li>
+        <li>
+            <span>banner6:</span>
+            <a id="banner6">{{update[5].images[0].image?"已传":'点击上传图片'}}</a>
+            <input placeholder="输入标题" v-model="update[5].images[0].brief" maxlength="8" type="text">
+            <input class="urls" placeholder="输入跳转地址" v-model="update[5].images[0].url" type="text">
+        </li>
+        <li><button @click="updatebanner">提交</button></li>
+    </ul>
+</div>
 <!-- @@close-->
 
 <!-- @@block = scripts-->

@@ -17,47 +17,58 @@
 	<link rel="stylesheet" type="text/css" href="css/libs/morris.css" />
 	<link rel="stylesheet" type="text/css" href="css/libs/pickday.css" />
 	<link rel="stylesheet" type="text/css" href="css/font-awesome.css" />
-	<link rel="stylesheet" type="text/css" href="css/style.css?rev=8858faf42f8cc96897f17ccf7f7fe6e4" />
+	<link rel="stylesheet" type="text/css" href="css/style.css?rev=07bf5a5048a8940954d2514b57246103" />
 </head>
 
 <body>
-	<div id="layout-main" class="op-header"><img src="images/logo.png" /><a @click="logout" v-if="islogin">注销登录</a></div>
+	<header class="op-header"><img src="images/logo.png" /><a class="logout">注销登录</a></header>
+	<section class="layout-main">
+		<div class="op-left" id="layout-main" v-cloak>
+			<ul>
+				<li v-show="role=='Admin'"><a href="order.html"><i class="fa fa-money"></i>做单查询</a></li>
+				<li v-show="role=='Admin'||role=='FinancialAffairs'"><a href="transfers.html"><i class="fa fa-money"></i>提现管理</a></li>
+				<li v-show="role=='Admin'||role=='GeneralManager'"><a href="upgraderight.html"><i class="fa fa-money"></i>提升区域经理</a></li>
+				<li v-show="role=='Admin'"><a href="cashpool.html"><i class="fa fa-money"></i>资金池统计</a></li>
+				<li v-show="role=='Admin'||role=='Marketing'"><a href="product.html"><i class="fa fa-money"></i>商品管理</a></li>
+				<li v-show="role=='Admin'||role=='CustomerService'"><a href="onlineorder.html"><i class="fa fa-money"></i>商城订单管理</a></li>
+				<li v-show="role=='Admin'||role=='GeneralManager'"><a href="downgraderight.html"><i class="fa fa-money"></i>降权管理</a></li>
+				<li v-show="role=='Admin'||role=='Marketing'"><a href="banner.html"><i class="fa fa-money"></i>首页管理</a></li>
+				<li v-show="role=='Admin'||role=='GeneralManager'"><a href="users.html"><i class="fa fa-money"></i>有效用户</a></li>
+				<li v-show="role=='Admin'||role=='FinancialAffairs'"><a href="wages.html"><i class="fa fa-money"></i>工资管理</a></li>
+				<li v-show="role=='Admin'"><a href="toarea.html"><i class="fa fa-money"></i>体验积分</a></li>
+			</ul>
+		</div>
+		<div class="op-right">
 
-<section class="wages-main" id="wages-main" v-cloak>
-    <div class="op-left">
-        <ul>
-            <li><a href="wages.html"><i class="fa fa-money"></i>区域经理工资管理</a></li>
-            <li><a href="transfers.html"><i class="fa fa-money"></i>提现审核</a></li>
-        </ul>
-    </div>
-    <div class="op-right">
-        <h1>{{year}}年{{month}}月区域经理工资单</h1>
-        <table>
-            <tr>
-                <th>真实姓名</th>
-                <th>区域</th>
-                <th>手机号</th>
-                <th>工资</th>
-                <th>操作</th>
-            </tr>
-            <tr v-if="list.length<1">
-                <td colspan="5">
-                    这个月所有的工资都发放了
-                </td>
-            </tr>
-            <tr v-for="a in list">
-                <td>{{a.name}}</td>
-                <td>{{a.address}}</td>
-                <td>{{a.mobile}}</td>
-                <td>{{a.wage}}</td>
-                <td>
-                    <a @click="sendwage(a.areaManagerID)">发工资</a>
-                </td>
-            </tr>
-        </table>
-    </div>
-</section>
+<div class="wages-main" id="wages-main" v-cloak>
+    <h1>{{year}}年{{month}}月区域经理工资单</h1>
+    <table>
+        <tr>
+            <th>真实姓名</th>
+            <th>区域</th>
+            <th>手机号</th>
+            <th>工资</th>
+            <th>操作</th>
+        </tr>
+        <tr v-if="list.length<1">
+            <td colspan="5">
+                这个月所有的工资都发放了
+            </td>
+        </tr>
+        <tr v-for="a in list">
+            <td>{{a.name}}</td>
+            <td>{{a.address}}</td>
+            <td>{{a.mobile}}</td>
+            <td>{{a.wage}}</td>
+            <td>
+                <a @click="sendwage(a.areaManagerID)">发工资</a>
+            </td>
+        </tr>
+    </table>
+</div>
 
+		</div>
+	</section>
 </body>
 <script src="js/libs/jquery-2.1.4.min.js" type="text/javascript"></script>
 <script src="js/libs/bootstrap.min.js" type="text/javascript"></script>
@@ -65,10 +76,10 @@
 <script src="js/libs/pickday.min.js" type="text/javascript"></script>
 <script src="js/libs/vue.min.js" type="text/javascript"></script>
 <script src="js/libs/echarts.min.js" type="text/javascript"></script>
-<script src="js/base.js?rev=8858faf42f8cc96897f17ccf7f7fe6e4" type="text/javascript"></script>
+<script src="js/base.js?rev=07bf5a5048a8940954d2514b57246103" type="text/javascript"></script>
 
 
-<script type="text/javascript" src="js/wages.js?rev=8858faf42f8cc96897f17ccf7f7fe6e4"></script>
+<script type="text/javascript" src="js/wages.js?rev=07bf5a5048a8940954d2514b57246103"></script>
 
 
 </html>

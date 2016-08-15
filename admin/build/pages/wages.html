@@ -5,40 +5,32 @@
 <!-- @@close-->
 
 <!-- @@block = content-->
-<section class="wages-main" id="wages-main" v-cloak>
-    <div class="op-left">
-        <ul>
-            <li><a href="wages.html"><i class="fa fa-money"></i>区域经理工资管理</a></li>
-            <li><a href="transfers.html"><i class="fa fa-money"></i>提现审核</a></li>
-        </ul>
-    </div>
-    <div class="op-right">
-        <h1>{{year}}年{{month}}月区域经理工资单</h1>
-        <table>
-            <tr>
-                <th>真实姓名</th>
-                <th>区域</th>
-                <th>手机号</th>
-                <th>工资</th>
-                <th>操作</th>
-            </tr>
-            <tr v-if="list.length<1">
-                <td colspan="5">
-                    这个月所有的工资都发放了
-                </td>
-            </tr>
-            <tr v-for="a in list">
-                <td>{{a.name}}</td>
-                <td>{{a.address}}</td>
-                <td>{{a.mobile}}</td>
-                <td>{{a.wage}}</td>
-                <td>
-                    <a @click="sendwage(a.areaManagerID)">发工资</a>
-                </td>
-            </tr>
-        </table>
-    </div>
-</section>
+<div class="wages-main" id="wages-main" v-cloak>
+    <h1>{{year}}年{{month}}月区域经理工资单</h1>
+    <table>
+        <tr>
+            <th>真实姓名</th>
+            <th>区域</th>
+            <th>手机号</th>
+            <th>工资</th>
+            <th>操作</th>
+        </tr>
+        <tr v-if="list.length<1">
+            <td colspan="5">
+                这个月所有的工资都发放了
+            </td>
+        </tr>
+        <tr v-for="a in list">
+            <td>{{a.name}}</td>
+            <td>{{a.address}}</td>
+            <td>{{a.mobile}}</td>
+            <td>{{a.wage}}</td>
+            <td>
+                <a @click="sendwage(a.areaManagerID)">发工资</a>
+            </td>
+        </tr>
+    </table>
+</div>
 <!-- @@close-->
 
 <!-- @@block = scripts-->

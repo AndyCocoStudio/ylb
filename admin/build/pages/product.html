@@ -5,203 +5,195 @@
 <!-- @@close-->
 
 <!-- @@block = content-->
-<section class="product-main" id="product-main" v-cloak>
-    <div class="op-left">
+<div class="product-main" id="product-main" v-cloak>
+    <h1>商品管理<a @click="cancel">查看列表</a><a @click="addGoods">添加商品</a></h1>
+    <div v-show="path=='add'">
+        <h2>新增商品</h2>
         <ul>
-            <li><a href="product.html"><i class="fa fa-comments"></i>商品管理</a></li>
-            <li><a href="banner.html"><i class="fa fa-comments"></i>首页管理</a></li>
-        </ul>
-    </div>
-    <div class="op-right">
-        <h1>商品管理<a @click="cancel">查看列表</a><a @click="addGoods">添加商品</a></h1>
-        <div v-show="path=='add'">
-            <h2>新增商品</h2>
-            <ul>
-                <li>
-                    <span>商品名</span>
-                    <input v-model="detail.name" type="text">
-                </li>
-                <li>
-                    <span>价格</span>
-                    <input v-model="detail.price" type="text">
-                </li>
-                <li>
-                    <span>库存</span><input v-model="detail.sku" type="text">
-                </li>
-                <li>
-                    <span>重量</span><input v-model="detail.weight" type="text">
-                </li>
-                <li>
-                    <span>运费</span><input v-model="detail.freight" type="text">
-                </li>
-                <li>
-                    <span>列表图</span>
-                    <span class="uploadbtn" id="lbt">{{detail.thumbnail.length==0?'点击上传图片':'图片已上传'}}</span>
-                    <img :src="detail.thumbnail[0]">
-                </li>
-                <li>
-                    <span>产品概述</span>
-                    <textarea v-model="detail.brief.content" type="text"></textarea>
-                </li>
-                <li>
-                    <span>概述图</span>
-                    <span class="uploadbtn" id="gst">{{detail.brief.img ? ' 图片已上传': '请上传图片'}}</span>
-                    <img :src="detail.brief.img">
-                </li>
-                <li>
-                    <span>可抵用积分数</span>
-                    <input v-model="detail.deduction" type="text">
-                </li>
-                <!--<li>
+            <li>
+                <span>商品名</span>
+                <input v-model="detail.name" type="text">
+            </li>
+            <li>
+                <span>价格</span>
+                <input v-model="detail.price" type="text">
+            </li>
+            <li>
+                <span>库存</span><input v-model="detail.sku" type="text">
+            </li>
+            <li>
+                <span>重量</span><input v-model="detail.weight" type="text">
+            </li>
+            <li>
+                <span>运费</span><input v-model="detail.freight" type="text">
+            </li>
+            <li>
+                <span>列表图</span>
+                <span class="uploadbtn" id="lbt">{{detail.thumbnail.length==0?'点击上传图片':'图片已上传'}}</span>
+                <img :src="detail.thumbnail[0]">
+            </li>
+            <li>
+                <span>产品概述</span>
+                <textarea v-model="detail.brief.content" type="text"></textarea>
+            </li>
+            <li>
+                <span>概述图</span>
+                <span class="uploadbtn" id="gst">{{detail.brief.img ? ' 图片已上传': '请上传图片'}}</span>
+                <img :src="detail.brief.img">
+            </li>
+            <li>
+                <span>可抵用积分数</span>
+                <input v-model="detail.deduction" type="text">
+            </li>
+            <!--<li>
                     <span>供应商</span>
                     <input v-model="detail.vendorID" type="text">
                 </li>-->
-                <li>
-                    <span>所属类目</span>
-                    <select @change="setflist">
+            <li>
+                <span>所属类目</span>
+                <select @change="setflist">
                         <option value="-1">-请选择一级类目-</option>
                         <option v-for="f in flist" value={{f.code}}>{{f.name}}</option>
                     </select>
-                    <select @change="setslist">
+                <select @change="setslist">
                         <option value="-1">-请选择二级类目-</option>
                         <option v-for="s in slist" value="{{s.code}}">{{s.name}}</option>
                     </select>
-                </li>
-                <li>
-                    <span>商品属性</span><a @click="addparam">添加</a>
-                    <div v-for="p in detail.info">
-                        <input type="text" v-model="p.name" placeholder="属性">
-                        <input v-model="p.value" type="text" placeholder="值">
-                        <a class="deleteparam" @click="delparam($index)">x</a>
-                    </div>
-                </li>
-                <li>
-                    <span>商品详情图</span>
-                    <span class="uploadbtn" id="spxqt1">{{detail.introduceImages[0]?"图片已上传":'详情图1'}}</span>
-                    <span class="uploadbtn" id="spxqt2">{{detail.introduceImages[1]?"图片已上传":'详情图2'}}</span>
-                    <span class="uploadbtn" id="spxqt3">{{detail.introduceImages[2]?"图片已上传":'详情图3'}}</span>
-                    <img v-for="i in detail.introduceImages" :src="i">
-                </li>
-                <li>
-                    <span>状态</span>
-                    <select>
+            </li>
+            <li>
+                <span>商品属性</span><a @click="addparam">添加</a>
+                <div v-for="p in detail.info">
+                    <input type="text" v-model="p.name" placeholder="属性">
+                    <input v-model="p.value" type="text" placeholder="值">
+                    <a class="deleteparam" @click="delparam($index)">x</a>
+                </div>
+            </li>
+            <li>
+                <span>商品详情图</span>
+                <span class="uploadbtn" id="spxqt1">{{detail.introduceImages[0]?"图片已上传":'详情图1'}}</span>
+                <span class="uploadbtn" id="spxqt2">{{detail.introduceImages[1]?"图片已上传":'详情图2'}}</span>
+                <span class="uploadbtn" id="spxqt3">{{detail.introduceImages[2]?"图片已上传":'详情图3'}}</span>
+                <img v-for="i in detail.introduceImages" :src="i">
+            </li>
+            <li>
+                <span>状态</span>
+                <select>
                         <option value="OnSell">在售</option>
                         <option value="SoldOut">下架</option>
                     </select>
-                </li>
-                <li>
-                    <a class="blue-button" @click="newPro">提交</a>
-                    <a class="white-button" @click="cancel">取消</a>
-                </li>
-            </ul>
-        </div>
-        <div v-show="path=='edit'">
-            <h2>编辑商品</h2>
-            <ul>
-                <li>
-                    <span>商品ID</span>
-                    <span>{{edit.goodsID}}</span>
-                </li>
-                <li>
-                    <span>商品名</span>
-                    <input v-model="edit.name" type="text">
-                </li>
-                <li>
-                    <span>价格</span>
-                    <input v-model="edit.price" type="text">
-                </li>
-                <li>
-                    <span>库存</span><input v-model="edit.sku" type="text">
-                </li>
-                <li>
-                    <span>重量</span><input v-model="edit.weight" type="text">
-                </li>
-                <li>
-                    <span>运费</span><input v-model="edit.freight" type="text">
-                </li>
-                <li>
-                    <span>列表图</span>
-                    <span class="uploadbtn" id="lbt1">{{edit.thumbnail.length==0?'点击上传图片':'图片已上传'}}</span>
-                    <img :src="edit.thumbnail[0]">
-                </li>
-                <li>
-                    <span>产品概述</span>
-                    <textarea v-model="edit.brief.content"></textarea>
-                </li>
-                <li>
-                    <span>概述图</span>
-                    <span class="uploadbtn" id="gst1">{{edit.brief.img ? ' 图片已上传': '请上传图片'}}</span>
-                    <img :src="edit.brief.img">
-                </li>
-                <li>
-                    <span>可抵用积分数</span>
-                    <input v-model="edit.deduction" type="text">
-                </li>
-                <!--<li>
+            </li>
+            <li>
+                <a class="blue-button" @click="newPro">提交</a>
+                <a class="white-button" @click="cancel">取消</a>
+            </li>
+        </ul>
+    </div>
+    <div v-show="path=='edit'">
+        <h2>编辑商品</h2>
+        <ul>
+            <li>
+                <span>商品ID</span>
+                <span>{{edit.goodsID}}</span>
+            </li>
+            <li>
+                <span>商品名</span>
+                <input v-model="edit.name" type="text">
+            </li>
+            <li>
+                <span>价格</span>
+                <input v-model="edit.price" type="text">
+            </li>
+            <li>
+                <span>库存</span><input v-model="edit.sku" type="text">
+            </li>
+            <li>
+                <span>重量</span><input v-model="edit.weight" type="text">
+            </li>
+            <li>
+                <span>运费</span><input v-model="edit.freight" type="text">
+            </li>
+            <li>
+                <span>列表图</span>
+                <span class="uploadbtn" id="lbt1">{{edit.thumbnail.length==0?'点击上传图片':'图片已上传'}}</span>
+                <img :src="edit.thumbnail[0]">
+            </li>
+            <li>
+                <span>产品概述</span>
+                <textarea v-model="edit.brief.content"></textarea>
+            </li>
+            <li>
+                <span>概述图</span>
+                <span class="uploadbtn" id="gst1">{{edit.brief.img ? ' 图片已上传': '请上传图片'}}</span>
+                <img :src="edit.brief.img">
+            </li>
+            <li>
+                <span>可抵用积分数</span>
+                <input v-model="edit.deduction" type="text">
+            </li>
+            <!--<li>
                     <span>供应商</span>
                     <input v-model="edit.vendorID" type="text">
                 </li>-->
-                <li>
-                    <span>所属类目</span>
-                    <select @change="esetflist">
+            <li>
+                <span>所属类目</span>
+                <select @change="esetflist">
                         <option value="-1">-请选择一级类目-</option>
                         <option selected="{{f.code==edit.kind1Code}}" v-for="f in flist" value={{f.code}}>{{f.name}}</option>
                     </select>
-                    <select @change="esetslist">
+                <select @change="esetslist">
                         <option value="-1">-请选择二级类目-</option>
                         <option selected="{{s.code==edit.kind2Code}}" v-for="s in slist" value="{{s.code}}">{{s.name}}</option>
                     </select>
-                </li>
-                <li>
-                    <span>商品属性</span><a @click="eaddparam">添加</a>
-                    <div v-for="p in edit.info">
-                        <input type="text" v-model="p.name" placeholder="属性">
-                        <input v-model="p.value" type="text" placeholder="值">
-                        <a class="deleteparam" @click="edelparam($index)">x</a>
-                    </div>
-                </li>
-                <li>
-                    <span>商品详情图</span>
-                    <span class="uploadbtn" id="spxqt11">{{edit.introduceImages[0]?"图片已上传":'详情图1'}}</span>
-                    <span class="uploadbtn" id="spxqt22">{{edit.introduceImages[1]?"图片已上传":'详情图2'}}</span>
-                    <span class="uploadbtn" id="spxqt33">{{edit.introduceImages[2]?"图片已上传":'详情图3'}}</span>
-                    <img v-for="i in edit.introduceImages" :src="i">
-                </li>
-                <li>
-                    <span>状态</span>
-                    <select>
+            </li>
+            <li>
+                <span>商品属性</span><a @click="eaddparam">添加</a>
+                <div v-for="p in edit.info">
+                    <input type="text" v-model="p.name" placeholder="属性">
+                    <input v-model="p.value" type="text" placeholder="值">
+                    <a class="deleteparam" @click="edelparam($index)">x</a>
+                </div>
+            </li>
+            <li>
+                <span>商品详情图</span>
+                <span class="uploadbtn" id="spxqt11">{{edit.introduceImages[0]?"图片已上传":'详情图1'}}</span>
+                <span class="uploadbtn" id="spxqt22">{{edit.introduceImages[1]?"图片已上传":'详情图2'}}</span>
+                <span class="uploadbtn" id="spxqt33">{{edit.introduceImages[2]?"图片已上传":'详情图3'}}</span>
+                <img v-for="i in edit.introduceImages" :src="i">
+            </li>
+            <li>
+                <span>状态</span>
+                <select>
                         <option value="OnSell">在售</option>
                         <option value="SoldOut">下架</option>
                     </select>
-                </li>
-                <li>
-                    <a class="blue-button" @click="editPro">提交</a>
-                    <a class="white-button" @click="cancel">取消</a>
-                </li>
-            </ul>
-        </div>
-        <div v-show="path=='list'">
-            <h2>商品列表</h2>
-            <table>
-                <tr>
-                    <th>商品ID</th>
-                    <th>商品名称</th>
-                    <th>商品价格</th>
-                    <th>可抵积分</th>
-                    <th>操作</th>
-                </tr>
-                <tr v-for="g in list">
-                    <td>{{g.goodsID}}</td>
-                    <td>{{g.name}}</td>
-                    <td>{{g.price}}</td>
-                    <td>{{g.deduction}}</td>
-                    <td><a class="white-button edit" @click="editGoods(g.goodsID)">编辑</a>
-                        <a class="white-button delete" @click="delGoods(g.goodsID)">删除</a></td>
-                </tr>
-            </table>
-        </div>
+            </li>
+            <li>
+                <a class="blue-button" @click="editPro">提交</a>
+                <a class="white-button" @click="cancel">取消</a>
+            </li>
+        </ul>
     </div>
-</section>
+    <div v-show="path=='list'">
+        <h2>商品列表</h2>
+        <table>
+            <tr>
+                <th>商品ID</th>
+                <th>商品名称</th>
+                <th>商品价格</th>
+                <th>可抵积分</th>
+                <th>操作</th>
+            </tr>
+            <tr v-for="g in list">
+                <td>{{g.goodsID}}</td>
+                <td>{{g.name}}</td>
+                <td>{{g.price}}</td>
+                <td>{{g.deduction}}</td>
+                <td><a class="white-button edit" @click="editGoods(g.goodsID)">编辑</a>
+                    <a class="white-button delete" @click="delGoods(g.goodsID)">删除</a></td>
+            </tr>
+        </table>
+    </div>
+</div>
 <!-- @@close-->
 
 <!-- @@block = scripts-->

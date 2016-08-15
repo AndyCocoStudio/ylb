@@ -21,9 +21,10 @@
                         }).done(function (d) {
                             $.ylbAjaxHandler(d, function () {
                                 $.setID(d.data.sessionID);
+                                $.setRole(d.data.role);
                                 switch (d.data.role) {
                                     case "Admin":
-                                        window.location.href = "superadmin.html";
+                                        window.location.href = "cashpool.html";
                                         break;
                                     case "Marketing":
                                         window.location.href = "product.html";

@@ -5,40 +5,31 @@
 <!-- @@close-->
 
 <!-- @@block = content-->
-<section class="right-main" id="right-main" v-cloak>
-    <div class="op-left">
-        <ul>
-            <li><a href="users.html"><i class="fa fa-money"></i>有效会员查看</a></li>
-            <li><a href="upgraderight.html"><i class="fa fa-money"></i>提升区域经理</a></li>
-            <li><a href="downgraderight.html"><i class="fa fa-money"></i>降权管理</a></li>
-        </ul>
-    </div>
-    <div class="op-right">
-        <ul>
-            <li><span>选择区域</span>
-                <select @change="changeprov">
+<div class="right-main" id="right-main" v-cloak>
+    <ul>
+        <li><span>选择区域</span>
+            <select @change="changeprov">
                     <option value="-1">-请选择省-</option>
                     <option v-for="p in plist" value="{{p.code}}">{{p.name}}</option>
                 </select>
-                <select @change="changecity">
+            <select @change="changecity">
                     <option value="-1">-请选择市-</option>
                     <option v-for="c in clist" value="{{c.code}}">{{c.name}}</option>
                 </select>
-                <select @change="changearea">
+            <select @change="changearea">
                     <option value="-1">-请选择区-</option>
                     <option v-for="a in alist" value="{{a.code}}">{{a.name}}</option>
                 </select>
-            </li>
-            <li><span>手机号</span>
-                <input maxlength="11" v-model="apply.mobile" type="text"></li>
-            <li><span>真实姓名</span>
-                <input maxlength="11" v-model="apply.name" type="text"></li>
-            <li><span>推荐人手机</span>
-                <input maxlength="11" v-model="apply.referrerMobile" type="text"></li>
-            <li><a @click="toupgrade" class="btn-submit">提交</a></li>
-        </ul>
-    </div>
-</section>
+        </li>
+        <li><span>手机号</span>
+            <input maxlength="11" v-model="apply.mobile" type="text"></li>
+        <li><span>真实姓名</span>
+            <input maxlength="11" v-model="apply.name" type="text"></li>
+        <li><span>推荐人手机</span>
+            <input maxlength="11" v-model="apply.referrerMobile" type="text"></li>
+        <li><a @click="toupgrade" class="btn-submit">提交</a></li>
+    </ul>
+</div>
 <!-- @@close-->
 
 <!-- @@block = scripts-->
