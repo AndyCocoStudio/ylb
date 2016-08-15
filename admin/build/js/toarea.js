@@ -1,6 +1,8 @@
 (function () {
     var toarea = {
-
+        cp: 1,
+        sz: 20,
+        t: 0
     };
     var m = {
         init: function () {
@@ -8,11 +10,12 @@
         },
         getAreaList: function () {
             $.when($.ajax({
-                url: $.apiUrl + "/user/all?cp=1&sz=1000&k=0", 
+                url: $.apiUrl + "/user/all?cp=" + toarea.cp + "&sz=" + toarea.sz + "&k=0",
                 type: "GET"
             })).done(function (d) {
                 $.ylbAjaxHandler(d, function () {
                     toarea.list = d.data.areaManagers;
+                    toarea.t = d.data.totalCount;
                     m.buildVue();
                 });
             });
@@ -44,7 +47,28 @@
                                 });
                             });
                         }
-                    }
+                    },
+                    prev: function () {
+                        if (toarea.cp <= 1) {
+                            return;
+                        } else {
+                            toarea.cp = +toarea.cp - 1;
+                            m.getAreaList();
+                        }
+                    },
+                    next: function () {
+                        if (toarea.cp >= Math.ceil(toarea.t / toarea.sz)) {
+                            return;
+                        } else {
+                            toarea.cp = +toarea.cp + 1;
+                            m.getAreaList();
+                        }
+                    },
+                    jump: function () {
+                        if (toarea.cp >= Math.ceil(toarea.t / toarea.sz)) toarea.cp = Math.ceil(toarea.t / toarea.sz);
+                        if (toarea.cp <= 1) toarea.cp = 1;
+                        m.getAreaList();
+                    },
                 }
             })
         }

@@ -17,7 +17,7 @@
 	<link rel="stylesheet" type="text/css" href="css/libs/morris.css" />
 	<link rel="stylesheet" type="text/css" href="css/libs/pickday.css" />
 	<link rel="stylesheet" type="text/css" href="css/font-awesome.css" />
-	<link rel="stylesheet" type="text/css" href="css/style.css?rev=10c4c9beea3caec775947a3e3a168118" />
+	<link rel="stylesheet" type="text/css" href="css/style.css?rev=f53450e3b681692dd885a112295d7dc3" />
 </head>
 
 <body>
@@ -42,9 +42,7 @@
 
 <div class="right-main" id="right-main" v-cloak>
     <div class="right-tips">
-        <a @click="togglet(1)" :class="{'active':amshow}">区域经理列表</a>
-        <a @click="togglet(2)" :class="{'active':cmshow}">客户经理列表</a>
-        <a @click="togglet(3)" :class="{'active':mshow}">加盟商列表</a>
+        <a @click="togglet(1)" :class="{'active':amshow}">区域经理列表</a><a @click="togglet(2)" :class="{'active':cmshow}">客户经理列表</a><a @click="togglet(3)" :class="{'active':mshow}">加盟商列表</a>
     </div>
     <div v-show="amshow">
         <div class="filters">手机号码<input v-model="af.mobile" type="text">姓名<input v-model="af.name" type="text"><a @click="fam">搜索</a></div>
@@ -135,10 +133,10 @@
 <script src="js/libs/pickday.min.js" type="text/javascript"></script>
 <script src="js/libs/vue.min.js" type="text/javascript"></script>
 <script src="js/libs/echarts.min.js" type="text/javascript"></script>
-<script src="js/base.js?rev=10c4c9beea3caec775947a3e3a168118" type="text/javascript"></script>
+<script src="js/base.js?rev=f53450e3b681692dd885a112295d7dc3" type="text/javascript"></script>
 
 
-<script type="text/javascript" src="js/dright.js?rev=10c4c9beea3caec775947a3e3a168118"></script>
+<script type="text/javascript" src="js/dright.js?rev=f53450e3b681692dd885a112295d7dc3"></script>
 
 
 </html>

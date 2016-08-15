@@ -2,6 +2,9 @@
 	var product = {
 		path: "list",
 		goodsid: "",
+		sz: 20,
+		cp: 1,
+		t: 0,
 		detail: {
 			name: "",
 			price: "",
@@ -66,11 +69,12 @@
 		//获取商品列表
 		getData: function () {
 			$.when($.ajax({
-				url: $.apiUrl + '/goods/query?sz=6000',
+				url: $.apiUrl + '/goods/query?sz=' + product.sz + "&cp=" + product.cp,
 				type: 'GET'
 			})).done(function (d) {
 				$.ylbAjaxHandler(d, function () {
 					product.list = d.data.goodses;
+					product.t = d.data.totalCount;
 					product.edit = product.list[0];
 					m.buildVue();
 				});
@@ -382,7 +386,28 @@
 								m.getData();
 							});
 						});
-					}
+					},
+					prev: function () {
+                        if (product.cp <= 1) {
+                            return;
+                        } else {
+                            product.cp = +product.cp - 1;
+                            m.getData();
+                        }
+                    },
+                    next: function () {
+                        if (product.cp >= Math.ceil(product.t / product.sz)) {
+                            return;
+                        } else {
+                            product.cp = +product.cp + 1;
+                            m.getData();
+                        }
+                    },
+                    jump: function () {
+                        if (product.cp >= Math.ceil(product.t / product.sz)) product.cp = Math.ceil(product.t / product.sz);
+                        if (product.cp <= 1) product.cp = 1;
+                        m.getData();
+                    }
 				}
 			});
 			setTimeout(function () {

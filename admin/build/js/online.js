@@ -1,7 +1,10 @@
 (function () {
-    online = {
+    var online = {
         cover: false,
         express: false,
+        cp: 1,
+        sz: 20,
+        t: 0,
         send: {
             orderID: "",
             expressID: "",
@@ -14,11 +17,12 @@
         },
         getList: function () {
             $.when($.ajax({
-                url: $.apiUrl + "/order/shoppingonline",
+                url: $.apiUrl + "/order/shoppingonline?cp=" + online.cp + "&sz=" + online.sz,
                 type: "GET"
             })).done(function (d) {
                 $.ylbAjaxHandler(d, function () {
                     online.list = d.data.orders;
+                    online.t = d.data.totalCount;
                     m.buildVue();
                 });
             })
@@ -49,7 +53,28 @@
                                 m.getList();
                             });
                         });
-                    }
+                    },
+                    prev: function () {
+                        if (online.cp <= 1) {
+                            return;
+                        } else {
+                            online.cp = +online.cp - 1;
+                            m.getList();
+                        }
+                    },
+                    next: function () {
+                        if (online.cp >= Math.ceil(online.t / online.sz)) {
+                            return;
+                        } else {
+                            online.cp = +online.cp + 1;
+                            m.getList();
+                        }
+                    },
+                    jump: function () {
+                        if (online.cp >= Math.ceil(online.t / online.sz)) online.cp = Math.ceil(online.t / online.sz);
+                        if (online.cp <= 1) online.cp = 1;
+                        m.getList();
+                    },
                 }
             })
         }

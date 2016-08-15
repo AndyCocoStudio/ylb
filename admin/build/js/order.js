@@ -1,6 +1,5 @@
 (function () {
     var order = {
-        filter: {},
         plist: [],
         clist: [],
         alist: [],
@@ -8,7 +7,10 @@
         cc: "",
         ac: "",
         st: "",
-        et: ""
+        et: "",
+        t: 0,
+        cp: 1,
+        sz: 20,
     };
     var m = {
         init: function () {
@@ -16,12 +18,14 @@
             m.resetDate();
         },
         getList: function () {
+            var param = "cp=" + order.cp + "&sz=" + order.sz + "&pc=" + order.pc + "&cc=" + order.cc + "&ac=" + order.ac + "&st=" + order.st + "&et=" + order.et;
             $.when($.ajax({
-                url: $.apiUrl + "/statistics/givingscore",
+                url: $.apiUrl + "/statistics/givingscore?" + param,
                 type: "GET"
             })).done(function (d) {
                 $.ylbAjaxHandler(d, function () {
                     order.list = d.data;
+                    order.t = d.data.totalCount;
                     m.getplist();
                 });
             });
@@ -97,16 +101,29 @@
                         order.ac = c;
                     },
                     filterorder: function () {
-                        var param = "pc=" + order.pc + "&cc=" + order.cc + "&ac=" + order.ac + "&st=" + order.st + "&et=" + order.et;
-                        $.ajax({
-                            url: $.apiUrl + "/statistics/givingscore?" + param,
-                            type: "GET"
-                        }).done(function (d) {
-                            $.ylbAjaxHandler(d, function () {
-                                order.list = d.data;
-                            });
-                        });
-                    }
+                        m.getList();
+                    },
+                    prev: function () {
+                        if (order.cp <= 1) {
+                            return;
+                        } else {
+                            order.cp = +order.cp - 1;
+                            m.getList();
+                        }
+                    },
+                    next: function () {
+                        if (order.cp >= Math.ceil(order.t / order.sz)) {
+                            return;
+                        } else {
+                            order.cp = +order.cp + 1;
+                            m.getList();
+                        }
+                    },
+                    jump: function () {
+                        if (order.cp >= Math.ceil(order.t / order.sz)) order.cp = Math.ceil(order.t / order.sz);
+                        if (order.cp <= 1) order.cp = 1;
+                        m.getList();
+                    },
                 }
             });
         }

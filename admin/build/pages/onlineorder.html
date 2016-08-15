@@ -35,11 +35,18 @@
             <td>{{o.mobile}}</td>
             <td>{{o.address}}</td>
             <td>
-                <p v-if="g.status=='Sending'" v-for="g in o.items"><a @click="showexpress(g.orderID)">发货</a></p>
+                <p v-if="g.status=='New'" v-for="g in o.items"><a @click="showexpress(g.orderID)">发货</a></p>
                 <p v-if="g.status=='Sent'" v-for="g in o.items">已发货</p>
             </td>
         </tr>
     </table>
+    <div class="ylb-page">
+        总共{{Math.ceil(t/sz)}}页，当前第{{cp}}页
+        <a @click="prev">上一页</a>
+        <a @click="next">下一页</a>
+        <input v-model="cp" type="text" />
+        <a @click="jump">跳转</a>
+    </div>
     <div class="ylb-cover" @click="hideall" v-show="cover"></div>
     <div class="ylb-graybox" v-show="express">
         <ul>

@@ -9,8 +9,8 @@
     <h1>区域做单查询</h1>
     <div class="order-filter">
         <select @change="setprov">
-                <option value="">-请选择省-</option>
-                <option v-for="p in plist" value="{{p.code}}">{{p.name}}</option>
+                <option selected="{{pc==''}}" value="">-请选择省-</option>
+                <option selected="{{pc==p.code}}" v-for="p in plist" value="{{p.code}}">{{p.name}}</option>
             </select>
         <select @change="setcity">
                 <option value="">-请选择市-</option>
@@ -52,6 +52,13 @@
             </td>
         </tr>
     </table>
+    <div class="ylb-page">
+        总共{{Math.ceil(t/sz)}}页，当前第{{cp}}页
+        <a @click="prev">上一页</a>
+        <a @click="next">下一页</a>
+        <input v-model="cp" type="text" />
+        <a @click="jump">跳转</a>
+    </div>
 </div>
 <!-- @@close-->
 

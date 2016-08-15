@@ -5,7 +5,10 @@
         ac: "",
         plist: [],
         clist: [],
-        alist: []
+        alist: [],
+        cp: 1,
+        sz: 5,
+        t: 0
     };
     var m = {
         init: function () {
@@ -19,16 +22,6 @@
             })).done(function (d) {
                 $.ylbAjaxHandler(d, function () {
                     users.plist = d.data;
-                });
-            });
-        },
-        filterusers: function () {
-            $.when($.ajax({
-                url: $.apiUrl + "/statistics/marketing?cityCode=" + users.cc + "&areaCode=" + users.ac,
-                type: "GET"
-            })).done(function (d) {
-                $.ylbAjaxHandler(d, function () {
-                    users.info = d.data; 
                 });
             });
         },
@@ -54,11 +47,12 @@
         },
         getUserList: function () {
             $.when($.ajax({
-                url: $.apiUrl + "/statistics/marketing",
+                url: $.apiUrl + "/statistics/marketing?pc=" + users.pc + "&cc=" + users.cc + "&ac=" + users.ac + "&cp=" + users.cp + "&sz=" + users.sz,
                 type: "GET"
             })).done(function (d) {
                 $.ylbAjaxHandler(d, function () {
                     users.info = d.data;
+                    users.t = d.data.totalCount;
                     m.buildVue();
                 });
             });
@@ -87,8 +81,29 @@
                         users.ac = c;
                     },
                     filteruser: function () {
-                        m.filterusers();
-                    }
+                        m.getUserList();
+                    },
+                    prev: function () {
+                        if (users.cp <= 1) {
+                            return;
+                        } else {
+                            users.cp = +users.cp - 1;
+                            m.getList();
+                        }
+                    },
+                    next: function () {
+                        if (users.cp >= Math.ceil(users.t / users.sz)) {
+                            return;
+                        } else {
+                            users.cp = +users.cp + 1;
+                            m.getList();
+                        }
+                    },
+                    jump: function () {
+                        if (users.cp >= Math.ceil(users.t / users.sz)) users.cp = Math.ceil(users.t / users.sz);
+                        if (users.cp <= 1) users.cp = 1;
+                        m.getList();
+                    },
                 }
             })
         }

@@ -7,9 +7,7 @@
 <!-- @@block = content-->
 <div class="right-main" id="right-main" v-cloak>
     <div class="right-tips">
-        <a @click="togglet(1)" :class="{'active':amshow}">区域经理列表</a>
-        <a @click="togglet(2)" :class="{'active':cmshow}">客户经理列表</a>
-        <a @click="togglet(3)" :class="{'active':mshow}">加盟商列表</a>
+        <a @click="togglet(1)" :class="{'active':amshow}">区域经理列表</a><a @click="togglet(2)" :class="{'active':cmshow}">客户经理列表</a><a @click="togglet(3)" :class="{'active':mshow}">加盟商列表</a>
     </div>
     <div v-show="amshow">
         <div class="filters">手机号码<input v-model="af.mobile" type="text">姓名<input v-model="af.name" type="text"><a @click="fam">搜索</a></div>
