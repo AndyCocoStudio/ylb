@@ -1,0 +1,39 @@
+<!-- @@master ../layout.html  -->
+
+<!-- @@block = title-->
+<title>后台用户管理</title>
+<!-- @@close-->
+
+<!-- @@block = content-->
+<div class="account-main" id="account-main" v-cloak>
+    <a>新建用户</a>
+    <table>
+        <tr>
+            <th>用户名</th>
+            <th>角色</th>
+            <th>操作</th>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td>
+                <a @click="editaccount">修改</a>
+                <a>删除</a>
+            </td>
+        </tr>
+    </table>
+    <div class="ylb-graybox" v-show="edit">
+        <ul>
+            <li><span>用户名</span>{{}}</li>
+            <li><span>角色</span><select></select></li>
+            <li><span>密码</span><input type="password"></li>
+            <li><a>确认</a><a @click="hideall">取消</a></li>
+        </ul>
+    </div>
+    <div class="ylb-cover" v-show="cover" @click="hideall"></div>
+</div>
+<!-- @@close-->
+
+<!-- @@block = scripts-->
+<script type="text/javascript" src="js/account.js?rev=@@hash"></script>
+<!-- @@close-->

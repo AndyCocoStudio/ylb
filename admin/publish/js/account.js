@@ -1,0 +1,1 @@
+!function(){var i={edit:!1,cover:!1},n={init:function(){n.buildVue()},getRoleList:function(){},buildVue:function(){i=new Vue({el:"#account-main",data:i,methods:{editaccount:function(){i.edit=!0,i.cover=!0},hideall:function(){i.edit=!1,i.cover=!1}}})}};n.init()}();
