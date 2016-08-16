@@ -1,0 +1,21 @@
+<!-- @@master ../layout.html  -->
+
+<!-- @@block = title-->
+<title>配置管理</title>
+<!-- @@close-->
+
+<!-- @@block = content-->
+<div class="config-main" id="config-main" v-cloak>
+    <h1>配置管理<a @click="editable">编辑</a></h1>
+    <ul>
+        <li><span>手续费(%)</span><em v-show="!isedit">{{option.pr}}</em><input v-show="isedit" v-model="option.pr" type="text"></li>
+        <li><span>做单最大抵扣额度(%)</span><em v-show="!isedit">{{option.gsd}}</em><input v-show="isedit" v-model="option.gsd" type="text"></li>
+        <li><span>积分兑换最大抵扣额度(%)</span><em v-show="!isedit">{{option.sod}}</em><input v-show="isedit" v-model="option.sod" type="text"></li>
+        <li v-show="isedit"><a>提交</a></li>
+    </ul>
+</div>
+<!-- @@close-->
+
+<!-- @@block = scripts-->
+<script type="text/javascript" src="js/config.js?rev=@@hash"></script>
+<!-- @@close-->

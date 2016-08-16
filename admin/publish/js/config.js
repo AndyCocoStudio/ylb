@@ -1,0 +1,1 @@
+!function(){var i={isedit:!1},n={init:function(){n.getConfig()},getConfig:function(){$.when($.ajax({url:$.apiUrl+"/config",type:"GET"})).done(function(t){$.ylbAjaxHandler(t,function(){i.option=t.data,n.buildVue()})})},buildVue:function(){i=new Vue({el:"#config-main",data:i,methods:{editable:function(){i.isedit=!i.isedit}}})}};n.init()}();

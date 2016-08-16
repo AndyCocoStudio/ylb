@@ -1,0 +1,1 @@
+!function(){var n={},i={init:function(){i.getConfig()},getConfig:function(){$.when($.ajax({url:$.apiUrl+"/config",type:"GET"})).done(function(t){$.ylbAjaxHandler(t,function(){n.option=t.data,i.buildVue()})})},buildVue:function(){n=new Vue({el:"#config-main",data:n,methods:{}})}};i.init()}();

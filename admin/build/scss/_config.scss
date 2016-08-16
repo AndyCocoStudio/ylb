@@ -1,0 +1,29 @@
+.config-main{
+    ul li{
+        margin: 2px 0;
+        line-height: 36px;
+        border-bottom: 1px dashed #ddd;
+        span{
+            width:180px;
+        }
+        em{
+            padding-left: 20px;
+        }
+        input{
+            margin-left: 20px;
+        }
+        &:last-child{
+            border-bottom: none;
+            text-align: center;
+            a{
+                display: inline-block;
+                border-radius: 3px;
+                width: 120px;
+                height: 24px;
+                line-height: 24px;
+                background-color: $orange;
+                color: #fff;
+            }
+        }
+    }
+}

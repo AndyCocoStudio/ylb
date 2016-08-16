@@ -1,14 +1,14 @@
 (function () {
     var account = {
-        edit: false,
+        edita: false,
         cover: false,
-
+        newa: false
     };
     var m = {
         init: function () {
             m.buildVue();
         },
-        getRoleList:function(){
+        getRoleList: function () {
 
         },
         buildVue: function () {
@@ -17,12 +17,17 @@
                 data: account,
                 methods: {
                     editaccount: function () {
-                        account.edit = true;
+                        account.edita = true;
                         account.cover = true;
                     },
                     hideall: function () {
-                        account.edit = false;
+                        account.edita = false;
                         account.cover = false;
+                        account.newa = false;
+                    },
+                    newaccount:function(){
+                        account.newa = true;
+                        account.cover = true;
                     }
                 }
             })

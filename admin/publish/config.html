@@ -3,7 +3,7 @@
 
 <head>
 
-<title>后台用户管理</title>
+<title>配置管理</title>
 
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1" />
@@ -17,7 +17,7 @@
 	<link rel="stylesheet" type="text/css" href="css/libs/morris.css" />
 	<link rel="stylesheet" type="text/css" href="css/libs/pickday.css" />
 	<link rel="stylesheet" type="text/css" href="css/font-awesome.css" />
-	<link rel="stylesheet" type="text/css" href="css/style.css?rev=9f08a472b28797935cfbd21c21dfa8f6" />
+	<link rel="stylesheet" type="text/css" href="css/style.css?rev=ff9cb6caac98844ddba7a539ce5eb789" />
 </head>
 
 <body>
@@ -40,40 +40,14 @@
 		</div>
 		<div class="op-right">
 
-<div class="account-main" id="account-main" v-cloak>
-    <a @click="newaccount">新建用户</a>
-    <table>
-        <tr>
-            <th>用户名</th>
-            <th>角色</th>
-            <th>操作</th>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td>
-                <a @click="editaccount">修改</a>
-                <a>删除</a>
-            </td>
-        </tr>
-    </table>
-    <div class="ylb-graybox" v-show="edita">
-        <ul>
-            <li><span>用户名</span>{{}}</li>
-            <li><span>角色</span><select></select></li>
-            <li><span>密码</span><input type="password"></li>
-            <li><a>确认</a><a @click="hideall">取消</a></li>
-        </ul>
-    </div>
-    <div class="ylb-graybox" v-show="newa">
-        <ul>
-            <li><span>用户名</span>{{}}</li>
-            <li><span>角色</span><select></select></li>
-            <li><span>密码</span><input type="password"></li>
-            <li><a>确认</a><a @click="hideall">取消</a></li>
-        </ul>
-    </div>
-    <div class="ylb-cover" v-show="cover" @click="hideall"></div>
+<div class="config-main" id="config-main" v-cloak>
+    <h1>配置管理<a @click="editable">编辑</a></h1>
+    <ul>
+        <li><span>手续费(%)</span><em v-show="!isedit">{{option.pr}}</em><input v-show="isedit" v-model="option.pr" type="text"></li>
+        <li><span>做单最大抵扣额度(%)</span><em v-show="!isedit">{{option.gsd}}</em><input v-show="isedit" v-model="option.gsd" type="text"></li>
+        <li><span>积分兑换最大抵扣额度(%)</span><em v-show="!isedit">{{option.sod}}</em><input v-show="isedit" v-model="option.sod" type="text"></li>
+        <li v-show="isedit"><a>提交</a></li>
+    </ul>
 </div>
 
 		</div>
@@ -85,10 +59,10 @@
 <script src="js/libs/pickday.min.js" type="text/javascript"></script>
 <script src="js/libs/vue.min.js" type="text/javascript"></script>
 <script src="js/libs/echarts.min.js" type="text/javascript"></script>
-<script src="js/base.js?rev=9f08a472b28797935cfbd21c21dfa8f6" type="text/javascript"></script>
+<script src="js/base.js?rev=ff9cb6caac98844ddba7a539ce5eb789" type="text/javascript"></script>
 
 
-<script type="text/javascript" src="js/account.js?rev=9f08a472b28797935cfbd21c21dfa8f6"></script>
+<script type="text/javascript" src="js/config.js?rev=ff9cb6caac98844ddba7a539ce5eb789"></script>
 
 
 </html>
