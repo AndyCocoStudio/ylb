@@ -17,7 +17,7 @@
 	<link rel="stylesheet" type="text/css" href="css/libs/morris.css" />
 	<link rel="stylesheet" type="text/css" href="css/libs/pickday.css" />
 	<link rel="stylesheet" type="text/css" href="css/font-awesome.css" />
-	<link rel="stylesheet" type="text/css" href="css/style.css?rev=b40e1edf6c960f0579f7f2b2779effce" />
+	<link rel="stylesheet" type="text/css" href="css/style.css?rev=3e2d5d3845558f4899db1d0a7faae539" />
 </head>
 
 <body>
@@ -25,23 +25,23 @@
 	<section class="layout-main">
 		<div class="op-left" id="layout-main" v-cloak>
 			<ul>
-				<li v-show="role=='Admin'"><a href="order.html"><i class="fa fa-money"></i>做单查询</a></li>
-				<li v-show="role=='Admin'||role=='FinancialAffairs'"><a href="transfers.html"><i class="fa fa-money"></i>提现管理</a></li>
+				<li v-show="role=='Admin'||role=='Marketing'||role=='GeneralManager'"><a href="order.html"><i class="fa fa-money"></i>做单查询</a></li>
+				<li v-show="role=='Admin'||role=='FinancialAffairs'||role=='GeneralManager'"><a href="transfers.html"><i class="fa fa-money"></i>提现管理</a></li>
 				<li v-show="role=='Admin'||role=='GeneralManager'"><a href="upgraderight.html"><i class="fa fa-money"></i>提升区域经理</a></li>
 				<li v-show="role=='Admin'"><a href="cashpool.html"><i class="fa fa-money"></i>资金池统计</a></li>
-				<li v-show="role=='Admin'||role=='Marketing'"><a href="product.html"><i class="fa fa-money"></i>商品管理</a></li>
-				<li v-show="role=='Admin'||role=='CustomerService'"><a href="onlineorder.html"><i class="fa fa-money"></i>商城订单管理</a></li>
+				<li v-show="role=='Admin'||role=='CustomerService'"><a href="product.html"><i class="fa fa-money"></i>商品管理</a></li>
+				<li v-show="role=='Admin'||role=='Marketing'||role=='CustomerService'"><a href="onlineorder.html"><i class="fa fa-money"></i>商城订单管理</a></li>
 				<li v-show="role=='Admin'||role=='GeneralManager'"><a href="downgraderight.html"><i class="fa fa-money"></i>降权管理</a></li>
-				<li v-show="role=='Admin'||role=='Marketing'"><a href="banner.html"><i class="fa fa-money"></i>首页管理</a></li>
-				<li v-show="role=='Admin'||role=='GeneralManager'"><a href="users.html"><i class="fa fa-money"></i>有效用户</a></li>
-				<li v-show="role=='Admin'||role=='FinancialAffairs'"><a href="wages.html"><i class="fa fa-money"></i>工资管理</a></li>
-				<li v-show="role=='Admin'"><a href="toarea.html"><i class="fa fa-money"></i>体验积分</a></li>
+				<li v-show="role=='Admin'||role=='CustomerService'"><a href="banner.html"><i class="fa fa-money"></i>首页管理</a></li>
+				<li v-show="role=='Admin'||role=='Marketing'||role=='GeneralManager'"><a href="users.html"><i class="fa fa-money"></i>有效用户</a></li>
+				<li v-show="role=='Admin'||role=='FinancialAffairs'||role=='GeneralManager'"><a href="wages.html"><i class="fa fa-money"></i>工资管理</a></li>
+				<li v-show="role=='Admin'||role=='GeneralManager'"><a href="toarea.html"><i class="fa fa-money"></i>体验积分</a></li>
 			</ul>
 		</div>
 		<div class="op-right">
 
 <div class="users-main" id="users-main" v-cloak>
-    <h1>有效会员统计({{info.activeMember}})</h1>
+    <h1>有效会员统计({{info.totalCount}})</h1>
     <div class="users-filter">
         <select @change="changeprov">
                 <option value="">-请选择省-</option>
@@ -99,10 +99,10 @@
 <script src="js/libs/pickday.min.js" type="text/javascript"></script>
 <script src="js/libs/vue.min.js" type="text/javascript"></script>
 <script src="js/libs/echarts.min.js" type="text/javascript"></script>
-<script src="js/base.js?rev=b40e1edf6c960f0579f7f2b2779effce" type="text/javascript"></script>
+<script src="js/base.js?rev=3e2d5d3845558f4899db1d0a7faae539" type="text/javascript"></script>
 
 
-<script type="text/javascript" src="js/users.js?rev=b40e1edf6c960f0579f7f2b2779effce"></script>
+<script type="text/javascript" src="js/users.js?rev=3e2d5d3845558f4899db1d0a7faae539"></script>
 
 
 </html>

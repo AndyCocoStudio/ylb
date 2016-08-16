@@ -22,26 +22,27 @@
                             $.ylbAjaxHandler(d, function () {
                                 $.setID(d.data.sessionID);
                                 $.setRole(d.data.role);
-                                switch (d.data.role) {
-                                    case "Admin":
-                                        window.location.href = "cashpool.html";
-                                        break;
-                                    case "Marketing":
-                                        window.location.href = "product.html";
-                                        break;
-                                    case "FinancialAffairs":
-                                        window.location.href = "transfers.html";
-                                        break;
-                                    case "CustomerService":
-                                        window.location.href = "onlineorder.html";
-                                        break;
-                                    case "GeneralManager":
-                                        window.location.href = "upgraderight.html";
-                                        break;
-                                    default:
-                                        break;
+                                 window.location.href = "index.html";
+                                // switch (d.data.role) {
+                                //     case "Admin":
+                                //         window.location.href = "cashpool.html";//超管
+                                //         break;
+                                //     case "Marketing":
+                                //         window.location.href = "product.html";//市场scb
+                                //         break;
+                                //     case "FinancialAffairs":
+                                //         window.location.href = "transfers.html";//财务cwb
+                                //         break;
+                                //     case "CustomerService":
+                                //         window.location.href = "onlineorder.html";//网购部wgb
+                                //         break;
+                                //     case "GeneralManager":
+                                //         window.location.href = "upgraderight.html";//总经理zjl
+                                //         break;
+                                //     default:
+                                //         break;
 
-                                }
+                                // }
                             });
                         });
                     },

@@ -10,11 +10,11 @@
         et: "",
         t: 0,
         cp: 1,
-        sz: 20,
+        sz: 12,
     };
     var m = {
         init: function () {
-            m.getList();
+            m.getplist();
             m.resetDate();
         },
         getList: function () {
@@ -26,7 +26,7 @@
                 $.ylbAjaxHandler(d, function () {
                     order.list = d.data;
                     order.t = d.data.totalCount;
-                    m.getplist();
+                    m.buildVue();
                 });
             });
         },
@@ -37,7 +37,7 @@
             })).done(function (d) {
                 $.ylbAjaxHandler(d, function () {
                     order.plist = d.data;
-                    m.buildVue();
+                    m.getList();
                 });
             })
         },
@@ -101,6 +101,7 @@
                         order.ac = c;
                     },
                     filterorder: function () {
+                        order.cp = 1;
                         m.getList();
                     },
                     prev: function () {

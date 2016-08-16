@@ -7,7 +7,7 @@
         clist: [],
         alist: [],
         cp: 1,
-        sz: 5,
+        sz: 20,
         t: 0
     };
     var m = {
@@ -81,6 +81,7 @@
                         users.ac = c;
                     },
                     filteruser: function () {
+                        users.cp = 1;
                         m.getUserList();
                     },
                     prev: function () {
@@ -88,7 +89,7 @@
                             return;
                         } else {
                             users.cp = +users.cp - 1;
-                            m.getList();
+                            m.getUserList();
                         }
                     },
                     next: function () {
@@ -96,13 +97,13 @@
                             return;
                         } else {
                             users.cp = +users.cp + 1;
-                            m.getList();
+                            m.getUserList();
                         }
                     },
                     jump: function () {
                         if (users.cp >= Math.ceil(users.t / users.sz)) users.cp = Math.ceil(users.t / users.sz);
                         if (users.cp <= 1) users.cp = 1;
-                        m.getList();
+                        m.getUserList();
                     },
                 }
             })
