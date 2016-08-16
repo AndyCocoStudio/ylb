@@ -12,9 +12,15 @@
             background-color: $green;
             color: #fff;
             border-radius: 3px;
+            margin-left: 8px;
         }
         em{
             margin-right: 5px;
+            display: inline-block;
+            width: 90px;
+        }
+        select{
+            margin-right: 12px;
         }
     }
     table{

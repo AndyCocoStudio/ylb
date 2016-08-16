@@ -6,8 +6,10 @@
 
 <!-- @@block = content -->
 <div class="transfer-main" id="transfer-main" v-cloak>
-	<div class="mb40">
-		<h1 class="transfer-title">资产转出审批</h1>
+	<div class="transfer-tips">
+		<a @click="togglet(1)" :class="{'active':ut}">未处理转出申请</a><a @click="togglet(2)" :class="{'active':ft}">已处理转出申请</a>
+	</div>
+	<div v-show="ut">
 		<table>
 			<tr>
 				<th>申请ID</th>
@@ -32,37 +34,52 @@
 				<td><a @click="agree(t.transferID)">同意</a><a @click="disagree(t.transferID)">拒绝</a></td>
 			</tr>
 		</table>
+		<div class="ylb-page">
+			总共{{Math.ceil(ut/sz)}}页，当前第{{ucp}}页
+			<a @click="uprev">上一页</a>
+			<a @click="unext">下一页</a>
+			<input v-model="ucp" type="text" />
+			<a @click="ujump">跳转</a>
+		</div>
 	</div>
-	<h1 class="transfer-title">资产转出审批记录</h1>
-	<table>
-		<tr>
-			<th>申请ID</th>
-			<th>转出金额</th>
-			<th>银行卡号</th>
-			<th>开户行</th>
-			<th>开卡人</th>
-			<th>店铺名</th>
-			<th>地址</th>
-			<th>申请时间</th>
-			<th>状态</th>
-			<th>备注</th>
-		</tr>
-		<tr v-if="t.status!='New'" v-for="t in list">
-			<td>{{t.transferID}}</td>
-			<td>{{t.amount}}</td>
-			<td>{{t.account}}</td>
-			<td>{{t.bank}}</td>
-			<td>{{t.name}}</td>
-			<td>{{t.storeName}}</td>
-			<td>{{t.address}}</td>
-			<td>{{t.createTime}}</td>
-			<td>
-				<em v-if="t.status=='Agree'">已同意</em>
-				<em v-if="t.status=='Reject'">已拒绝</em>
-			</td>
-			<td>{{t.reason}}</td>
-		</tr>
-	</table>
+	<div v-show="ft">
+		<table>
+			<tr>
+				<th>申请ID</th>
+				<th>转出金额</th>
+				<th>银行卡号</th>
+				<th>开户行</th>
+				<th>开卡人</th>
+				<th>店铺名</th>
+				<th>地址</th>
+				<th>申请时间</th>
+				<th>状态</th>
+				<th>备注</th>
+			</tr>
+			<tr v-if="t.status!='New'" v-for="t in list">
+				<td>{{t.transferID}}</td>
+				<td>{{t.amount}}</td>
+				<td>{{t.account}}</td>
+				<td>{{t.bank}}</td>
+				<td>{{t.name}}</td>
+				<td>{{t.storeName}}</td>
+				<td>{{t.address}}</td>
+				<td>{{t.createTime}}</td>
+				<td>
+					<em v-if="t.status=='Agree'">已同意</em>
+					<em v-if="t.status=='Reject'">已拒绝</em>
+				</td>
+				<td>{{t.reason}}</td>
+			</tr>
+		</table>
+		<div class="ylb-page">
+			总共{{Math.ceil(ft/sz)}}页，当前第{{fcp}}页
+			<a @click="fprev">上一页</a>
+			<a @click="fnext">下一页</a>
+			<input v-model="fcp" type="text" />
+			<a @click="fjump">跳转</a>
+		</div>
+	</div>
 </div>
 <!-- @@close -->
 

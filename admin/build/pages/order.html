@@ -8,6 +8,7 @@
 <div class="order-main" id="order-main" v-cloak>
     <h1>区域做单查询({{list.totalCount}})</h1>
     <div class="order-filter">
+        <em>请选择区域</em>
         <select @change="setprov">
                 <option selected="{{pc==''}}" value="">-请选择省-</option>
                 <option selected="{{pc==p.code}}" v-for="p in plist" value="{{p.code}}">{{p.name}}</option>
@@ -19,9 +20,9 @@
         <select @change="setarea">
                 <option value="">-请选择区-</option>
                 <option v-for="a in alist" value="{{a.code}}">{{a.name}}</option>
-            </select>
+            </select><br>
         <em>请选择时间段</em>
-        <input id="std" v-model="st" type="text"> ~
+        <input id="std" v-model="st" type="text">~
         <input id="etd" v-model="et" type="text">
         <a @click="filterorder">搜索</a>
     </div>

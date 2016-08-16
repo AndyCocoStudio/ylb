@@ -1,6 +1,7 @@
 (function () {
 	var transfer = {
-
+		ut: true,
+		ft: false
 	};
 	var m = {
 		init: function () {
@@ -52,6 +53,22 @@
 							})
 						}
 					},
+					togglet: function (i) {
+						switch (i) {
+							case 1:
+								transfer.ut = true;
+								transfer.ft = false;
+								break;
+							case 2:
+								transfer.ut = false;
+								transfer.ft = true;
+								break;
+							default:
+								transfer.ut = true;
+								transfer.ft = false;
+								break;
+						}
+					}
 				}
 			});
 		}
