@@ -47,7 +47,7 @@
         },
         getUserList: function () {
             $.when($.ajax({
-                url: $.apiUrl + "/statistics/marketing?pc=" + users.pc + "&cc=" + users.cc + "&ac=" + users.ac + "&cp=" + users.cp + "&sz=" + users.sz,
+                url: $.apiUrl + "/statistics/users?pc=" + users.pc + "&cc=" + users.cc + "&ac=" + users.ac + "&cp=" + users.cp + "&sz=" + users.sz,
                 type: "GET"
             })).done(function (d) {
                 $.ylbAjaxHandler(d, function () {
