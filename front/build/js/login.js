@@ -6,7 +6,14 @@
         sid: $.getID() || "",
         num: 60,
         counting: false,
-        countdown: 0
+        countdown: 0,
+        npwd: false,
+        cover: false,
+        newpwd: {
+            mobile: "",
+            captcha: "",
+            password: ""
+        }
     };
     var m = {
         init: function () {
@@ -89,6 +96,74 @@
                                 $.ylbAlert("请输入手机号码");
                             }
                         }
+                    },
+                    getCode2: function () {
+                        if (vlogin.counting) {
+                            return;
+                        } else {
+                            if (vlogin.newpwd.mobile) {
+                                if (vlogin.newpwd.mobile.length < 11) {
+                                    $.ylbAlert("手机号码位数不正确");
+                                } else {
+                                    if (!$.checkIsMobileNumber(vlogin.newpwd.mobile)) {
+                                        $.ylbAlert("请输入正确手机号");
+                                    } else {
+                                        vlogin.counting = true;
+                                        $.ajax({
+                                            url: $.apiUrl + "/captcha",
+                                            type: "PUT",
+                                            data: JSON.stringify({
+                                                mobile: vlogin.newpwd.mobile,
+                                            })
+                                        }).done(function (d) {
+                                            $.ylbAjaxHandler(d, function () {
+                                                $.ylbAlert("发送成功");
+                                                vlogin.countdown = setInterval(m.countDown, 1000);
+                                            });
+                                        });
+                                    }
+                                }
+                            } else {
+                                $.ylbAlert("请输入手机号码");
+                            }
+                        }
+                    },
+                    setpwd: function () {
+                        if (vlogin.newpwd.mobile == "") {
+                            $.ylbAlert("请输入手机号码");
+                            return;
+                        }
+                        if (vlogin.newpwd.captcha == "") {
+                            $.ylbAlert("请输入验证码");
+                            return;
+                        }
+                        if (vlogin.newpwd.password == "") {
+                            $.ylbAlert("请输入密码");
+                            return;
+                        }
+                        $.ajax({
+                            url: $.apiUrl + "/user/login/password/reset",
+                            type: "POST",
+                            data: JSON.stringify(vlogin.newpwd)
+                        }).done(function (d) {
+                            $.ylbAjaxHandler(d, function () {
+                                $.ylbAlert("设置成功，请重新登录");
+                                vlogin.hideall();
+                                vlogin.newpwd = {
+                                    mobile: "",
+                                    captcha: "",
+                                    password: ""
+                                };
+                            })
+                        });
+                    },
+                    hideall: function () {
+                        this.npwd = false;
+                        this.cover = false;
+                    },
+                    showforget: function () {
+                        this.cover = true;
+                        this.npwd = true;
                     }
                 }
             })
@@ -97,7 +172,7 @@
             //## 再次获取验证码倒计时
             if (vlogin.num > 1) {
                 vlogin.num -= 1;
-                $(".btn-code").val(vlogin.num + "秒后重新获取");
+                $(".btn-code, .a-code").val(vlogin.num + "秒后重新获取");
             } else {
                 vlogin.counting = false;
                 $(".btn-code").val("重新获取");

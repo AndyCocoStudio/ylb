@@ -6,7 +6,8 @@
         url: $.regexUrl() || "",
         num: 60,
         counting: false,
-        countdown: 0
+        countdown: 0,
+        txtinfo: false
     };
     var m = {
         init: function () {
@@ -17,7 +18,7 @@
                 el: "#logon-main",
                 data: vlogon,
                 methods: {
-                    logon: function () {
+                    showinfo: function () {
                         if (vlogon.mobile) {
                             if (vlogon.mobile.length < 11) {
                                 $.ylbAlert("手机号码位数不正确");
@@ -25,30 +26,38 @@
                                 if (!$.checkIsMobileNumber(vlogon.mobile)) {
                                     $.ylbAlert("请输入正确手机号");
                                 } else {
-                                    if(!vlogon.password){
+                                    if (!vlogon.password) {
                                         $.ylbAlert("请输入密码");
                                         return;
+                                    } else {
+                                        vlogon.txtinfo = true;
                                     }
-                                    $.ajax({
-                                        url: $.apiUrl + '/user/register',
-                                        type: 'PUT',
-                                        data: JSON.stringify({
-                                            "mobile": vlogon.mobile,
-                                            "password": vlogon.password,
-                                            "referrerMobile": vlogon.ref
-                                        })
-                                    }).done(function (d) {
-                                        $.ylbAjaxHandler(d, function () {
-                                            $.setID(d.data.sessionID);
-                                            $.localStorageHandler("set", "flag", d.data.flag);
-                                            window.location.href = "index.html";
-                                        });
-                                    });
                                 }
                             }
                         } else {
                             $.ylbAlert("请输入手机号码");
                         }
+                    },
+                    logon: function () {
+                        vlogon.txtinfo = false;
+                        $.ajax({
+                            url: $.apiUrl + '/user/register',
+                            type: 'PUT',
+                            data: JSON.stringify({
+                                "mobile": vlogon.mobile,
+                                "password": vlogon.password,
+                                "referrerMobile": vlogon.ref
+                            })
+                        }).done(function (d) {
+                            $.ylbAjaxHandler(d, function () {
+                                $.setID(d.data.sessionID);
+                                $.localStorageHandler("set", "flag", d.data.flag);
+                                window.location.href = "index.html";
+                            });
+                        });
+                    },
+                    hideall: function () {
+                        this.txtinfo = false;
                     },
                     tologon: function (e) {
                         if (e.keyCode == 13) {

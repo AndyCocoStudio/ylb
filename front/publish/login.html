@@ -13,9 +13,9 @@
 
 
 
-	<link rel="stylesheet" type="text/css" href="css/style.css?rev=302dbd6ef4633b9bcf809ca021d67f1d" />
+	<link rel="stylesheet" type="text/css" href="css/style.css?rev=57d84e38a949108d22e827c0e303a7e2" />
 	<link rel="stylesheet" type="text/css" href="css/pickday.css" />
-	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=302dbd6ef4633b9bcf809ca021d67f1d" />
+	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=57d84e38a949108d22e827c0e303a7e2" />
 </head>
 
 <body>
@@ -49,8 +49,18 @@
                 <button @click="login">登录</button>
             </li>
         </ul>
-        <p>还没有账号?<a href="logon.html">注册</a><span><i class="icon-ylbicon-27"></i>安全</span></p>
+        <p>还没有账号?<a href="logon.html">注册</a><a class="forget" @click="showforget">忘记密码?</a><span><i class="icon-ylbicon-27"></i>安全</span></p>
     </div>
+    <div class="ylb-graybox login-newpwd" v-show="npwd">
+        <h1>重设登录密码</h1>
+        <ul>
+            <li><input placeholder="请输入手机号" v-model="newpwd.mobile" type="text"><a class="a-code" @click="getCode2">发送验证码</a></li>
+            <li><input placeholder="请输入验证码" v-model="newpwd.captcha" type="text"></li>
+            <li><input placeholder="请输入新密码" v-model="newpwd.password" type="password"></li>
+            <li><button @click="setpwd">重设密码</button></li>
+        </ul>
+    </div>
+    <div class="ylb-show-cover" v-show="cover" @click="hideall"></div>
 </section>
 
 	<div id="ylb-layout">
@@ -84,9 +94,9 @@
 <script src="js/libs/pickday.min.js" type="text/javascript"></script>
 <script src="js/libs/qrcode.min.js" type="text/javascript"></script>
 <script src="js/libs/dropzone.js" type="text/javascript"></script>
-<script src="js/base.js?rev=302dbd6ef4633b9bcf809ca021d67f1d" type="text/javascript"></script>
+<script src="js/base.js?rev=57d84e38a949108d22e827c0e303a7e2" type="text/javascript"></script>
 
-<script type="text/javascript" src="js/login.js?rev=302dbd6ef4633b9bcf809ca021d67f1d"></script>
+<script type="text/javascript" src="js/login.js?rev=57d84e38a949108d22e827c0e303a7e2"></script>
 
 
 </html>

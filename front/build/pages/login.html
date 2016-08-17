@@ -20,8 +20,18 @@
                 <button @click="login">登录</button>
             </li>
         </ul>
-        <p>还没有账号?<a href="logon.html">注册</a><span><i class="icon-ylbicon-27"></i>安全</span></p>
+        <p>还没有账号?<a href="logon.html">注册</a><a class="forget" @click="showforget">忘记密码?</a><span><i class="icon-ylbicon-27"></i>安全</span></p>
     </div>
+    <div class="ylb-graybox login-newpwd" v-show="npwd">
+        <h1>重设登录密码</h1>
+        <ul>
+            <li><input placeholder="请输入手机号" v-model="newpwd.mobile" type="text"><a class="a-code" @click="getCode2">发送验证码</a></li>
+            <li><input placeholder="请输入验证码" v-model="newpwd.captcha" type="text"></li>
+            <li><input placeholder="请输入新密码" v-model="newpwd.password" type="password"></li>
+            <li><button @click="setpwd">重设密码</button></li>
+        </ul>
+    </div>
+    <div class="ylb-show-cover" v-show="cover" @click="hideall"></div>
 </section>
 <!-- @@close-->
 
