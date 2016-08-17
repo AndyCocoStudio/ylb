@@ -6,36 +6,56 @@
 
 <!-- @@block = content-->
 <div class="account-main" id="account-main" v-cloak>
-    <a @click="newaccount">新建用户</a>
+    <h1>后台用户管理<a @click="newaccount">新建用户</a></h1>
     <table>
         <tr>
             <th>用户名</th>
             <th>角色</th>
             <th>操作</th>
         </tr>
-        <tr>
-            <td></td>
-            <td></td>
+        <tr v-for="u in list">
+            <td>{{u.userName}}</td>
             <td>
-                <a @click="editaccount">修改</a>
-                <a>删除</a>
+                <em v-if="u.role=='Admin'">超级管理员</em>
+                <em v-if="u.role=='Marketing'">市场部</em>
+                <em v-if="u.role=='FinancialAffairs'">财务部</em>
+                <em v-if="u.role=='CustomerService'">网购部</em>
+                <em v-if="u.role=='GeneralManager'">总经理</em>
+                <em v-if="u.role=='LegalInspection'">法务部</em>
+            </td>
+            <td>
+                <a @click="editaccount($index)">修改密码</a>
+                <a @click="delaccount(u.staffID)">删除</a>
             </td>
         </tr>
     </table>
     <div class="ylb-graybox" v-show="edita">
         <ul>
-            <li><span>用户名</span>{{}}</li>
-            <li><span>角色</span><select></select></li>
-            <li><span>密码</span><input type="password"></li>
-            <li><a>确认</a><a @click="hideall">取消</a></li>
+            <li><span>用户名</span>{{ea.userName}}</li>
+            <li><span>角色</span><em v-if="ea.role=='Admin'">超级管理员</em>
+                <em v-if="ea.role=='Marketing'">市场部</em>
+                <em v-if="ea.role=='FinancialAffairs'">财务部</em>
+                <em v-if="ea.role=='CustomerService'">网购部</em>
+                <em v-if="ea.role=='GeneralManager'">总经理</em>
+                <em v-if="ea.role=='LegalInspection'">法务部</em></li>
+            <li><span>密码</span><input v-model="ea.password" type="password"></li>
+            <li><a @click="updateaccount">确认</a><a @click="hideall">取消</a></li>
         </ul>
     </div>
     <div class="ylb-graybox" v-show="newa">
         <ul>
-            <li><span>用户名</span>{{}}</li>
-            <li><span>角色</span><select></select></li>
-            <li><span>密码</span><input type="password"></li>
-            <li><a>确认</a><a @click="hideall">取消</a></li>
+            <li><span>用户名</span><input v-model="na.name" type="text"></li>
+            <li><span>角色</span><select @change="nselrole">
+                <option value="">-请选择-</option>
+                <option value="Admin">超级管理员</option>
+                <option value="Marketing">市场部</option>
+                <option value="FinancialAffairs">财务部</option>
+                <option value="CustomerService">网购部</option>
+                <option value="GeneralManager">总经理</option>
+                <option value="LegalInspection">法务部</option>
+                </select></li>
+            <li><span>密码</span><input v-model="na.password" type="password"></li>
+            <li><a @click="createaccount">新增</a><a @click="hideall">取消</a></li>
         </ul>
     </div>
     <div class="ylb-cover" v-show="cover" @click="hideall"></div>

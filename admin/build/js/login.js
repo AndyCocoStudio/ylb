@@ -21,6 +21,7 @@
                         }).done(function (d) {
                             $.ylbAjaxHandler(d, function () {
                                 $.setID(d.data.sessionID);
+                                console.log(d.data);
                                 $.setRole(d.data.role);
                                  window.location.href = "index.html";
                             });
