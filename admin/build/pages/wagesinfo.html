@@ -1,0 +1,79 @@
+<!-- @@master ../layout.html  -->
+
+<!-- @@block = title-->
+<title>区域经理工资管理</title>
+<!-- @@close-->
+
+<!-- @@block = content-->
+<div class="wagesinfo-main" id="wagesinfo-main" v-cloak>
+    <h1>{{y}}年{{m}}月工资详情</h1>
+    <div class="wages-filter">
+        <select @change="changeyear">
+                <option selected="{{y==''}}" value="">-请选择年份-</option>
+                <option selected="{{y=='2016'}}" value="2016">2016年</option>
+                <option selected="{{y=='2017'}}" value="2017">2017年</option>
+                <option selected="{{y=='2018'}}" value="2018">2018年</option>
+                <option selected="{{y=='2019'}}" value="2019">2019年</option>
+                <option selected="{{y=='2020'}}" value="2020">2020年</option>
+                <option selected="{{y=='2021'}}" value="2021">2021年</option>
+                <option selected="{{y=='2022'}}" value="2022">2022年</option>
+                <option selected="{{y=='2023'}}" value="2023">2023年</option>
+                <option selected="{{y=='2024'}}" value="2024">2024年</option>
+                <option selected="{{y=='2025'}}" value="2025">2025年</option>
+                <option selected="{{y=='2026'}}" value="2026">2026年</option>
+                <option selected="{{y=='2027'}}" value="2027">2027年</option>
+                <option selected="{{y=='2028'}}" value="2028">2028年</option>
+                <option selected="{{y=='2029'}}" value="2029">2029年</option>
+                <option selected="{{y=='2030'}}" value="2030">2030年</option>
+            </select>
+        <select @change="changemonth">
+                <option selected="{{m==''}}" value="">-请选择月份-</option>
+                <option selected="{{m=='1'}}" value="1">1月</option>
+                <option selected="{{m=='2'}}" value="2">2月</option>
+                <option selected="{{m=='3'}}" value="3">3月</option>
+                <option selected="{{m=='4'}}" value="4">4月</option>
+                <option selected="{{m=='5'}}" value="5">5月</option>
+                <option selected="{{m=='6'}}" value="6">6月</option>
+                <option selected="{{m=='7'}}" value="7">7月</option>
+                <option selected="{{m=='8'}}" value="8">8月</option>
+                <option selected="{{m=='9'}}" value="9">9月</option>
+                <option selected="{{m=='10'}}" value="10">10月</option>
+                <option selected="{{m=='11'}}" value="11">11月</option>
+                <option selected="{{m=='12'}}" value="12">12月</option>
+            </select>
+
+        <a @click="filterlist">搜索</a>
+    </div>
+    <table>
+        <tr>
+            <th>店铺名</th>
+            <th>注册号</th>
+            <th>区域</th>
+            <th>做单时间</th>
+            <th>积分</th>
+            <th>提成比例(%)</th>
+            <th>工资</th>
+        </tr>
+        <tr v-for="a in list">
+            <td>{{a.storeName}}</td>
+            <td>{{a.mobile}}</td>
+            <td>{{a.address}}</td>
+            <td>{{a.date}}</td>
+            <td>{{a.totalAmount}}</td>
+            <td>{{a.rate}}</td>
+            <td>{{a.wage}}</td>
+        </tr>
+    </table>
+    <div class="ylb-page">
+        总共{{Math.ceil(t/sz)}}页，当前第{{cp}}页
+        <a @click="prev">上一页</a>
+        <a @click="next">下一页</a>
+        <input v-model="cp" type="text" />
+        <a @click="jump">跳转</a>
+    </div>
+</div>
+<!-- @@close-->
+
+<!-- @@block = scripts-->
+<script type="text/javascript" src="js/wagesinfo.js?rev=@@hash"></script>
+<!-- @@close-->

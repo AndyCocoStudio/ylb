@@ -2,15 +2,52 @@
     var toarea = {
         cp: 1,
         sz: 20,
-        t: 0
+        t: 0,
+        pc: "",
+        cc: "",
+        ac: "",
+        plist: [],
+        clist: [],
+        alist: []
     };
     var m = {
         init: function () {
-            m.getAreaList();
+            m.getpList();
+        },
+        getpList: function () {
+            $.when($.ajax({
+                url: $.apiUrl + "/address",
+                type: "GET"
+            })).done(function (d) {
+                $.ylbAjaxHandler(d, function () {
+                    toarea.plist = d.data;
+                    m.getAreaList();
+                });
+            });
+        },
+        updatecity: function (code) {
+            $.ajax({
+                url: $.apiUrl + "/address?code=" + code,
+                type: "GET"
+            }).done(function (d) {
+                $.ylbAjaxHandler(d, function () {
+                    toarea.clist = d.data;
+                });
+            })
+        },
+        updatearea: function (code) {
+            $.ajax({
+                url: $.apiUrl + "/address?code=" + code,
+                type: "GET"
+            }).done(function (d) {
+                $.ylbAjaxHandler(d, function () {
+                    toarea.alist = d.data;
+                });
+            })
         },
         getAreaList: function () {
             $.when($.ajax({
-                url: $.apiUrl + "/user/all?cp=" + toarea.cp + "&sz=" + toarea.sz + "&k=0",
+                url: $.apiUrl + "/user/all?cp=" + toarea.cp + "&sz=" + toarea.sz + "&k=0&pc=" + toarea.pc + "&cc=" + toarea.cc + "&ac=" + toarea.ac,
                 type: "GET"
             })).done(function (d) {
                 $.ylbAjaxHandler(d, function () {
@@ -48,6 +85,24 @@
                             });
                         }
                     },
+                    changeprov: function (el) {
+                        var c = $(el.target).find("option:selected").val();
+                        toarea.pc = c;
+                        toarea.cc = "";
+                        toarea.ac = "";
+                        toarea.alist = [];
+                        m.updatecity(c);
+                    },
+                    changecity: function (el) {
+                        var c = $(el.target).find("option:selected").val();
+                        toarea.cc = c;
+                        toarea.ac = "";
+                        m.updatearea(c);
+                    },
+                    changearea: function (el) {
+                        var c = $(el.target).find("option:selected").val();
+                        toarea.ac = c;
+                    },
                     prev: function () {
                         if (toarea.cp <= 1) {
                             return;
@@ -69,6 +124,9 @@
                         if (toarea.cp <= 1) toarea.cp = 1;
                         m.getAreaList();
                     },
+                    filterlist: function () {
+                        m.getAreaList();
+                    }
                 }
             })
         }

@@ -1,0 +1,16 @@
+.wages-main, .wagesinfo-main{
+    .wages-filter{
+        padding-bottom: 20px;
+        line-height: 32px;
+        a{
+            display: inline-block;
+            padding: 0 20px;
+            background-color: $green;
+            height: 28px;
+            margin-top: 2px;
+            line-height: 28px;
+            border-radius: 3px;
+            color: #fff;
+        }
+    }
+}

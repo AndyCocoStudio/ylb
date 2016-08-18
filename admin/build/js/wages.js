@@ -2,15 +2,55 @@
     var wages = {
         cp: 1,
         sz: 20,
-        t: 0
+        t: 0,
+        y: "",
+        m: "",
+        role: "",
+        pc: "",
+        cc: "",
+        ac: "",
+        plist: [],
+        clist: [],
+        alist: []
     };
     var m = {
         init: function () {
-            m.getList();
+            m.getpList();
+        },
+        getpList: function () {
+            $.when($.ajax({
+                url: $.apiUrl + "/address",
+                type: "GET"
+            })).done(function (d) {
+                $.ylbAjaxHandler(d, function () {
+                    wages.plist = d.data;
+                    m.getList();
+                });
+            });
+        },
+        updatecity: function (code) {
+            $.ajax({
+                url: $.apiUrl + "/address?code=" + code,
+                type: "GET"
+            }).done(function (d) {
+                $.ylbAjaxHandler(d, function () {
+                    wages.clist = d.data;
+                });
+            })
+        },
+        updatearea: function (code) {
+            $.ajax({
+                url: $.apiUrl + "/address?code=" + code,
+                type: "GET"
+            }).done(function (d) {
+                $.ylbAjaxHandler(d, function () {
+                    wages.alist = d.data;
+                });
+            })
         },
         getList: function () {
             $.when($.ajax({
-                url: $.apiUrl + "/areamanager/wages?cp=" + wages.cp + "&sz=" + wages.sz,
+                url: $.apiUrl + "/wages?pc=" + wages.pc + "&cc=" + wages.cc + "&ac=" + wages.ac + "&cp=" + wages.cp + "&sz=" + wages.sz + "&y=" + wages.y + "&m=" + wages.m + "&role=" + wages.role,
                 type: "GET"
             })).done(function (d) {
                 $.ylbAjaxHandler(d, function () {
@@ -41,6 +81,36 @@
                             })
                         });
                     },
+                    changeprov: function (el) {
+                        var c = $(el.target).find("option:selected").val();
+                        wages.pc = c;
+                        wages.cc = "";
+                        wages.ac = "";
+                        wages.alist = [];
+                        m.updatecity(c);
+                    },
+                    changecity: function (el) {
+                        var c = $(el.target).find("option:selected").val();
+                        wages.cc = c;
+                        wages.ac = "";
+                        m.updatearea(c);
+                    },
+                    changearea: function (el) {
+                        var c = $(el.target).find("option:selected").val();
+                        wages.ac = c;
+                    },
+                    changeyear: function (el) {
+                        var v = $(el.target).find("option:selected").val();
+                        wages.y = v;
+                    },
+                    changemonth: function (el) {
+                        var v = $(el.target).find("option:selected").val();
+                        wages.m = v;
+                    },
+                    changerole: function (el) {
+                        var v = $(el.target).find("option:selected").val();
+                        wages.y = v;
+                    },
                     prev: function () {
                         if (wages.cp <= 1) {
                             return;
@@ -62,6 +132,9 @@
                         if (wages.cp <= 1) wages.cp = 1;
                         m.getList();
                     },
+                    filterlist: function () {
+                        m.getList();
+                    }
                 }
             })
         }

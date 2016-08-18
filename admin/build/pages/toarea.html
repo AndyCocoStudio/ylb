@@ -7,6 +7,21 @@
 <!-- @@block = content-->
 <div class="toarea-main" id="toarea-main" v-cloak>
     <h1>赠送体验积分名额给区域经理</h1>
+    <div class="ylb-filter">
+        <select @change="changeprov">
+                <option value="">-请选择省-</option>
+                <option v-for="p in plist" value="{{p.code}}">{{p.name}}</option>
+            </select>
+        <select @change="changecity">
+                <option value="">-请选择省市-</option>
+                <option v-for="c in clist" value="{{c.code}}">{{c.name}}</option>
+            </select>
+        <select @change="changearea">
+                <option value="">-请选择区-</option>
+                <option v-for="a in alist" value="{{a.code}}">{{a.name}}</option>
+            </select>
+        <a @click="filterlist">搜索</a>
+    </div>
     <table>
         <tr>
             <th>区域</th>
