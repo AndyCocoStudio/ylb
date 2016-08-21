@@ -14,15 +14,19 @@
     <div class="pay-detail">
         <h1 v-for="p in order.product">{{p.name}}</h1>
         <h2>订单提交成功，请您尽快付款！<br>订单号：{{id}}</h2>
-        <p>
+        <!--<p>
             <em>积分支付:<span>{{order.payInScore}}</span>元</em> 
             <em>余额支付:<span>{{order.payInBalance}}</span>元</em>
             <em>货款支付:<span>{{order.payInPaymentForGoods}}</span>元</em> 
             <em>佣金支付:<span>{{order.payInCommission}}</span>元</em> 
-            <em>现金支付:<span>{{order.payInCash}}</span>元</em></p>
+            <em>现金支付:<span>{{order.payInCash}}</span>元</em></p>-->
+        <p>
+            <em>您需要支付：<span>{{order.payInScore+order.payInBalance+order.payInPaymentForGoods+order.payInCommission+order.payInCash}}</span>元</em>
+        </p>
     </div>
     <div class="pay-way">
-        <h1>现金部分请选择支付方式</h1>
+        <h1>请选择支付方式</h1>
+        <h2>是否使用余额/佣金/货款支付：<input id="useb" type="checkbox"><label for="useb">使用</label></h2>
         <input name="payway" @change="selectpayway(1)" checked="checked" type="radio" id="zfb"><label for="zfb">支付宝支付</label>
         <input name="payway" @change="selectpayway(2)" type="radio" id="wy"><label for="wy">网银支付</label>
     </div>

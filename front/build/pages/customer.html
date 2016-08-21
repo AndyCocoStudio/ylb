@@ -533,7 +533,7 @@
                 <a @click="cmjump">跳转</a>
             </div>
         </div>
-        <!--区域经理审批管理-->
+        <!--区域经理审批管理
         <div v-if="info.role=='AreaManager'||info.role=='AM'" id="customer-approve" class="customer-approve">
             <div class="customer-title">
                 审批管理
@@ -687,35 +687,8 @@
                     <td><a href="apply.html?aid={{a.id}}&r={{a.applyRole}}">详情</a></td>
                 </tr>
             </table>
-            <!--<div v-show="zdsh" class="ylb-page">
-                总共{{Math.ceil(zdt/sz)}}页，当前第{{zdcp}}页
-                <a @click="zdprev">上一页</a>
-                <a @click="zdnext">下一页</a>
-                <input v-model="zdcp" type="text" />
-                <a @click="zdjump">跳转</a>
-            </div>
-            <div v-show="jssh" class="ylb-page">
-                总共{{Math.ceil(jst/sz)}}页，当前第{{jscp}}页
-                <a @click="jsprev">上一页</a>
-                <a @click="jsnext">下一页</a>
-                <input v-model="jscp" type="text" />
-                <a @click="jsjump">跳转</a>
-            </div>
-            <div v-show="fzdsh" class="ylb-page">
-                总共{{Math.ceil(fzdt/sz)}}页，当前第{{fzdcp}}页
-                <a @click="fzdprev">上一页</a>
-                <a @click="fzdnext">下一页</a>
-                <input v-model="fzdcp" type="text" />
-                <a @click="fzdjump">跳转</a>
-            </div>
-            <div v-show="fjssh" class="ylb-page">
-                总共{{Math.ceil(fjst/sz)}}页，当前第{{fjscp}}页
-                <a @click="fjsprev">上一页</a>
-                <a @click="fjsnext">下一页</a>
-                <input v-model="fjscp" type="text" />
-                <a @click="fjsjump">跳转</a>
-            </div>-->
         </div>
+        -->
         <!--区域经理工资管理-->
         <div v-if="info.role=='AreaManager'||info.role=='AM'" class="customer-cash"></div>
     </div>
