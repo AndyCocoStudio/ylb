@@ -1,5 +1,7 @@
 (function () {
     var cash = {
+        st: "",
+        et: "",
     };
     var m = {
         init: function () {
@@ -12,7 +14,7 @@
             var goption = {
                 title: {
                     text: '货款资金池',
-                    subtext: '现金['+cash.pool.PaymentForGoods.cash+'] 佣金['+cash.pool.PaymentForGoods.commission+'] 货款['+cash.pool.PaymentForGoods.paymentForGoods+'] 积分['+cash.pool.PaymentForGoods.score+'] 剩余资金['+(cash.pool.PaymentForGoods.cash-cash.paidTransferDetail.PaymentForGoods)+"]",
+                    //subtext: ,
                     x: 'center'
                 },
                 tooltip: {
@@ -49,7 +51,7 @@
             var poption = {
                 title: {
                     text: '平台费资金池',
-                    subtext: '现金['+cash.pool.PlatFormFee.cash+'] 佣金['+cash.pool.PlatFormFee.commission+'] 货款['+cash.pool.PlatFormFee.paymentForGoods+'] 积分['+cash.pool.PlatFormFee.score+'] 剩余资金['+(cash.pool.PlatFormFee.cash-cash.paidTransferDetail.Balance)+"]",
+                    //subtext: '现金['+cash.pool.PlatFormFee.cash+'] 佣金['+cash.pool.PlatFormFee.commission+'] 货款['+cash.pool.PlatFormFee.paymentForGoods+'] 积分['+cash.pool.PlatFormFee.score+'] 剩余资金['+(cash.pool.PlatFormFee.cash-cash.paidTransferDetail.Balance)+"]",
                     x: 'center'
                 },
                 tooltip: {
@@ -86,7 +88,7 @@
             var soption = {
                 title: {
                     text: '服务费资金池',
-                    subtext: '现金['+cash.pool.ServiceFee.cash+'] 佣金['+cash.pool.ServiceFee.commission+'] 货款['+cash.pool.ServiceFee.paymentForGoods+'] 积分['+cash.pool.ServiceFee.score+'] 剩余资金['+(cash.pool.ServiceFee.cash-cash.paidTransferDetail.Commission)+"]",
+                    //subtext: '现金['+cash.pool.ServiceFee.cash+'] 佣金['+cash.pool.ServiceFee.commission+'] 货款['+cash.pool.ServiceFee.paymentForGoods+'] 积分['+cash.pool.ServiceFee.score+'] 剩余资金['+(cash.pool.ServiceFee.cash-cash.paidTransferDetail.Commission)+"]",
                     x: 'center'
                 },
                 tooltip: {

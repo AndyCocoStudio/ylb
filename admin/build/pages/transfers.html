@@ -7,9 +7,9 @@
 <!-- @@block = content -->
 <div class="transfer-main" id="transfer-main" v-cloak>
 	<div class="transfer-tips">
-		<a @click="togglet(1)" :class="{'active':ut}">未处理转出申请</a><a @click="togglet(2)" :class="{'active':ft}">已处理转出申请</a>
+		<a @click="togglet(1)" :class="{'active':unt}">未放款</a><a @click="togglet(2)" :class="{'active':fnt}">全部</a>
 	</div>
-	<div v-show="ut">
+	<div v-show="unt">
 		<table>
 			<tr>
 				<th>申请ID</th>
@@ -22,7 +22,7 @@
 				<th>申请时间</th>
 				<th>操作</th>
 			</tr>
-			<tr v-if="t.status=='New'" v-for="t in list">
+			<tr v-for="t in ulist">
 				<td>{{t.transferID}}</td>
 				<td>{{t.amount}}</td>
 				<td>{{t.account}}</td>
@@ -31,7 +31,7 @@
 				<td>{{t.storeName}}</td>
 				<td>{{t.address}}</td>
 				<td>{{t.createTime}}</td>
-				<td><a @click="agree(t.transferID)">同意</a><a @click="disagree(t.transferID)">拒绝</a></td>
+				<td><a @click="agree(t.transferID)">放款</a></td>
 			</tr>
 		</table>
 		<div class="ylb-page">
@@ -42,7 +42,7 @@
 			<a @click="ujump">跳转</a>
 		</div>
 	</div>
-	<div v-show="ft">
+	<div v-show="fnt">
 		<table>
 			<tr>
 				<th>申请ID</th>
@@ -54,9 +54,8 @@
 				<th>地址</th>
 				<th>申请时间</th>
 				<th>状态</th>
-				<th>备注</th>
 			</tr>
-			<tr v-if="t.status!='New'" v-for="t in list">
+			<tr v-for="t in flist">
 				<td>{{t.transferID}}</td>
 				<td>{{t.amount}}</td>
 				<td>{{t.account}}</td>
@@ -66,10 +65,9 @@
 				<td>{{t.address}}</td>
 				<td>{{t.createTime}}</td>
 				<td>
-					<em v-if="t.status=='Agree'">已同意</em>
-					<em v-if="t.status=='Reject'">已拒绝</em>
+					<em v-if="t.status=='Agree'">区域经理已同意</em>
+					<em v-if="t.status=='Paid'">财务已放款</em>
 				</td>
-				<td>{{t.reason}}</td>
 			</tr>
 		</table>
 		<div class="ylb-page">

@@ -1,7 +1,12 @@
 (function () {
 	var transfer = {
-		ut: true,
-		ft: false
+		unt: true,
+		fnt: false,
+		sz: 20,
+		ucp: 1,
+		ut: 1,
+		fcp: 1,
+		ft: 1
 	};
 	var m = {
 		init: function () {
@@ -9,11 +14,25 @@
 		},
 		getData: function () {
 			$.ajax({
-				url: $.apiUrl + '/transfers?k=1',
+				url: $.apiUrl + '/transfers?k=0&cp=' + transfer.ucp + '&sz=' + transfer.sz,
 				type: 'GET',
 			}).done(function (d) {
 				$.ylbAjaxHandler(d, function () {
-					transfer.list = d.data.transfers;
+					transfer.ulist = d.data.transfers;
+					transfer.ut = d.data.totalCount;
+					m.getAll();
+					//m.buildVue();
+				});
+			})
+		},
+		getAll: function () {
+			$.ajax({
+				url: $.apiUrl + '/transfers?k=1&cp=' + transfer.fcp + '&sz=' + transfer.sz,
+				type: 'GET',
+			}).done(function (d) {
+				$.ylbAjaxHandler(d, function () {
+					transfer.flist = d.data.transfers;
+					transfer.ft = d.data.totalCount;
 					m.buildVue();
 				});
 			})
@@ -56,19 +75,61 @@
 					togglet: function (i) {
 						switch (i) {
 							case 1:
-								transfer.ut = true;
-								transfer.ft = false;
+								transfer.unt = true;
+								transfer.fnt = false;
 								break;
 							case 2:
-								transfer.ut = false;
-								transfer.ft = true;
+								transfer.unt = false;
+								transfer.fnt = true;
 								break;
 							default:
-								transfer.ut = true;
-								transfer.ft = false;
+								transfer.unt = true;
+								transfer.fnt = false;
 								break;
 						}
-					}
+					},
+					uprev: function () {
+                        if (transfer.ucp <= 1) {
+                            return;
+                        } else {
+                            transfer.ucp = +transfer.ucp - 1;
+                            m.getData();
+                        }
+                    },
+                    unext: function () {
+                        if (transfer.ucp >= Math.ceil(transfer.ut / transfer.sz)) {
+                            return;
+                        } else {
+                            transfer.ucp = +transfer.ucp + 1;
+                            m.getData();
+                        }
+                    },
+                    ujump: function () {
+                        if (transfer.ucp >= Math.ceil(transfer.ut / transfer.sz)) transfer.ucp = Math.ceil(transfer.ut / transfer.sz);
+                        if (transfer.ucp <= 1) transfer.ucp = 1;
+                        m.getData();
+                    },
+					fprev: function () {
+                        if (transfer.fcp <= 1) {
+                            return;
+                        } else {
+                            transfer.fcp = +transfer.fcp - 1;
+                            m.getData();
+                        }
+                    },
+                    fnext: function () {
+                        if (transfer.fcp >= Math.ceil(transfer.ft / transfer.sz)) {
+                            return;
+                        } else {
+                            transfer.fcp = +transfer.fcp + 1;
+                            m.getData();
+                        }
+                    },
+                    fjump: function () {
+                        if (transfer.fcp >= Math.ceil(transfer.ft / transfer.sz)) transfer.fcp = Math.ceil(transfer.ft / transfer.sz);
+                        if (transfer.fcp <= 1) transfer.fcp = 1;
+                        m.getData();
+                    },
 				}
 			});
 		}
