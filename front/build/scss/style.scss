@@ -395,6 +395,9 @@ $base-border-color: #c7c7c7;
         background: #f0f0f0; 
     }
 }
+table tr:hover td{
+    background-color: lemonchiffon;
+}
 
 @import "customer";
 @import "index";
@@ -416,3 +419,4 @@ $base-border-color: #c7c7c7;
 @import "wages";
 @import "referlogon";
 @import "record";
+@import "approve";

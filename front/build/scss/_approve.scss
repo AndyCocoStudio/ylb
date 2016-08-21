@@ -1,0 +1,49 @@
+.approve-main{
+    h1{
+        line-height: 42px;
+        font-size: 18px;
+        border-bottom: 1px solid #aaa;
+        margin-bottom: 20px;
+        padding-left: 20px; 
+    }
+    .approve-tip{
+        padding-left: 20px;
+        line-height: 32px;
+        a{
+            display: inline-block;
+            padding: 0 15px;
+            border: 1px solid #aaa;
+            border-bottom: none;
+            margin: 0 3px;
+            border-radius: 5px 5px 0 0;
+            &.active{
+                background-color: #cecece;
+                color: #333;
+            }
+        }
+    }
+    .approve-wrap{
+        table{
+            width: 99.9%;
+            border-top: 1px solid #aaa;
+            border-left: 1px solid #aaa;
+            tr{
+                line-height: 18px;
+                th{
+                    padding: 9px 0;
+                    font-weight: 400;
+                    background-color: #cecece;
+                    &:last-child{
+                        border-right: 1px solid #aaa;
+                    }
+                }
+                td{
+                    border-bottom: 1px solid #aaa;
+                    border-right: 1px solid #aaa;
+                    padding: 9px 0;
+                    text-align: center;
+                }
+            }
+        }
+    }
+}

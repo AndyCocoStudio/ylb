@@ -1,0 +1,303 @@
+<!-- @@master ../layout.html  -->
+
+<!-- @@block = title-->
+<title>审批管理</title>
+<!-- @@close-->
+
+<!-- @@block = content-->
+<section class="customer-main approve-main" id="approve-main" v-cloak>
+    <!--顶部导航-->
+    <div class="customer-header-wrap">
+        <img class="customer-logo" src="images/logo.png" />
+        <ul class="customer-nav">
+            <li><a href="index.html">首页</a></li>
+            <li class="select"><a href="customer.html">个人中心</a></li>
+            <li><a href="shops.html">加盟商户</a></li>
+        </ul>
+        <div class="customer-seach">
+            <!--<input type="search" placeholder="搜索">-->
+            <!--<i class="customer-bag icon-ylbicon-23"></i>-->
+            <a href="shopcart.html"><i class="customer-bag icon-ylbicon-23"></i>购物车</a>
+        </div>
+    </div>
+    <p class="ylb-navbar">您现在的位置：<a href="index.html">首页</a> > <a href="customer.html">个人中心</a> > 审批管理 <a class="customer-logout"><i class="icon-ylbicon-29"></i><em class="btn-logout">注销登录</em></a></p>
+    <h1>审批管理</h1>
+    <div class="approve-tip">
+        <a @click="changetip(1)" :class="{'active': zd}">做单审核</a>
+        <a @click="changetip(2)" :class="{'active': js}">角色申请</a>
+        <a @click="changetip(3)" :class="{'active': tx}">提现审核</a>
+        <a @click="changetip(4)" :class="{'active': zdr}">做单审核记录</a>
+        <a @click="changetip(5)" :class="{'active': jsr}">角色申请记录</a>
+        <a @click="changetip(6)" :class="{'active': txr}">提现审核记录</a>
+    </div>
+    <div class="approve-wrap" v-show="zd">
+        <table>
+            <tr>
+                <th>id</th>
+                <th>商家</th>
+                <th>商家会员号</th>
+                <th>买家</th>
+                <th>买家会员号</th>
+                <th>商品</th>
+                <th>赠送积分</th>
+                <th>申请时间</th>
+                <th>状态</th>
+                <th>操作</th>
+            </tr>
+            <tr v-if="order.length<1">
+                <td colspan="10">
+                    暂无需要处理的审核
+                </td>
+            </tr>
+            <tr v-for="o in order">
+                <td>{{o.orderID}}</td>
+                <td>{{o.storeName}}</td>
+                <td>{{o.tel}}</td>
+                <td>{{o.givenUser}}</td>
+                <td>{{o.givenUserMobile}}</td>
+                <td>{{o.goodsName}}</td>
+                <td>{{o.givingScore}}</td>
+                <td>{{o.createTime}}</td>
+                <td>
+                    待审核
+                </td>
+                <td>
+                    <a v-if="o.orderStatus=='New'" @click="agreeorder(o.orderID)">同意</a><br v-if="o.orderStatus=='New'" />
+                    <a v-if="o.orderStatus=='New'" @click="showorderreason(o.orderID)">拒绝</a>
+                </td>
+            </tr>
+        </table>
+        <div class="ylb-page">
+            总共{{Math.ceil(ot/sz)}}页，当前第{{ocp}}页
+            <a @click="oprev">上一页</a>
+            <a @click="onext">下一页</a>
+            <input v-model="ocp" type="text" />
+            <a @click="ojump">跳转</a>
+        </div>
+    </div>
+    <div class="approve-wrap" v-show="zdr">
+        <table>
+            <tr>
+                <th>id</th>
+                <th>商家</th>
+                <th>商家会员号</th>
+                <th>买家</th>
+                <th>买家会员号</th>
+                <th>商品</th>
+                <th>赠送积分</th>
+                <th>申请时间</th>
+                <th>状态</th>
+                <th>操作</th>
+            </tr>
+            <tr v-if="aorder.length<1">
+                <td colspan="9">
+                    暂无需要处理的审核
+                </td>
+            </tr>
+            <tr v-for="d in aorder">
+                <td>{{d.orderID}}</td>
+                <td>{{d.storeName}}</td>
+                <td>{{d.tel}}</td>
+                <td>{{d.givenUser}}</td>
+                <td>{{d.givenUserMobile}}</td>
+                <td>{{d.goodsName}}</td>
+                <td>{{d.givingScore}}</td>
+                <td>{{d.createTime}}</td>
+                <td>
+                    <em v-if="d.orderStatus=='Agree'">已同意</em>
+                    <em v-if="d.orderStatus=='Reject'">已拒绝</em>
+                </td>
+                <td>
+                    <a v-if="d.orderStatus=='Reject'" @click="showrejectreason(d.reason)">查看拒绝理由</a>
+                </td>
+            </tr>
+        </table>
+        <div class="ylb-page">
+            总共{{Math.ceil(aot/sz)}}页，当前第{{aocp}}页
+            <a @click="aoprev">上一页</a>
+            <a @click="aonext">下一页</a>
+            <input v-model="aocp" type="text" />
+            <a @click="aojump">跳转</a>
+        </div>
+    </div>
+    <div class="approve-wrap" v-show="js">
+        <table>
+            <tr>
+                <th>id</th>
+                <th>申请人</th>
+                <th>推荐人</th>
+                <th>申请角色</th>
+                <th>当前角色</th>
+                <th>成功推荐商家数</th>
+                <th>申请时间</th>
+                <th>状态</th>
+                <th>操作</th>
+            </tr>
+            <tr v-if="apply.length<1">
+                <td colspan="9">
+                    暂无需要处理的审核
+                </td>
+            </tr>
+            <tr v-if="a.status=='Pending'" v-for="a in apply">
+                <td>{{a.id}}</td>
+                <td>{{a.applicantName||a.applicantMobile}}</td>
+                <td>{{a.referrerName||a.referrerMobile}}</td>
+                <td><em v-if="a.applyRole=='Merchants'">商家</em>
+                    <em v-if="a.applyRole=='CustomerManager'">客户经理</em>
+                </td>
+                <td>
+                    <em v-if="a.currentRole=='Merchants'">商家</em>
+                    <em v-if="a.currentRole=='Ordinary'">普通会员</em>
+                    <em v-if="a.currentRole=='CustomerManager'">客户经理</em>
+                    <em v-if="a.currentRole=='AreaManager'">区域经理</em>
+                </td>
+                <td>{{a.recommended}}</td>
+                <td>{{a.date}}</td>
+                <td>待审核</td>
+                <td><a href="apply.html?aid={{a.id}}&r={{a.applyRole}}">详情</a><br><a @click="accepts(a.id)">同意</a><br>
+                    <a @click="showreason(a.id)">拒绝</a>
+                </td>
+            </tr>
+        </table>
+        <div class="ylb-page">
+            总共{{Math.ceil(at/sz)}}页，当前第{{acp}}页
+            <a @click="aprev">上一页</a>
+            <a @click="anext">下一页</a>
+            <input v-model="acp" type="text" />
+            <a @click="ajump">跳转</a>
+        </div>
+    </div>
+    <div class="approve-wrap" v-show="jsr">
+        <table>
+            <tr>
+                <th>id</th>
+                <th>申请人</th>
+                <th>推荐人</th>
+                <th>申请角色</th>
+                <th>当前角色</th>
+                <th>成功推荐商家数</th>
+                <th>申请时间</th>
+                <th>状态</th>
+                <th>操作</th>
+            </tr>
+            <tr v-if="aapply.length<1">
+                <td colspan="9">
+                    暂无处理过的审核
+                </td>
+            </tr>
+            <tr v-for="a in aapply">
+                <td>{{a.id}}</td>
+                <td>{{a.applicantName||a.applicantMobile}}</td>
+                <td>{{a.referrerName||a.referrerMobile}}</td>
+                <td><em v-if="a.applyRole=='Merchants'">商家</em><em v-if="a.applyRole=='CustomerManager'">客户经理</em></td>
+                <td>
+                    <em v-if="a.currentRole=='Merchants'">商家</em>
+                    <em v-if="a.currentRole=='Ordinary'">普通会员</em>
+                    <em v-if="a.currentRole=='CustomerManager'">客户经理</em>
+                    <em v-if="a.currentRole=='AreaManager'">区域经理</em>
+                </td>
+                <td>{{a.recommended}}</td>
+                <td>{{a.date}}</td>
+                <td>
+                    <em v-if="a.status=='Approval'">已同意</em>
+                    <em v-if="a.status=='Reject'">已拒绝</em>
+                </td>
+                <td><a href="apply.html?aid={{a.id}}&r={{a.applyRole}}">详情</a></td>
+            </tr>
+        </table>
+        <div class="ylb-page">
+            总共{{Math.ceil(aat/sz)}}页，当前第{{aacp}}页
+            <a @click="aaprev">上一页</a>
+            <a @click="aanext">下一页</a>
+            <input v-model="aacp" type="text" />
+            <a @click="aajump">跳转</a>
+        </div>
+    </div>
+    <div class="approve-wrap" v-show="tx">
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>申请人</th>
+                <th>店铺名</th>
+                <th>会员号</th>
+                <th>转出金额</th>
+                <th>开户行</th>
+                <th>卡号</th>
+                <th>时间</th>
+                <th>操作</th>
+            </tr>
+            <tr v-if="transfer.length<1">
+                <td colspan="9">
+                    暂无提现申请
+                </td>
+            </tr>
+            <tr v-for="t in transfer">
+                <td>{{t.transferID}}</td>
+                <td>{{t.name}}</td>
+                <td>{{t.storeName}}</td>
+                <td>{{t.mobile}}</td>
+                <td>{{t.amount}}</td>
+                <td>{{t.bank}}</td>
+                <td>{{t.account}}</td>
+                <td>{{t.createTime}}</td>
+                <td><a @click="agreetrs">同意</a><br><a @click="rejecttrs">拒绝</a></td>
+            </tr>
+        </table>
+        <div class="ylb-page">
+            总共{{Math.ceil(tt/sz)}}页，当前第{{tcp}}页
+            <a @click="tprev">上一页</a>
+            <a @click="tnext">下一页</a>
+            <input v-model="tcp" type="text" />
+            <a @click="tjump">跳转</a>
+        </div>
+    </div>
+    <div class="approve-wrap" v-show="txr">
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>申请人</th>
+                <th>店铺名</th>
+                <th>会员号</th>
+                <th>转出金额</th>
+                <th>开户行</th>
+                <th>卡号</th>
+                <th>时间</th>
+                <th>状态</th>
+            </tr>
+            <tr v-if="atransfer.length<1">
+                <td colspan="9">
+                    暂无提现申请
+                </td>
+            </tr>
+            <tr v-for="t in atransfer">
+                <td>{{t.transferID}}</td>
+                <td>{{t.name}}</td>
+                <td>{{t.storeName}}</td>
+                <td>{{t.mobile}}</td>
+                <td>{{t.amount}}</td>
+                <td>{{t.bank}}</td>
+                <td>{{t.account}}</td>
+                <td>{{t.createTime}}</td>
+                <td>
+                    <em v-if="t.status=='New'">待处理</em>
+                    <em v-if="t.status=='Agree'">已同意</em>
+                    <em v-if="t.status=='Reject'">已拒绝</em>
+                    <em v-if="t.status=='Paid'">已打款</em>
+                </td>
+            </tr>
+        </table>
+        <div class="ylb-page">
+            总共{{Math.ceil(att/sz)}}页，当前第{{atcp}}页
+            <a @click="atprev">上一页</a>
+            <a @click="atnext">下一页</a>
+            <input v-model="atcp" type="text" />
+            <a @click="atjump">跳转</a>
+        </div>
+    </div>
+</section>
+<footer></footer>
+<!-- @@close-->
+
+<!-- @@block = scripts-->
+<script type="text/javascript" src="js/approve.js?rev=@@hash"></script>
+<!-- @@close-->
