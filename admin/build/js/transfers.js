@@ -43,10 +43,10 @@
 				data: transfer,
 				methods: {
 					agree: function (id) {
-						var c = confirm("确认同意该提现申请？");
+						var c = confirm("确认已放款？");
 						if (c) {
 							$.ajax({
-								url: $.apiUrl + "/transfer/agree",
+								url: $.apiUrl + "/transfer/paid",
 								type: "POST",
 								data: JSON.stringify({ transferID: id })
 							}).done(function (d) {

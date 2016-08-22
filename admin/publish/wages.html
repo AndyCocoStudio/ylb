@@ -17,7 +17,7 @@
 	<link rel="stylesheet" type="text/css" href="css/libs/morris.css" />
 	<link rel="stylesheet" type="text/css" href="css/libs/pickday.css" />
 	<link rel="stylesheet" type="text/css" href="css/font-awesome.css" />
-	<link rel="stylesheet" type="text/css" href="css/style.css?rev=d5f0ee745f5182be7cc07cac3675d4a3" />
+	<link rel="stylesheet" type="text/css" href="css/style.css?rev=ea14841993e067207f1801d4d440fd50" />
 </head>
 
 <body>
@@ -42,22 +42,22 @@
 		<div class="op-right">
 
 <div class="wages-main" id="wages-main" v-cloak>
-    <h1>{{year}}年{{month}}月区域经理工资单</h1>
+    <h1>{{y}}年{{m}}月区域经理工资单</h1>
     <div class="wages-filter">
         <select @change="changeprov">
-                <option value="">-请选择省-</option>
+                <option selected="selected" value="">-请选择省-</option>
                 <option v-for="p in plist" value="{{p.code}}">{{p.name}}</option>
             </select>
         <select @change="changecity">
-                <option value="">-请选择省市-</option>
+                <option selected="selected" value="">-请选择省市-</option>
                 <option v-for="c in clist" value="{{c.code}}">{{c.name}}</option>
             </select>
         <select @change="changearea">
-                <option value="">-请选择区-</option>
+                <option selected="selected" value="">-请选择区-</option>
                 <option v-for="a in alist" value="{{a.code}}">{{a.name}}</option>
             </select>
         <select @change="changeyear">
-                <option value="">-请选择年份-</option>
+                <option selected="selected" value="">-请选择年份-</option>
                 <option value="2016">2016年</option>
                 <option value="2017">2017年</option>
                 <option value="2018">2018年</option>
@@ -74,7 +74,7 @@
                 <option value="2029">2029年</option>
                 <option value="2030">2030年</option>
             </select>
-        <select @change="changemonth">
+        <select selected="selected" @change="changemonth">
                 <option value="">-请选择月份-</option>
                 <option value="1">1月</option>
                 <option value="2">2月</option>
@@ -90,7 +90,7 @@
                 <option value="12">12月</option>
             </select>
         <select @change="changerole">
-                <option value="">-请选择角色-</option>
+                <option selected="selected" value="">-请选择角色-</option>
                 <option value="CustomerManager">客户经理</option>
                 <option value="AreaManager">区域经理</option>
             </select>
@@ -103,11 +103,11 @@
             <th>区域</th>
             <th>时间</th>
             <th>总业绩</th>
-            <th>工资</th>
+            <th>税后工资</th>
             <th>操作</th>
         </tr>
         <tr v-if="list.length<1">
-            <td colspan="6">
+            <td colspan="7">
                 这个月所有的工资都发放了
             </td>
         </tr>
@@ -122,8 +122,8 @@
             <td>{{a.totalAmount}}</td>
             <td>{{a.wage}}</td>
             <td>
-                <em v-if="a.isPay==0&&a.role=='AreaManager'"><a @click="sendwage(a.areaManagerID)">发工资</a></em>
-                <a href="wagesinfo.html?uid={{a.userID}}&y={{a.year}}&m={{a.month}}">查看明细</a>
+                <em v-show="(y==cty&&m!=ctm)||y!=cty" v-if="a.isPay==0&&a.role=='AreaManager'"><a @click="sendwage(a.userID)">发工资</a></em>
+                <a target="_blank" href="wagesinfo.html?uid={{a.userID}}&y={{a.year}}&m={{a.month}}">查看明细</a>
             </td>
         </tr>
     </table>
@@ -145,10 +145,10 @@
 <script src="js/libs/pickday.min.js" type="text/javascript"></script>
 <script src="js/libs/vue.min.js" type="text/javascript"></script>
 <script src="js/libs/echarts.min.js" type="text/javascript"></script>
-<script src="js/base.js?rev=d5f0ee745f5182be7cc07cac3675d4a3" type="text/javascript"></script>
+<script src="js/base.js?rev=ea14841993e067207f1801d4d440fd50" type="text/javascript"></script>
 
 
-<script type="text/javascript" src="js/wages.js?rev=d5f0ee745f5182be7cc07cac3675d4a3"></script>
+<script type="text/javascript" src="js/wages.js?rev=ea14841993e067207f1801d4d440fd50"></script>
 
 
 </html>

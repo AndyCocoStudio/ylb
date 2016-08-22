@@ -94,6 +94,27 @@
 				case "4022":
 					$.ylbAlert("该账号已经是区域经理/客户经理");
 					break;
+				case "4023":
+					$.ylbAlert("做单金额需小于10W");
+					break;
+				case "4024":
+					$.ylbAlert("手动领取积分功能尚未开放");
+					break;
+				case "4025":
+					$.ylbAlert("获取验证码太频繁");
+					break;
+				case "4026":
+					$.ylbAlert("工资尚未结算");
+					break;
+				case "4027":
+					$.ylbAlert("当月工资已支付");
+					break;
+				case "4028":
+					$.ylbAlert("可用赠送名额不足");
+					break;
+				case "4029":
+					$.ylbAlert("该用户已经体验过该优惠");
+					break;
 				default:
 					$.ylbAlert("服务器又开小差(error:" + code + ")");
 					break;
