@@ -3,6 +3,7 @@
         hideaddress: false,
         id: $.urlParam("id") || "",
         count: $.urlParam("count") || 1,
+        useb: 0,
         total: 0,
         postage: 0,
         ispoint: "disabled",

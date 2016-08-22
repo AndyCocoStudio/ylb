@@ -3,7 +3,7 @@
 
 <head>
 
-<title>支付方式</title>
+<title>二维码中心</title>
 
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<meta name="description" content="优良宝" />
@@ -12,9 +12,9 @@
 
 
 
-	<link rel="stylesheet" type="text/css" href="css/style.css?rev=5df167dc0982abbc03d801edc04c2f85" />
+	<link rel="stylesheet" type="text/css" href="css/style.css?rev=c23946d49c620c27d41a46deb246a172" />
 	<link rel="stylesheet" type="text/css" href="css/pickday.css" />
-	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=5df167dc0982abbc03d801edc04c2f85" />
+	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=c23946d49c620c27d41a46deb246a172" />
 </head>
 
 <body>
@@ -33,32 +33,10 @@
 		</a>
 	</header>
 
-<section id="pay-main" class="pay-main" v-cloak>
-    <!--<ul class="pay-cource">
-        <li><span>1</span><br>确认订单信息</li>
-        <li class="select"><span>2</span><br>付款方式</li>
-        <li><span>3</span><br>确认收货</li>
-    </ul>-->
-    <div class="pay-detail">
-        <h1 v-for="p in order.product">{{p.name}}</h1>
-        <h2>订单提交成功，请您尽快付款！<br>订单号：{{id}}</h2>
-        <p>
-            <em>积分支付:<span>{{order.payInScore}}</span>元</em>
-            <em>余额支付:<span>{{order.payInBalance}}</span>元</em>
-            <em>货款支付:<span>{{order.payInPaymentForGoods}}</span>元</em>
-            <em>佣金支付:<span>{{order.payInCommission}}</span>元</em>
-            <em>现金支付:<span>{{order.payInCash}}</span>元</em>
-        </p>
-        <!--<p>
-            <em>您需要支付：<span>{{order.payInScore+order.payInBalance+order.payInPaymentForGoods+order.payInCommission+order.payInCash}}</span>元</em>
-        </p>-->
-    </div>
-    <div class="pay-way">
-        <h1>请选择支付方式</h1>
-        <input name="payway" @change="selectpayway(1)" checked="checked" type="radio" id="zfb"><label for="zfb">支付宝支付</label>
-        <input name="payway" @change="selectpayway(2)" type="radio" id="wy"><label for="wy">网银支付</label>
-    </div>
-    <div class="payorder"><button @click="payorder">确认支付</button></div>
+<section class="func-main" id="func-main" v-cloak>
+    <a href="logon.html?rid={{rid}}">推荐注册</a>
+    <a href="sendpoint.html">商家做单</a>
+    <a href="spendpoint.html">积分兑换</a>
 </section>
 
 	<div id="ylb-layout">
@@ -92,9 +70,9 @@
 <script src="js/libs/pickday.min.js" type="text/javascript"></script>
 <script src="js/libs/qrcode.min.js" type="text/javascript"></script>
 <script src="js/libs/dropzone.js" type="text/javascript"></script>
-<script src="js/base.js?rev=5df167dc0982abbc03d801edc04c2f85" type="text/javascript"></script>
+<script src="js/base.js?rev=c23946d49c620c27d41a46deb246a172" type="text/javascript"></script>
 
-<script type="text/javascript" src="js/pay.js?rev=5df167dc0982abbc03d801edc04c2f85"></script>
+<script type="text/javascript" src="js/func.js?rev=c23946d49c620c27d41a46deb246a172"></script>
 
 
 </html>

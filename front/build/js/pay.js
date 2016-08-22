@@ -26,6 +26,13 @@
                     selectpayway: function (id) {
                         this.payway = id;
                     },
+                    useb: function (el) {
+                        if ($(el.target).is(":checked")) {
+                            pay.isUseBalance = 1;
+                        } else {
+                            pay.isUseBalance = 0;
+                        }
+                    },
                     payorder: function () {
                         $.ylbConfirm({
                             msg: "请输入支付密码：<input class='paypwd' type='password'/>",

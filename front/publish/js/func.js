@@ -1,0 +1,1 @@
+!function(){var i={rid:$.urlParam("rid")},n={init:function(){n.buildVue(),$("header,footer").hide()},buildVue:function(){i=new Vue({el:"#func-main",data:i,methods:{}})}};n.init()}();

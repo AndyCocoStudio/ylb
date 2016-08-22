@@ -93,6 +93,7 @@
         <article class="order-total">
             <p>总计： <em>￥ {{total}}</em>元</p>
             <p>运费： {{postage}}元</p>
+            <p><input @click="useb" type="checkbox">是否使用佣金/货款</p>
             <p><input @click="canuse" type="checkbox">是否使用积分<input @change="usepoint" disabled="{{ispoint}}" v-model="point"
                     type="text">(您有{{userpoint}}积分，本单最高可抵用{{maxpoint}}元)</p>
         </article>
