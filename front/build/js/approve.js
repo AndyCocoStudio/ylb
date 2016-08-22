@@ -120,7 +120,7 @@
         },
         getUntransfer: function () {
             $.when($.ajax({
-                url: $.apiUrl + "/area/transfers?k=1&cp=" + approve.tcp + "&sz=" + approve.sz,
+                url: $.apiUrl + "/area/transfers?k=0&cp=" + approve.tcp + "&sz=" + approve.sz,
                 type: "GET"
             })).done(function (d) {
                 $.ylbAjaxHandler(d, function () {
@@ -132,7 +132,7 @@
         },
         pageUntransfer: function () {
             $.when($.ajax({
-                url: $.apiUrl + "/area/transfers?k=1&cp=" + approve.tcp + "&sz=" + approve.sz,
+                url: $.apiUrl + "/area/transfers?k=0&cp=" + approve.tcp + "&sz=" + approve.sz,
                 type: "GET"
             })).done(function (d) {
                 $.ylbAjaxHandler(d, function () {
@@ -143,7 +143,7 @@
         },
         getAlltransfer: function () {
             $.when($.ajax({
-                url: $.apiUrl + "/area/transfers?k=0&cp=" + approve.atcp + "&sz=" + approve.sz,
+                url: $.apiUrl + "/area/transfers?k=1&cp=" + approve.atcp + "&sz=" + approve.sz,
                 type: "GET"
             })).done(function (d) {
                 $.ylbAjaxHandler(d, function () {
@@ -155,7 +155,7 @@
         },
         pageAlltransfer: function () {
             $.when($.ajax({
-                url: $.apiUrl + "/area/transfers?k=0&cp=" + approve.atcp + "&sz=" + approve.sz,
+                url: $.apiUrl + "/area/transfers?k=1&cp=" + approve.atcp + "&sz=" + approve.sz,
                 type: "GET"
             })).done(function (d) {
                 $.ylbAjaxHandler(d, function () {
@@ -227,6 +227,40 @@
                                 this.jsr = false;
                                 this.txr = false;
                                 break;
+                        }
+                    },
+                    agreetrs: function (id) {
+                        var c = confirm("确认同意该转出申请？");
+                        if (c) {
+                            $.ajax({
+                                url: $.apiUrl + "/transfer/agree",
+                                type: "POST",
+                                data: JSON.stringify({
+                                    transferID: id
+                                })
+                            }).done(function (d) {
+                                $.ylbAjaxHandler(d, function () {
+                                    $.ylbAlert("操作成功");
+                                    m.getUntransfer();
+                                });
+                            });
+                        }
+                    },
+                    rejecttrs: function (id) {
+                        var c = confirm("确认决绝该转出申请？");
+                        if (c) {
+                            $.ajax({
+                                url: $.apiUrl + "/transfer/reject",
+                                type: "POST",
+                                data: JSON.stringify({
+                                    transferID: id
+                                })
+                            }).done(function (d) {
+                                $.ylbAjaxHandler(d, function () {
+                                    $.ylbAlert("操作成功");
+                                    m.getUntransfer();
+                                });
+                            });
                         }
                     },
                     oprev: function () {

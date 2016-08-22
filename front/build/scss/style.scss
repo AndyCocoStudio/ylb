@@ -29,7 +29,6 @@ $base-border-color: #c7c7c7;
     height: 44px;
     line-height: 44px;
     width: 100%;
-    min-width: 960px;
     background-color: $top-bg;
     position: relative;
     a{
@@ -113,12 +112,10 @@ $base-border-color: #c7c7c7;
     position: fixed;
     bottom: 0;
     width: 100%;
-    min-width: 960px;
     background-color: $top-bg; 
     color: #fff;
     overflow: hidden;
-    .ylb-doclist{
-        width: 960px; 
+    .ylb-doclist{ 
         margin: 20px auto;
         text-align: center;
         p{

@@ -240,7 +240,7 @@
                 <td>{{t.bank}}</td>
                 <td>{{t.account}}</td>
                 <td>{{t.createTime}}</td>
-                <td><a @click="agreetrs">同意</a><br><a @click="rejecttrs">拒绝</a></td>
+                <td><a @click="agreetrs(t.transferID)">同意</a><br><a @click="rejecttrs(t.transferID)">拒绝</a></td>
             </tr>
         </table>
         <div class="ylb-page">
