@@ -13,10 +13,10 @@
         <em>{{paidTransferDetail.Commission}}</em>元， 平台费池:
         <em>{{paidTransferDetail.Balance}}</em>元)</h1>
     <h2>计算公式： 剩余资金({{totalRecharge-balance-paidTransfer}}) = 平台充值总额-平台用户总余额-已转出金额</h2>
-    <div class="ylb-filter">
+    <!--<div class="ylb-filter">
         <em>时间筛选</em><input id="st" placeholder="选择时间" type="text">~<input placeholder="选择时间" id="et" type="text">
         <a @click="filtercash">筛选</a>
-    </div>
+    </div>-->
     <div class="cashpool-wrap">
         <div class="cashpool-echarts" id="goods"></div>
         <div class="cashpool-echarts" id="plat"></div>
@@ -29,7 +29,7 @@
             <p><span>货款总入池</span>{{pool.PaymentForGoods.paymentForGoods}}</p>
             <p><span>积分总入池</span>{{pool.PaymentForGoods.score}}</p>
             <p><span>剩余资金</span>{{pool.PaymentForGoods.cash-paidTransferDetail.PaymentForGoods}}</p>
-            <p><a>详情</a></p>
+            <!--<p><a>详情</a></p>-->
         </div>
         <div class="cashpool-echarts">
             <p><span>现金总入池</span>{{pool.PlatFormFee.cash}}</p>
@@ -37,7 +37,7 @@
             <p><span>货款总入池</span>{{pool.PlatFormFee.paymentForGoods}}</p>
             <p><span>积分总入池</span>{{pool.PlatFormFee.score}}</p>
             <p><span>剩余资金</span>{{pool.PlatFormFee.cash-paidTransferDetail.PaymentForGoods}}</p>
-            <p><a>详情</a></p>
+            <!--<p><a>详情</a></p>-->
         </div>
         <div class="cashpool-echarts">
             <p><span>现金总入池</span>{{pool.ServiceFee.cash}}</p>
@@ -45,7 +45,7 @@
             <p><span>货款总入池</span>{{pool.ServiceFee.paymentForGoods}}</p>
             <p><span>积分总入池</span>{{pool.ServiceFee.score}}</p>
             <p><span>剩余资金</span>{{pool.ServiceFee.cash-paidTransferDetail.PaymentForGoods}}</p>
-            <p><a>详情</a></p>
+            <!--<p><a>详情</a></p>-->
         </div>
     </div>
 </div>
