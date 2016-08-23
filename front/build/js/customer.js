@@ -745,7 +745,7 @@
                                 m.getApply();
                             });
                         });
-                    },
+                    }, 
                     //申请角色切换
                     rolechange: function (el) {
                         vcustomer.role = $(el.target).val();

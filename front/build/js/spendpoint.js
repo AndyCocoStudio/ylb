@@ -7,8 +7,8 @@
         merchant: {
             name: "",
             address: ""
-        }
-
+        },
+        useb: 0
     };
     var m = {
         init: function () {
@@ -33,13 +33,21 @@
                             type: "PUT",
                             data: JSON.stringify({
                                 merchantMobile: spendpointer.order.merchantMobile,
-                                amount: spendpointer.order.score
+                                amount: spendpointer.order.score,
+                                //isUseBalance: spendpointer.useb
                             })
                         }).done(function (d) {
                             $.ylbAjaxHandler(d, function () {
                                 window.location.href = "pay.html?oid=" + d.data;
                             });
                         });
+                    },
+                    usebalance: function (el) {
+                        if ($(el.target).is(":checked")) {
+                            spendpointer.useb = 1;
+                        } else {
+                            spendpointer.useb = 0;
+                        }
                     },
                     getstoreinfo: function () {
                         spendpointer.merchant.name = "";

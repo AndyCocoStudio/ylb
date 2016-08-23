@@ -12,9 +12,9 @@
 
 
 
-	<link rel="stylesheet" type="text/css" href="css/style.css?rev=49089460ffde58e65257cad057250c60" />
+	<link rel="stylesheet" type="text/css" href="css/style.css?rev=0e60dcb1588bea2a5471f3a55a9de9a5" />
 	<link rel="stylesheet" type="text/css" href="css/pickday.css" />
-	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=49089460ffde58e65257cad057250c60" />
+	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=0e60dcb1588bea2a5471f3a55a9de9a5" />
 </head>
 
 <body>
@@ -90,8 +90,8 @@
                     待审核
                 </td>
                 <td>
-                    <a v-if="o.orderStatus=='New'" @click="agreeorder(o.orderID)">同意</a><br v-if="o.orderStatus=='New'" />
-                    <a v-if="o.orderStatus=='New'" @click="showorderreason(o.orderID)">拒绝</a>
+                    <a v-if="o.orderStatus=='New'" @click="oaccept(o.orderID)">同意</a><br v-if="o.orderStatus=='New'" />
+                    <a v-if="o.orderStatus=='New'" @click="showoreason(o.orderID)">拒绝</a>
                 </td>
             </tr>
         </table>
@@ -132,6 +132,7 @@
                 <td>{{d.givingScore}}</td>
                 <td>{{d.createTime}}</td>
                 <td>
+                    <em v-if="d.orderStatus=='New'">待审核</em>
                     <em v-if="d.orderStatus=='Agree'">已同意</em>
                     <em v-if="d.orderStatus=='Reject'">已拒绝</em>
                 </td>
@@ -182,8 +183,8 @@
                 <td>{{a.recommended}}</td>
                 <td>{{a.date}}</td>
                 <td>待审核</td>
-                <td><a href="apply.html?aid={{a.id}}&r={{a.applyRole}}">详情</a><br><a @click="accepts(a.id)">同意</a><br>
-                    <a @click="showreason(a.id)">拒绝</a>
+                <td><a href="apply.html?aid={{a.id}}&r={{a.applyRole}}">详情</a><br><a @click="aaccept(a.id)">同意</a><br>
+                    <a @click="showareason(a.id)">拒绝</a> 
                 </td>
             </tr>
         </table>
@@ -322,6 +323,17 @@
             <a @click="atjump">跳转</a>
         </div>
     </div>
+    <div class="ylb-graybox nagtive" v-show="areason">
+        <h1>请输入拒绝理由</h1>
+        <input v-model="areasontxt" maxlength="128" placeholder="最多可填入128字" type="text" />
+        <a @click="areject">提交</a>
+    </div>
+    <div class="ylb-graybox nagtive" v-show="oreason">
+        <h1>请输入拒绝理由</h1>
+        <input v-model="oreasontxt" maxlength="128" placeholder="最多可填入128字" type="text" />
+        <a @click="oreject">提交</a>
+    </div>
+    <div class="ylb-show-cover" v-show="cover" @click="hideall"></div>
 </section>
 <footer></footer>
 
@@ -356,9 +368,9 @@
 <script src="js/libs/pickday.min.js" type="text/javascript"></script>
 <script src="js/libs/qrcode.min.js" type="text/javascript"></script>
 <script src="js/libs/dropzone.js" type="text/javascript"></script>
-<script src="js/base.js?rev=49089460ffde58e65257cad057250c60" type="text/javascript"></script>
+<script src="js/base.js?rev=0e60dcb1588bea2a5471f3a55a9de9a5" type="text/javascript"></script>
 
-<script type="text/javascript" src="js/approve.js?rev=49089460ffde58e65257cad057250c60"></script>
+<script type="text/javascript" src="js/approve.js?rev=0e60dcb1588bea2a5471f3a55a9de9a5"></script>
 
 
 </html>

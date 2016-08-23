@@ -12,9 +12,9 @@
 
 
 
-	<link rel="stylesheet" type="text/css" href="css/style.css?rev=006451f8851eb4ce4e60c6158173019e" />
+	<link rel="stylesheet" type="text/css" href="css/style.css?rev=e1375672acd111255f8ec72a221cabd0" />
 	<link rel="stylesheet" type="text/css" href="css/pickday.css" />
-	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=006451f8851eb4ce4e60c6158173019e" />
+	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=e1375672acd111255f8ec72a221cabd0" />
 </head>
 
 <body>
@@ -39,6 +39,7 @@
         <li><span>商家手机号</span><input type="text" maxlength="11" @change="getstoreinfo" v-model="order.merchantMobile"></li>
         <li><span>店铺名：</span>{{merchant.name}}</li>
         <li><span>积分数</span><input type="text" v-model="order.score"></li>
+        <!--<li><input @click="usebalance" type="checkbox">是否使用佣金/货款支付</li>-->
         <li><a class="pay" @click="createOrder">支付</a></li>
     </ul>
     <div id="qrcode" class="qrcode"></div>
@@ -75,9 +76,9 @@
 <script src="js/libs/pickday.min.js" type="text/javascript"></script>
 <script src="js/libs/qrcode.min.js" type="text/javascript"></script>
 <script src="js/libs/dropzone.js" type="text/javascript"></script>
-<script src="js/base.js?rev=006451f8851eb4ce4e60c6158173019e" type="text/javascript"></script>
+<script src="js/base.js?rev=e1375672acd111255f8ec72a221cabd0" type="text/javascript"></script>
 
-<script type="text/javascript" src="js/spendpoint.js?rev=006451f8851eb4ce4e60c6158173019e"></script>
+<script type="text/javascript" src="js/spendpoint.js?rev=e1375672acd111255f8ec72a221cabd0"></script>
 
 
 </html>

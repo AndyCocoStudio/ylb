@@ -12,9 +12,9 @@
 
 
 
-	<link rel="stylesheet" type="text/css" href="css/style.css?rev=e11fc30622fad61247e0b940b3c7f6ab" />
+	<link rel="stylesheet" type="text/css" href="css/style.css?rev=1132b5568aef841ec7f5086ede7b2a82" />
 	<link rel="stylesheet" type="text/css" href="css/pickday.css" />
-	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=e11fc30622fad61247e0b940b3c7f6ab" />
+	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=1132b5568aef841ec7f5086ede7b2a82" />
 </head>
 
 <body>
@@ -121,7 +121,7 @@
         <article class="order-total">
             <p>总计： <em>￥ {{total}}</em>元</p>
             <p>运费： {{postage}}元</p>
-            <p><input @click="useb" type="checkbox">是否使用佣金/货款</p>
+            <p><input @click="usebalance" type="checkbox">是否使用佣金/货款</p>
             <p><input @click="canuse" type="checkbox">是否使用积分<input @change="usepoint" disabled="{{ispoint}}" v-model="point"
                     type="text">(您有{{userpoint}}积分，本单最高可抵用{{maxpoint}}元)</p>
         </article>
@@ -169,9 +169,9 @@
 <script src="js/libs/pickday.min.js" type="text/javascript"></script>
 <script src="js/libs/qrcode.min.js" type="text/javascript"></script>
 <script src="js/libs/dropzone.js" type="text/javascript"></script>
-<script src="js/base.js?rev=e11fc30622fad61247e0b940b3c7f6ab" type="text/javascript"></script>
+<script src="js/base.js?rev=1132b5568aef841ec7f5086ede7b2a82" type="text/javascript"></script>
 
-<script type="text/javascript" src="js/order.js?rev=e11fc30622fad61247e0b940b3c7f6ab"></script>
+<script type="text/javascript" src="js/order.js?rev=1132b5568aef841ec7f5086ede7b2a82"></script>
 
 
 </html>

@@ -20,7 +20,13 @@
         atcp: 1,
         att: 1,
         st: "",
-        et: ""
+        et: "",
+        areason: false,
+        oreason: false,
+        cover: false,
+        appID: "",
+        areasontxt: "",
+        oreasontxt: ""
     };
     var m = {
         init: function () {
@@ -169,6 +175,11 @@
                 el: "#approve-main",
                 data: approve,
                 methods: {
+                    hideall: function () {
+                        approve.areason = false;
+                        approve.oreason = false;
+                        approve.cover = false;
+                    },
                     changetip: function (num) {
                         switch (num) {
                             case 1:
@@ -229,6 +240,9 @@
                                 break;
                         }
                     },
+                    showrejectreason: function (msg) {
+                        alert(msg);
+                    },
                     agreetrs: function (id) {
                         var c = confirm("确认同意该转出申请？");
                         if (c) {
@@ -262,6 +276,82 @@
                                 });
                             });
                         }
+                    },
+                    showareason: function (id) {
+                        approve.areason = true;
+                        approve.cover = true;
+                        approve.appID = id;
+                    },
+                    showoreason: function (id) {
+                        approve.oreason = true;
+                        approve.cover = true;
+                        approve.appID = id;
+                    },
+                    aaccept: function (id) {
+                        var c = confirm("确认同意该申请？");
+                        if (c) {
+                            $.ajax({
+                                url: $.apiUrl + "/apply/allow",
+                                type: "POST",
+                                data: JSON.stringify({
+                                    applicationID: id
+                                })
+                            }).done(function (d) {
+                                $.ylbAjaxHandler(d, function () {
+                                    $.ylbAlert("操作成功");
+                                    m.getUnapply();
+                                });
+                            });
+                        }
+                    },
+                    oaccept: function (id) {
+                        var c = confirm("确认同意该申请？");
+                        if (c) {
+                            $.ajax({
+                                url: $.apiUrl + "/givingscore/agree",
+                                type: "POST",
+                                data: JSON.stringify({
+                                    orderID: id
+                                })
+                            }).done(function (d) {
+                                $.ylbAjaxHandler(d, function () {
+                                    $.ylbAlert("操作成功");
+                                    m.getUnorder();
+                                });
+                            });
+                        }
+                    },
+                    areject: function () {
+                        $.ajax({
+                            url: $.apiUrl + "/apply/reject",
+                            type: "POST",
+                            data: JSON.stringify({
+                                applicationID: approve.appID,
+                                reason: approve.areasontxt
+                            })
+                        }).done(function (d) {
+                            $.ylbAjaxHandler(d, function () {
+                                $.ylbAlert("操作成功");
+                                approve.hideall();
+                                m.getUnapply();
+                            });
+                        });
+                    },
+                    oreject: function () {
+                        $.ajax({
+                            url: $.apiUrl + "/givingscore/reject",
+                            type: "POST",
+                            data: JSON.stringify({
+                                orderID: approve.appID,
+                                reason: approve.oreasontxt
+                            })
+                        }).done(function (d) {
+                            $.ylbAjaxHandler(d, function () {
+                                $.ylbAlert("操作成功");
+                                approve.hideall();
+                                m.getUnorder();
+                            });
+                        });
                     },
                     oprev: function () {
                         if (approve.ocp <= 1) {

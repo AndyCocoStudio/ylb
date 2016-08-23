@@ -243,6 +243,14 @@
                             });
                         }
                     },
+                    //是否使用佣金
+                    usebalance: function (el) {
+                        if ($(el.target).is(":checked")) {
+                            order.useb = 1;
+                        } else {
+                            order.useb = 0;
+                        }
+                    },
                     //创建新订单
                     neworder: function () {
                         if (!order.select.addressID) {
@@ -262,6 +270,7 @@
                             datas.items = p;
                             datas.score = order.point;
                             datas.addressID = order.select.addressID;
+                            datas.isUseBalance = order.useb;
                             $.ajax({
                                 url: $.apiUrl + "/order/shoppingonline",
                                 type: "PUT",
