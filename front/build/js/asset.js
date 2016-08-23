@@ -6,7 +6,10 @@
         tt: 0,
         rt: 0,
         ct: 0,
-        sz: 20
+        sz: 20,
+        rrecord: true,
+        trecord: false,
+        crecord: false,
     };
     var m = {
         init: function () {
@@ -80,6 +83,30 @@
                 el: "#asset-main",
                 data: asset,
                 methods: {
+                    toggletap: function (i) {
+                        switch (i) {
+                            case 1:
+                                asset.rrecord = true;
+                                asset.trecord = false;
+                                asset.crecord = false;
+                                break;
+                            case 2:
+                                asset.rrecord = false;
+                                asset.trecord = true;
+                                asset.crecord = false;
+                                break;
+                            case 3:
+                                asset.rrecord = false;
+                                asset.trecord = false;
+                                asset.crecord = true;
+                                break;
+                            default:
+                                asset.rrecord = true;
+                                asset.trecord = false;
+                                asset.crecord = false;
+                                break;
+                        }
+                    },
                     cprev: function () {
                         if (asset.ccp <= 1) {
                             return;

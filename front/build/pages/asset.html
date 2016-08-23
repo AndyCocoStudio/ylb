@@ -12,98 +12,106 @@
         <li><span>已领取积分</span><em>{{detail.grantScore}}</em></li>
         <li><span>已消费</span><em>{{detail.givenScore}}</em></li>
     </ul>
-    <h1 class="asset-title">资产转出记录</h1>
-    <table class="asset-table">
-        <tr>
-            <th>ID</th>
-            <th>转出时间</th>
-            <th>转出金额</th>
-            <th>银行卡</th>
-            <th>状态</th>
-            <th>备注</th>
-        </tr>
-        <tr v-for="t in transfer">
-            <td>{{t.transferID}}</td>
-            <td>{{t.createTime}}</td>
-            <td>{{t.amount}}</td>
-            <td>{{t.account}}</td>
-            <td>
-                <em v-if="t.status=='New'">审批中</em>
-                <em v-if="t.status=='Agree'">已同意</em>
-                <em v-if="t.status=='Reject'">已拒绝</em>
-            </td>
-            <td>{{t.reason}}</td>
-        </tr>
-    </table>
-    <div class="ylb-page">
-        总共{{Math.ceil(tt/sz)}}页，当前第{{tcp}}页
-        <a @click="tprev">上一页</a>
-        <a @click="tnext">下一页</a>
-        <input v-model="tcp" type="text"/>
-        <a @click="tjump">跳转</a>
+    <div class="asset-tap">
+        <a @click="toggletap(1)" :class="{'active':rrecord}">充值记录</a>
+        <a @click="toggletap(2)" :class="{'active':trecord}" v-show="user.role!='Ordinary'">资产转出记录</a>
+        <a @click="toggletap(3)" :class="{'active':crecord}" v-show="user.role=='Merchants'||user.role=='AM'||user.info=='CM'">佣金记录</a>
     </div>
-    <h1 class="asset-title">充值记录</h1>
-    <table class="asset-table">
-        <tr>
-            <th>ID</th>
-            <th>充值时间</th>
-            <th>充值金额</th>
-            <th>状态</th>
-            <th>操作</th>
-        </tr>
-        <tr v-for="t in recharge">
-            <td>{{t.id}}</td>
-            <td>{{t.createTime}}</td>
-            <td>{{t.amount}}</td>
-            <td>
-                <em v-if="t.payStatus=='Paid'">成功</em>
-                <em v-else>未支付</em>
-            </td>
-            <td><a v-if="t.payStatus!='Paid'" href="http://api.hnylbsc.com/unionpay?id={{t.id}}">支付</a></td>
-        </tr>
-    </table>
-    <div class="ylb-page">
-        总共{{Math.ceil(rt/sz)}}页，当前第{{rcp}}页
-        <a @click="rprev">上一页</a>
-        <a @click="rnext">下一页</a>
-        <input v-model="rcp" type="text"/>
-        <a @click="rjump">跳转</a>
+    <div class="asset-wrap" v-show="trecord&&user.role!='Ordinary'">
+        <table class="asset-table">
+            <tr>
+                <th>ID</th>
+                <th>转出时间</th>
+                <th>转出金额</th>
+                <th>银行卡</th>
+                <th>状态</th>
+                <th>备注</th>
+            </tr>
+            <tr v-for="t in transfer">
+                <td>{{t.transferID}}</td>
+                <td>{{t.createTime}}</td>
+                <td>{{t.amount}}</td>
+                <td>{{t.account}}</td>
+                <td>
+                    <em v-if="t.status=='New'">审批中</em>
+                    <em v-if="t.status=='Agree'">已同意</em>
+                    <em v-if="t.status=='Reject'">已拒绝</em>
+                </td>
+                <td>{{t.reason}}</td>
+            </tr>
+        </table>
+        <div class="ylb-page">
+            总共{{Math.ceil(tt/sz)}}页，当前第{{tcp}}页
+            <a @click="tprev">上一页</a>
+            <a @click="tnext">下一页</a>
+            <input v-model="tcp" type="text" />
+            <a @click="tjump">跳转</a>
+        </div>
     </div>
-    <h1 v-if="user.role=='Merchant'||user.role=='AM'||user.info=='CM'" class="asset-title">佣金记录</h1>
-    <table v-if="user.role=='Merchant'||user.role=='AM'||user.info=='CM'" class="asset-table">
-        <tr>
-            <th>名下会员</th>
-            <th>会员手机号</th>
-            <th>做单人</th>
-            <th>做单人手机</th>
-            <th>商家名</th>
-            <th>商家地址</th>
-            <th>做单积分</th>
-            <th>佣金</th>
-            <th>佣金比例(%)</th>
-            <th>做单时间</th>
-            <th>备注</th>
-        </tr>
-        <tr v-for="t in commission">
-            <td>{{t.receiverName}}</td>
-            <td>{{t.receiverMobile}}</td>
-            <td>{{t.giverName}}</td>
-            <td>{{t.giverMobile}}</td>
-            <td>{{t.storeName}}</td>
-            <td>{{t.address}}</td>
-            <td>{{t.commissionBase}}</td>
-            <td>{{t.amount}}</td>
-            <td>{{t.rate}}</td>
-            <td>{{t.createTime}}</td>
-            <td>{{t.reason}}</td>
-        </tr>
-    </table>
-    <div class="ylb-page">
-        总共{{Math.ceil(ct/sz)}}页，当前第{{ccp}}页
-        <a @click="cprev">上一页</a>
-        <a @click="cnext">下一页</a>
-        <input v-model="ccp" type="text"/>
-        <a @click="cjump">跳转</a>
+    <div class="asset-wrap" v-show="rrecord">
+        <table class="asset-table">
+            <tr>
+                <th>ID</th>
+                <th>充值时间</th>
+                <th>充值金额</th>
+                <th>状态</th>
+                <th>操作</th>
+            </tr>
+            <tr v-for="t in recharge">
+                <td>{{t.id}}</td>
+                <td>{{t.createTime}}</td>
+                <td>{{t.amount}}</td>
+                <td>
+                    <em v-if="t.payStatus=='Paid'">成功</em>
+                    <em v-else>未支付</em>
+                </td>
+                <td><a v-if="t.payStatus!='Paid'" href="http://api.hnylbsc.com/unionpay?id={{t.id}}">支付</a></td>
+            </tr>
+        </table>
+        <div class="ylb-page">
+            总共{{Math.ceil(rt/sz)}}页，当前第{{rcp}}页
+            <a @click="rprev">上一页</a>
+            <a @click="rnext">下一页</a>
+            <input v-model="rcp" type="text" />
+            <a @click="rjump">跳转</a>
+        </div>
+    </div>
+    <div class="asset-wrap" v-show="crecord&&(user.role=='Merchants'||user.role=='AM'||user.info=='CM')">
+        <table class="asset-table">
+            <tr>
+                <th>名下会员</th>
+                <th>会员手机号</th>
+                <th>做单人</th>
+                <th>做单人手机</th>
+                <th>商家名</th>
+                <th>商家地址</th>
+                <th>做单积分</th>
+                <th>佣金</th>
+                <th>佣金比例(%)</th>
+                <th>做单时间</th>
+                <th>备注</th>
+            </tr>
+            <tr v-for="t in commission">
+                <td>{{t.receiverName}}</td>
+                <td>{{t.receiverMobile}}</td>
+                <td>{{t.giverName}}</td>
+                <td>{{t.giverMobile}}</td>
+                <td>{{t.storeName}}</td>
+                <td>{{t.address}}</td>
+                <td>{{t.commissionBase}}</td>
+                <td>{{t.amount}}</td>
+                <td>{{t.rate}}</td>
+                <td>{{t.createTime}}</td>
+                <td>{{t.reason}}</td>
+            </tr>
+        </table>
+        <div class="ylb-page">
+            总共{{Math.ceil(ct/sz)}}页，当前第{{ccp}}页
+            <a @click="cprev">上一页</a>
+            <a @click="cnext">下一页</a>
+            <input v-model="ccp" type="text" />
+            <a @click="cjump">跳转</a>
+        </div>
     </div>
 </section>
 <!-- @@close-->
