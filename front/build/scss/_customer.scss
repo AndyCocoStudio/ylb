@@ -361,6 +361,12 @@
                     overflow: hidden;
                     text-align: center;
                     padding: 0 5px;
+                    p{
+                        border-bottom: 1px dashed #999;
+                        &:last-child{
+                            border: none;
+                        }
+                    }
                 }
                 th{
                     background-color: #efefef; 

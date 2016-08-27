@@ -222,6 +222,7 @@
                 <th>店铺名</th>
                 <th>会员号</th>
                 <th>转出金额</th>
+                <th>类型</th>
                 <th>开户行</th>
                 <th>卡号</th>
                 <th>时间</th>
@@ -238,6 +239,11 @@
                 <td>{{t.storeName}}</td>
                 <td>{{t.mobile}}</td>
                 <td>{{t.amount}}</td>
+                <td>
+                    <em v-if="t.transferKind=='Commission'">佣金</em>
+                    <em v-if="t.transferKind=='PaymentForGoods'">货款</em>
+                    <em v-if="t.transferKind=='Balance'">余额</em>
+                </td>
                 <td>{{t.bank}}</td>
                 <td>{{t.account}}</td>
                 <td>{{t.createTime}}</td>
@@ -260,6 +266,7 @@
                 <th>店铺名</th>
                 <th>会员号</th>
                 <th>转出金额</th>
+                <th>类型</th>
                 <th>开户行</th>
                 <th>卡号</th>
                 <th>时间</th>
@@ -276,12 +283,17 @@
                 <td>{{t.storeName}}</td>
                 <td>{{t.mobile}}</td>
                 <td>{{t.amount}}</td>
+                <td>
+                    <em v-if="t.transferKind=='Commission'">佣金</em>
+                    <em v-if="t.transferKind=='PaymentForGoods'">货款</em>
+                    <em v-if="t.transferKind=='Balance'">余额</em>
+                </td>
                 <td>{{t.bank}}</td>
                 <td>{{t.account}}</td>
                 <td>{{t.createTime}}</td>
                 <td>
                     <em v-if="t.status=='New'">待处理</em>
-                    <em v-if="t.status=='Agree'">已同意</em>
+                    <em v-if="t.status=='Agree'">区域经理已同意</em>
                     <em v-if="t.status=='Reject'">已拒绝</em>
                     <em v-if="t.status=='Paid'">已打款</em>
                 </td>

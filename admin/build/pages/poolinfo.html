@@ -1,0 +1,88 @@
+<!-- @@master ../layout.html  -->
+
+<!-- @@block = title-->
+<title>资金池进出账明细</title>
+<!-- @@close-->
+
+<!-- @@block = content-->
+<div class="poolinfo-main" id="poolinfo-main" v-cloak>
+    <h1>
+        <em v-if="k=='PaymentForGoods'">【货款】</em>
+        <em v-if="k=='PlatFormFee'">【平台费】</em>
+        <em v-if="k=='ServiceFee'">【服务费】</em>
+        <em v-if="et&&st">[{{st}}至{{et}}]</em> 资金池进出账明细
+    </h1>
+    <div class="poolinfo-tap">
+        <a :class="{'active':inl}" @click="changetap(1)">进账记录</a>
+        <a :class="{'active':outl}" @click="changetap(2)">出账记录</a>
+    </div>
+    <div v-show="inl" class="poolinfo-wrap">
+        <table>
+            <tr>
+                <th>现金入账</th>
+                <th>货款入账</th>
+                <th>佣金入账</th>
+                <th>积分入账</th>
+                <th>客户号</th>
+                <th>来源</th>
+                <th>时间</th>
+            </tr>
+            <tr v-for="i in inlist">
+                <td>{{i.cash}}</td>
+                <td>{{i.paymentForGoods}}</td>
+                <td>{{i.commission}}</td>
+                <td>{{i.score}}</td>
+                <td>{{i.mobile}}</td>
+                <td>{{i.reason}}</td>
+                <td>{{i.createTime}}</td>
+            </tr>
+        </table>
+        <div class="ylb-page">
+            总共{{Math.ceil(it/sz)}}页，当前第{{icp}}页
+            <a @click="iprev">上一页</a>
+            <a @click="inext">下一页</a>
+            <input v-model="icp" type="text" />
+            <a @click="ijump">跳转</a>
+        </div>
+    </div>
+    <div v-show="outl" class="poolinfo-wrap">
+        <table>
+            <tr>
+                <th>转出金额</th>
+                <th>会员号</th>
+                <th>会员角色</th>
+                <th>转出类型</th>
+                <th>时间</th>
+            </tr>
+            <tr v-for="i in outlist">
+                <td>{{i.amount}}</td>
+                <td>{{i.mobile}}</td>
+                <td>
+                    <em v-if="i.role=='Merchants'">商家</em>
+                    <em v-if="i.role=='CustomerManager'">客户经理</em>
+                    <em v-if="i.role=='AreaManager'">区域经理</em>
+                    <em v-if="i.role=='AM'">区域经理/商家</em>
+                    <em v-if="i.role=='CM'">客户经理/商家</em>
+                </td>
+                <td>
+                    <em v-if="i.transferKind=='PaymentForGoods'">货款</em>
+                    <em v-if="i.transferKind=='Commission'">佣金</em>
+                    <em v-if="i.transferKind=='Balance'">余额</em>
+                </td>
+                <td>{{i.createTime}}</td>
+            </tr>
+        </table>
+        <div class="ylb-page">
+            总共{{Math.ceil(ot/sz)}}页，当前第{{ocp}}页
+            <a @click="oprev">上一页</a>
+            <a @click="onext">下一页</a>
+            <input v-model="ocp" type="text" />
+            <a @click="ojump">跳转</a>
+        </div>
+    </div>
+</div>
+<!-- @@close-->
+
+<!-- @@block = scripts-->
+<script type="text/javascript" src="js/poolinfo.js?rev=@@hash"></script>
+<!-- @@close-->

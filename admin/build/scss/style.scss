@@ -224,9 +224,10 @@ body{
             }
             a{
                 width: 90px;
-                display: inline-block;
-                margin: 10px 0 0 90px;
+                display: block;
+                margin: 0 auto;
                 height: 28px;
+                line-height: 28px;
                 background-color: $orange;
                 color: #fff;
                 text-align: center;

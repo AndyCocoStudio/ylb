@@ -1,0 +1,14 @@
+.online-main{
+    table{
+        tr{
+            td{
+                p{
+                    border-bottom: 1px dashed #999;
+                    &:last-child{
+                        border-bottom: none;
+                    }
+                }
+            }
+        }
+    }
+}

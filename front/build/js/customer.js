@@ -244,7 +244,7 @@
         },
         //生成做单二维码
         createQRcode: function () {
-            var url = "http://www.hnylbsc.com/sendpoint.html?uid=" + vcustomer.info.mobile;
+            var url = "http://www.hnylbsc.com/func.html?mobile=" + vcustomer.info.mobile;
             if (!vcustomer.pcode) {
                 vcustomer.pcode = $('#customer-private-qrcode').qrcode({
                     render: "canvas",
@@ -253,16 +253,16 @@
                     text: url
                 });
             }
-            if (!vcustomer.rcode) {
-                var logonurl = "http://www.hnylbsc.com/logon.html?rid=" + vcustomer.info.mobile;
-                vcustomer.rcode = $('#logon-qrcode').qrcode({
-                    //render: "canvas",
-                    width: 280,
-                    height: 280,
-                    text: logonurl,
-                    useSVG: true
-                });
-            }
+            // if (!vcustomer.rcode) {
+            //     var logonurl = "http://www.hnylbsc.com/logon.html?rid=" + vcustomer.info.mobile;
+            //     vcustomer.rcode = $('#logon-qrcode').qrcode({
+            //         //render: "canvas",
+            //         width: 280,
+            //         height: 280,
+            //         text: logonurl,
+            //         useSVG: true
+            //     });
+            // }
         },
         //获取用户信息
         getUserInfo: function () {
@@ -276,30 +276,6 @@
                     m.getJFDHOrder();
                 });
             });
-        },
-        //获取角色申请列表
-        getApply: function () {
-            $.when($.ajax({
-                url: $.apiUrl + "/applies?k=0",
-                type: "GET"
-            })).done(function (d) {
-                $.ylbAjaxHandler(d, function () {
-                    vcustomer.apply = d.data.applies;
-                    m.getOrder();
-                });
-            });
-        },
-        //获取做单申请列表
-        getOrder: function () {
-            $.when($.ajax({
-                url: $.apiUrl + "/givingscore",
-                type: "GET"
-            })).done(function (d) {
-                $.ylbAjaxHandler(d, function () {
-                    vcustomer.order = d.data.orders;
-                    m.buildVue();
-                });
-            })
         },
         //获取积分兑换订单列表
         getJFDHOrder: function () {
@@ -348,26 +324,13 @@
                 $.ylbAjaxHandler(d, function () {
                     vcustomer.zzsjzdlist = d.data.orders;
                     vcustomer.zt = d.data.totalCount;
-                    m.getReward();
-                });
-            });
-        },
-        //获取资金转出记录
-        getReward: function () {
-            $.when($.ajax({
-                url: $.apiUrl + "/user/transfers?cp=" + vcustomer.zczcp + "&sz=" + vcustomer.sz,
-                type: "GET"
-            })).done(function (d) {
-                $.ylbAjaxHandler(d, function () {
-                    vcustomer.rlist = d.data.transfers;
-                    vcustomer.zczct = d.data.totalCount;
                     if (vcustomer.info.role == 'CustomerManager' || vcustomer.info.role == 'AreaManager' || vcustomer.info.role == 'AM' || vcustomer.info.role == 'CM') {
                         m.getTotal();
                     }
                     else {
                         m.buildVue();
                     }
-                })
+                });
             });
         },
         //计算工资小计
@@ -378,24 +341,6 @@
             })).done(function (d) {
                 $.ylbAjaxHandler(d, function () {
                     vcustomer.total = d.data;
-                    if (vcustomer.info.role == 'CustomerManager' || vcustomer.info.role == 'CM') {
-                        m.getOrders();
-                    } else if (vcustomer.info.role == 'AreaManager' || vcustomer.info.role == 'AM') {
-                        m.getApply();
-                    }
-                    else m.buildVue();
-                });
-            });
-        },
-        //获取客户经理名下商家做单列表
-        getOrders: function () {
-            $.when($.ajax({
-                url: $.apiUrl + "/customermanager/givingscore?cp=" + vcustomer.cmcp + "&sz=" + vcustomer.sz,
-                type: "GET"
-            })).done(function (d) {
-                $.ylbAjaxHandler(d, function () {
-                    vcustomer.customerorders = d.data;
-                    vcustomer.cmt == d.data.totalCount;
                     m.buildVue();
                 });
             });
@@ -489,49 +434,6 @@
                         if (vcustomer.zcp <= 1) vcustomer.zcp = 1;
                         m.getZZSJZDOrder();
                     },
-                    zczcprev: function () {
-                        if (vcustomer.zczcp <= 1) {
-                            return;
-                        } else {
-                            vcustomer.zczcp = +vcustomer.zczcp - 1;
-                            m.getReward();
-                        }
-                    },
-                    zczcnext: function () {
-                        if (vcustomer.zczcp >= Math.ceil(vcustomer.zczct / vcustomer.sz)) {
-                            return;
-                        } else {
-                            vcustomer.zczcp = +vcustomer.zczcp + 1;
-                            m.getReward();
-                        }
-                    },
-                    zczcjump: function () {
-                        if (vcustomer.zczcp >= Math.ceil(vcustomer.zczct / vcustomer.sz)) vcustomer.zczcp = Math.ceil(vcustomer.zczct / vcustomer.sz);
-                        if (vcustomer.zczcp <= 1) vcustomer.zczcp = 1;
-                        m.getReward();
-                    },
-                    cmprev: function () {
-                        if (vcustomer.cmcp <= 1) {
-                            return;
-                        } else {
-                            vcustomer.cmcp = +vcustomer.cmcp - 1;
-                            m.getOrders();
-                        }
-                    },
-                    cmnext: function () {
-                        if (vcustomer.cmcp >= Math.ceil(vcustomer.cmt / vcustomer.sz)) {
-                            return;
-                        } else {
-                            vcustomer.cmcp = +vcustomer.cmcp + 1;
-                            m.getOrders();
-                        }
-                    },
-                    cmjump: function () {
-                        if (vcustomer.cmcp >= Math.ceil(vcustomer.cmt / vcustomer.sz)) vcustomer.cmcp = Math.ceil(vcustomer.cmt / vcustomer.sz);
-                        if (vcustomer.cmcp <= 1) vcustomer.cmcp = 1;
-                        m.getOrders();
-                    },
-
                     //选择订单列表
                     selectorder: function (t) {
                         switch (t) {
@@ -576,38 +478,6 @@
                     spendpoints: function () {
                         this.covershow = true;
                         this.spendshow = true;
-                    },
-                    //获取验证码
-                    getcode: function () {
-                        if (vcustomer.counting) {
-                            return;
-                        } else {
-                            if (vcustomer.tj.mobile) {
-                                if (vcustomer.tj.mobile.length < 11) {
-                                    $.ylbAlert("手机号码位数不正确");
-                                } else {
-                                    if (!$.checkIsMobileNumber(vcustomer.tj.mobile)) {
-                                        $.ylbAlert("请输入正确手机号");
-                                    } else {
-                                        vcustomer.counting = true;
-                                        $.ajax({
-                                            url: $.apiUrl + "/captcha",
-                                            type: "PUT",
-                                            data: JSON.stringify({
-                                                mobile: vcustomer.tj.mobile,
-                                            })
-                                        }).done(function (d) {
-                                            $.ylbAjaxHandler(d, function () {
-                                                $.ylbAlert("发送成功");
-                                                vcustomer.countdown = setInterval(m.countDown, 1000);
-                                            });
-                                        });
-                                    }
-                                }
-                            } else {
-                                $.ylbAlert("请输入手机号码");
-                            }
-                        }
                     },
                     //隐藏所有弹层
                     hideall: function () {
@@ -672,80 +542,11 @@
                             });
                         });;
                     },
-                    //同意角色申请
-                    accepts: function (id) {
-                        var c = confirm("确认同意该申请？");
-                        if (c) {
-                            $.ajax({
-                                url: $.apiUrl + "/apply/allow",
-                                type: "POST",
-                                data: JSON.stringify({
-                                    applicationID: id
-                                })
-                            }).done(function (d) {
-                                $.ylbAjaxHandler(d, function () {
-                                    $.ylbAlert("操作成功");
-                                    m.getApply();
-                                });
-                            });
-                        }
-                    },
-                    //切换审批列表
-                    selapprove: function (id) {
-                        if (id == 1) {
-                            vcustomer.zdsh = true;
-                            vcustomer.jssh = false;
-                            vcustomer.fzdsh = false;
-                            vcustomer.fjssh = false;
-                        } else if (id == 2) {
-                            vcustomer.zdsh = false;
-                            vcustomer.jssh = true;
-                            vcustomer.fzdsh = false;
-                            vcustomer.fjssh = false;
-                        } else if (id == 3) {
-                            vcustomer.zdsh = false;
-                            vcustomer.jssh = false;
-                            vcustomer.fzdsh = true;
-                            vcustomer.fjssh = false;
-                        } else if (id == 4) {
-                            vcustomer.zdsh = false;
-                            vcustomer.jssh = false;
-                            vcustomer.fzdsh = false;
-                            vcustomer.fjssh = true;
-                        }
-                    },
-                    //显示拒绝理由
-                    showreason: function (id) {
-                        vcustomer.nagtive = true;
-                        vcustomer.covershow = true;
-                        vcustomer.appID = id;
-                    },
-                    //查看做单拒绝理由
-                    showrejectreason: function (msg) {
-                        alert(msg);
-                    },
                     //选择转出资产类型
                     changerewardway: function (el) {
                         var v = $(el.target).find("option:selected").val();
                         vcustomer.reward.way = v;
                     },
-                    //拒绝角色申请
-                    reject: function () {
-                        $.ajax({
-                            url: $.apiUrl + "/apply/reject",
-                            type: "POST",
-                            data: JSON.stringify({
-                                applicationID: vcustomer.appID,
-                                reason: vcustomer.reason
-                            })
-                        }).done(function (d) {
-                            $.ylbAjaxHandler(d, function () {
-                                $.ylbAlert("操作成功");
-                                vcustomer.hideall();
-                                m.getApply();
-                            });
-                        });
-                    }, 
                     //申请角色切换
                     rolechange: function (el) {
                         vcustomer.role = $(el.target).val();
@@ -943,61 +744,6 @@
                             })
                         }
                     },
-                    //加盟商注册用户
-                    logon: function () {
-                        $.ajax({
-                            url: $.apiUrl + "/user/register",
-                            type: "PUT",
-                            data: JSON.stringify(vcustomer.tj)
-                        }).done(function (d) {
-                            $.ylbAjaxHandler(d, function () {
-                                $.ylbAlert("创建成功");
-                                vcustomer.tj.mobile = "";
-                                vcustomer.tj.captcha = "";
-                            })
-                        });
-                    },
-                    //显示拒绝做单申请理由
-                    showorderreason: function (id) {
-                        vcustomer.orderID = id;
-                        this.covershow = true;
-                        this.ordernagtive = true;
-                    },
-                    //同意做单申请
-                    agreeorder: function (id) {
-                        var c = confirm("确认同意该申请？");
-                        if (c) {
-                            $.ajax({
-                                url: $.apiUrl + "/givingscore/agree",
-                                type: "POST",
-                                data: JSON.stringify({
-                                    orderID: id
-                                })
-                            }).done(function (d) {
-                                $.ylbAjaxHandler(d, function () {
-                                    $.ylbAlert("操作成功");
-                                    m.getUserInfo();
-                                });
-                            });
-                        }
-                    },
-                    //不同意做单申请
-                    disagreeorder: function () {
-                        $.ajax({
-                            url: $.apiUrl + "/givingscore/reject",
-                            type: "POST",
-                            data: JSON.stringify({
-                                orderID: vcustomer.orderID,
-                                reason: vcustomer.orderreason
-                            })
-                        }).done(function (d) {
-                            $.ylbAjaxHandler(d, function () {
-                                $.ylbAlert("操作成功");
-                                vcustomer.hideall();
-                                m.getOrder();
-                            });
-                        });
-                    },
                     //充值
                     recharge: function () {
                         $.ylbConfirm({
@@ -1070,6 +816,22 @@
                                 }, 1500);
                             });
                         });
+                    },
+                    //确认收货
+                    getgoods: function (id) {
+                        var c = confirm("确认收货？");
+                        if (c) {
+                            $.ajax({
+                                url: $.apiUrl + "/order/receive",
+                                type: "POST",
+                                data: JSON.stringify({ orderItemID: id})
+                            }).done(function (d) {
+                                $.ylbAjaxHandler(d, function () {
+                                    $.ylbAlert("操作成功");
+                                    vcustomer.getXSXFOrder();
+                                });
+                            });
+                        }
                     }
                 }
             });

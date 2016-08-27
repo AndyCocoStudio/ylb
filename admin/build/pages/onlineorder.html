@@ -20,7 +20,7 @@
             <th>发货地址</th>
             <th>操作</th>
         </tr>
-        <tr v-if="o.payStatus=='Paid'&o.orderStatus!='Cancel'" v-for="o in list">
+        <tr v-for="o in list">
             <td>{{o.orderID}}</td>
             <td>
                 <p v-for="p in o.items">{{p.name}}</p>
@@ -35,8 +35,9 @@
             <td>{{o.mobile}}</td>
             <td>{{o.address}}</td>
             <td>
-                <p v-if="g.status=='New'" v-for="g in o.items"><a @click="showexpress(g.orderID)">发货</a></p>
-                <p v-if="g.status=='Sent'" v-for="g in o.items">已发货</p>
+                <p v-if="o.orderStatus=='New'"><a @click="showexpress(o.orderID)">发货</a></p>
+                <p v-if="o.orderStatus=='Sent'">已发货</p>
+                <p v-if="o.orderStatus=='Complete'">交易完成</p>
             </td>
         </tr>
     </table>

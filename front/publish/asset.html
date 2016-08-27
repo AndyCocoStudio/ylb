@@ -12,9 +12,9 @@
 
 
 
-	<link rel="stylesheet" type="text/css" href="css/style.css?rev=d5e48e49b1496092364d522b30db0749" />
+	<link rel="stylesheet" type="text/css" href="css/style.css?rev=e52ce6dd11b5b9c49905e6d4ccdcadaa" />
 	<link rel="stylesheet" type="text/css" href="css/pickday.css" />
-	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=d5e48e49b1496092364d522b30db0749" />
+	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=e52ce6dd11b5b9c49905e6d4ccdcadaa" />
 </head>
 
 <body>
@@ -104,7 +104,7 @@
             <a @click="rjump">跳转</a>
         </div>
     </div>
-    <div class="asset-wrap" v-show="crecord&&(user.role=='Merchants'||user.role=='AM'||user.info=='CM')">
+    <div class="asset-wrap" v-show="crecord&&user.role!='Ordinary'">
         <table class="asset-table">
             <tr>
                 <th>名下会员</th>
@@ -174,9 +174,9 @@
 <script src="js/libs/pickday.min.js" type="text/javascript"></script>
 <script src="js/libs/qrcode.min.js" type="text/javascript"></script>
 <script src="js/libs/dropzone.js" type="text/javascript"></script>
-<script src="js/base.js?rev=d5e48e49b1496092364d522b30db0749" type="text/javascript"></script>
+<script src="js/base.js?rev=e52ce6dd11b5b9c49905e6d4ccdcadaa" type="text/javascript"></script>
 
-<script type="text/javascript" src="js/asset.js?rev=d5e48e49b1496092364d522b30db0749"></script>
+<script type="text/javascript" src="js/asset.js?rev=e52ce6dd11b5b9c49905e6d4ccdcadaa"></script>
 
 
 </html>

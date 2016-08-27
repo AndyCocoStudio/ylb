@@ -7,6 +7,7 @@
 <!-- @@block = content-->
 <section class="spendpoint-main" id="spendpoint-main" v-cloak>
     <h1>积分兑换</h1>
+    <p class="ylb-p">您当前可用积分：{{info.asset.score}}</p>
     <ul>
         <li><span>商家手机号</span><input type="text" maxlength="11" @change="getstoreinfo" v-model="order.merchantMobile"></li>
         <li><span>店铺名：</span>{{merchant.name}}</li>

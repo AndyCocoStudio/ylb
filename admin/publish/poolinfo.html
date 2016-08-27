@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>资金池进出账明细</title>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1" />
+	<meta name="description" content="优良宝" />
+	<meta name="keywords" content="优良宝" />
+	<link rel="shortcut icon" type="image/png" href="images/favicon.png" />
+
+
+
+	<link rel="stylesheet" type="text/css" href="css/libs/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/libs/morris.css" />
+	<link rel="stylesheet" type="text/css" href="css/libs/pickday.css" />
+	<link rel="stylesheet" type="text/css" href="css/font-awesome.css" />
+	<link rel="stylesheet" type="text/css" href="css/style.css?rev=a114d109dd573e337f10bc8c17993266" />
+</head>
+
+<body>
+	<header class="op-header"><img src="images/logo.png" /><a class="logout">注销登录</a></header>
+	<section class="layout-main">
+		<div class="op-left" id="layout-main" v-cloak>
+			<ul>
+				<li v-show="role=='Admin'||role=='Marketing'||role=='GeneralManager'||role=='LegalInspection'"><a href="order.html"><i class="fa fa-money"></i>做单查询</a></li>
+				<li v-show="role=='Admin'||role=='FinancialAffairs'||role=='GeneralManager'||role=='LegalInspection'"><a href="transfers.html"><i class="fa fa-money"></i>提现管理</a></li>
+				<li v-show="role=='Admin'||role=='GeneralManager'"><a href="upgraderight.html"><i class="fa fa-money"></i>提升区域经理</a></li>
+				<li v-show="role=='Admin'"><a href="cashpool.html"><i class="fa fa-money"></i>资金池统计</a></li>
+				<li v-show="role=='Admin'||role=='CustomerService'"><a href="product.html"><i class="fa fa-money"></i>商品管理</a></li>
+				<li v-show="role=='Admin'||role=='Marketing'||role=='CustomerService'"><a href="onlineorder.html"><i class="fa fa-money"></i>商城订单管理</a></li>
+				<li v-show="role=='Admin'||role=='GeneralManager'"><a href="downgraderight.html"><i class="fa fa-money"></i>降权管理</a></li>
+				<li v-show="role=='Admin'||role=='CustomerService'"><a href="banner.html"><i class="fa fa-money"></i>首页管理</a></li>
+				<li v-show="role=='Admin'||role=='Marketing'||role=='GeneralManager'||role=='LegalInspection'"><a href="users.html"><i class="fa fa-money"></i>有效用户</a></li>
+				<li v-show="role=='Admin'||role=='FinancialAffairs'||role=='GeneralManager'"><a href="wages.html"><i class="fa fa-money"></i>工资管理</a></li>
+				<li v-show="role=='Admin'||role=='GeneralManager'"><a href="toarea.html"><i class="fa fa-money"></i>体验积分</a></li>
+				<li v-show="role=='Admin'"><a href="account.html"><i class="fa fa-money"></i>后台账号管理</a></li>
+			</ul>
+		</div>
+		<div class="op-right">
+
+<div class="poolinfo-main" id="poolinfo-main" v-cloak>
+    <h1>
+        <em v-if="k=='PaymentForGoods'">【货款】</em>
+        <em v-if="k=='PlatFormFee'">【平台费】</em>
+        <em v-if="k=='ServiceFee'">【服务费】</em>
+        <em v-if="et&&st">[{{st}}至{{et}}]</em> 资金池进出账明细
+    </h1>
+    <div class="poolinfo-tap">
+        <a :class="{'active':inl}" @click="changetap(1)">进账记录</a>
+        <a :class="{'active':outl}" @click="changetap(2)">出账记录</a>
+    </div>
+    <div v-show="inl" class="poolinfo-wrap">
+        <table>
+            <tr>
+                <th>现金入账</th>
+                <th>货款入账</th>
+                <th>佣金入账</th>
+                <th>积分入账</th>
+                <th>客户号</th>
+                <th>来源</th>
+                <th>时间</th>
+            </tr>
+            <tr v-for="i in inlist">
+                <td>{{i.cash}}</td>
+                <td>{{i.paymentForGoods}}</td>
+                <td>{{i.commission}}</td>
+                <td>{{i.score}}</td>
+                <td>{{i.mobile}}</td>
+                <td>{{i.reason}}</td>
+                <td>{{i.createTime}}</td>
+            </tr>
+        </table>
+        <div class="ylb-page">
+            总共{{Math.ceil(it/sz)}}页，当前第{{icp}}页
+            <a @click="iprev">上一页</a>
+            <a @click="inext">下一页</a>
+            <input v-model="icp" type="text" />
+            <a @click="ijump">跳转</a>
+        </div>
+    </div>
+    <div v-show="outl" class="poolinfo-wrap">
+        <table>
+            <tr>
+                <th>转出金额</th>
+                <th>会员号</th>
+                <th>会员角色</th>
+                <th>转出类型</th>
+                <th>时间</th>
+            </tr>
+            <tr v-for="i in outlist">
+                <td>{{i.amount}}</td>
+                <td>{{i.mobile}}</td>
+                <td>
+                    <em v-if="i.role=='Merchants'">商家</em>
+                    <em v-if="i.role=='CustomerManager'">客户经理</em>
+                    <em v-if="i.role=='AreaManager'">区域经理</em>
+                    <em v-if="i.role=='AM'">区域经理/商家</em>
+                    <em v-if="i.role=='CM'">客户经理/商家</em>
+                </td>
+                <td>
+                    <em v-if="i.transferKind=='PaymentForGoods'">货款</em>
+                    <em v-if="i.transferKind=='Commission'">佣金</em>
+                    <em v-if="i.transferKind=='Balance'">余额</em>
+                </td>
+                <td>{{i.createTime}}</td>
+            </tr>
+        </table>
+        <div class="ylb-page">
+            总共{{Math.ceil(ot/sz)}}页，当前第{{ocp}}页
+            <a @click="oprev">上一页</a>
+            <a @click="onext">下一页</a>
+            <input v-model="ocp" type="text" />
+            <a @click="ojump">跳转</a>
+        </div>
+    </div>
+</div>
+
+		</div>
+	</section>
+</body>
+<script src="js/libs/jquery-2.1.4.min.js" type="text/javascript"></script>
+<script src="js/libs/bootstrap.min.js" type="text/javascript"></script>
+<script src="js/libs/dropzone.js" type="text/javascript"></script>
+<script src="js/libs/pickday.min.js" type="text/javascript"></script>
+<script src="js/libs/vue.min.js" type="text/javascript"></script>
+<script src="js/libs/echarts.min.js" type="text/javascript"></script>
+<script src="js/base.js?rev=a114d109dd573e337f10bc8c17993266" type="text/javascript"></script>
+
+
+<script type="text/javascript" src="js/poolinfo.js?rev=a114d109dd573e337f10bc8c17993266"></script>
+
+
+</html>

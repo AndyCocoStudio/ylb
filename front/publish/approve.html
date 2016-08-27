@@ -12,9 +12,9 @@
 
 
 
-	<link rel="stylesheet" type="text/css" href="css/style.css?rev=0e60dcb1588bea2a5471f3a55a9de9a5" />
+	<link rel="stylesheet" type="text/css" href="css/style.css?rev=822e5fe19b4f7f2e11a1b49023ac5ebd" />
 	<link rel="stylesheet" type="text/css" href="css/pickday.css" />
-	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=0e60dcb1588bea2a5471f3a55a9de9a5" />
+	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=822e5fe19b4f7f2e11a1b49023ac5ebd" />
 </head>
 
 <body>
@@ -250,6 +250,7 @@
                 <th>店铺名</th>
                 <th>会员号</th>
                 <th>转出金额</th>
+                <th>类型</th>
                 <th>开户行</th>
                 <th>卡号</th>
                 <th>时间</th>
@@ -266,6 +267,11 @@
                 <td>{{t.storeName}}</td>
                 <td>{{t.mobile}}</td>
                 <td>{{t.amount}}</td>
+                <td>
+                    <em v-if="t.transferKind=='Commission'">佣金</em>
+                    <em v-if="t.transferKind=='PaymentForGoods'">货款</em>
+                    <em v-if="t.transferKind=='Balance'">余额</em>
+                </td>
                 <td>{{t.bank}}</td>
                 <td>{{t.account}}</td>
                 <td>{{t.createTime}}</td>
@@ -288,6 +294,7 @@
                 <th>店铺名</th>
                 <th>会员号</th>
                 <th>转出金额</th>
+                <th>类型</th>
                 <th>开户行</th>
                 <th>卡号</th>
                 <th>时间</th>
@@ -304,12 +311,17 @@
                 <td>{{t.storeName}}</td>
                 <td>{{t.mobile}}</td>
                 <td>{{t.amount}}</td>
+                <td>
+                    <em v-if="t.transferKind=='Commission'">佣金</em>
+                    <em v-if="t.transferKind=='PaymentForGoods'">货款</em>
+                    <em v-if="t.transferKind=='Balance'">余额</em>
+                </td>
                 <td>{{t.bank}}</td>
                 <td>{{t.account}}</td>
                 <td>{{t.createTime}}</td>
                 <td>
                     <em v-if="t.status=='New'">待处理</em>
-                    <em v-if="t.status=='Agree'">已同意</em>
+                    <em v-if="t.status=='Agree'">区域经理已同意</em>
                     <em v-if="t.status=='Reject'">已拒绝</em>
                     <em v-if="t.status=='Paid'">已打款</em>
                 </td>
@@ -368,9 +380,9 @@
 <script src="js/libs/pickday.min.js" type="text/javascript"></script>
 <script src="js/libs/qrcode.min.js" type="text/javascript"></script>
 <script src="js/libs/dropzone.js" type="text/javascript"></script>
-<script src="js/base.js?rev=0e60dcb1588bea2a5471f3a55a9de9a5" type="text/javascript"></script>
+<script src="js/base.js?rev=822e5fe19b4f7f2e11a1b49023ac5ebd" type="text/javascript"></script>
 
-<script type="text/javascript" src="js/approve.js?rev=0e60dcb1588bea2a5471f3a55a9de9a5"></script>
+<script type="text/javascript" src="js/approve.js?rev=822e5fe19b4f7f2e11a1b49023ac5ebd"></script>
 
 
 </html>

@@ -121,6 +121,7 @@
                     $.ylbAjaxHandler(d, function () {
                         order.product = d.data;
                         order.product.goodses[0].count = order.count;
+                        order.postage = d.data.goodses[0].freight;
                         m.countPrice();
                         m.buildVue();
                     });

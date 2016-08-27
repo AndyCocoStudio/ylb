@@ -12,7 +12,19 @@
     };
     var m = {
         init: function () {
-            m.buildVue();
+            m.getInfo();
+            //m.buildVue();
+        },
+        getInfo: function () {
+            $.when($.ajax({
+                url: $.apiUrl + "/user/abstract",
+                type: "GET"
+            })).done(function (d) {
+                $.ylbAjaxHandler(d, function () {
+                    spendpointer.info = d.data;
+                    m.buildVue();
+                });
+            });
         },
         buildVue: function () {
             spendpointer = new Vue({

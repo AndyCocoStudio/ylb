@@ -12,9 +12,9 @@
 
 
 
-	<link rel="stylesheet" type="text/css" href="css/style.css?rev=be2c9713e8e675a3e1aa6857aba57b97" />
+	<link rel="stylesheet" type="text/css" href="css/style.css?rev=ca0db9d1ae25ecb3b938f99136bac6f0" />
 	<link rel="stylesheet" type="text/css" href="css/pickday.css" />
-	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=be2c9713e8e675a3e1aa6857aba57b97" />
+	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=ca0db9d1ae25ecb3b938f99136bac6f0" />
 </head>
 
 <body>
@@ -57,11 +57,12 @@
         <ul>
             <li class="select"><a href="#customer-info"><i class="icon-ylbicon-01"></i>我的账号</a></li>
             <li><a href="tastepoint.html"><i class="icon-ylbicon-09"></i>体验积分</a></li>
+            <li><a href="spendpoint.html"><i class="icon-ylbicon-25"></i>积分兑换</a></li>
+            <li><a href="sendpoint.html"><i class="icon-ylbicon-04"></i>商家做单</a></li>
             <li><a href="edit.html"><i class="icon-ylbicon-37"></i>个人资料</a></li>
             <li><a href="#customer-order"><i class="icon-ylbicon-02"></i>我的订单</a></li>
-            <li><a href="#customer-apply"><i class="icon-ylbicon-04"></i>角色申请</a></li>
+            <li v-if="!(info.role=='AM'||info.role=='CM')"><a href="#customer-apply"><i class="icon-ylbicon-04"></i>角色申请</a></li>
             <li v-if="info.role=='Merchants'||info.role=='AM'||info.role=='CM'"><a href="#customer-logon"><i class="icon-ylbicon-37"></i>推荐会员</a></li>
-            <li v-if="info.role!='Ordinary'"><a href="#customer-reward"><i class="icon-ylbicon-41"></i>转出记录</a></li>
             <li v-if="info.role=='Merchants'||info.role=='AM'||info.role=='CM'"><a href="#customer-managerorder"><i class="icon-ylbicon-22"></i>名下业绩</a></li>
             <li v-if="info.role=='AreaManager'||info.role=='AM'"><a href="approve.html"><i class="icon-ylbicon-18"></i>审核管理</a></li>
         </ul>
@@ -96,7 +97,7 @@
                         href="wages.html">工资管理</a><a href="asset.html">资产详情</a></p>
             </div>
             <div class="customer-code customer-eqcode">
-                <div class="customer-tag">扫我做单</div>
+                <div class="customer-tag">多用二维码</div>
                 <div class="customer-pic ylb-center">
                     <div id="customer-private-qrcode" class="customer-private-qrcode"></div>
                 </div>
@@ -108,10 +109,8 @@
                     <a v-if="info.role=='Merchants'||info.role=='AM'||info.role=='CM'" href="sendpoint.html">商家做单</a>
                     <a v-if="info.role!='Ordinary'" href="referlist.html">推荐列表</a>
                     <a v-if="info.role!='Ordinary'&&info.role!='Merchants'" href="record.html">业绩统计</a>
-                    <!--<a v-if="info.role!='Ordinary'" href="tastepoint.html">体验积分</a>-->
                 </div>
             </div>
-            <!--<img v-if="info.role!='Merchants'&&info.role!='AM'&&info.role!='CM'" class="customer-adv" src="images/adv1.png" />-->
         </div>
         <!--客户经理统计-->
         <div v-if="info.role=='CustomerManager'||info.role=='CM'" class="customer-count">
@@ -199,6 +198,7 @@
                 <tr>
                     <th>订单号</th>
                     <th>商品名称</th>
+                    <th>数量</th>
                     <th>店铺名</th>
                     <th>总价</th>
                     <th>积分支付</th>
@@ -213,37 +213,64 @@
                 </tr>
                 <tr v-for="x in xsxflist">
                     <td>{{x.orderID}}</td>
-                    <td>{{x.items[0].name}}</td>
+                    <td>
+                        <p v-for="i in x.items">{{i.name}}</p>
+                    </td>
+                    <td>
+                        <p v-for="i in x.items">{{i.quantity}}</p>
+                    </td>
                     <td>{{x.storeName}}</td>
                     <td>{{x.totalPrice}}</td>
                     <td>{{x.score}}</td>
                     <td>{{x.createTime.substring(0,x.createTime.length-6)}}</td>
                     <td>
-                        <p v-if="x.payStatus=='Unpaid'">
+                        <div v-if="x.payStatus=='Unpaid'">
                             <em v-if="x.orderStatus=='Cancel'">已取消</em>
                             <em v-if="x.orderStatus!='Cancel'">待支付</em>
-                        </p>
-                        <p v-if="x.payStatus=='Paying'">
+                        </div>
+                        <div v-if="x.payStatus=='Paying'">
                             <em v-if="x.orderStatus=='Cancel'">已取消</em>
                             <em v-if="x.orderStatus!='Cancel'">继续支付</em>
-                        </p>
-                        <p v-if="x.payStatus=='Paid'">
-                            <em v-if="x.items[0].status=='New'">已支付</em>
-                            <em v-if="x.items[0].status=='Refund'">退款中</em>
-                            <em v-if="x.items[0].status=='Refunded'">已退款</em>
-                            <em v-if="x.items[0].status=='Sending'">待发货</em>
-                            <em v-if="x.items[0].status=='Sent'">已发货</em>
-                            <em v-if="x.items[0].status=='Received'">已收货</em>
-                        </p>
+                        </div>
+                        <div v-if="x.payStatus=='Paid'">
+                            <!--<p v-for="i in x.items">
+                                <em v-if="i.status=='New'">已支付</em>
+                                <em v-if="i.status=='Refund'">退款中</em>
+                                <em v-if="i.status=='Refunded'">已退款</em>
+                                <em v-if="i.status=='Sending'">待发货</em>
+                                <em v-if="i.status=='Sent'">已发货</em>
+                                <em v-if="i.status=='Received'">已收货</em>
+                            </p>-->
+                            <em v-if="x.orderStatus=='New'">待发货</em>
+                            <em v-if="x.orderStatus=='Sent'">已发货</em>
+                            <em v-if="x.orderStatus=='Complete'">交易完成</em>
+                        </div>
                     </td>
                     <td>
-                        <a v-if="x.payStatus=='Unpaid'&&x.orderStatus!='Cancel'" href="pay.html?oid={{x.orderID}}">支付</a><br
-                            v-if="x.payStatus=='Unpaid'&&x.orderStatus!='Cancel'" />
-                        <a v-if="x.payStatus=='Unpaid'&&x.orderStatus!='Cancel'" @click="cancel(x.orderID)" data-id="{{x.orderID}}">取消</a><br
-                            v-if="x.payStatus=='Unpaid'&&x.orderStatus!='Cancel'" />
-                        <!--<a v-if="x.payStatus=='Paid'&&x.orderStatus!='Cancel'" data-id="{{x.orderID}}">退款</a>-->
-                        <a v-if="x.payStatus=='Paying'&&x.orderStatus!='Cancel'" href="pay.html?oid={{x.orderID}}">继续支付</a>
-                        <a v-if="x.payStatus=='Paying'&&x.orderStatus!='Cancel'" @click="cancel(x.orderID)" data-id="{{x.orderID}}">取消</a>
+                        <div v-if="x.payStatus=='Unpaid'&&x.orderStatus!='Cancel'">
+                            <a href="pay.html?oid={{x.orderID}}">支付</a><br>
+                            <a @click="cancel(x.orderID)" data-id="{{x.orderID}}">取消</a>
+                        </div>
+                        <div v-if="x.payStatus=='Paying'&&x.orderStatus!='Cancel'">
+                            <a href="pay.html?oid={{x.orderID}}">继续支付</a>
+                            <a @click="cancel(x.orderID)" data-id="{{x.orderID}}">取消</a>
+                        </div>
+                        <div v-if="x.payStatus=='Paid'&&x.orderStatus!='Cancel'">
+                            <!--<p v-for="i in x.items">
+                                <em v-if="i.status=='Sent'"><a @click="getgoods(x.orderID)">确认收货</a></em>
+                            </p>-->
+                            <div v-if="x.orderStatus=='New'"></div>
+                            <div v-if="x.orderStatus=='Sent'">
+                                <p v-for="i in x.items">
+                                    <a @click="getgoods(i.orderItemID)">确认收货</a>
+                                </p>
+                            </div>
+                            <div v-if="x.orderStatus=='Complete'">
+                                <p v-for="i in x.items">
+                                    <a @click="refundgoods(i.orderItemID)">退货</a>
+                                </p>
+                            </div>
+                        </div>
                     </td>
                 </tr>
             </table>
@@ -454,271 +481,6 @@
                 <li><a class="btn-sub" @click="apymanager">提交</a></li>
             </ul>
         </div>
-        <!--商家注册会员-->
-        <div v-if="info.role=='Merchants'||info.role=='AM'||info.role=='CM'" id="customer-logon" class="customer-logon">
-            <div class="customer-title">
-                推荐会员
-            </div>
-            <!--<ul>
-                <li>
-                    <input type="text" maxlength="11" v-model="tj.mobile" placeholder="请输入手机号码" /><input class="btn-code"
-                        @click="getcode" value="获取验证码" type="button" />
-                </li>
-                <li>
-                    <input type="text" maxlength="4" v-model="tj.captcha" placeholder="请输入验证码" />
-                </li>
-                <li>
-                    <button @click="logon">注册</button>
-                </li>
-            </ul>-->
-            <a href="referlogon.html?rid={{info.mobile}}">查看大图</a>
-            <div id="logon-qrcode" class="customer-recommendqrcode"></div>
-        </div>
-        <!--资产转出查看-->
-        <div v-if="info.role!='Ordinary'" id="customer-reward" class="customer-reward">
-            <div class="customer-title">转出查询</div>
-            <table class="customer-reward-list">
-                <tr>
-                    <th>单号</th>
-                    <th>转出金额</th>
-                    <th>转出卡号</th>
-                    <th>申请时间</th>
-                    <th>状态</th>
-                </tr>
-                <tr v-show="rlist.length<1">
-                    <td colspan="5">
-                        您暂无做单订单
-                    </td>
-                </tr>
-                <tr v-for="r in rlist">
-                    <td>{{r.transferID}}</td>
-                    <td>{{r.amount}}</td>
-                    <td>{{r.account}}</td>
-                    <td>{{r.createTime}}</td>
-                    <td>
-                        <em v-if="r.status=='New'">审核中</em>
-                        <em v-if="r.status=='Agree'">已同意</em>
-                        <em v-if="r.status=='Reject'">已拒绝</em>
-                    </td>
-                </tr>
-            </table>
-            <div class="ylb-page">
-                总共{{Math.ceil(zczct/sz)}}页，当前第{{zczcp}}页
-                <a @click="zczcprev">上一页</a>
-                <a @click="zczcnext">下一页</a>
-                <input v-model="zczcp" type="text" />
-                <a @click="zczcjump">跳转</a>
-            </div>
-        </div>
-        <!--客户经理名下商家做单查看-->
-        <div v-if="info.role=='CustomerManager'||info.role=='CM'" id="customer-managerorder" class="customer-managerorder">
-            <div class="customer-title">名下商家做单</div>
-            <table class="customer-order-list">
-                <tr>
-                    <th>订单号</th>
-                    <th>商品名称</th>
-                    <th>商品类目</th>
-                    <th>店铺名</th>
-                    <th>店铺电话</th>
-                    <th>受赠人</th>
-                    <th>赠送积分</th>
-                    <th>创建时间</th>
-                    <th>状态</th>
-                </tr>
-                <tr v-show="sjzdlist.length<1">
-                    <td colspan="9">
-                        您暂无做单订单
-                    </td>
-                </tr>
-                <tr v-for="s in sjzdlist">
-                    <td>{{s.orderID}}</td>
-                    <td>{{s.goodsName}}</td>
-                    <td>{{s.goodsKind}}</td>
-                    <td>{{s.storeName}}</td>
-                    <td>{{s.tel}}</td>
-                    <td>{{s.buyer||s.buyerMobile}}</td>
-                    <td>{{s.givingScore}}</td>
-                    <td>{{s.createTime.substring(0,s.createTime.length-6)}}</td>
-                    <td v-if="s.payStatus=='Unpaid'">
-                        <em v-if="s.orderStatus!='Cancel'">待支付</em>
-                        <em v-else>已取消</em>
-                    </td>
-                    <td v-else>
-                        <em v-if="s.items[0].status=='New'">已支付</em>
-                        <em v-if="s.items[0].status=='Refund'">退款中</em>
-                        <em v-if="s.items[0].status=='Refunded'">已退款</em>
-                        <em v-if="s.items[0].status=='Sending'">待发货</em>
-                        <em v-if="s.items[0].status=='Sent'">已发货</em>
-                        <em v-if="s.items[0].status=='Received'">已收货</em>
-                    </td>
-                </tr>
-            </table>
-            <div class="ylb-page">
-                总共{{Math.ceil(cmt/sz)}}页，当前第{{cmcp}}页
-                <a @click="cmprev">上一页</a>
-                <a @click="zcmnext">下一页</a>
-                <input v-model="cmcp" type="text" />
-                <a @click="cmjump">跳转</a>
-            </div>
-        </div>
-        <!--区域经理审批管理
-        <div v-if="info.role=='AreaManager'||info.role=='AM'" id="customer-approve" class="customer-approve">
-            <div class="customer-title">
-                审批管理
-            </div>
-            <ul class="customer-approve-type">
-                <li :class="{'select':zdsh}" @click="selapprove(1)">做单审批</li>
-                <li :class="{'select':jssh}" @click="selapprove(2)">申请审批</li>
-                <li :class="{'select':fzdsh}" @click="selapprove(3)">已处理做单审批</li>
-                <li :class="{'select':fjssh}" @click="selapprove(4)">已处理申请审批</li>
-            </ul>
-            <table class="customer-approve-list approve-order" v-show="zdsh">
-                <tr>
-                    <th>id</th>
-                    <th>申请人</th>
-                    <th>做单对象</th>
-                    <th>商品</th>
-                    <th>类目</th>
-                    <th>赠送积分</th>
-                    <th>申请时间</th>
-                    <th>状态</th>
-                    <th>操作</th>
-                </tr>
-                <tr v-if="order.length<1">
-                    <td colspan="9">
-                        暂无需要处理的审核
-                    </td>
-                </tr>
-                <tr v-if="o.orderStatus=='New'" v-for="o in order">
-                    <td>{{o.orderID}}</td>
-                    <td>{{o.storeName}}</td>
-                    <td>{{o.givenUser||o.givenUserMobile}}</td>
-                    <td>{{o.goodsName}}</td>
-                    <td>{{o.goodsKind}}</td>
-                    <td>{{o.givingScore}}</td>
-                    <td>{{o.createTime}}</td>
-                    <td>
-                        待审核
-                    </td>
-                    <td>
-                        <a v-if="o.orderStatus=='New'" @click="agreeorder(o.orderID)">同意</a><br v-if="o.orderStatus=='New'"
-                        /><a v-if="o.orderStatus=='New'" @click="showorderreason(o.orderID)">拒绝</a>
-                    </td>
-                </tr>
-            </table>
-            <table class="customer-approve-list approve-role" v-show="jssh">
-                <tr>
-                    <th>id</th>
-                    <th>申请人</th>
-                    <th>推荐人</th>
-                    <th>申请角色</th>
-                    <th>当前角色</th>
-                    <th>成功推荐商家数</th>
-                    <th>申请时间</th>
-                    <th>状态</th>
-                    <th>操作</th>
-                </tr>
-                <tr v-if="apply.length<1">
-                    <td colspan="9">
-                        暂无需要处理的审核
-                    </td>
-                </tr>
-                <tr v-if="a.status=='Pending'" v-for="a in apply">
-                    <td>{{a.id}}</td>
-                    <td>{{a.applicantName||a.applicantMobile}}</td>
-                    <td>{{a.referrerName||a.referrerMobile}}</td>
-                    <td><em v-if="a.applyRole=='Merchants'">商家</em>
-                        <em v-if="a.applyRole=='CustomerManager'">客户经理</em>
-                    </td>
-                    <td>
-                        <em v-if="a.currentRole=='Merchants'">商家</em>
-                        <em v-if="a.currentRole=='Ordinary'">普通会员</em>
-                        <em v-if="a.currentRole=='CustomerManager'">客户经理</em>
-                        <em v-if="a.currentRole=='AreaManager'">区域经理</em>
-                    </td>
-                    <td>{{a.recommended}}</td>
-                    <td>{{a.date}}</td>
-                    <td>待审核</td>
-                    <td><a href="apply.html?aid={{a.id}}&r={{a.applyRole}}">详情</a><br><a @click="accepts(a.id)">同意</a><br>
-                        <a @click="showreason(a.id)">拒绝</a>
-                    </td>
-                </tr>
-            </table>
-            <table class="customer-approve-list approve-order" v-show="fzdsh">
-                <tr>
-                    <th>id</th>
-                    <th>申请人</th>
-                    <th>做单对象</th>
-                    <th>商品</th>
-                    <th>类目</th>
-                    <th>赠送积分</th>
-                    <th>申请时间</th>
-                    <th>状态</th>
-                    <th>操作</th>
-                </tr>
-                <tr v-if="order.length<1">
-                    <td colspan="9">
-                        暂无需要处理的审核
-                    </td>
-                </tr>
-                <tr v-if="d.orderStatus!='New'" v-for="d in order">
-                    <td>{{d.orderID}}</td>
-                    <td>{{d.storeName}}</td>
-                    <td>{{d.givenUser||d.givenUserMobile}}</td>
-                    <td>{{d.goodsName}}</td>
-                    <td>{{d.goodsKind}}</td>
-                    <td>{{d.givingScore}}</td>
-                    <td>{{d.createTime}}</td>
-                    <td>
-                        <em v-if="d.orderStatus=='Agree'">已同意</em>
-                        <em v-if="d.orderStatus=='Reject'">已拒绝</em>
-                    </td>
-                    <td>
-                        <a v-if="d.orderStatus=='Reject'" @click="showrejectreason(d.reason)">查看拒绝理由</a>
-                    </td>
-                </tr>
-            </table>
-            <table class="customer-approve-list approve-role" v-show="fjssh">
-                <tr>
-                    <th>id</th>
-                    <th>申请人</th>
-                    <th>推荐人</th>
-                    <th>申请角色</th>
-                    <th>当前角色</th>
-                    <th>成功推荐商家数</th>
-                    <th>申请时间</th>
-                    <th>状态</th>
-                    <th>操作</th>
-                </tr>
-                <tr v-if="apply.length<1">
-                    <td colspan="9">
-                        暂无处理过的审核
-                    </td>
-                </tr>
-                <tr v-if="a.status!='Pending'" v-for="a in apply">
-                    <td>{{a.id}}</td>
-                    <td>{{a.applicantName||a.applicantMobile}}</td>
-                    <td>{{a.referrerName||a.referrerMobile}}</td>
-                    <td><em v-if="a.applyRole=='Merchants'">商家</em><em v-if="a.applyRole=='CustomerManager'">客户经理</em></td>
-                    <td>
-                        <em v-if="a.currentRole=='Merchants'">商家</em>
-                        <em v-if="a.currentRole=='Ordinary'">普通会员</em>
-                        <em v-if="a.currentRole=='CustomerManager'">客户经理</em>
-                        <em v-if="a.currentRole=='AreaManager'">区域经理</em>
-                    </td>
-                    <td>{{a.recommended}}</td>
-                    <td>{{a.date}}</td>
-                    <td>
-                        <em v-if="a.status=='Approval'">已同意</em>
-                        <em v-if="a.status=='Reject'">已拒绝</em>
-                    </td>
-                    <td><a href="apply.html?aid={{a.id}}&r={{a.applyRole}}">详情</a></td>
-                </tr>
-            </table>
-        </div>
-        -->
-        <!--区域经理工资管理-->
-        <div v-if="info.role=='AreaManager'||info.role=='AM'" class="customer-cash"></div>
     </div>
     <div class="ylb-show-cover" v-show="covershow" @click="hideall"></div>
     <!--积分兑换-->
@@ -750,17 +512,6 @@
         <p><span>开户行：</span><input v-model="reward.bank" type="text"></p>
         <p><span>银行卡：</span><input v-model="reward.account" type="text"></p>
         <button @click="dorewards">提交</button>
-    </div>
-    <!--拒绝-->
-    <div class="ylb-graybox nagtive" v-show="nagtive">
-        <h1>请输入拒绝理由</h1>
-        <input v-model="reason" maxlength="128" placeholder="最多可填入128字" type="text" />
-        <a @click="reject">提交</a>
-    </div>
-    <div class="ylb-graybox nagtive" v-show="ordernagtive">
-        <h1>请输入拒绝理由</h1>
-        <input v-model="orderreason" maxlength="128" placeholder="最多可填入128字" type="text" />
-        <a @click="disagreeorder">提交</a>
     </div>
 </section>
 <footer></footer>
@@ -796,9 +547,9 @@
 <script src="js/libs/pickday.min.js" type="text/javascript"></script>
 <script src="js/libs/qrcode.min.js" type="text/javascript"></script>
 <script src="js/libs/dropzone.js" type="text/javascript"></script>
-<script src="js/base.js?rev=be2c9713e8e675a3e1aa6857aba57b97" type="text/javascript"></script>
+<script src="js/base.js?rev=ca0db9d1ae25ecb3b938f99136bac6f0" type="text/javascript"></script>
 
-<script type="text/javascript" src="js/customer.js?rev=be2c9713e8e675a3e1aa6857aba57b97"></script>
+<script type="text/javascript" src="js/customer.js?rev=ca0db9d1ae25ecb3b938f99136bac6f0"></script>
 
 
 </html>

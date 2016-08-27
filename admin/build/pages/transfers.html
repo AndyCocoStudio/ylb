@@ -14,6 +14,7 @@
 			<tr>
 				<th>申请ID</th>
 				<th>转出金额</th>
+				<th>类型</th>
 				<th>银行卡号</th>
 				<th>开户行</th>
 				<th>开卡人</th>
@@ -25,13 +26,21 @@
 			<tr v-for="t in ulist">
 				<td>{{t.transferID}}</td>
 				<td>{{t.amount}}</td>
+				<td>
+					<em v-if="t.transferKind=='Commission'">佣金</em>
+                    <em v-if="t.transferKind=='PaymentForGoods'">货款</em>
+                    <em v-if="t.transferKind=='Balance'">余额</em>
+				</td>
 				<td>{{t.account}}</td>
 				<td>{{t.bank}}</td>
 				<td>{{t.name}}</td>
 				<td>{{t.storeName}}</td>
 				<td>{{t.address}}</td>
 				<td>{{t.createTime}}</td>
-				<td><a @click="agree(t.transferID)">放款</a></td>
+				<td>
+					<a @click="agree(t.transferID)">放款</a>
+					<a @click="showreason(t.transferID)">拒绝</a>
+				</td>
 			</tr>
 		</table>
 		<div class="ylb-page">
@@ -47,6 +56,7 @@
 			<tr>
 				<th>申请ID</th>
 				<th>转出金额</th>
+				<th>类型</th>
 				<th>银行卡号</th>
 				<th>开户行</th>
 				<th>开卡人</th>
@@ -58,6 +68,11 @@
 			<tr v-for="t in flist">
 				<td>{{t.transferID}}</td>
 				<td>{{t.amount}}</td>
+				<td>
+					<em v-if="t.transferKind=='Commission'">佣金</em>
+                    <em v-if="t.transferKind=='PaymentForGoods'">货款</em>
+                    <em v-if="t.transferKind=='Balance'">余额</em>
+				</td>
 				<td>{{t.account}}</td>
 				<td>{{t.bank}}</td>
 				<td>{{t.name}}</td>
@@ -78,6 +93,13 @@
 			<a @click="fjump">跳转</a>
 		</div>
 	</div>
+	<div class="ylb-graybox" v-show="greason">
+		<ul>
+			<li><span>拒绝理由</span><input v-model="reason" type="text"></li>
+			<li><a @click="disagree()">提交</a></li>
+		</ul>
+	</div>
+	<div class="ylb-cover" v-show="cover" @click="hideall"></div>
 </div>
 <!-- @@close -->
 

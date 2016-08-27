@@ -1,11 +1,10 @@
 (function () {
     var func = {
-        rid: $.urlParam("rid")
+        mobile: $.urlParam("mobile")
     };
     var m = {
         init: function () {
             m.buildVue();
-            $("header,footer").hide();
         },
         buildVue: function () {
             func = new Vue({

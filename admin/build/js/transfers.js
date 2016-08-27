@@ -6,7 +6,11 @@
 		ucp: 1,
 		ut: 1,
 		fcp: 1,
-		ft: 1
+		ft: 1,
+		cover: false,
+		greason: false,
+		reason:"",
+		tid: ""
 	};
 	var m = {
 		init: function () {
@@ -57,20 +61,29 @@
 							})
 						}
 					},
-					disagree: function (id) {
-						var c = confirm("确认拒绝该提现申请？");
-						if (c) {
-							$.ajax({
-								url: $.apiUrl + "/transfer/reject",
-								type: "POST",
-								data: JSON.stringify({ transferID: id })
-							}).done(function (d) {
-								$.ylbAjaxHandler(d, function () {
-									$.ylbAlert("操作成功");
-									m.getData();
-								})
+					disagree: function () {
+						$.ajax({
+							url: $.apiUrl + "/transfer/op/reject",
+							type: "POST",
+							data: JSON.stringify({
+								transferID: transfer.tid,
+								reason: transfer.reason
 							})
-						}
+						}).done(function (d) {
+							$.ylbAjaxHandler(d, function () {
+								$.ylbAlert("操作成功");
+								m.getData();
+							})
+						});
+					},
+					showreason: function (id) {
+						this.tid = id;
+						this.cover = true;
+						this.greason = true;
+					},
+					hideall: function () {
+						this.cover = false;
+						this.greason = false;
 					},
 					togglet: function (i) {
 						switch (i) {

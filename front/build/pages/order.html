@@ -98,8 +98,8 @@
                     type="text">(您有{{userpoint}}积分，本单最高可抵用{{maxpoint}}元)</p>
         </article>
         <div class="order-result">
-            <p v-show="!ispoint">实付： <em>￥ {{parseFloat(total+postage-point).toFixed(2)}}</em>元</p>
-            <p v-show="ispoint">实付： <em>￥ {{parseFloat(total+postage).toFixed(2)}}</em>元</p>
+            <p v-show="!ispoint">实付： <em>￥ {{(+total+postage-point).toFixed(2)}}</em>元</p>
+            <p v-show="ispoint">实付： <em>￥ {{(+total+postage).toFixed(2)}}</em>元</p>
             <p>
                 <span>{{selectaddress.name}}</span>
                 <span>{{selectaddress.province+selectaddress.city+selectaddress.area+selectaddress.street}}</span>

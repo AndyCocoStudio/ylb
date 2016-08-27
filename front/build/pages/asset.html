@@ -76,7 +76,7 @@
             <a @click="rjump">跳转</a>
         </div>
     </div>
-    <div class="asset-wrap" v-show="crecord&&(user.role=='Merchants'||user.role=='AM'||user.info=='CM')">
+    <div class="asset-wrap" v-show="crecord&&user.role!='Ordinary'">
         <table class="asset-table">
             <tr>
                 <th>名下会员</th>

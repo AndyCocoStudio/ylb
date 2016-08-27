@@ -2,6 +2,7 @@
     h1{
         height: auto;
         line-height: 40px;
+        border-top: 1px solid #999;
         em{
             color: $red;
         }
@@ -12,11 +13,41 @@
         text-align: center;
         margin-bottom: 20px;
     }
+    .cashpool-tap{
+        height: 32px;
+        line-height: 32px;
+        border-bottom: 1px solid #999;
+        padding-left: 20px;
+        a{
+            display: inline-block;
+            padding: 0 20px;
+            line-height: 31px;
+            border: 1px solid #999;
+            border-bottom: none;
+            border-radius: 5px 5px 0 0; 
+            &.active{
+                background-color: $blue;
+                color: #fff;
+            }
+            &:last-child{
+                border-right: 1px solid #999;
+            }
+        }
+    }
+    .cashpool-wrap{
+        border: 1px solid #999;
+        border-top: none;
+        padding: 20px;
+        min-width: 100%;
+        p{
+            text-align: right;
+            padding: 5px 0 10px;
+        }
+    }
     .cashpool-echarts{
-        height: 200px;
-        margin-bottom: 20px;
-        width: 33.33%;
-        float: left;
+        height: 400px;
+        margin-bottom: 10px;
+        width: 100%;
         p{
             padding-left: 20px;
             span{
@@ -31,6 +62,29 @@
                 color: #fff;
                 text-align: center;
                 border-radius: 3px;
+            }
+        }
+    }
+}
+.poolinfo-main{
+    .poolinfo-tap{
+        height: 32px;
+        line-height: 32px;
+        border-bottom: 1px solid #999;
+        padding-left: 20px;
+        a{
+            display: inline-block;
+            padding: 0 20px;
+            line-height: 31px;
+            border: 1px solid #999;
+            border-bottom: none;
+            border-radius: 5px 5px 0 0; 
+            &.active{
+                background-color: $green;
+                color: #fff;
+            }
+            &:last-child{
+                border-right: 1px solid #999;
             }
         }
     }
