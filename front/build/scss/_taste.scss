@@ -6,11 +6,14 @@
         border-bottom: 1px solid #cecece;
         line-height: 40px;
         background-color: $link-blue;
-        padding-left: 10px;
         color: #fff;
         margin-bottom: 20px;
         em{
             color: #ff0000;
+        }
+        p{
+            padding-left: 10px;
+            border-bottom: 1px solid #eee;
         }
     }
     h3{

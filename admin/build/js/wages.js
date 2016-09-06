@@ -52,7 +52,7 @@
         },
         getList: function () {
             $.when($.ajax({
-                url: $.apiUrl + "/wages?pc=" + wages.pc + "&cc=" + wages.cc + "&ac=" + wages.ac + "&cp=" + wages.cp + "&sz=" + wages.sz + "&y=" + wages.y + "&m=" + wages.m + "&role=" + wages.role,
+                url: $.apiUrl + "/wages?pc=" + wages.pc + "&cc=" + wages.cc + "&ac=" + wages.ac + "&cp=" + wages.cp + "&sz=" + wages.sz + "&y=" + wages.y + "&m=" + wages.m + "&r=" + wages.role,
                 type: "GET"
             })).done(function (d) {
                 $.ylbAjaxHandler(d, function () {
@@ -111,7 +111,7 @@
                     },
                     changerole: function (el) {
                         var v = $(el.target).find("option:selected").val();
-                        wages.y = v;
+                        wages.role = v;
                     },
                     prev: function () {
                         if (wages.cp <= 1) {

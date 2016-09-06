@@ -1,7 +1,7 @@
 (function () {
     var pay = {
         id: $.urlParam("oid"),
-        payway: 1
+        payway: 2
     };
     var m = {
         init: function () {
