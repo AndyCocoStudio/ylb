@@ -12,9 +12,9 @@
 
 
 
-	<link rel="stylesheet" type="text/css" href="css/style.css?rev=ca0db9d1ae25ecb3b938f99136bac6f0" />
+	<link rel="stylesheet" type="text/css" href="css/style.css?rev=8fae2ff7072ea0493053d6ec071f64a3" />
 	<link rel="stylesheet" type="text/css" href="css/pickday.css" />
-	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=ca0db9d1ae25ecb3b938f99136bac6f0" />
+	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=8fae2ff7072ea0493053d6ec071f64a3" />
 </head>
 
 <body>
@@ -211,7 +211,7 @@
                         您暂无线上订单
                     </td>
                 </tr>
-                <tr v-for="x in xsxflist">
+                <tr data-index="{{$index}}" v-for="x in xsxflist">
                     <td>{{x.orderID}}</td>
                     <td>
                         <p v-for="i in x.items">{{i.name}}</p>
@@ -256,19 +256,31 @@
                             <a @click="cancel(x.orderID)" data-id="{{x.orderID}}">取消</a>
                         </div>
                         <div v-if="x.payStatus=='Paid'&&x.orderStatus!='Cancel'">
-                            <!--<p v-for="i in x.items">
-                                <em v-if="i.status=='Sent'"><a @click="getgoods(x.orderID)">确认收货</a></em>
-                            </p>-->
-                            <div v-if="x.orderStatus=='New'"></div>
+                            <div v-if="x.orderStatus=='New'">
+                                <div>
+                                    <p class="getgoods" v-for="i in x.items">
+                                        <a data-index="{{$index}}" @click="showrefund">退款</a>
+                                    </p>
+                                </div>
+                            </div>
                             <div v-if="x.orderStatus=='Sent'">
-                                <p v-for="i in x.items">
-                                    <a @click="getgoods(i.orderItemID)">确认收货</a>
-                                </p>
+                                <div class="refundgoods">
+                                    <p>
+                                        <a @click="getgoods(x.orderID)">收货</a>
+                                    </p>
+                                </div>
+                                <div class="refundgoods">
+                                    <p class="getgoods" v-for="i in x.items">
+                                        <a data-index="{{$index}}" @click="showrefund">退款</a>
+                                    </p>
+                                </div>
                             </div>
                             <div v-if="x.orderStatus=='Complete'">
-                                <p v-for="i in x.items">
-                                    <a @click="refundgoods(i.orderItemID)">退货</a>
-                                </p>
+                                <div>
+                                    <p v-for="i in x.items">
+                                        <a data-index="{{$index}}" @click="showrefund">退款</a>
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </td>
@@ -513,6 +525,23 @@
         <p><span>银行卡：</span><input v-model="reward.account" type="text"></p>
         <button @click="dorewards">提交</button>
     </div>
+    <!--退款-->
+    <div class="ylb-graybox refund" v-show="grefund">
+        <h1>退款</h1>
+        <ul>
+            <li><span>类型</span><select @change="selrefundkind">
+                <option selected="{{refundobj.kind==='1'}}" value="1">仅退款</option>
+                <option selected="{{refundobj.kind==='0'}}" value="0">退货退款</option>
+                </select></li>
+            <li v-show="refundobj.kind==='0'"><span>快递公司</span><input v-model="refundobj.expressCompany" type="text"></li>
+            <li v-show="refundobj.kind==='0'"><span>运单号</span><input v-model="refundobj.expressNum" type="text"></li>
+            <li><span>退款金额</span>{{refundgoods.price}}</li>
+            <li><span>运费</span>{{refundobj.freight}}</li>
+            <li><span>退款原因</span><textarea cols="30" rows="4" v-model="refundobj.reason"></textarea></li>
+            <li class="uploadfiles"><span>上传图片</span><input v-model="refundobj.img" type="file"></li>
+            <li><button @click="refundgoods">确认</button></li>
+        </ul>
+    </div>
 </section>
 <footer></footer>
 
@@ -547,9 +576,9 @@
 <script src="js/libs/pickday.min.js" type="text/javascript"></script>
 <script src="js/libs/qrcode.min.js" type="text/javascript"></script>
 <script src="js/libs/dropzone.js" type="text/javascript"></script>
-<script src="js/base.js?rev=ca0db9d1ae25ecb3b938f99136bac6f0" type="text/javascript"></script>
+<script src="js/base.js?rev=8fae2ff7072ea0493053d6ec071f64a3" type="text/javascript"></script>
 
-<script type="text/javascript" src="js/customer.js?rev=ca0db9d1ae25ecb3b938f99136bac6f0"></script>
+<script type="text/javascript" src="js/customer.js?rev=8fae2ff7072ea0493053d6ec071f64a3"></script>
 
 
 </html>

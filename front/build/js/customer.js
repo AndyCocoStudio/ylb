@@ -1,5 +1,6 @@
 (function () {
     var vcustomer = {
+        imgsize: 5.0,
         sz: 10,
         hcp: 1,
         ht: 0,
@@ -46,6 +47,15 @@
         plist: [],
         clist: [],
         alist: [],
+        grefund: false,
+        refundgoods: {},
+        refundobj: {
+            kind: "1",
+            img: "",
+            expressNum: "",
+            expressCompany: "",
+            reason: ""
+        },
         zdsh: true,
         jssh: false,
         fzdsh: false,
@@ -147,6 +157,23 @@
         },
         //图片上传初始化
         imgUpload: function () {
+            $("#tksmt").dropzone({
+                init: function () {
+                    this.on("removedfile", function (file) {
+                        vcustomer.refundobj.img = "";
+                    });
+                },
+                url: $.apiUrl + "/upload",
+                paramName: "file",
+                maxFiles: 1,
+                maxFilesize: vcustomer.imgsize, // MB
+                acceptedFiles: "image/*",
+                addRemoveLinks: true,
+                dictResponseError: '上传文件出错！',
+                success: function (file, response) {
+                    vcustomer.refundobj.img = response.data;
+                }
+            });
             $("#yyzz").dropzone({
                 init: function () {
                     this.on("removedfile", function (file) {
@@ -156,7 +183,7 @@
                 url: $.apiUrl + "/upload",
                 paramName: "file",
                 maxFiles: 1,
-                maxFilesize: 2.0, // MB
+                maxFilesize: vcustomer.imgsize, // MB
                 acceptedFiles: "image/*",
                 addRemoveLinks: true,
                 dictResponseError: '上传文件出错！',
@@ -168,7 +195,7 @@
                 url: $.apiUrl + "/upload",
                 paramName: "file",
                 maxFiles: 2,
-                maxFilesize: 2.0, // MB
+                maxFilesize: vcustomer.imgsize, // MB
                 acceptedFiles: "image/*",
                 addRemoveLinks: false,
                 dictResponseError: '上传文件出错！',
@@ -180,7 +207,7 @@
                 url: $.apiUrl + "/upload",
                 paramName: "file",
                 maxFiles: 1,
-                maxFilesize: 2.0, // MB
+                maxFilesize: vcustomer.imgsize, // MB
                 acceptedFiles: "image/*",
                 addRemoveLinks: false,
                 dictResponseError: '上传文件出错！',
@@ -197,7 +224,7 @@
                 url: $.apiUrl + "/upload",
                 paramName: "file",
                 maxFiles: 1,
-                maxFilesize: 2.0, // MB
+                maxFilesize: vcustomer.imgsize, // MB
                 acceptedFiles: "image/*",
                 addRemoveLinks: true,
                 dictResponseError: '上传文件出错！',
@@ -209,7 +236,7 @@
                 url: $.apiUrl + "/upload",
                 paramName: "file",
                 maxFiles: 4,
-                maxFilesize: 2.0, // MB
+                maxFilesize: vcustomer.imgsize, // MB
                 acceptedFiles: "image/*",
                 addRemoveLinks: false,
                 dictResponseError: '上传文件出错！',
@@ -221,7 +248,7 @@
                 url: $.apiUrl + "/upload",
                 paramName: "file",
                 maxFiles: 2,
-                maxFilesize: 2.0, // MB
+                maxFilesize: vcustomer.imgsize, // MB
                 acceptedFiles: "image/*",
                 addRemoveLinks: false,
                 dictResponseError: '上传文件出错！',
@@ -233,7 +260,7 @@
                 url: $.apiUrl + "/upload",
                 paramName: "file",
                 maxFiles: 1,
-                maxFilesize: 2.0, // MB
+                maxFilesize: vcustomer.imgsize, // MB
                 acceptedFiles: "image/*",
                 addRemoveLinks: false,
                 dictResponseError: '上传文件出错！',
@@ -485,6 +512,7 @@
                         this.sendshow = false;
                         this.spendshow = false;
                         this.nagtive = false;
+                        this.grefund = false;
                         this.ordernagtive = false;
                         this.zczc = false;
                     },
@@ -824,15 +852,69 @@
                             $.ajax({
                                 url: $.apiUrl + "/order/receive",
                                 type: "POST",
-                                data: JSON.stringify({ orderItemID: id})
+                                data: JSON.stringify({ orderID: id })
                             }).done(function (d) {
                                 $.ylbAjaxHandler(d, function () {
                                     $.ylbAlert("操作成功");
-                                    vcustomer.getXSXFOrder();
+                                    m.getXSXFOrder();
                                 });
                             });
                         }
-                    }
+                    },
+                    //选择退款类型
+                    selrefundkind: function (el) {
+                        var t = $(el.target).find("option:selected").val();
+                        vcustomer.refundobj.kind = t;
+                    },
+                    //显示退款弹窗
+                    showrefund: function (el) {
+                        var _this = $(el.target);
+                        var tindex = _this.attr("data-index");
+                        var oindex = _this.parent().parent().parent().parent().parent().parent().attr("data-index");
+                        vcustomer.refundobj = vcustomer.xsxflist[oindex];
+                        vcustomer.refundobj.kind = "1";
+                        vcustomer.refundobj.img = "";
+                        vcustomer.refundobj.expressNum = "";
+                        vcustomer.refundobj.expressCompany = "";
+                        vcustomer.refundobj.reason = "";
+                        vcustomer.refundgoods = vcustomer.refundobj.items[tindex];
+                        $.when($.ajax({
+                            url: $.apiUrl + "/order/refund/freight?oid=" + vcustomer.refundobj.orderID,
+                            type: "GET"
+                        })).done(function (d) {
+                            $.ylbAjaxHandler(d, function () {
+                                vcustomer.refundobj.freight = d.data.freight;
+                                vcustomer.covershow = true;
+                                vcustomer.grefund = true;
+                            });
+                        });
+                    },
+                    //申请退款
+                    refundgoods: function () {
+                        var c = confirm("确认退款？");
+                        if (c) {
+                            $.ajax({
+                                url: $.apiUrl + "/order/refund",
+                                type: "POST",
+                                data: JSON.stringify({
+                                    orderID: vcustomer.refundobj.orderID,
+                                    orderItemID: vcustomer.refundobj.items[tindex].orderItemID,
+                                    amount: vcustomer.refundobj.items[tindex].price,
+                                    freight: vcustomer.refundobj.freight,
+                                    kind: vcustomer.refundobj.kind,
+                                    expressCompany: vcustomer.refundobj.expressCompany,
+                                    expressNum: vcustomer.refundobj.expressNum,
+                                    reason: vcustomer.refundobj.reason,
+                                    images: "[" + vcustomer.refundobj.img + "]"
+                                })
+                            }).done(function (d) {
+                                $.ylbAjaxHandler(d, function () {
+                                    $.ylbAlert("操作成功");
+                                    m.getXSXFOrder();
+                                });
+                            });
+                        }
+                    },
                 }
             });
             m.createQRcode();

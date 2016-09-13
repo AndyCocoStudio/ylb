@@ -356,15 +356,29 @@
             border-top: none;
             margin-bottom: 25px;
             tr{
+                border-top: 1px solid #ccc;
+                border-left: 1px solid #ccc;
                 height: 44px;
+                th{
+                    font-weight: 400;
+                }
                 td, th{
                     overflow: hidden;
                     text-align: center;
-                    padding: 0 5px;
+                    border-bottom: 1px solid #ccc;
+                    border-right: 1px solid #ccc;
                     p{
-                        border-bottom: 1px dashed #999;
+                        border-bottom: 1px solid #ccc;
+                        padding: 5px;
                         &:last-child{
                             border: none;
+                        }
+                    }
+                    .refundgoods{
+                        width: 50%;
+                        float: left;
+                        .getgoods{
+                            border-left: 1px solid #ccc;
                         }
                     }
                 }

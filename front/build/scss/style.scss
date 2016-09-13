@@ -284,6 +284,11 @@ $base-border-color: #c7c7c7;
         li{
             line-height: 24px;
             margin-bottom: 5px;
+            textarea{
+                border: 1px solid $base-border-color;
+                resize: none;
+                padding: 2px 4px;
+            }
             span{
                 display: inline-block;
                 width: 110px;
