@@ -6,12 +6,29 @@
 
 <!-- @@block = content-->
 <div class="config-main" id="config-main" v-cloak>
-    <h1>配置管理<a @click="editable">编辑</a></h1>
+    <h1>配置管理</h1>
     <ul>
-        <li><span>手续费(%)</span><em v-show="!isedit">{{option.pr}}</em><input v-show="isedit" v-model="option.pr" type="text"></li>
-        <li><span>做单最大抵扣额度(%)</span><em v-show="!isedit">{{option.gsd}}</em><input v-show="isedit" v-model="option.gsd" type="text"></li>
-        <li><span>积分兑换最大抵扣额度(%)</span><em v-show="!isedit">{{option.sod}}</em><input v-show="isedit" v-model="option.sod" type="text"></li>
-        <li v-show="isedit"><a>提交</a></li>
+        <li v-for="c in option">
+            <span v-if="c.key=='commissionRate'" data-key="{{c.key}}">佣金比例(%)</span>
+            <span v-if="c.key=='serviceFeeRate'" data-key="{{c.key}}">服务费资金池比例(%)</span>
+            <span v-if="c.key=='platformFeeRate'" data-key="{{c.key}}">平台费比例(%)</span>
+            <span v-if="c.key=='poundageRate'" data-key="{{c.key}}">手续费比例(%)</span>
+            <span v-if="c.key=='givingScoreMaxDeductionRate'" data-key="{{c.key}}">做单最大抵扣比例(%)</span>
+            <span v-if="c.key=='shoppingOfflineMaxDeductionRate'" data-key="{{c.key}}">积分兑换最大抵扣比例(%)</span>
+            <span v-if="c.key=='givingScoreOrderRefundTimeLimit'" data-key="{{c.key}}">做单退款时限(天)</span>
+            <span v-if="c.key=='signInReward'" data-key="{{c.key}}">手动领取积分额度</span>
+            <span v-if="c.key=='automaticReward'" data-key="{{c.key}}">自动送积分额度</span>
+            <span v-if="c.key=='signInRewardOpen'" data-key="{{c.key}}">手动领积分功能是否开启，0关闭1开启</span>
+            <span v-if="c.key=='scoreToPointRate'" data-key="{{c.key}}">积分点生成消费数</span>
+            <span v-if="c.key=='cashToScoreRate'" data-key="{{c.key}}">现金消费产生积分比例</span>
+            <span v-if="c.key=='recommendedNumber'" data-key="{{c.key}}">申请客户经理需要推荐用户数</span>
+            <span v-if="c.key=='areaManagerWageRate'" data-key="{{c.key}}">区域经理工资比例(%)</span>
+            <span v-if="c.key=='customerManagerWageRate'" data-key="{{c.key}}">客户经理工资比例(%)</span>
+            <span v-if="c.key=='shoppingOnlineOrderRefundTimeLimit'" data-key="{{c.key}}">线上购物退款时限(天)</span>
+            <span v-if="c.key=='areaManagerRecommendCommissionRate'" data-key="{{c.key}}">区域推荐提成(%)</span>
+            <input v-model="c.value" type="text">
+            <a @click="edit" data-key="{{c.key}}" data-value="{{c.value}}">编辑</a>
+        </li>
     </ul>
 </div>
 <!-- @@close-->

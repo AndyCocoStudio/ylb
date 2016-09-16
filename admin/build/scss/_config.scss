@@ -4,7 +4,8 @@
         line-height: 36px;
         border-bottom: 1px dashed #ddd;
         span{
-            width:180px;
+            width:240px;
+            text-align: left;
         }
         em{
             padding-left: 20px;
@@ -12,18 +13,13 @@
         input{
             margin-left: 20px;
         }
-        &:last-child{
-            border-bottom: none;
-            text-align: center;
-            a{
-                display: inline-block;
-                border-radius: 3px;
-                width: 120px;
-                height: 24px;
-                line-height: 24px;
-                background-color: $orange;
-                color: #fff;
-            }
+        a{
+            line-height: 24px;
+            display: inline-block;
+            margin: 6px 0 6px 20px;
+            padding: 0 15px;
+            background-color: $green;
+            color: #fff;
         }
     }
 }
