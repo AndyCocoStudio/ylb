@@ -1,0 +1,47 @@
+<!-- @@master ../layout.html  -->
+
+<!-- @@block = title-->
+<title>商品分类管理</title>
+<!-- @@close-->
+
+<!-- @@block = content-->
+<div class="kind-main" id="kind-main" v-cloak>
+    <h1>商品分类管理</h1>
+    <h2>一级类目<a @click="shownewkind('')">添加</a></h2>
+    <ul class="kindlist">
+        <li @click="showmore" data-code="{{k.code}}" data-name="{{k.name}}" v-for="k in list">{{k.name}}</li>
+    </ul>
+    <h2>
+        <div v-show="chosekind"><input type="text" v-model="chosekind">下类目
+            <a @click="delkind(chosekindcode,1)" class="red">删除</a>
+            <a @click="editkind('',chosekindcode,chosekind)" class="blue">修改</a>
+            <a @click="shownewkind(chosekindcode)">添加</a>
+        </div>
+        <div v-show="!chosekind">请选中一个一级类目</div>
+    </h2>
+    <table v-show="chosekind">
+        <tr>
+            <th>类目名称</th>
+            <th>操作</th>
+        </tr>
+        <tr v-for="l in sublist">
+            <td><input type="text" v-model="l.name"></td>
+            <td>
+                <a @click="editkind(chosekindcode,l.code,l.name)">修改</a>
+                <a @click="delkind(l.code,2)">删除</a>
+            </td>
+        </tr>
+    </table>
+    <div class="ylb-cover" v-show="cover" @click="hideall"></div>
+    <div class="ylb-graybox" v-show="gnewkind">
+        <ul>
+            <li><span>分类名称</span><input type="text" v-model="newkindname"></li>
+            <li><a @click="addkind">添加</a></li>
+        </ul>
+    </div>
+</div>
+<!-- @@close-->
+
+<!-- @@block = scripts-->
+<script type="text/javascript" src="js/kind.js?rev=@@hash"></script>
+<!-- @@close-->

@@ -3,7 +3,7 @@
 
 <head>
 
-<title>资金池</title>
+<title>商品分类管理</title>
 
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1" />
@@ -17,7 +17,7 @@
 	<link rel="stylesheet" type="text/css" href="css/libs/morris.css" />
 	<link rel="stylesheet" type="text/css" href="css/libs/pickday.css" />
 	<link rel="stylesheet" type="text/css" href="css/font-awesome.css" />
-	<link rel="stylesheet" type="text/css" href="css/style.css?rev=33a01a1275dfcdf9790268443173c16a" />
+	<link rel="stylesheet" type="text/css" href="css/style.css?rev=a4569b63ddaa28ea5f8033adf4b6bda1" />
 </head>
 
 <body>
@@ -45,34 +45,39 @@
 		</div>
 		<div class="op-right">
 
-<div class="cashpool-main" id="cashpool-main" v-cloak>
-    <div class="ylb-filter">
-        <em>选择时间</em><input id="fst" v-model="st" placeholder="选择开始时间" type="text">~<input v-model="et" placeholder="选择结束时间" id="fet" type="text">
-        <a @click="filtercash">筛选</a>
-    </div>
-    <h1>平台充值总额：<em>{{info.totalRecharge}}</em>元，平台用户总余额：<em>{{info.balance}}</em>元<br> 申请转出总额：
-        <em>{{info.totalTransfer}}</em>元， 同意转出金额：
-        <em>{{info.paidTransfer}}</em>元 (货款池:
-        <em>{{info.paidTransferDetail.PaymentForGoods}}</em>元， 服务费池:
-        <em>{{info.paidTransferDetail.Commission}}</em>元， 平台费池:
-        <em>{{info.paidTransferDetail.Balance}}</em>元)</h1>
-    <h2>计算公式： 剩余资金({{info.totalRecharge-info.balance-info.paidTransfer}}) = 平台充值总额-平台用户总余额-已转出金额</h2>
-    <div class="cashpool-tap">
-        <a :class="{'active':t1}" @click="changetap(1)">货款资金池</a>
-        <a :class="{'active':t2}" @click="changetap(2)">平台资金池</a>
-        <a :class="{'active':t3}" @click="changetap(3)">服务费资金池</a>
-    </div>
-    <div class="cashpool-wrap" v-show="t1">
-        <p><a href="poolinfo.html?k=PaymentForGoods&st={{st}}&et={{et}}">查看进出账详情</a></p>
-        <div class="cashpool-echarts" id="goods"></div>
-    </div>
-    <div class="cashpool-wrap" v-show="t2">
-        <p><a href="poolinfo.html?k=PlatFormFee&st={{st}}&et={{et}}">查看进出账详情</a></p>
-        <div class="cashpool-echarts" id="plat"></div>
-    </div>
-    <div class="cashpool-wrap" v-show="t3">
-        <p><a href="poolinfo.html?k=ServiceFee&st={{st}}&et={{et}}">查看进出账详情</a></p>
-        <div class="cashpool-echarts" id="service"></div>
+<div class="kind-main" id="kind-main" v-cloak>
+    <h1>商品分类管理</h1>
+    <h2>一级类目<a @click="shownewkind('')">添加</a></h2>
+    <ul class="kindlist">
+        <li @click="showmore" data-code="{{k.code}}" data-name="{{k.name}}" v-for="k in list">{{k.name}}</li>
+    </ul>
+    <h2>
+        <div v-show="chosekind"><input type="text" v-model="chosekind">下类目
+            <a @click="delkind(chosekindcode,1)" class="red">删除</a>
+            <a @click="editkind('',chosekindcode,chosekind)" class="blue">修改</a>
+            <a @click="shownewkind(chosekindcode)">添加</a>
+        </div>
+        <div v-show="!chosekind">请选中一个一级类目</div>
+    </h2>
+    <table v-show="chosekind">
+        <tr>
+            <th>类目名称</th>
+            <th>操作</th>
+        </tr>
+        <tr v-for="l in sublist">
+            <td><input type="text" v-model="l.name"></td>
+            <td>
+                <a @click="editkind(chosekindcode,l.code,l.name)">修改</a>
+                <a @click="delkind(l.code,2)">删除</a>
+            </td>
+        </tr>
+    </table>
+    <div class="ylb-cover" v-show="cover" @click="hideall"></div>
+    <div class="ylb-graybox" v-show="gnewkind">
+        <ul>
+            <li><span>分类名称</span><input type="text" v-model="newkindname"></li>
+            <li><a @click="addkind">添加</a></li>
+        </ul>
     </div>
 </div>
 
@@ -85,10 +90,10 @@
 <script src="js/libs/pickday.min.js" type="text/javascript"></script>
 <script src="js/libs/vue.min.js" type="text/javascript"></script>
 <script src="js/libs/echarts.min.js" type="text/javascript"></script>
-<script src="js/base.js?rev=33a01a1275dfcdf9790268443173c16a" type="text/javascript"></script>
+<script src="js/base.js?rev=a4569b63ddaa28ea5f8033adf4b6bda1" type="text/javascript"></script>
 
 
-<script type="text/javascript" src="js/cashpool.js?rev=33a01a1275dfcdf9790268443173c16a"></script>
+<script type="text/javascript" src="js/kind.js?rev=a4569b63ddaa28ea5f8033adf4b6bda1"></script>
 
 
 </html>

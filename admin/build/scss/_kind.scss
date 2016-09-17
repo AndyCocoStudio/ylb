@@ -1,0 +1,57 @@
+.kind-main{
+    h2{
+        overflow: hidden;
+        line-height: 24px;
+        padding: 5px 5px 5px 10px;
+        background-color: #cecece;
+        border: 1px solid #888;
+        color: #666;
+        border-bottom: none;
+        a{
+            display: block;
+            float: right;
+            padding: 0 10px;
+            border-radius: 3px;
+            background-color: $green;
+            color: #fff;
+            margin-left: 5px;
+            &.red{
+                background-color: $red;
+            }
+            &.blue{
+                background-color: $blue;
+            }
+        }
+    }
+    ul.kindlist{
+        display: block;
+        overflow: hidden;
+        margin-bottom: 5px;
+        width: 100%;
+        border-left: 1px solid #888;
+        border-top: 1px solid #888;
+        li{
+            width: 20%;
+            box-sizing: border-box;
+            border-right: 1px solid #888;
+            border-bottom: 1px solid #888;
+            float: left;
+            margin: 0;
+            text-align: center;
+            cursor: pointer;
+        }
+    }
+    table{
+        th{
+            background-color: #fff;
+            color: #666;
+        }
+        th,td{
+            line-height: 36px;
+            height: 36px;
+            input{
+                margin-top: 4px;
+            }
+        }
+    }
+}
