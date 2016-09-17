@@ -12,9 +12,9 @@
 
 
 
-	<link rel="stylesheet" type="text/css" href="css/style.css?rev=3826ced4c5f5f9acd8b7314e7f55b75f" />
+	<link rel="stylesheet" type="text/css" href="css/style.css?rev=7d1d8a5db52aaafd4ff1675a1291fc98" />
 	<link rel="stylesheet" type="text/css" href="css/pickday.css" />
-	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=3826ced4c5f5f9acd8b7314e7f55b75f" />
+	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=7d1d8a5db52aaafd4ff1675a1291fc98" />
 </head>
 
 <body>
@@ -88,8 +88,8 @@
                 <div class="customer-tag">资产</div>
                 <h1>真实姓名： {{info.name||info.mobile}}</h1>
                 <p>账户余额： <em>{{info.asset.balance}}</em>元<a @click="recharge">充值</a></p>
-                <p v-if="info.role=='Merchants'||info.role=='AM'||info.role=='CM'">账户货款： <em>{{info.asset.paymentForGoods}}</em>元</p>
-                <p v-if="info.role=='Merchants'||info.role=='AM'||info.role=='CM'">税后佣金： <em>{{info.asset.commission}}</em>元</p>
+                <p v-if="info.role=='Merchants'||info.role=='AM'||info.role=='CM'||info.role=='CustomerManager'||info.role=='AreaManager'">账户货款： <em>{{info.asset.paymentForGoods}}</em>元</p>
+                <p v-if="info.role=='Merchants'||info.role=='AM'||info.role=='CM'||info.role=='CustomerManager'||info.role=='AreaManager'">税后佣金： <em>{{info.asset.commission}}</em>元</p>
                 <p>可用积分： <em>{{info.asset.score}}</em>分</p>
                 <p>积分基点： <em>{{info.asset.point}}</em>个
                     <!--<a @click="getpoint">领取积分</a>--></p>
@@ -577,9 +577,9 @@
 <script src="js/libs/pickday.min.js" type="text/javascript"></script>
 <script src="js/libs/qrcode.min.js" type="text/javascript"></script>
 <script src="js/libs/dropzone.js" type="text/javascript"></script>
-<script src="js/base.js?rev=3826ced4c5f5f9acd8b7314e7f55b75f" type="text/javascript"></script>
+<script src="js/base.js?rev=7d1d8a5db52aaafd4ff1675a1291fc98" type="text/javascript"></script>
 
-<script type="text/javascript" src="js/customer.js?rev=3826ced4c5f5f9acd8b7314e7f55b75f"></script>
+<script type="text/javascript" src="js/customer.js?rev=7d1d8a5db52aaafd4ff1675a1291fc98"></script>
 
 
 </html>
