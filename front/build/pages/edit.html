@@ -167,7 +167,7 @@
                 </ul>-->
             </div>
             <div v-show="detail" class="edit-info">
-                <p v-show="!hasall.hasname||!hasall.hasgender||!hasall.hasidCard||!hasall.hasarea||!hasall.hasaddress">* 请认真填写以下信息，一旦提交将无法修改</p>
+                <p v-show="!hasall.hasname||!hasall.hasgender||!hasall.hasidCard||!hasall.hasarea||!hasall.hasaddress">* 请认真填写真实身份信息，一旦提交将无法修改</p>
                 <ul>
                     <li><span>真实姓名</span><em v-show="hasall.hasname">{{userinfo.name}}</em><input v-show="!hasall.hasname" v-model="userinfo.name"
                             type="text"></li>

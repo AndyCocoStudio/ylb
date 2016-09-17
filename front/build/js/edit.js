@@ -70,7 +70,7 @@
                 url: $.apiUrl + "/upload",
                 paramName: "file",
                 maxFiles: 1,
-                maxFilesize: 1.0, // MB
+                maxFilesize: 5.0, // MB
                 acceptedFiles: "image/*",
                 addRemoveLinks: true,
                 dictResponseError: '上传文件出错！',

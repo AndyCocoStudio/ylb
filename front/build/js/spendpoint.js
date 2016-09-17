@@ -1,14 +1,15 @@
 (function () {
     var spendpointer = {
         order: {
-            merchantMobile: "",
+            merchantMobile: $.urlParam("mid") || "",
             score: ""
         },
         merchant: {
             name: "",
             address: ""
         },
-        useb: 0
+        useb: 0,
+        hasnum: $.urlParam("mid") ? true : false
     };
     var m = {
         init: function () {
@@ -75,6 +76,9 @@
                     }
                 }
             });
+            if (spendpointer.hasnum) {
+                spendpointer.getstoreinfo();
+            }
         }
     };
     m.init();
