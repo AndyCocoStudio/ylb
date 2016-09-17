@@ -17,7 +17,7 @@
 	<link rel="stylesheet" type="text/css" href="css/libs/morris.css" />
 	<link rel="stylesheet" type="text/css" href="css/libs/pickday.css" />
 	<link rel="stylesheet" type="text/css" href="css/font-awesome.css" />
-	<link rel="stylesheet" type="text/css" href="css/style.css?rev=010f2b0c7d5dfed7e820daa9db154ddf" />
+	<link rel="stylesheet" type="text/css" href="css/style.css?rev=e936eee9409b46027cb04bf7e9347db6" />
 </head>
 
 <body>
@@ -31,6 +31,8 @@
 				<li v-show="role=='Admin'"><a href="cashpool.html"><i class="fa fa-money"></i>资金池统计</a></li>
 				<li v-show="role=='Admin'||role=='CustomerService'"><a href="product.html"><i class="fa fa-money"></i>商品管理</a></li>
 				<li v-show="role=='Admin'||role=='Marketing'||role=='CustomerService'"><a href="onlineorder.html"><i class="fa fa-money"></i>商城订单管理</a></li>
+				<li v-show="role=='Admin'||role=='CustomerService'"><a href="refund.html"><i class="fa fa-money"></i>客服退单管理</a></li>
+				<li v-show="role=='Admin'||role=='FinancialAffairs'"><a href="refundmoney.html"><i class="fa fa-money"></i>财务退单管理</a></li>
 				<li v-show="role=='Admin'||role=='GeneralManager'"><a href="downgraderight.html"><i class="fa fa-money"></i>降权管理</a></li>
 				<li v-show="role=='Admin'||role=='CustomerService'"><a href="banner.html"><i class="fa fa-money"></i>首页管理</a></li>
 				<li v-show="role=='Admin'||role=='Marketing'||role=='GeneralManager'||role=='LegalInspection'"><a href="users.html"><i class="fa fa-money"></i>有效用户</a></li>
@@ -119,10 +121,10 @@
 <script src="js/libs/pickday.min.js" type="text/javascript"></script>
 <script src="js/libs/vue.min.js" type="text/javascript"></script>
 <script src="js/libs/echarts.min.js" type="text/javascript"></script>
-<script src="js/base.js?rev=010f2b0c7d5dfed7e820daa9db154ddf" type="text/javascript"></script>
+<script src="js/base.js?rev=e936eee9409b46027cb04bf7e9347db6" type="text/javascript"></script>
 
 
-<script type="text/javascript" src="js/wagesinfo.js?rev=010f2b0c7d5dfed7e820daa9db154ddf"></script>
+<script type="text/javascript" src="js/wagesinfo.js?rev=e936eee9409b46027cb04bf7e9347db6"></script>
 
 
 </html>

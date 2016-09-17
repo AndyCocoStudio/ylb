@@ -1,0 +1,86 @@
+<!-- @@master ../layout.html  -->
+
+<!-- @@block = title-->
+<title>商城退款订单管理</title>
+<!-- @@close-->
+
+<!-- @@block = content-->
+
+<div class="refund-main" id="refund-main" v-cloak>
+    <div>
+        手机号: <input v-model="filter.m" type="text" /> 日期: <input v-model="filter.st" id="st" type="text">~<input id="et"
+            v-model="filter.et" type="text"> 快递单号: <input v-model="filter.en" type="text">
+        <a @click="filterlist">搜索</a>
+    </div>
+    <table>
+        <tr>
+            <th>退单号</th>
+            <th>退款用户</th>
+            <th>商品名</th>
+            <th>退款金额</th>
+            <th>支付方式</th>
+            <th>现金退还</th>
+            <th>余额退还</th>
+            <th>积分退还</th>
+            <th>佣金退还</th>
+            <th>货款退还</th>
+            <th>运费退还</th>
+            <th>退款类型</th>
+            <th>快递公司</th>
+            <th>快递单号</th>
+            <th>退款证明图</th>
+            <th>备注信息</th>
+            <th>操作</th>
+        </tr>
+        <tr v-for="o in list">
+            <td>{{o.refundOrderID}}</td>
+            <td>{{o.mobile}}</td>
+            <td>{{o.goodsName}}</td>
+            <td>{{o.refundAmount}}</td>
+            <td>
+                <em v-if="o.payMethod=='AlipayWeb'">支付宝网页</em>
+                <em v-if="o.payMethod=='AlipayApp'">支付宝APP</em>
+                <em v-if="o.payMethod=='Balance'">余额</em>
+                <em v-if="o.payMethod=='Unionpay'">银联</em>
+            </td>
+            <td>{{o.payInCash}}</td>
+            <td>{{o.payInBalance}}</td>
+            <td>{{o.payInScore}}</td>
+            <td>{{o.payInCommission}}</td>
+            <td>{{o.payInPaymentForGoods}}</td>
+            <td>{{o.freight}}</td>
+            <td>{{o.kind==1?"仅退款":"退货退款"}}</td>
+            <td>{{o.kind==0?o.expressCompany:"无"}}</td>
+            <td>{{o.kind==0?o.expressNum:"无"}}</td>
+            <td><img :src="o.images[0]"></td>
+            <td>{{o.note}}</td>
+            <td>
+                <a @click="agree(o.refundOrderID)">同意</a>
+                <a @click="disagree(o.refundOrderID)">拒绝</a>
+                <a @click="shownote(o.refundOrderID,o.note)">添加备注</a>
+            </td>
+        </tr>
+    </table>
+    <div class="ylb-page">
+        总共{{Math.ceil(t/sz)}}页，当前第{{cp}}页
+        <a @click="prev">上一页</a>
+        <a @click="next">下一页</a>
+        <input v-model="cp" type="text" />
+        <a @click="jump">跳转</a>
+    </div>
+    <div class="ylb-cover" @click="hideall" v-show="cover"></div>
+    <div class="ylb-graybox" v-show="gnote">
+        <ul>
+            <li>
+                <span>退单号</span><em>{{oid}}</em>
+            </li>
+            <li><span>备注</span><input v-model="note" type="text" /></li>
+            <li><a @click="addnote">添加</a></li>
+        </ul>
+    </div>
+</div>
+<!-- @@close-->
+
+<!-- @@block = scripts-->
+<script type="text/javascript" src="js/refund.js?rev=@@hash"></script>
+<!-- @@close-->
