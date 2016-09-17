@@ -502,16 +502,17 @@
         <h1>退款</h1>
         <ul>
             <li><span>类型</span><select @change="selrefundkind">
+                <option value="">-请选择退款类型-</option>
                 <option selected="{{refundobj.kind==='1'}}" value="1">仅退款</option>
                 <option selected="{{refundobj.kind==='0'}}" value="0">退货退款</option>
                 </select></li>
             <li v-show="refundobj.kind==='0'"><span>快递公司</span><input v-model="refundobj.expressCompany" type="text"></li>
             <li v-show="refundobj.kind==='0'"><span>运单号</span><input v-model="refundobj.expressNum" type="text"></li>
             <li><span>退款金额</span>{{refundgoods.price}}</li>
-            <li><span>运费</span>{{refundobj.freight}}</li>
-            <li><span>退款原因</span><textarea cols="30" rows="4" v-model="refundobj.reason"></textarea></li>
-            <li class="uploadfiles"><span>上传图片</span><input v-model="refundobj.img" type="file"></li>
-            <li><button @click="refundgoods">确认</button></li>
+            <li><span>运费</span>{{refundobj.goodsinfo.freight}}</li>
+            <li><span>退款原因</span><input v-model="refundobj.reason" type="text" /></li>
+            <li class="uploadfiles"><span>上传图片</span><input id="tksmt" type="file"></li>
+            <li><button @click="torefund">确认</button></li>
         </ul>
     </div>
 </section>

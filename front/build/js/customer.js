@@ -54,7 +54,8 @@
             img: "",
             expressNum: "",
             expressCompany: "",
-            reason: ""
+            reason: "",
+            goodsinfo: {}
         },
         zdsh: true,
         jssh: false,
@@ -871,41 +872,44 @@
                         var _this = $(el.target);
                         var tindex = _this.attr("data-index");
                         var oindex = _this.parent().parent().parent().parent().parent().parent().attr("data-index");
-                        vcustomer.refundobj = vcustomer.xsxflist[oindex];
+                        vcustomer.refundobj.goodsinfo = vcustomer.xsxflist[oindex];
+                        vcustomer.refundgoods = vcustomer.refundobj.goodsinfo.items[tindex];
                         vcustomer.refundobj.kind = "1";
                         vcustomer.refundobj.img = "";
                         vcustomer.refundobj.expressNum = "";
                         vcustomer.refundobj.expressCompany = "";
                         vcustomer.refundobj.reason = "";
-                        vcustomer.refundgoods = vcustomer.refundobj.items[tindex];
                         $.when($.ajax({
-                            url: $.apiUrl + "/order/refund/freight?oid=" + vcustomer.refundobj.orderID,
+                            url: $.apiUrl + "/order/refund/freight?oid=" + vcustomer.refundobj.goodsinfo.orderID,
                             type: "GET"
                         })).done(function (d) {
                             $.ylbAjaxHandler(d, function () {
-                                vcustomer.refundobj.freight = d.data.freight;
+                                vcustomer.refundobj.goodsinfo.freight = d.data.freight;
                                 vcustomer.covershow = true;
                                 vcustomer.grefund = true;
                             });
                         });
                     },
                     //申请退款
-                    refundgoods: function () {
+                    torefund: function () {
                         var c = confirm("确认退款？");
                         if (c) {
+                            var img = [];
+                            console.log(vcustomer.refundobj.img);
+                            img.push(vcustomer.refundobj.img);
                             $.ajax({
                                 url: $.apiUrl + "/order/refund",
                                 type: "POST",
                                 data: JSON.stringify({
-                                    orderID: vcustomer.refundobj.orderID,
-                                    orderItemID: vcustomer.refundobj.items[tindex].orderItemID,
-                                    amount: vcustomer.refundobj.items[tindex].price,
-                                    freight: vcustomer.refundobj.freight,
+                                    orderID: vcustomer.refundobj.goodsinfo.orderID,
+                                    orderItemID: vcustomer.refundgoods.orderItemID,
+                                    amount: vcustomer.refundgoods.price,
+                                    freight: vcustomer.refundobj.goodsinfo.freight,
                                     kind: vcustomer.refundobj.kind,
                                     expressCompany: vcustomer.refundobj.expressCompany,
                                     expressNum: vcustomer.refundobj.expressNum,
                                     reason: vcustomer.refundobj.reason,
-                                    images: "[" + vcustomer.refundobj.img + "]"
+                                    images: img
                                 })
                             }).done(function (d) {
                                 $.ylbAjaxHandler(d, function () {
