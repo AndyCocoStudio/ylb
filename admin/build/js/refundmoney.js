@@ -65,6 +65,7 @@
                         }).done(function (d) {
                             $.ylbAjaxHandler(d, function () {
                                 $.ylbAlert("添加成功！");
+                                refund.hideall();
                                 m.filterList();
                             })
                         });

@@ -7,7 +7,7 @@
 <!-- @@block = content-->
 
 <div class="refund-main" id="refund-main" v-cloak>
-    <div>
+    <div class="ylb-filter">
         手机号: <input v-model="filter.m" type="text" /> 日期: <input v-model="filter.st" id="st" type="text">~<input id="et"
             v-model="filter.et" type="text"> 快递单号: <input v-model="filter.en" type="text">
         <a @click="filterlist">搜索</a>
@@ -29,6 +29,7 @@
             <th>快递公司</th>
             <th>快递单号</th>
             <th>退款证明图</th>
+            <th>退款理由</th>
             <th>备注信息</th>
             <th>操作</th>
         </tr>
@@ -53,6 +54,7 @@
             <td>{{o.kind==0?o.expressCompany:"无"}}</td>
             <td>{{o.kind==0?o.expressNum:"无"}}</td>
             <td><img :src="o.images[0]"></td>
+            <td>{{o.reason}}</td>
             <td>{{o.note}}</td>
             <td>
                 <a @click="agree(o.refundOrderID)">放款</a>

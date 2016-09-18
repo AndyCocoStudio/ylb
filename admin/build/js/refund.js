@@ -23,7 +23,6 @@
                 url: $.apiUrl + "/order/refund?k=0&cp=1&sz=" + refund.sz,
                 type: "GET"
             })).done(function (d) {
-                console.log(d);
                 $.ylbAjaxHandler(d, function () {
                     refund.list = d.data;
                     m.buildVue();
@@ -65,6 +64,7 @@
                         }).done(function (d) {
                             $.ylbAjaxHandler(d, function () {
                                 $.ylbAlert("添加成功！");
+                                refund.hideall();
                                 m.filterList();
                             })
                         });
