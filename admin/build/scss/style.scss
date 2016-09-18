@@ -53,6 +53,12 @@ body{
             font-size: 14px; 
             padding-left: 20px;
             border-top: 1px solid #efefef;
+            &.active{
+                background-color: $blue;
+                a{
+                    color: #fff;
+                }
+            }
             a{
                 color: #333;
                 i{

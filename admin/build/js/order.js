@@ -127,6 +127,9 @@
                     },
                 }
             });
+            setTimeout(function () {
+                $.setLeftBar("order");
+            }, 100);
         }
     };
     m.init();

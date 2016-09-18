@@ -188,6 +188,9 @@
                     }
                 }
             });
+            setTimeout(function () {
+                $.setLeftBar("banner");
+            }, 100);
             setTimeout(m.imgUpload, 1000);
         }
     };

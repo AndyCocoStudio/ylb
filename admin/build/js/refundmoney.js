@@ -125,7 +125,10 @@
                         m.filterList();
                     }
                 }
-            })
+            });
+            setTimeout(function () {
+                $.setLeftBar("refundmoney");
+            }, 100);
         }
     };
     m.init();

@@ -145,6 +145,9 @@
                     },
 				}
 			});
+			setTimeout(function () {
+                $.setLeftBar("transfers");
+            }, 100);
 		}
 	};
 	m.init();

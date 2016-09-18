@@ -411,6 +411,9 @@
 				}
 			});
 			setTimeout(function () {
+                $.setLeftBar("product");
+            }, 100);
+			setTimeout(function () {
 				m.imgUpload();
 			}, 1000);
 		}

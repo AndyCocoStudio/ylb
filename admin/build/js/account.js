@@ -102,7 +102,10 @@
                         }
                     }
                 }
-            })
+            });
+            setTimeout(function () {
+                $.setLeftBar("account");
+            }, 100);
         }
     };
     m.init();

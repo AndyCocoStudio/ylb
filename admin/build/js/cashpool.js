@@ -230,6 +230,7 @@
             setTimeout(function () {
                 m.buildEcharts();
                 m.setDate();
+                $.setLeftBar("cashpool");
             }, 200);
         }
     };

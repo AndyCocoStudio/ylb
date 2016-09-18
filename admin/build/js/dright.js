@@ -208,7 +208,10 @@
                         m.getMerchant();
                     },
                 }
-            })
+            });
+            setTimeout(function () {
+                $.setLeftBar("downgraderight");
+            }, 100);
         }
     };
     m.init();

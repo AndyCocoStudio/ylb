@@ -76,7 +76,10 @@
                         m.getList();
                     },
                 }
-            })
+            });
+            setTimeout(function () {
+                $.setLeftBar("onlineorder");
+            }, 100);
         }
     };
     m.init();

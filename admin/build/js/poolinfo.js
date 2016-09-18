@@ -103,7 +103,10 @@
                         m.getOutList();
                     },
                 }
-            })
+            });
+            setTimeout(function () {
+                $.setLeftBar("cashpool");
+            }, 100);
         }
     };
     m.init();

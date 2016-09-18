@@ -42,7 +42,10 @@
                         }
                     }
                 }
-            })
+            });
+            setTimeout(function () {
+                $.setLeftBar("config");
+            }, 100);
         }
     };
     m.init();

@@ -61,7 +61,10 @@
                         m.getList();
                     },
                 }
-            })
+            });
+            setTimeout(function () {
+                $.setLeftBar("wagesinfo");
+            }, 100);
         }
     };
     m.init();

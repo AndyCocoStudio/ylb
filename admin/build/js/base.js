@@ -8,6 +8,12 @@
 		}
     });
 	/**
+	 * 设置左侧菜单选中状态
+	 * **/
+	$.setLeftBar = function (name) {
+		$(".op-left ul li[data-role='" + name + "']").addClass("active");
+	}
+	/**
 	 * 检查session
 	 * **/
 	$.checkSession = function () {

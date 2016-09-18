@@ -106,7 +106,10 @@
                         m.getUserList();
                     },
                 }
-            })
+            });
+            setTimeout(function () {
+                $.setLeftBar("users");
+            }, 100);
         }
     };
     m.init();

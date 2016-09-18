@@ -138,7 +138,10 @@
                         m.getList();
                     }
                 }
-            })
+            });
+            setTimeout(function () {
+                $.setLeftBar("wages");
+            }, 100);
         }
     };
     m.init()

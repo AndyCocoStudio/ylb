@@ -125,7 +125,10 @@
                         m.filterList();
                     }
                 }
-            })
+            });
+            setTimeout(function () {
+                $.setLeftBar("refund");
+            }, 100);
         }
     };
     m.init();

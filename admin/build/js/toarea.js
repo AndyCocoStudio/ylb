@@ -128,7 +128,10 @@
                         m.getAreaList();
                     }
                 }
-            })
+            });
+            setTimeout(function () {
+                $.setLeftBar("toarea");
+            }, 100);
         }
     };
     m.init();

@@ -94,7 +94,10 @@
                         });
                     }
                 }
-            })
+            });
+            setTimeout(function () {
+                $.setLeftBar("upgraderight");
+            }, 100);
         }
     };
     m.init();

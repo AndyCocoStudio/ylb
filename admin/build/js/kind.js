@@ -112,6 +112,9 @@
                     }
                 }
             });
+            setTimeout(function () {
+                $.setLeftBar("kind");
+            }, 100);
         }
     };
     m.init();
