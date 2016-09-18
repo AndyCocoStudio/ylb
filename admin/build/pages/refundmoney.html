@@ -53,7 +53,7 @@
             <td>{{o.kind==1?"仅退款":"退货退款"}}</td>
             <td>{{o.kind==0?o.expressCompany:"无"}}</td>
             <td>{{o.kind==0?o.expressNum:"无"}}</td>
-            <td><img :src="o.images[0]"></td>
+            <td><a target="_blank" href="{{o.images[0]}}"><img :src="o.images[0]"></a></td>
             <td>{{o.reason}}</td>
             <td>{{o.note}}</td>
             <td>

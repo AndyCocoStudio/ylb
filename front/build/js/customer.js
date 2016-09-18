@@ -915,6 +915,7 @@
                                 $.ylbAjaxHandler(d, function () {
                                     $.ylbAlert("操作成功");
                                     m.getXSXFOrder();
+                                    vcustomer.hideall();
                                 });
                             });
                         }

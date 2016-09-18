@@ -115,6 +115,18 @@
 				case "4029":
 					$.ylbAlert("该用户已经体验过该优惠");
 					break;
+				case "4030":
+					$.ylbAlert("订单已取消");
+					break;
+				case "4031":
+					$.ylbAlert("订单已支付");
+					break;
+				case "4032":
+					$.ylbAlert("退款订单已处理");
+					break;
+				case "4033":
+					$.ylbAlert("不能重复申请退款");
+					break;
 				default:
 					$.ylbAlert("服务器又开小差(err:" + code + ")");
 					break;
