@@ -12,9 +12,9 @@
 
 
 
-	<link rel="stylesheet" type="text/css" href="css/style.css?rev=7d1d8a5db52aaafd4ff1675a1291fc98" />
+	<link rel="stylesheet" type="text/css" href="css/style.css?rev=8dfe0daededf54dfd87dfba0cf4533f9" />
 	<link rel="stylesheet" type="text/css" href="css/pickday.css" />
-	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=7d1d8a5db52aaafd4ff1675a1291fc98" />
+	<link rel="stylesheet" type="text/css" href="css/ylbicon.css?rev=8dfe0daededf54dfd87dfba0cf4533f9" />
 </head>
 
 <body>
@@ -84,7 +84,7 @@
                 <!--<h1>{{info.mobile}}</h1>-->
                 <p>{{info.address}}</p>
             </div>
-            <div class="customer-asset" :class="{salerasset:info.role=='Merchants'||info.role=='AM'||info.role=='CM'}">
+            <div class="customer-asset" :class="{salerasset:info.role!=='Ordinary'}">
                 <div class="customer-tag">资产</div>
                 <h1>真实姓名： {{info.name||info.mobile}}</h1>
                 <p>账户余额： <em>{{info.asset.balance}}</em>元<a @click="recharge">充值</a></p>
@@ -577,9 +577,9 @@
 <script src="js/libs/pickday.min.js" type="text/javascript"></script>
 <script src="js/libs/qrcode.min.js" type="text/javascript"></script>
 <script src="js/libs/dropzone.js" type="text/javascript"></script>
-<script src="js/base.js?rev=7d1d8a5db52aaafd4ff1675a1291fc98" type="text/javascript"></script>
+<script src="js/base.js?rev=8dfe0daededf54dfd87dfba0cf4533f9" type="text/javascript"></script>
 
-<script type="text/javascript" src="js/customer.js?rev=7d1d8a5db52aaafd4ff1675a1291fc98"></script>
+<script type="text/javascript" src="js/customer.js?rev=8dfe0daededf54dfd87dfba0cf4533f9"></script>
 
 
 </html>

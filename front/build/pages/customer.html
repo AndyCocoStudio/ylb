@@ -56,7 +56,7 @@
                 <!--<h1>{{info.mobile}}</h1>-->
                 <p>{{info.address}}</p>
             </div>
-            <div class="customer-asset" :class="{salerasset:info.role=='Merchants'||info.role=='AM'||info.role=='CM'}">
+            <div class="customer-asset" :class="{salerasset:info.role!=='Ordinary'}">
                 <div class="customer-tag">资产</div>
                 <h1>真实姓名： {{info.name||info.mobile}}</h1>
                 <p>账户余额： <em>{{info.asset.balance}}</em>元<a @click="recharge">充值</a></p>
