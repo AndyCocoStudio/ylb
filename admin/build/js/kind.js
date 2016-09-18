@@ -67,6 +67,7 @@
                                 kind.parentcode = "";
                                 kind.hideall();
                                 m.getList();
+                                if (kind.chosekindcode) m.getSubList(kind.chosekindcode);
                             })
                         });
                     },
