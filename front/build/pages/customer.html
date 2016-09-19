@@ -244,7 +244,8 @@
                                 </div>
                                 <div class="refundgoods">
                                     <p class="getgoods" v-for="i in x.items">
-                                        <a data-index="{{$index}}" @click="showrefund">退款</a>
+                                        <a v-if="i.status=='Refund'||i.status=='Refunded'">{{i.status=='Refund'?"退款中":"已退款"}}</a>
+                                        <a v-else data-index="{{$index}}" @click="showrefund">退款</a>
                                     </p>
                                 </div>
                             </div>

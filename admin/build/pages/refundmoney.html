@@ -26,6 +26,7 @@
             <th>货款退还</th>
             <th>运费退还</th>
             <th>退款类型</th>
+            <th>退款时间</th>
             <th>快递公司</th>
             <th>快递单号</th>
             <th>退款证明图</th>
@@ -51,6 +52,7 @@
             <td>{{o.payInPaymentForGoods}}</td>
             <td>{{o.freight}}</td>
             <td>{{o.kind==1?"仅退款":"退货退款"}}</td>
+            <td>{{o.refundTime}}</td>
             <td>{{o.kind==0?o.expressCompany:"无"}}</td>
             <td>{{o.kind==0?o.expressNum:"无"}}</td>
             <td><a target="_blank" href="{{o.images[0]}}"><img :src="o.images[0]"></a></td>

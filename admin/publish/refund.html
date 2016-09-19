@@ -17,7 +17,7 @@
 	<link rel="stylesheet" type="text/css" href="css/libs/morris.css" />
 	<link rel="stylesheet" type="text/css" href="css/libs/pickday.css" />
 	<link rel="stylesheet" type="text/css" href="css/font-awesome.css" />
-	<link rel="stylesheet" type="text/css" href="css/style.css?rev=d91dff06c4078c2a137ac1c1d300a247" />
+	<link rel="stylesheet" type="text/css" href="css/style.css?rev=79ae8111b6c689a0855468c614f8af1e" />
 </head>
 
 <body>
@@ -65,6 +65,7 @@
             <th>货款退还</th>
             <th>运费退还</th>
             <th>退款类型</th>
+            <th>退款时间</th>
             <th>快递公司</th>
             <th>快递单号</th>
             <th>退款证明图</th>
@@ -90,6 +91,7 @@
             <td>{{o.payInPaymentForGoods}}</td>
             <td>{{o.freight}}</td>
             <td>{{o.kind==1?"仅退款":"退货退款"}}</td>
+            <td>{{o.refundTime}}</td>
             <td>{{o.kind==0?o.expressCompany:"无"}}</td>
             <td>{{o.kind==0?o.expressNum:"无"}}</td>
             <td><a target="_blank" href="{{o.images[0]}}"><img :src="o.images[0]"></a></td>
@@ -130,10 +132,10 @@
 <script src="js/libs/pickday.min.js" type="text/javascript"></script>
 <script src="js/libs/vue.min.js" type="text/javascript"></script>
 <script src="js/libs/echarts.min.js" type="text/javascript"></script>
-<script src="js/base.js?rev=d91dff06c4078c2a137ac1c1d300a247" type="text/javascript"></script>
+<script src="js/base.js?rev=79ae8111b6c689a0855468c614f8af1e" type="text/javascript"></script>
 
 
-<script type="text/javascript" src="js/refund.js?rev=d91dff06c4078c2a137ac1c1d300a247"></script>
+<script type="text/javascript" src="js/refund.js?rev=79ae8111b6c689a0855468c614f8af1e"></script>
 
 
 </html>
